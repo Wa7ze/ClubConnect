@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/all.min.css">
+    <link rel="stylesheet" href="../student-interface/homepage.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500&display=swap" rel="stylesheet">
+    <title>ClubConnect | Uskudar Universitesi Events</title>
+</head>
+<body id="home">
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid">
+            <div class="logo">
+                <a href= "../student-interface/homepage.html"><i class="fa-solid fa-link"></i> ClubConnect</a>
+            </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main" aria-controls="main" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse text-center" id="main">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
+                <a id="home" class="nav-link" aria-current="page" href="../student-interface/homepage.html">Home</a>
+              </li>
+              <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
+                <a id="events" class="nav-link" href="../student-interface/events.html">Events</a>
+              </li>
+              <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
+                <a id="clubs" class="nav-link" href="../student-interface/clubs.html">Clubs</a>
+              </li>
+              <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
+                <a id="my-list" class="nav-link" href="../student-interface/my-list.html">My List</a>
+              </li>
+            </ul>
+            <div class="reg-buttons flex-column align-items-center gap-3 gap-lg-2 flex-lg-row">
+            <a href="../registration/login-form.html"><button type="button" class="main-btn login-btn">Log in</button></a>
+            <a href="../registration/signup-form.html"><button type="button" class="main-btn signup-btn">Sign up</button></a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active c-item">
+            <img src="../images/image-slider-event-1.png" class="d-block w-100 c-img" alt="...">
+            <div class="carousel-caption  d-md-block top-0 mt-5">
+                <p class="mt-5 pt-lg-5 pt-3">Embark on Adventure: Join Us for a Hiking Extravaganza!</p>
+                <h1>Let's Hike Together</h1>
+                <button type="button" class="main-btn text-uppercase learn-more-btn mt-4">Learn More</button>
+              </div>
+          </div>
+          <div class="carousel-item c-item">
+            <img src="../images/image-slider-event-2.png" class="d-block w-100 c-img" alt="...">
+            <div class="carousel-caption  d-md-block top-0 mt-5">
+                <p class="mt-5 pt-5">You can trust us to provide you with the most effective digital solution</p>
+                <h1>Creative Digital Marketing</h1>
+                <button type="button" class="main-btn text-uppercase learn-more-btn mt-4">Learn More</button>
+              </div>
+          </div>
+          <div class="carousel-item c-item">
+            <img src="../images/image-slider-event-3.png" class="d-block w-100 c-img" alt="...">
+            <div class="carousel-caption  d-md-block top-0 mt-5">
+                <p class="mt-5 pt-5">Craft Your Path to Success: Turbocharge Your CV to Land Your Dream Job!</p>
+                <h1>Build Your CV And Get Hired</h1>
+                <button type="button" class="main-btn text-uppercase learn-more-btn mt-4">Learn More</button>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="clubs-section">
+        <h1 class="section-title">Clubs</h1>
+        <div class="clubs-slider-container">
+        <i onclick="scrollPreviousClub()" class="fa-solid fa-less-than"></i>
+         <div class="clubs-container">
+            <a href="#"><div class="club-card">
+                <div class="rounded-image"><img src="../images/ping-pong-club.jpg" alt="paddle-pros-club"></div>
+                <h5>Paddle Pros</h5>
+            </div></a>
+            <a href="#"><div class="club-card">
+                <div class="rounded-image"><img src="../images/artisan-club.jpg" alt="artisan-alias-club"></div>
+                <h5>Artisan Alias</h5>
+            </div></a>
+            <a href="#"><div class="club-card">
+                <div class="rounded-image"><img src="../images/chess-club.jpg" alt="checkmate-club"></div>
+                <h5>Checkmate</h5>
+            </div></a>
+            <a href="#"><div class="club-card">
+                <div class="rounded-image"><img src="../images/gaming-club.jpg" alt="pixel-pioneers-club"></div>
+                <h5>Pixel Pioneers</h5>
+            </div></a>
+            <a href="#"><div class="club-card">
+                <div class="rounded-image"><img src="../images/hiking-club.jpg" alt="Hike-Harmony-club"></div>
+                <h5>Hike Harmony</h5>
+            </div></a>
+            <a href="#"><div class="club-card">
+                <div class="rounded-image"><img src="../images/knife-club.jpg" alt="sword-club"></div>
+                <h5>Sword</h5>
+            </div></a>
+            <a href="#"><div class="club-card">
+                <div class="rounded-image"><img src="../images/run-club.jpg" alt="run-for-fun-club"></div>
+                <h5>Run For Fun</h5>
+            </div></a>
+            <a href="#"><div class="club-card">
+                <div class="rounded-image"><img src="../images/tech-titans-club.jpg" alt="tech-titans-club"></div>
+                <h5>Tech Titans</h5>
+            </div></a>
+            <a href="#"><div class="club-card">
+                <div class="rounded-image"><img src="../images/tree-club.jpg" alt="root-revivers-club"></div>
+                <h5>Root Revivers</h5>
+            </div></a>
+            <a href="#"><div class="club-card">
+                <div class="rounded-image"><img src="../images/volleyball-club.jpg" alt="volley-victors-club"></div>
+                <h5>Volley Victors</h5>
+            </div></a>
+            <a href="#"><div class="club-card">
+                <div class="rounded-image"><img src="../images/yoga-club.jpg" alt="ping-pong-club"></div>
+                <h5>Yoga Club</h5>
+            </div></a>
+         </div>
+         <i onclick="scrollNextClub()" class="fa-solid fa-greater-than"></i>
+        </div>
+      </div>
+
+      <div class="upcoming-events-section">
+        <h1 class="section-title">Upcoming Event</h1>
+        <div class="event-post">
+            <div class="event-details">
+            <h1>How To Become An Architect</h1>
+            <p class="event-paragraph text-black-50">
+                To host an architect event, gather experienced professionals to share insights
+                 on academic paths, licensure, and career options. Include workshops on design
+                  and technical skills, networking sessions for mentorship, and opportunities to showcase
+                   portfolios. Foster collaboration and dialogue to empower aspiring architects on their journey.
+            </p>
+            <div class="info-list">
+                <a href="#"><button type="button" class="main-btn more-info-btn">More Info</button></a>
+                <span class="add-to-list-btn add-to-list-plus"></span>
+            </div>
+            <div class="event-infos">
+                <div class="date-time">
+                    <i class="fa-regular fa-calendar"></i>
+                    <p class="text-black-50">Mon, MAY 06, 10:00 am </p>
+                </div>
+                <div class="location">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p class="text-black-50">Uskudar Universitesi, A-block, Nermine Tarhan</p>
+                </div>
+                <div class="contact">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <p class="text-black-50">+90-324-324-4386</p>
+                </div>
+                
+            </div>
+        </div>
+        <div class="event-image">
+            <img src="../images/architect-upcoming-event.png" alt="architect upcoming event">
+        </div>
+        </div>
+
+        <div class="event-post reverse-div">
+            <div class="event-details">
+            <h1>Mobile Minds: Exploring the World of App Development</h1>
+            <p class="event-paragraph text-black-50">
+                Welcome to 'Mobile Minds: Exploring the World of App Development', your go-to podcast for all
+                 things mobile development! Join us on a journey through the latest trends, technologies, and insights
+                  shaping the fast-paced world of app creation. Whether you're an experienced developer seeking advanced
+                   techniques or a newcomer eager to learn the ropes, our podcast offers valuable discussions, expert interviews,
+                    and practical tips to help you excel in the mobile development landscape.
+                      Get ready to expand your mobile mindset and unleash your creativity in the ever-evolving world of app development!
+            </p>
+            <div class="info-list">
+                <a href="#"><button type="button" class="main-btn more-info-btn">More Info</button></a>
+                <span class="add-to-list-btn add-to-list-plus"></span>
+            </div>
+            
+            <div class="event-infos">
+                <div class="date-time">
+                    <i class="fa-regular fa-calendar"></i>
+                    <p class="text-black-50">Tue, MAY 07, 11:00 am </p>
+                </div>
+                <div class="location">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p class="text-black-50">Uskudar Universitesi, D-block</p>
+                </div>
+                <div class="contact">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <p class="text-black-50">+90-722-413-6649</p>
+                </div>
+                
+            </div>
+        </div>
+        <div class="event-image">
+            <img src="../images/mobile-development-upcoming-event.png" alt="architect upcoming event">
+        </div>
+        </div>
+        <div class="event-post">
+            <div class="event-details">
+            <h1>Virtual Realms: Gaming in the VR Universe</h1>
+            <p class="event-paragraph text-black-50">
+                Step into 'Virtual Realms: Gaming in the VR Universe' for an unparalleled gaming adventure!
+                 Immerse yourself in cutting-edge VR technology, thrilling demos, and competitive tournaments.
+                  Whether you're a seasoned VR enthusiast or new to the experience, there's something for everyone.
+                   Join us and explore the limitless possibilities of the VR universe!
+            </p>
+            <div class="info-list">
+                <a href="#"><button type="button" class="main-btn more-info-btn">More Info</button></a>
+                <span class="add-to-list-btn add-to-list-plus"></span>
+            </div>
+            <div class="event-infos">
+                <div class="date-time">
+                    <i class="fa-regular fa-calendar"></i>
+                    <p class="text-black-50">Thu, MAY 09, 2:00 pm </p>
+                </div>
+                <div class="location">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p class="text-black-50">Uskudar Universitesi, Ayhan Songar</p>
+                </div>
+                <div class="contact">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <p class="text-black-50">+90-324-324-4386</p>
+                </div>
+                
+            </div>
+        </div>
+        <div class="event-image">
+            <img src="../images/gaming-vr-upcoming-event.png" alt="architect upcoming event">
+        </div>
+        </div>
+        <div class="Explore-Events-container d-flex justify-content-center mt-5 mb-5 pt-3 pb-3">
+            <a href="#"><button type="button" class="explore-events-btn">Explore Events</button></a>
+        </div>
+      </div>
+
+      <footer>
+        <div class="footer-uskudar">
+            <h6>@ <span>USKUDAR UNIVERSITESI - 2011</span></h6>
+        </div>
+      </footer>
+
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="../js/all.min.js"></script>
+<script src="../js/navbar.js"></script>
+<script src="../student-interface/script.js"></script>
+</body>
+</html>
