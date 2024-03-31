@@ -1,17 +1,64 @@
-let addToMyListBtn = document.querySelectorAll('.add-to-list-btn');
 let clubsContainer = document.querySelector('.clubs-container');
 let searchByName = document.getElementById('search-by-name');
 let FilterList = document.querySelector('.filter-list');
 let blurry = document.querySelector('.blur');
+let addToListBtns = document.querySelectorAll('.add-to-list-btn');
 let filterCategories = document.querySelectorAll('.filter-list ul li');
-let cards = document.querySelectorAll('.card-to-filter');
 let NoResultsMatches = document.querySelector('.no-clubs-events-matches');
 let dateInputFrom = document.getElementById("search-by-date-from");
 let dateInputTo = document.getElementById("search-by-date-to");
 let cardEventDesc = document.querySelectorAll(".card-body .card-text");
 let cardEventTitle = document.querySelectorAll(".card-body .card-title");
+let eventCards = document.querySelectorAll('.event-card');
+let listedEventsCount = document.querySelector('.header-my-list h3 span')
 let clubsFound;
 let eventsFound;
+let dataPro;
+if (localStorage.product) {
+    dataPro = JSON.parse(localStorage.product);
+}   else {
+ dataPro = [];
+}
+
+/*Start My-List Pgae JS*/
+if(document.body.id === 'my-list'){
+    showData();
+}
+function showData() {
+    let table = '';
+    if(dataPro.length === 0){
+        NoResultsMatches.classList.remove('hidden-div');
+        listedEventsCount.innerHTML = `(0)`;
+      }
+      else{
+        for (let i = 0; i < dataPro.length; i++) {
+                table += `
+                    <tr data-category="${dataPro[i].category}" class="card-to-filter">
+                        <td><img src="${dataPro[i].image}" alt="Event Image"></td>
+                        <td>${dataPro[i].title}</td>
+                        <td class="event-date" data-date="${dataPro[i].date}">${dataPro[i].day} ${dataPro[i].month}, ${dataPro[i].time}</td>
+                        <td><button class="main-btn more-info-btn smaller-more-info-btn">More Info</button></td>
+                        <td><i onclick ="deleteFromList(${i})" class="fa-solid fa-trash"></i></td>
+                    </tr>`;
+                    listedEventsCount.innerHTML = `(${i+1})`;
+            }
+             NoResultsMatches.classList.add('hidden-div');
+      }
+    
+    document.querySelector('tbody').innerHTML = table;
+}
+
+  function deleteFromList(i){
+      dataPro.splice(i,1);
+      localStorage.setItem('product', JSON.stringify(dataPro));
+      showData();
+
+  }
+
+/*End My-List Pgae JS*/
+   
+let cards = document.querySelectorAll('.card-to-filter');
+
 //show filters and blur
 function showFilters(){
     FilterList.style.transform = 'translateX(0)';
@@ -103,21 +150,6 @@ function checkEventsFound(){
     }
 }
 
-/**Start For Home and Events JS */
-if(document.body.id === 'home' || document.body.id === 'events'){
-
-addToMyListBtn.forEach(ListBtn =>{
-    ListBtn.addEventListener('click', function(){
-     for(let i = 0; i< addToMyListBtn.length; i++){
-        ListBtn.classList.toggle('add-to-list-plus');
-        ListBtn.classList.toggle('remove-from-list-minus');
-    }
-    });
-    
-});
-}
-/**End For Home and Events JS */
-
 /*Start Home Page Js */
 if(document.body.id === 'home'){
 
@@ -152,9 +184,8 @@ if(document.body.id === 'clubs' || document.body.id === 'events' || document.bod
             this.classList.add('active-category');
             hideFilters();
             filterCards(category);
-
             // Reset the search input field
-            if(document.body.id === 'clubs'){
+             if(document.body.id === 'clubs'){
                 searchByName.value = '';
                 // Clear the search results
                  searchCardByName();
@@ -165,6 +196,7 @@ if(document.body.id === 'clubs' || document.body.id === 'events' || document.bod
         });
     });
 }
+
     
 /*End Clubs Page JS */
 
@@ -230,3 +262,4 @@ if(document.body.id === 'events'){
    
         
 /*End Events Page JS*/
+

@@ -65,28 +65,8 @@
         </div>
       </nav>
      
-      <div class="search-filter-section">
-        <div class="search-form">
-            <div class="search-input date-search-input">
-            <div class="from-date-div">
-                <label for="search-by-date-from">From: </label>
-                <input type="date" id="search-by-date-from">
-            </div>
-            <div class="to-date-div">
-                 <label for="search-by-date-to">To: </label>
-                 <input type="date" id="search-by-date-to">
-            </div>
-            <button onclick="searchCardByDate()" class="main-btn search-date-btn">Search</button>
-           
-            </div>
-        </div>
-
-        <div class="filter-by-category-container">
-            <button onclick="showFilters()" class="filter-btn main-btn clubs-btn">Filter By Category</button>
-        </div>
-      </div>
       <div class="header-my-list">
-        <h3>My List <span>(5)</span></h3>
+        <h3>My List <span></span></h3>
       </div>
       <div class="table-container">
         <div class="no-clubs-events-matches hidden-div">
@@ -102,27 +82,7 @@
                     <td>Remove</td>
                 </tr>
             </thead>
-                <tr data-category="sport" class="card-to-filter">
-                    <td><img src="../images/hiking-event.jpg" alt="hiking event"></td>
-                    <td>Let's Hike</td>
-                    <td class="event-date" data-date="2024-04-27">27 Apr, 8:00 pm</td>
-                    <td><button class="main-btn more-info-btn smaller-more-info-btn">More Info</button></td>
-                    <td><i class="fa-solid fa-trash"></i></td>
-                </tr>
-                <tr data-category="technology" class="card-to-filter">
-                    <td><img src="../images/tech-titans-event.jpg" alt="Hackathons event"></td>
-                    <td>Hackathons</td>
-                    <td class="event-date" data-date ="2024-04-13">13 Apr, 3:30 pm</td>
-                    <td><button class="main-btn more-info-btn smaller-more-info-btn">More Info</button></td>
-                    <td><i class="fa-solid fa-trash"></i></td>
-                </tr>
-                <tr data-category="art" class="card-to-filter">
-                    <td><img src="../images/artisan-alias-event.jpg" alt="artisan alias event"></td>
-                    <td>Art Workshop And Skill Shares</td>
-                    <td class="event-date" data-date ="2024-04-21">21 Apr, 11:00 am</td>
-                    <td><button class="main-btn more-info-btn smaller-more-info-btn">More Info</button></td>
-                    <td><i class="fa-solid fa-trash"></i></td>
-                </tr>
+            <tbody>
                 
             </tbody>
     </table>
@@ -140,4 +100,5 @@
 <script src="../js/all.min.js"></script>
 <script src="../js/navbar.js"></script>
 <script src="../student-interface/script.js"></script>
+<script src="../student-interface/listed-events-storage.js"></script>
 </body>
