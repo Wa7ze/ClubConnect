@@ -8,7 +8,7 @@ let NoResultsMatches = document.querySelector('.no-clubs-events-matches');
 let dateInputFrom = document.getElementById("search-by-date-from");
 let dateInputTo = document.getElementById("search-by-date-to");
 let cardEventDesc = document.querySelectorAll(".card-body .card-text");
-let cardEventTitle = document.querySelectorAll(".card-body .card-title");
+let cardEventTitle = document.querySelectorAll(".card-title");
 let eventCards = document.querySelectorAll('.event-card');
 let listedEventsCount = document.querySelector('.header-my-list h3 span')
 let clubsFound;
@@ -51,8 +51,13 @@ function showData() {
   function deleteFromList(i){
       dataPro.splice(i,1);
       localStorage.setItem('product', JSON.stringify(dataPro));
+      let successfulMessage = document.querySelector('.successful-message');
+      successfulMessage.style.display = 'block';
+      setTimeout(function(){
+          successfulMessage.style.display = 'none';
+      },800);
       showData();
-
+      
   }
 
 /*End My-List Pgae JS*/
@@ -236,9 +241,11 @@ if(document.body.id === 'events'){
     // console.log("month by name:", monthByName);
     // console.log("year:", year);
     // });
+    
+    }
 
-
-    //make the paragraph withing 40 words
+    if(document.body.id === 'events' || document.body.id === 'home'){
+        //make the paragraph withing 40 words
     cardEventDesc.forEach(description => {
         let cardText = description.textContent;
         let words = cardText.split(' ');
@@ -258,8 +265,6 @@ if(document.body.id === 'events'){
         eventTitle.textContent = truncatedTitle;
         });
     }
-
-   
         
 /*End Events Page JS*/
 

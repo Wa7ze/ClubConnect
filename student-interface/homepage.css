@@ -155,12 +155,6 @@ body{
     gap: 20px;
     align-items: center;
   }
-  .event-details .info-list .add-to-list-btn{
-    color: var(--blue-color);
-    margin-top: 7px;
-    font-size: 15px;
-    cursor: pointer;
-  }
  
   .event-post .event-infos{
     display: flex;
@@ -192,12 +186,8 @@ body{
   .reverse-div{
     flex-direction: row-reverse !important;
   }
-  .add-to-list-plus::before{
-    content: 'Add To List +';
-  }
-  .remove-from-list-minus::before{
-    content: 'Remove From List -';
-  }
+  
+  
 /*End Upcoming Events Section*/
 
 @media screen and (max-width: 1350px){
