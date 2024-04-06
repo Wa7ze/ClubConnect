@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/all.min.css">
+    <link rel="stylesheet" href="../registration-form/userType.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500&display=swap" rel="stylesheet">
+    <title>ClubConnect | Sign Up</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid">
+            <div class="logo">
+                <a href= "../registration-form/student-signup.html"><i class="fa-solid fa-link"></i> ClubConnect</a>
+            </div>
+        </div>
+      </nav>
+<div class="centered-div">
+    <div class="login-signup-form">
+        <div class="form">
+            <h1>Sign Up</h1>
+            <div class="input-fields signup-input-fields">
+                <div class="one-input-wrapper">
+                    <input id="name" class="name" type="text" placeholder="Name">
+                    <div class="form-icons">
+                    <i onclick="nameInput.focus()" class="fa-regular fa-user"></i>
+                </div>
+                </div>
+                <strong class="strong-message" id="invalid-name">Name should be 8-20 characters</strong>
+                <strong class="strong-message" id="blank-name">Cannot Leave the field blank</strong>
+                <div class="one-input-wrapper">
+                    <input id="student-signup-email" class="signup-email" type="email" placeholder="Email Adress">
+                    <div class="form-icons">
+                    <i onclick="signupEmailInput.focus()" class="fa-regular fa-envelope"></i>
+                </div>
+                </div>
+                <strong class="strong-message" id="invalid-email">Email should be in form ' example.email@st.uskudar.edu.tr '</strong>
+                <strong class="strong-message" id="blank-email">Cannot Leave the field blank</strong>
+                <div class="one-input-wrapper">
+                    <input id="student-signup-password" class="signup-password hidden-password" type="password" placeholder="Password">
+                    <div class="form-icons">
+                    <i onclick="passwordVisible(signupPasswordInput)" class="fa-regular fa-eye"></i>
+                    <i onclick="signupPasswordInput.focus()" class="fa-solid fa-lock"></i>
+                </div>
+                </div>
+                <strong class="strong-message" id="invalid-password">Password should be 8-20 characters</strong>
+                <strong class="strong-message" id="blank-password">Cannot Leave the field blank</strong>
+                <div class="one-input-wrapper">
+                    <input id="confirm-password" class="password hidden-password" type="password" placeholder="Confirm Password">
+                    <div class="form-icons">
+                    <i onclick="passwordVisible(confirmPasswordInput)" class="fa-regular fa-eye"></i>
+                    <i onclick="confirmPasswordInput.focus()" class="fa-solid fa-lock"></i>
+                </div>
+                </div>
+                <strong class="strong-message" id="invalid-confirm-password">Passwords doesn't match</strong>
+                <strong class="strong-message" id="blank-confirm-password">Cannot Leave the field blank</strong>
+        </div>
+        <p>Already have an account? <a href="../registration-form/student-login.html">Log In</a></p>
+        <button onclick="checkSignupValid()" class="reg-btn">Sign Up</button>
+        </div>
+        <img src="https://foto.haberler.com/haber/2022/08/09/uskudar-universitesi-taban-puanlari-2022-15156540_4460_amp.jpg">
+     </div>
+</div>
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="../js/all.min.js"></script>
+<script src="../js/navbar.js"></script>
+<script src="../registration-form/registration.js"></script>
+</body>

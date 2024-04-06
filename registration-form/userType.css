@@ -1,0 +1,189 @@
+:root {
+    --ligh-color: white;
+    --dark-color: rgb(26, 24, 24);
+    --grey-color: rgb(215, 214, 214);
+    --red-color: #ea3636;
+    --yellow-color: rgb(249, 221, 95);
+    --section-color: #eff7fa;
+    --blue-color: rgb(101, 108, 239);
+  }
+
+body{
+    font-family: "Roboto", sans-serif;
+}
+/*Start User Type*/
+.centered-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 93vh;
+}
+.user-container{
+    background-color: var(--dark-color);
+    text-align: center;
+    width: 40%;
+    padding: 20px 20px 70px 20px;
+}
+.user-container h1, .user-container p{
+   color: white;
+   font-weight: 300;
+}
+.user-container h1 span{
+    color: var(--yellow-color);
+}
+.type-of-user{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    margin-top: 50px;
+}
+.type-of-user a{
+    text-decoration: none;
+    width: 80%;
+}
+.type-of-user button, .reg-btn{
+    border: solid 1px transparent;
+    background-color: var(--red-color);
+    color: var(--section-color);
+    padding: 10px;
+    width: 100%;
+    transition: .3s;
+}
+.type-of-user button:hover,.reg-btn:hover{
+   color: var(--red-color);
+   background-color: transparent;
+   border: solid 1px var(--red-color);
+}
+/*End User Type*/
+
+/*Start Registration*/
+.login-signup-form{
+    background-color: var(--dark-color);
+    display: flex;
+    min-height: 82vh;
+}
+.login-signup-form img{
+    width: 40vw;
+}
+.login-signup-form .form{
+    padding: 30px;
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 100%;
+}
+.login-signup-form .form h1{
+    font-size: 40px;
+    color: var(--yellow-color);
+}
+.login-signup-form input{
+    width: 25vw;
+    height: 30px;
+    background-color: transparent;
+    outline: none;
+    border:solid 2px transparent;
+    font-size: 16px;
+    color: var(--yellow-color);
+    
+}
+.login-signup-form .one-input-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: solid 1px var(--yellow-color);
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.login-signup-form .one-input-wrapper svg{
+    color: var(--yellow-color);
+    cursor: pointer;
+}
+.login-signup-form .one-input-wrapper .fa-eye{
+    font-size: 12px;
+}
+.login-signup-form input::placeholder{
+    color:  rgba(245, 216, 89, 0.712);
+    font-size: 13px;
+}
+.login-signup-form input:focus{
+    transform: scale(.95);
+}
+.login-signup-form .input-fields{
+    display: flex;
+    flex-direction: column;
+}
+.signup-input-fields{
+    margin-top: 30px !important;
+}
+.login-signup-form p{
+    margin-top: 40px;
+    color: var(--yellow-color);
+    font-size: 13px;
+    font-weight: 300;
+}
+.login-signup-form p a{
+    color: var(--yellow-color);
+}
+.reg-btn{
+    cursor: pointer;
+    margin-top: 20px;
+    width: 50%;
+    padding: 10px 0;
+  }
+  .invalid-message{
+    color: var(--dark-color);
+    padding: 5px;
+    width:300px;
+    font-weight: bold;
+    background-color: var(--yellow-color);
+  }
+  .strong-message{
+    color: red;
+    font-weight: bold;
+    font-size: 12px;
+    margin-top: 3px;
+  }
+  #invalid-name, #invalid-email,#blank-email,#blank-name,#invalid-password,#blank-password,
+  #invalid-confirm-password, #blank-confirm-password{
+    display: none;
+  }
+ 
+/*End Registration*/
+ 
+  @media screen and (max-width: 1025px){
+    .login-signup-form img{
+        width: 40vw;
+    }
+    .login-signup-form input{
+        width: 30vw;
+    }
+  }
+  @media screen and (max-width: 764px){
+    .login-signup-form img{
+        width: 50vw;
+    }
+  }
+  @media screen and (max-width: 554px){
+    .login-signup-form img{
+        display: none;
+    }
+    .login-signup-form input{
+        width: 55vw;
+    }
+   
+  }
+/*End Registration*/
+
+/*Start Footer*/
+footer{
+    background-color: var(--dark-color);
+    padding: 15px;
+    color: var(--yellow-color);
+  }
+  .footer-uskudar span{
+    position: relative;
+    top: 2px;
+  }
+/*End Footer*/

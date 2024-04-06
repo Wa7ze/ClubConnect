@@ -48,23 +48,33 @@ body{
     transition: .3s ease-in-out;
     padding: 5px 20px;
 }
-.login-btn{
+.logout-btn{
     border: solid 1px transparent;
     background-color: var(--red-color);
     color: var(--section-color);
 }
-.signup-btn{
-    color: var(--red-color);
-    background-color: transparent;
-    border: solid 1px var(--red-color);
-}
+
 .btn:focus{
     box-shadow: none;
 }
-.login-btn:hover{
+.logout-btn:hover{
    color: var(--red-color);
    background-color: transparent;
    border: solid 1px var(--red-color);
+}
+.profile-letter{
+    background-color: var(--yellow-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    color: var(--dark-color);
+}
+.profile-name h5{
+    font-size: 1rem;
 }
 /*End Navbar*/
 
