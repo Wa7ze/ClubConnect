@@ -22,25 +22,41 @@
             <i class="fa-solid fa-bars"></i>
           </button>
           <div class="collapse navbar-collapse text-center" id="main">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav ms-auto mb-2 me-lg-3 mb-lg-0">
               <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
-                <a id="home" class="nav-link" aria-current="page" href="../student-interface/homepage.html">Home</a>
+                <a id="home" class="nav-link to-activate" aria-current="page" href="../student-interface/homepage.html">Home</a>
               </li>
               <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
-                <a id="events" class="nav-link" href="../student-interface/events.html">Events</a>
+                <a id="events" class="nav-link to-activate" href="../student-interface/events.html">Events</a>
               </li>
               <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
-                <a id="clubs" class="nav-link" href="../student-interface/clubs.html">Clubs</a>
+                <a id="clubs" class="nav-link to-activate" href="../student-interface/clubs.html">Clubs</a>
               </li>
               <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
-                <a id="my-list" class="nav-link" href="../student-interface/my-list.html">My List</a>
+                <a id="my-list" class="nav-link to-activate" href="../student-interface/my-list.html">My List</a>
               </li>
+              <div class="dropdown">
+                    <li class="nav-link create-button dropdown-toggle to-activate" type="button" id="create" data-bs-toggle="dropdown" aria-expanded="false">
+                      Create
+                    </li>
+                    <ul class="dropdown-menu activity-post-menu" aria-labelledby="dropdownMenuButton1">
+                      <li><a class="dropdown-item" href="../club-manager-interface/event-activity.html">Event Activity</a></li>
+                      <li><a class="dropdown-item" href="../club-manager-interface/event-post.html">Event Post</a></li>
+                    </ul>
+                  </div>
             </ul>
-            <div class="reg-buttons flex-column align-items-center gap-2 gap-lg-3 flex-lg-row">
-                <a href="../registration/login-form.html"><button type="button" class="main-btn logout-btn">Log out</button></a>
+            <a href="#">
+                <div class="notifications-container">
+                <i class="fa-solid fa-bell"></i>
+                <div class="notif-div"></div>
+            </a>
+            </div>
+            <div class="reg-buttons flex-column align-items-center gap-4 gap-lg-2 flex-lg-row">
+                <a href="#"><button type="button" class="logout-btn btn">Logout</button></a>
                 <div class="profile-letter">N</div>
             </div>
           </div>
+          
         </div>
       </nav>
       <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">

@@ -1,5 +1,4 @@
-let navbarLinks = document.querySelectorAll('.nav-link');
-
+let navbarLinks = document.querySelectorAll('.to-activate');
 function setActivePage() {
     // Get the ID of the current page
     const currentPageId = document.body.id;
@@ -13,4 +12,5 @@ function setActivePage() {
     }
 }
 setActivePage();
+
 
