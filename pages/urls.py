@@ -13,5 +13,6 @@ urlpatterns = [
     path('events', views.events, name = 'events'),
     path('clubs', views.clubs, name = 'clubs'),
     path('my-list', views.myList, name = 'myList'),
+    path('create a club', views.createClub, name = 'createClub'),
    
 ]

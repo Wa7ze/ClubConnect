@@ -7,7 +7,10 @@
         <i class="fa-solid fa-bars"></i>
       </button>
       <div class="collapse navbar-collapse text-center" id="main">
-        <ul class="navbar-nav ms-auto mb-2 me-lg-3 mb-lg-0">
+        <ul class="navbar-nav ms-auto mb-2  mb-lg-0">
+          <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
+            <a id="dashboard" class="nav-link to-activate" aria-current="page" href="#">Dashboard</a>
+          </li>
           <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
             <a id="home" class="nav-link to-activate" aria-current="page" href="{% url 'homePage' %}">Home</a>
           </li>
@@ -30,17 +33,25 @@
                 </ul>
               </div>
         </ul>
-        <a href="#">
-            <div class="notifications-container">
-            <i class="fa-solid fa-bell"></i>
-            <div class="notif-div"></div>
-        </a>
-        </div>
         <div class="reg-buttons flex-column align-items-center gap-4 gap-lg-2 flex-lg-row">
-            <a href="#"><button type="button" class="logout-btn btn">Logout</button></a>
-            <div class="profile-letter">N</div>
+            <a href="{% url 'createClub' %}"><button type="button" class="logout-btn btn">Create New Club</button></a>
+            
+            <a href="#">
+              <div class="notifications-container me-2">
+              <i class="fa-solid fa-bell"></i>
+              <div class="notif-div"></div>
+              </div>
+          </a>
+          <div class="profile-container d-lg-flex align-items-lg-center gap-1">
+          <div class="profile-letter">N</div>
+          <i class="fa-solid fa-caret-down"></i>
+          </div>
+         <ul class="logout-menu hidden-logout">
+          <li><a href="{% url 'usertype' %}">Logout</a></li>
+         </ul>
         </div>
+        </div>
+        
       </div>
-      
-    </div>
+ 
   </nav>

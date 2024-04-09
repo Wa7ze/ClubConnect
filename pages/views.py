@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+# registration:
+
 def userType(request):
     return render(request, 'pages/registration-form/userType.html')
 
@@ -15,14 +17,25 @@ def studentLogin(request):
 def studentSignup(request):
     return render(request, 'pages/registration-form/student-signup.html')
 
+
+
+# admin Interface:
+
 def adminBoard(request):
     return render(request, 'pages/sks-admin-interface/admin-board.html')
+
+def createClub(request):
+    return render(request, 'pages/sks-admin-interface/create-club-form.html')
+
+# manager Interface:
 
 def eventActivityForm(request):
     return render(request, 'pages/club-manager-interface/event-activity.html')
 
 def eventPostForm(request):
     return render(request, 'pages/club-manager-interface/event-post.html')
+
+#student-interface
 
 def homePage(request):
     return render(request, 'pages/student-interface/homepage.html')

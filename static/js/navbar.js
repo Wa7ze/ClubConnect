@@ -13,4 +13,15 @@ function setActivePage() {
 }
 setActivePage();
 
+let dropLogout = document.querySelector('.profile-container');
+let logoutBtn = document.querySelector('.logout-menu');
+
+dropLogout.addEventListener('click', ()=>{
+  logoutBtn.classList.toggle('hidden-logout');
+});
+document.body.addEventListener('click', (event)=>{
+  if(event.target !== logoutBtn && event.target !== dropLogout && !dropLogout.contains(event.target) && !logoutBtn.contains(event.target))
+  logoutBtn.classList.add('hidden-logout');
+});
+
 
