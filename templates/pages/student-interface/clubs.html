@@ -1,12 +1,15 @@
+{% extends 'base.html' %}
+{% block content%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/all.min.css">
-    <link rel="stylesheet" href="../student-interface/clubs-events.css">
-    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/clubs-events.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500&display=swap" rel="stylesheet">
@@ -35,36 +38,6 @@
             <button onclick="resetPage()" class="reset-filter-btn">Reset</button>
         </div>
     </div>
-    <nav class="navbar navbar-expand-lg sticky-top">
-        <div class="container-fluid">
-            <div class="logo">
-                <a href= "../student-interface/homepage.html"><i class="fa-solid fa-link"></i> ClubConnect</a>
-            </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main" aria-controls="main" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fa-solid fa-bars"></i>
-          </button>
-          <div class="collapse navbar-collapse text-center" id="main">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
-                <a id="home" class="nav-link" aria-current="page" href="../student-interface/homepage.html">Home</a>
-              </li>
-              <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
-                <a id="events" class="nav-link" href="../student-interface/events.html">Events</a>
-              </li>
-              <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
-                <a id="clubs" class="nav-link" href="../student-interface/clubs.html">Clubs</a>
-              </li>
-              <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
-                <a id="my-list" class="nav-link" href="../student-interface/my-list.html">My List</a>
-              </li>
-            </ul>
-            <div class="reg-buttons flex-column align-items-center gap-3 gap-lg-2 flex-lg-row">
-            <a href="../registration/login-form.html"><button type="button" class="main-btn login-btn">Log in</button></a>
-            <a href="../registration/signup-form.html"><button type="button" class="main-btn signup-btn">Sign up</button></a>
-            </div>
-          </div>
-        </div>
-      </nav>
 
       <div class="search-filter-section">
         <div class="search-form">
@@ -86,7 +59,7 @@
     </div>
         <div class="card col-md-4 col-lg-3 club-card card-to-filter text-center pt-2" data-category = "sport">
                 <div class="image-wrapper">
-                    <img src="../images/ping-pong-club.jpg" class="card-img-top rounded-pill" alt="Paddle Pros club">
+                    <img src="{% static 'images/ping-pong-club.jpg' %}" class="card-img-top rounded-pill" alt="Paddle Pros club">
                 </div>
                 <div class="card-body">
                 <h5 class="card-title">Paddle Pros</h5>
@@ -96,7 +69,7 @@
       </div>
         <div class="card col-md-4 col-lg-3 club-card card-to-filter text-center pt-2" data-category="art">
             <div class="image-wrapper">
-                <img src="../images/artisan-club.jpg" class="card-img-top rounded-pill" alt="Artisan Alias Club">
+                <img src="{% static 'images/artisan-club.jpg' %}" class="card-img-top rounded-pill" alt="Artisan Alias Club">
             </div>
             <div class="card-body">
             <h5 class="card-title">Artisan Alias</h5>
@@ -106,7 +79,7 @@
         </div>
         <div class="card col-md-4 col-lg-3 club-card card-to-filter text-center pt-2" data-category = "sport">
             <div class="image-wrapper">
-                <img src="../images/chess-club.jpg" class="card-img-top rounded-pill" alt="Checkmate Club">
+                <img src="{% static 'images/chess-club.jpg' %}" class="card-img-top rounded-pill" alt="Checkmate Club">
             </div>
             <div class="card-body">
             <h5 class="card-title">Checkmate</h5>
@@ -116,7 +89,7 @@
     </div>
     <div class="card col-md-4 col-lg-3 club-card card-to-filter text-center pt-2" data-category = "gaming">
         <div class="image-wrapper">
-            <img src="../images/gaming-club.jpg" class="card-img-top rounded-pill" alt="Pixel Pioneers Club">
+            <img src="{% static 'images/gaming-club.jpg' %}" class="card-img-top rounded-pill" alt="Pixel Pioneers Club">
         </div>
         <div class="card-body">
         <h5 class="card-title">Pixel Pioneers</h5>
@@ -126,7 +99,7 @@
     </div>
     <div class="card col-md-4 col-lg-3 club-card card-to-filter text-center pt-2" data-category = "sport">
         <div class="image-wrapper">
-            <img src="../images/hiking-club.jpg" class="card-img-top rounded-pill" alt="Hike Harmony Club">
+            <img src="{% static 'images/hiking-club.jpg' %}" class="card-img-top rounded-pill" alt="Hike Harmony Club">
         </div>
         <div class="card-body">
         <h5 class="card-title">Hike Harmony</h5>
@@ -136,7 +109,7 @@
     </div>
     <div class="card col-md-4 col-lg-3 club-card card-to-filter text-center pt-2" data-category = "art">
         <div class="image-wrapper">
-            <img src="../images/knife-club.jpg" class="card-img-top rounded-pill" alt="Sword Club">
+            <img src="{% static 'images/knife-club.jpg' %}" class="card-img-top rounded-pill" alt="Sword Club">
         </div>
         <div class="card-body">
         <h5 class="card-title">Sword</h5>
@@ -146,7 +119,7 @@
     </div>
     <div class="card col-md-4 col-lg-3 club-card card-to-filter text-center pt-2" data-category = "sport">
         <div class="image-wrapper">
-            <img src="../images/run-club.jpg" class="card-img-top rounded-pill" alt="Run For Fun Club">
+            <img src="{% static 'images/run-club.jpg' %}" class="card-img-top rounded-pill" alt="Run For Fun Club">
         </div>
         <div class="card-body">
         <h5 class="card-title">Run For Fun</h5>
@@ -156,7 +129,7 @@
     </div>
     <div class="card col-md-4 col-lg-3 club-card card-to-filter text-center pt-2" data-category = "technology programming">
         <div class="image-wrapper">
-            <img src="../images/tech-titans-club.jpg" class="card-img-top rounded-pill" alt="Tech Titans Club">
+            <img src="{% static 'images/tech-titans-club.jpg' %}" class="card-img-top rounded-pill" alt="Tech Titans Club">
         </div>
         <div class="card-body">
         <h5 class="card-title">Tech Titans</h5>
@@ -166,7 +139,7 @@
     </div>
     <div class="card col-md-4 col-lg-3 club-card card-to-filter text-center pt-2" data-category = "society">
         <div class="image-wrapper">
-            <img src="../images/tree-club.jpg" class="card-img-top rounded-pill" alt="Root Revivers Club">
+            <img src="{% static 'images/tree-club.jpg' %}" class="card-img-top rounded-pill" alt="Root Revivers Club">
         </div>
         <div class="card-body">
         <h5 class="card-title">Root Revivers</h5>
@@ -176,7 +149,7 @@
     </div>
     <div class="card col-md-4 col-lg-3 club-card card-to-filter text-center pt-2" data-category = "sport">
         <div class="image-wrapper">
-            <img src="../images/volleyball-club.jpg" class="card-img-top rounded-pill" alt="Volley Victors Club">
+            <img src="{% static 'images/volleyball-club.jpg' %}" class="card-img-top rounded-pill" alt="Volley Victors Club">
         </div>
         <div class="card-body">
         <h5 class="card-title">Volley Victors</h5>
@@ -186,7 +159,7 @@
     </div>
     <div class="card col-md-4 col-lg-3 club-card card-to-filter text-center pt-2" data-category = "sport">
         <div class="image-wrapper">
-            <img src="../images/yoga-club.jpg" class="card-img-top rounded-pill" alt="Yoga Club">
+            <img src="{% static 'images/yoga-club.jpg' %}" class="card-img-top rounded-pill" alt="Yoga Club">
         </div>
         <div class="card-body">
         <h5 class="card-title">Yoga Club</h5>
@@ -198,15 +171,10 @@
   </div>
 </div>
       
-
-    <footer>
-        <div class="footer-uskudar">
-            <h6>@ <span>USKUDAR UNIVERSITESI - 2011</span></h6>
-        </div>
-    </footer>
-    <script src="../js/bootstrap.bundle.min.js"></script>
-    <script src="../js/all.min.js"></script>
-    <script src="../js/navbar.js"></script>
-    <script src="../student-interface/script.js"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <script src="{% static 'js/navbar.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
+{% endblock content %}

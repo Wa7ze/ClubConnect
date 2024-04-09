@@ -1,64 +1,23 @@
+{% extends 'base.html' %}
+{% block content%}
+
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/all.min.css">
-    <link rel="stylesheet" href="../student-interface/homepage.css">
-    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500&display=swap" rel="stylesheet">
     <title>ClubConnect | Uskudar Universitesi Events</title>
 </head>
 <body id="home">
-    <nav class="navbar navbar-expand-lg sticky-top">
-        <div class="container-fluid">
-            <div class="logo">
-                <a href= "../student-interface/homepage.html"><i class="fa-solid fa-link"></i> ClubConnect</a>
-            </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main" aria-controls="main" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fa-solid fa-bars"></i>
-          </button>
-          <div class="collapse navbar-collapse text-center" id="main">
-            <ul class="navbar-nav ms-auto mb-2 me-lg-3 mb-lg-0">
-              <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
-                <a id="home" class="nav-link to-activate" aria-current="page" href="../student-interface/homepage.html">Home</a>
-              </li>
-              <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
-                <a id="events" class="nav-link to-activate" href="../student-interface/events.html">Events</a>
-              </li>
-              <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
-                <a id="clubs" class="nav-link to-activate" href="../student-interface/clubs.html">Clubs</a>
-              </li>
-              <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
-                <a id="my-list" class="nav-link to-activate" href="../student-interface/my-list.html">My List</a>
-              </li>
-              <div class="dropdown">
-                    <li class="nav-link create-button dropdown-toggle to-activate" type="button" id="create" data-bs-toggle="dropdown" aria-expanded="false">
-                      Create
-                    </li>
-                    <ul class="dropdown-menu activity-post-menu" aria-labelledby="dropdownMenuButton1">
-                      <li><a class="dropdown-item" href="../club-manager-interface/event-activity.html">Event Activity</a></li>
-                      <li><a class="dropdown-item" href="../club-manager-interface/event-post.html">Event Post</a></li>
-                    </ul>
-                  </div>
-            </ul>
-            <a href="#">
-                <div class="notifications-container">
-                <i class="fa-solid fa-bell"></i>
-                <div class="notif-div"></div>
-            </a>
-            </div>
-            <div class="reg-buttons flex-column align-items-center gap-4 gap-lg-2 flex-lg-row">
-                <a href="#"><button type="button" class="logout-btn btn">Logout</button></a>
-                <div class="profile-letter">N</div>
-            </div>
-          </div>
-          
-        </div>
-      </nav>
+
       <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -67,7 +26,7 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active c-item">
-            <img src="../images/image-slider-event-1.png" class="d-block w-100 c-img" alt="...">
+            <img src="{% static 'images/image-slider-event-1.png' %}" class="d-block w-100 c-img" alt="...">
             <div class="carousel-caption  d-md-block top-0 mt-5">
                 <p class="mt-5 pt-lg-5 pt-3">Embark on Adventure: Join Us for a Hiking Extravaganza!</p>
                 <h1>Let's Hike Together</h1>
@@ -75,7 +34,7 @@
               </div>
           </div>
           <div class="carousel-item c-item">
-            <img src="../images/image-slider-event-2.png" class="d-block w-100 c-img" alt="...">
+            <img src="{% static 'images/image-slider-event-2.png' %}" class="d-block w-100 c-img" alt="...">
             <div class="carousel-caption  d-md-block top-0 mt-5">
                 <p class="mt-5 pt-5">You can trust us to provide you with the most effective digital solution</p>
                 <h1>Creative Digital Marketing</h1>
@@ -83,7 +42,7 @@
               </div>
           </div>
           <div class="carousel-item c-item">
-            <img src="../images/image-slider-event-3.png" class="d-block w-100 c-img" alt="...">
+            <img src="{% static 'images/image-slider-event-3.png' %}" class="d-block w-100 c-img" alt="...">
             <div class="carousel-caption  d-md-block top-0 mt-5">
                 <p class="mt-5 pt-5">Craft Your Path to Success: Turbocharge Your CV to Land Your Dream Job!</p>
                 <h1>Build Your CV And Get Hired</h1>
@@ -99,47 +58,47 @@
         <i onclick="scrollPreviousClub()" class="fa-solid fa-less-than"></i>
          <div class="clubs-container">
             <a href="#"><div class="club-card">
-                <div class="rounded-image"><img src="../images/ping-pong-club.jpg" alt="paddle-pros-club"></div>
+                <div class="rounded-image"><img src="{% static 'images/ping-pong-club.jpg' %}" alt="paddle-pros-club"></div>
                 <h5>Paddle Pros</h5>
             </div></a>
             <a href="#"><div class="club-card">
-                <div class="rounded-image"><img src="../images/artisan-club.jpg" alt="artisan-alias-club"></div>
+                <div class="rounded-image"><img src="{% static 'images/artisan-club.jpg' %}" alt="artisan-alias-club"></div>
                 <h5>Artisan Alias</h5>
             </div></a>
             <a href="#"><div class="club-card">
-                <div class="rounded-image"><img src="../images/chess-club.jpg" alt="checkmate-club"></div>
+                <div class="rounded-image"><img src="{% static 'images/chess-club.jpg' %}" alt="checkmate-club"></div>
                 <h5>Checkmate</h5>
             </div></a>
             <a href="#"><div class="club-card">
-                <div class="rounded-image"><img src="../images/gaming-club.jpg" alt="pixel-pioneers-club"></div>
+                <div class="rounded-image"><img src="{% static 'images/gaming-club.jpg' %}" alt="pixel-pioneers-club"></div>
                 <h5>Pixel Pioneers</h5>
             </div></a>
             <a href="#"><div class="club-card">
-                <div class="rounded-image"><img src="../images/hiking-club.jpg" alt="Hike-Harmony-club"></div>
+                <div class="rounded-image"><img src="{% static 'images/hiking-club.jpg' %}" alt="Hike-Harmony-club"></div>
                 <h5>Hike Harmony</h5>
             </div></a>
             <a href="#"><div class="club-card">
-                <div class="rounded-image"><img src="../images/knife-club.jpg" alt="sword-club"></div>
+                <div class="rounded-image"><img src="{% static 'images/knife-club.jpg' %}" alt="sword-club"></div>
                 <h5>Sword</h5>
             </div></a>
             <a href="#"><div class="club-card">
-                <div class="rounded-image"><img src="../images/run-club.jpg" alt="run-for-fun-club"></div>
+                <div class="rounded-image"><img src="{% static 'images/run-club.jpg' %}" alt="run-for-fun-club"></div>
                 <h5>Run For Fun</h5>
             </div></a>
             <a href="#"><div class="club-card">
-                <div class="rounded-image"><img src="../images/tech-titans-club.jpg" alt="tech-titans-club"></div>
+                <div class="rounded-image"><img src="{% static 'images/tech-titans-club.jpg' %}" alt="tech-titans-club"></div>
                 <h5>Tech Titans</h5>
             </div></a>
             <a href="#"><div class="club-card">
-                <div class="rounded-image"><img src="../images/tree-club.jpg" alt="root-revivers-club"></div>
+                <div class="rounded-image"><img src="{% static 'images/tree-club.jpg' %}" alt="root-revivers-club"></div>
                 <h5>Root Revivers</h5>
             </div></a>
             <a href="#"><div class="club-card">
-                <div class="rounded-image"><img src="../images/volleyball-club.jpg" alt="volley-victors-club"></div>
+                <div class="rounded-image"><img src="{% static 'images/volleyball-club.jpg' %}" alt="volley-victors-club"></div>
                 <h5>Volley Victors</h5>
             </div></a>
             <a href="#"><div class="club-card">
-                <div class="rounded-image"><img src="../images/yoga-club.jpg" alt="ping-pong-club"></div>
+                <div class="rounded-image"><img src="{% static 'images/yoga-club.jpg' %}" alt="ping-pong-club"></div>
                 <h5>Yoga Club</h5>
             </div></a>
          </div>
@@ -178,7 +137,7 @@
             </div>
         </div>
         <div class="event-image">
-            <img class="event-img" src="../images/architect-upcoming-event.png" alt="architect upcoming event">
+            <img class="event-img" src="{% static 'images/architect-upcoming-event.png' %}" alt="architect upcoming event">
         </div>
         </div>
 
@@ -215,7 +174,7 @@
             </div>
         </div>
         <div class="event-image">
-            <img class="event-img" src="../images/mobile-development-upcoming-event.png" alt="architect upcoming event">
+            <img class="event-img" src="{% static 'images/mobile-development-upcoming-event.png' %}" alt="architect upcoming event">
         </div>
         </div>
         <div class="event-post event-card" data-category="gaming">
@@ -248,23 +207,19 @@
             </div>
         </div>
         <div class="event-image">
-            <img class="event-img" src="../images/gaming-vr-upcoming-event.png" alt="architect upcoming event">
+            <img class="event-img" src="{% static 'images/gaming-vr-upcoming-event.png' %}" alt="architect upcoming event">
         </div>
         </div>
         <div class="Explore-Events-container d-flex justify-content-center mt-5 mb-5 pt-3 pb-3">
-            <a href="../student-interface/events.html"><button type="button" class="explore-events-btn">Explore Events</button></a>
+            <a href="{% url 'events' %}"><button type="button" class="explore-events-btn">Explore Events</button></a>
         </div>
       </div>
 
-      <footer>
-        <div class="footer-uskudar">
-            <h6>@ <span>USKUDAR UNIVERSITESI - 2011</span></h6>
-        </div>
-      </footer>
 
-<script src="../js/bootstrap.bundle.min.js"></script>
-<script src="../js/all.min.js"></script>
-<script src="../js/navbar.js"></script>
-<script src="../student-interface/script.js"></script>
+      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+      <script src="{% static 'js/all.min.js' %}"></script>
+      <script src="{% static 'js/navbar.js' %}"></script>
+      <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
+{% endblock content%}

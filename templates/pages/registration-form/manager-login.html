@@ -1,12 +1,13 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/all.min.css">
-    <link rel="stylesheet" href="../registration-form/userType.css">
-    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/userType.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500&display=swap" rel="stylesheet">
@@ -16,7 +17,7 @@
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container-fluid">
             <div class="logo">
-                <a href= "../registration-form/manager-login.html"><i class="fa-solid fa-link"></i> ClubConnect</a>
+                <a href= "{% url 'usertype' %}"><i class="fa-solid fa-link"></i> ClubConnect</a>
             </div>
         </div>
       </nav>
@@ -40,7 +41,8 @@
                 </div>
                 </div>
         </div>
-            <button class="reg-btn">Log In</button>
+        <a href="{% url 'homePage' %}"><button class="reg-btn">Log In</button></a>
+        
             <div class="invalid-message mt-4">
                 <span><i class="fa-solid fa-triangle-exclamation"></i></span>
                 <strong>There was a problem logging in. Check your email and password or create an account.</strong>
@@ -48,8 +50,13 @@
         </div>
      </div>
 </div>
-<script src="../js/bootstrap.bundle.min.js"></script>
-<script src="../js/all.min.js"></script>
-<script src="../js/navbar.js"></script>
-<script src="../registration-form/registration.js"></script>
+<footer>
+    <div class="footer-uskudar">
+        <h6>@ <span>USKUDAR UNIVERSITESI - 2011</span></h6>
+    </div>
+  </footer>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/all.min.js' %}"></script>
+<script src="{% static 'js/navbar.js' %}"></script>
+<script src="{% static 'js/registration.js' %}"></script>
 </body>

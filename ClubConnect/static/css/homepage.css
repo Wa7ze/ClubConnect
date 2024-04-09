@@ -1,0 +1,272 @@
+:root {
+    --ligh-color: white;
+    --dark-color: rgb(26, 24, 24);
+    --grey-color: rgb(215, 214, 214);
+    --red-color: #ea3636;
+    --yellow-color: rgb(249, 221, 95);
+    --section-color: #eff7fa;
+    --blue-color: rgb(101, 108, 239);
+  }
+
+body{
+    font-family: "Roboto", sans-serif;
+}
+
+.main-btn{
+    transition: .3s ease-in-out;
+    padding: 5px 20px;
+}
+.learn-more-btn,.explore-events-btn,.more-info-btn{
+    border: solid 1px transparent;
+    background-color: var(--red-color);
+    color: var(--section-color);
+}
+
+.btn:focus{
+    box-shadow: none;
+}
+.learn-more-btn:hover,.explore-events-btn:hover,.more-info-btn:hover{
+   color: var(--red-color);
+   background-color: transparent;
+   border: solid 1px var(--red-color);
+}
+
+/*Start Image Slider*/
+
+.carousel-caption p{
+    font-size: .8rem;
+    letter-spacing: 1.2px;
+    color: var(--grey-color);
+}
+.carousel-caption h1{
+    font-size: 3.2rem;
+    
+}
+.c-item{
+  height: 70vh;
+}
+.c-img{
+  height: 100%;
+  object-fit: cover;
+  filter:brightness(.4);
+}
+
+/*End Image Slider*/
+
+/*Start Clubs Section*/
+.clubs-section{
+    padding: 30px;
+}
+.section-title{
+    color: var(--dark-color);
+    margin: 0 60px;
+}
+.clubs-slider-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+.clubs-slider-container .fa-less-than,.fa-greater-than{
+    font-size: 1.7rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+.clubs-section .clubs-container{
+    display: flex;
+    gap: 50px;
+    overflow-x: hidden;
+    margin-top: 20px;
+    width: 90vw;
+    padding: 20px;
+}
+.clubs-container::-webkit-scrollbar {
+    display: none;
+}
+.clubs-container a{
+    text-decoration: none;
+}
+.clubs-container .club-card{
+    text-align: center;
+    border: solid 1px var(--dark-color);
+    cursor: pointer;
+    border-radius: 10px;
+    transition: .3s ease-in-out;
+}
+.clubs-container .club-card:hover{
+    transform: scale(.9);
+}
+.clubs-container .club-card .rounded-image{
+    background-color: var(--dark-color);
+    padding: 20px;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+}
+
+.clubs-container .club-card .rounded-image img{
+    border-radius: 50%;
+    width: 140px;
+    height: 140px;
+}
+
+.club-card h5{
+    margin-top: 10px;
+    font-size: 19px;
+    color: var(--dark-color);
+}
+
+/*End Clubs Section*/
+
+/*Start Upcoming Events Section*/
+
+  .upcoming-events-section{
+    padding: 30px;
+    margin-top: 50px;
+  }
+  .upcoming-events-section a{
+    text-decoration: none;
+  }
+  .upcoming-events-section .event-post{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    border-top: solid 1px rgba(128, 128, 128, 0.288);
+    border-bottom: solid 1px rgba(128, 128, 128, 0.288);
+    padding: 30px;
+  }
+  .event-post .event-details{
+    padding: 20px;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 56%;
+  }
+  .event-post .event-details h1{
+    font-size: 1.8rem;
+    color: var(--dark-color);
+  }
+  .event-post .event-details .event-paragraph{
+    font-size: 1.1rem;
+    margin: 20px 0;
+  }
+  .event-details .info-list{
+    margin-bottom: 50px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+ 
+  .event-post .event-infos{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+  }
+  .event-infos svg{
+    font-size: 20px;
+    color: var(--dark-color);
+  }
+  .event-post .event-infos .date-time,.event-post .event-infos .location,.event-post .event-infos .contact{
+    display: flex;
+    gap: 5px;
+  }
+   .event-post .event-image{
+    width: 40%;
+  }
+  .event-post .event-image img{
+    width: 100%;
+    height: 100%;
+  }
+
+  .upcoming-events-section .Explore-Events-container .explore-events-btn{
+    padding: 10px 70px !important;
+    transition: .3s ease-in-out;
+  }
+  .reverse-div{
+    flex-direction: row-reverse !important;
+  }
+  
+  
+/*End Upcoming Events Section*/
+
+@media screen and (max-width: 1350px){
+  .clubs-section .clubs-container{
+        overflow-x: auto;
+    }
+    .event-post .event-details{
+        width: 50%;
+    }
+    .event-post .event-image{
+        width: 46%;
+      }
+}
+@media screen and (max-width: 1140px){
+    .event-post .event-infos{
+        gap: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+    }
+    .event-post .event-details{
+        width: 43%;
+    }
+    .event-post .event-image{
+        width: 55%;
+        height: 55vh;
+        display: flex;
+        align-items: flex-end;
+      }
+      .event-post .event-image img{
+        height: 80%;
+      }
+}
+@media screen and (max-width: 840px){
+    .carousel-caption h1{
+        font-size: 2rem;
+    }
+    .upcoming-events-section .event-post{
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        margin-top: 30px;
+        padding: 30px;
+      }
+      .reverse-div{
+        flex-direction: column-reverse !important;
+      }
+      .event-post .event-details{
+        width: 100%;
+    }
+    .event-post .event-image{
+        width: 100%;
+        height: 50vh;
+        align-items: flex-start;
+    }
+    .event-post .event-image img{
+        height: 100%;
+        width: 100%;
+    }
+}
+@media screen and (max-width: 575px){
+    .event-post .event-image{
+        height: 40vh;
+    }
+    .upcoming-events-section{
+        padding: 3px;
+    }
+    .upcoming-events-section .event-post{
+        padding: 0;
+    }
+    .event-post .event-details{
+        text-align: center;
+    }
+    .event-post .event-infos{
+        align-items: center;
+    }
+}
+@media screen and (max-width: 392px){
+    .event-post .event-image{
+        height: 28vh;
+    }
+}
