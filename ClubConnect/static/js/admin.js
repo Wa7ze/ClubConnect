@@ -1,58 +1,41 @@
-let btn = document.getElementById("burger");
-let menu = document.getElementById("sidebar");
-let unv = document.querySelectorAll(".unv");
-let burger_cont = document.getElementById("burger-cont");
-let courses = document.getElementById("courses");
-let course = document.querySelectorAll(".course");
-let left = document.getElementById("left");
-let scroll_down = document.getElementById("scroll");
-let fix_width = document.getElementById("fix-width");
+let searchEvent = document.getElementById('search-for-event');
+let eventCards = document.querySelectorAll('.event-card');
+let NoResultsMatches = document.querySelector('.no-clubs-events-matches');
+let biggerImage = document.querySelector('.bigger-profile');
+let eventsFound;
 
-btn.addEventListener('click',()=>{
-    
-    menu.classList.toggle('active');
-    menu.classList.toggle('nothing');
-    burger_cont.classList.toggle('move');
-    unv.forEach(e =>{
-      e.classList.toggle('op')
-    });
-       
-});
-
-
-  menu.addEventListener('mouseover',()=>{
-    if(menu.classList.contains('sidebar')){
-      if(menu.classList.contains('active')){
-    menu.classList.remove('active');
-    burger_cont.classList.remove('move');
-    unv.forEach(e =>{
-      e.classList.remove('op')
-    });
-  }}
-  });
-    menu.addEventListener('mouseout',()=>{
-    if(menu.classList.contains('sidebar')){
-      if(menu.classList.contains('nothing')){
-    menu.classList.add('active');
-    burger_cont.classList.add('move');
-      unv.forEach(e =>{
-        e.classList.add('op')
-      });
-      }}
-  });
+function searchForEvent(){
+  eventsFound = false;
+   for(let i = 0; i < eventCards.length; i++){
+  let eventTitle = eventCards[i].querySelector('.card-title');
+  if(eventTitle.textContent.toLowerCase().includes(searchEvent.value.toLowerCase())){
+     eventCards[i].classList.remove('hidden-card');
+     eventsFound = true;
+  }
+  else{
+     eventCards[i].classList.add('hidden-card');
+  }
+}
+checkEventsFound();
+}
 
 
-courses.addEventListener('click',()=>{
-    
-  left.classList.toggle("down");
-  course.forEach(e =>{
-    e.classList.toggle('show')
-  });
-  scroll_down.classList.toggle('overflow');
-  fix_width.classList.toggle('bigger');
-  courses.classList.toggle('color');
-   
-});
+function checkEventsFound(){
+  if (!eventsFound) {
+      NoResultsMatches.classList.remove('hidden-div');
+  } else {
+      NoResultsMatches.classList.add('hidden-div');
+     
+  }
+}
+
+function openImage(){
+  biggerImage.style.display = 'flex';
+}
+function closeImage(){
+  biggerImage.style.display = 'none';
+}
+
 
 
 

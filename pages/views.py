@@ -24,8 +24,8 @@ def studentSignup(request):
 def adminBoard(request):
     return render(request, 'pages/sks-admin-interface/admin-board.html')
 
-def createClub(request):
-    return render(request, 'pages/sks-admin-interface/create-club-form.html')
+def clubProfile(request):
+    return render(request, 'pages/sks-admin-interface/club-profile.html')
 
 # manager Interface:
 

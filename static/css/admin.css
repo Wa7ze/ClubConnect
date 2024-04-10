@@ -11,3 +11,247 @@
 body{
     font-family: "Roboto", sans-serif;
 }
+.bigger-profile{
+  background-color: var(--dark-color);
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+.bigger-profile img{
+  width: 25vw;
+}
+.bigger-profile svg{
+  font-size: 2rem;
+  position: absolute;
+  right: 40px;
+  top: 80px;
+  color: var(--yellow-color);
+  cursor: pointer;
+}
+.club-container{
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 0;
+}
+.club-container .first-container{
+  background-color: var(--ligh-color);
+  box-shadow: 0 0 8px 0;
+  width: 70%;
+}
+.club-container .second-container{
+  background-color: var(--red-color);
+  box-shadow: 0 0 8px 0;
+  width: 25%;
+}
+.first-container .club-bg-image{
+  background-image: url("https://bfplny.com/wp-content/uploads/2019/06/PingPong_6.4.18-1-6_crop.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 35vh;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.first-container .club-bg-image img{
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  bottom: -60px;
+  left: 40px;
+  border: solid 3px var(--dark-color);
+  cursor: pointer;
+}
+.first-container .club-bio-container{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 45px;
+  margin-top: 70px;
+}
+.club-bio-container .club-name span{
+  background-color: var(--dark-color);
+  border-radius: 15px;
+  color: var(--yellow-color);
+  font-size: .7rem;
+  padding: 3px 8px;
+  position: relative;
+  bottom: 4px;
+}
+.club-bio-container .club-sub{
+  font-size: 1rem;
+  margin-left: 3px;
+}
+.club-bio-container .club-location{
+  font-size: .8rem;
+  margin-left: 3px;
+  color: rgb(76, 76, 76);
+}
+.club-bio-container .uni-icon img{
+  width: 30px;
+  margin-right: 5px;
+}
+.first-container .vision-description{
+  margin-top: 20px;
+  padding: 0 45px;
+  
+}
+.vision-description h4{
+  margin-top: 30px;
+}
+
+.search-event-input{
+  background-color: rgb(51, 46, 46);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 19px;
+}
+.club-events-title{
+  color: var(--ligh-color);
+  font-size: 1.7rem;
+  font-weight: 350;
+}
+.search-container{
+  display: flex;
+}
+.search-event-input input{
+  width: 30vw;
+  outline: none;
+  border: solid 3px transparent;
+  border: none;
+  padding: 5px;
+}
+.search-event-input input:focus{
+  border: solid 3px var(--yellow-color);
+}
+.search-event-input svg{
+  background-color: var(--dark-color);
+  color: var(--yellow-color);
+  cursor: pointer;
+  border: solid 3px transparent;
+  padding: 13px;
+  font-size: 22px;
+  width: 28px;
+}
+.second-container{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.second-container .club-achievments{
+  background-color: var(--ligh-color);
+  padding: 20px;
+  border-radius: 5px;
+  color: var(--dark-color);
+}
+.second-container .club-management{
+  background-color: var(--ligh-color);
+  padding: 20px;
+  border-radius: 5px;
+  color: var(--dark-color);
+}
+.club-achievments svg{
+  color: var(--yellow-color);
+}
+.club-management p{
+  color:rgb(118, 117, 117);
+  font-size: .9rem;
+}
+.club-management p span{
+  font-weight: bold;
+  color: var(--dark-color);
+  font-size: .9rem;
+}
+.social-media{
+  display: flex;
+  gap: 10px;
+  font-size: 1.3rem;
+}
+.social-media a{
+  color: var(--dark-color);
+  transition: .3s ease;
+}
+.social-media a:hover{
+  color: var(--blue-color);
+}
+.edit-btn, .delete-btn{
+  padding: 5px 20px;
+  border: none;
+  margin-right: 10px;
+  border: solid 1px transparent;
+  transition: .3s ease;
+}
+.edit-btn{
+  background-color: rgb(57, 57, 159);
+  color: var(--ligh-color);
+}
+.delete-btn{
+  background-color: rgb(171, 15, 15);
+  color: var(--ligh-color);
+}
+.edit-btn:hover, .delete-btn:hover{
+  background-color: transparent;
+  border: solid 1px var(--ligh-color);
+}
+@media screen and (max-width: 1387px){
+  .club-container .first-container{
+      width: 59%;
+  }
+  .club-container .second-container{
+      width: 39%;
+  }
+  .bigger-profile img{
+      width: 38vw;
+  }
+}
+@media screen and (max-width: 893px){
+  .club-container .first-container{
+      width: 100%;
+      box-shadow: 0 0 0 0;
+  }
+  .club-container .second-container{
+      width: 100%;
+      background-color: var(--ligh-color);
+      box-shadow: 0 0 0 0;
+  }
+  .club-container{
+      flex-direction: column;
+      align-items: center;
+  }
+  .search-event-input input{
+      width: 65vw;
+  }
+  .search-event-input{
+      flex-direction: column;
+      gap: 20px;
+  }
+  .bigger-profile img{
+      width: 55vw;
+  }
+}
+  @media screen and (max-width: 480px){
+  .club-bio-container{
+      flex-direction: column;
+  }
+  .club-bio-container .club-name span svg{
+      display: none; 
+  }
+  .club-achievments svg{
+      display: none;
+  }
+  .edit-btn,.delete-btn{
+      margin-top: 10px;
+  }
+  .bigger-profile img{
+      width: 75vw;
+  }
+}

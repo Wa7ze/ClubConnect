@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% block content%}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <link rel="stylesheet" href="{% static 'css/clubs-events.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500&display=swap" rel="stylesheet">
+    <title>ClubConnect | Create a New Club</title>
+</head>
+<body>
+    <div class="bigger-profile">
+        <img src="{% static 'images/ping-pong-club.jpg' %}" alt="club profile picture">
+        <i onclick="closeImage()" class="fa-solid fa-x"></i>
+    </div>
+    <div class="club-container">
+        <div class="first-container">
+            <div class="club-bg-image">
+          <img onclick="openImage()" src="{% static 'images/ping-pong-club.jpg' %}" alt="club profile picture" id="profile-picture">
+        </div>
+        <div class="club-bio-container">
+            <div class="club-summary">
+                <h3 class="club-name">Paddle Pros <span>Verified <i class="fa-solid fa-check"></i></span></h3>
+            <p class="club-sub">Paddle Club | Paddle, Adventure, Unity</p>
+            <p class="club-location">Istanbul,Turkey</p>
+            </div>
+            <div class="uni-icon"><img src="https://uskudar.edu.tr/template/app/dist/img/logo/yazisiz-logo.png" alt="uskudar university icon">Uskudar University</div>
+        </div>
+        <div class="vision-description">
+            <h4>Club Vision</h4>
+            <p id="club-vision">the club's Vision goes here, you can write anything you want</p>
+            <h4>Club Description</h4>
+            <p id="club-desc">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                  when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                   It has survived not only five centuries, but also the leap into electronic typesetting,
+                    remaining essentially unchanged. It was popularised in the 1960s with the release of
+                     Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+                      software like Aldus PageMaker including versions of Lorem Ipsum.
+            </p>
+        </div>
+        </div>
+        <div class="second-container">
+           <div class="club-achievments">
+            <h4>Club's Achievments <i class="fa-solid fa-medal"></i></h4>
+            <ul>
+                <li>club's achievments goes here</li>
+                <li>club's achievments goes here</li>
+                <li>club's achievments goes here</li>
+                <li>club's achievments goes here</li>
+            </ul>
+            </div>
+            <div class="club-management">
+                <p><i class="fa-solid fa-user"></i> <span>Club Manager: </span>Nouhad El Hallab</p>
+                <p><i class="fa-solid fa-user"></i> <span>Club Vice Manager: </span>Mohammad Aburahma</p>
+                <p><i class="fa-solid fa-user-group"></i> <span>Number Of Members: </span>75</p>
+                <p><i class="fa-solid fa-phone"></i> <span>Phone Number 1: </span>+90 (531) 234 56 78</p>
+                <p><i class="fa-solid fa-phone"></i> <span>Phone Number 2: </span>+90 (531) 234 56 78</p>
+                <p><i class="fa-solid fa-envelope"></i> <span>Email: </span>paddleuskudar@gmail.com</p>
+                <div class="social-media">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+                
+            </div>
+            <div class="edit-delete">
+                <button type="button" class="edit-btn" id="edit-button">Edit Club</button>
+                <button type="button" class="delete-btn" id="delete-button">Delete Club</button>
+            </div>
+           </div>
+        </div>
+        
+    </div>
+    <div class="club-events">
+      <div class="search-event-input">
+        <div class="club-events-title">Club's Events</div>
+        <div class="search-container">
+        <input onkeyup="searchForEvent()" type="text" id="search-for-event" placeholder="Search for events...">
+        <div onclick="searchEvent.focus()" class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+    </div>
+    </div>
+    <div class="container cards-section mt-5 mb-5">
+        <div class="row events-cards-container gap-5">
+          <div class="no-clubs-events-matches hidden-div">
+              <h3 class="text-black-50 fs-5">No Events Found</h3>
+          </div>
+            <div class="card p-0 col-md-4 col-lg-3 event-card card-to-filter text-center" data-category = "sport">
+                        <div class="image-wrapper">
+                            <a href="#">
+                        <img src="{% static 'images/hiking-event.jpg' %}" class="card-img-top event-img" alt="let's Hike Event">
+                        <div class="event-date date-to-style" data-date = "2024-04-27">
+                        <span><span class="event-day">27 </span><span class="event-month">Apr</span></span>
+                        <hr>
+                        <span class="event-time">8:00 pm</span>
+                    </div>
+                    </a>
+                    </div>
+                    
+                    <div class="card-body">
+                        <h5 class="card-title mt-5">Let's Hike Together</h5>
+                        <p class="card-text text-black-50">Embark on an unforgettable hiking journey to conquer the summit of Büyük Camlica Hill.
+                             Experience breathtaking views, diverse wildlife, and camaraderie. Join us for adventure!</p>
+                        <div class="info-list">
+                            <a href="#"><button type="button" class="main-btn more-info-btn">More Info</button></a>
+            
+                        </div>
+                </div>
+            </div>
+            <div class="card p-0 col-md-4 col-lg-3 event-card card-to-filter text-center" data-category = "sport">
+                <div class="image-wrapper">
+                    <a href="#">
+                <img src="{% static 'images/run-for-fun-event.jpg' %}" class="card-img-top event-img" alt="Running event">
+                <div class="event-date date-to-style" data-date = "2024-06-20">
+                <span><span class="event-day">20 </span><span class="event-month">Jun</span></span>
+                <hr>
+                <span class="event-time">3:30 pm</span>
+            </div>
+            </a>
+            </div>
+            
+            <div class="card-body">
+                <h5 class="card-title mt-5">Run For Fun</h5>
+                <p class="card-text text-black-50">Gear up for an exhilarating urban adventure at the "Urban Rush: Istanbul City Marathon.
+                    " Join thousands of runners as we race through iconic landmarks and vibrant neighborhoods of Istanbul.</p>
+                <div class="info-list">
+                    <a href="#"><button type="button" class="main-btn more-info-btn">More Info</button></a>
+    
+                </div>
+        </div>
+    </div>
+        <div class="card p-0 col-md-4 col-lg-3 event-card card-to-filter text-center" data-category = "sport">
+            <div class="image-wrapper">
+                <a href="#">
+            <img src="{% static 'images/volley-ball-event.jpg' %}" class="card-img-top event-img" alt="volleyBall match Event">
+            <div class="event-date date-to-style" data-date = "2024-04-30">
+            <span><span class="event-day">30 </span><span class="event-month">Apr</span></span>
+            <hr>
+            <span class="event-time">7:00 pm</span>
+        </div>
+        </a>
+        </div>
+        
+        <div class="card-body">
+            <h5 class="card-title mt-5">VolleyBall Match</h5>
+            <p class="card-text text-black-50">Dive into the excitement of beach volleyball at the "Bosphorus Beach Volleyball Bash"!
+                 Join us for an action-packed match on the sandy shores of Istanbul's iconic Bosphorus coastline.</p>
+            <div class="info-list">
+                <a href="#"><button type="button" class="main-btn more-info-btn">More Info</button></a>
+
+            </div>
+    </div>
+    </div>
+        </div>
+      </div>
+    </div>
+    
+    
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <script src="{% static 'js/navbar.js' %}"></script>
+
+</body>
+</html>
+{% endblock content %}
