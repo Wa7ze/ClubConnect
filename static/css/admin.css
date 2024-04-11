@@ -44,6 +44,7 @@ body{
   background-color: var(--ligh-color);
   box-shadow: 0 0 8px 0;
   width: 70%;
+  padding-bottom: 20px;
 }
 .club-container .second-container{
   background-color: var(--red-color);
@@ -106,7 +107,16 @@ body{
 .vision-description h4{
   margin-top: 30px;
 }
-
+.club-category{
+  text-align: end;
+  margin-top: 40px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.club-category span{
+  color: var(--blue-color);
+  font-weight: 400;
+}
 .search-event-input{
   background-color: rgb(51, 46, 46);
   display: flex;
@@ -202,6 +212,200 @@ body{
   background-color: transparent;
   border: solid 1px var(--ligh-color);
 }
+
+ /* Start create new club style */
+ .form-container{
+  padding: 20px 120px;
+}
+.create-club-form{
+  box-shadow: 0 0 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.image-upload-container {
+  border-bottom: solid 1px black;
+  height: 250px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.custom-background-upload,
+.custom-profile-upload {
+  text-align: center;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 2.4rem;
+}
+
+.profile-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -55px;
+  left: 30px;
+  border: solid 1px black;
+  background-color: var(--ligh-color);
+}
+
+#background-upload,
+#profile-upload {
+  display: none;
+}
+
+#background-preview{
+  width: 100%;
+  height: 100%;
+  border: 2px solid #ccc;
+  margin-bottom: 10px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}
+#profile-preview{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  z-index: 900;
+}
+#profile-preview img{
+  border-radius: 50%;
+}
+
+.image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.club-infos{
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 20px 40px;
+  margin-top: 30px;
+}
+input{
+  width: 25vw;
+  height: 55px;
+  padding: 10px;
+  outline: none;
+  border: solid 2px grey;
+}
+select{
+  width: 25vw;
+  height: 55px;
+  padding: 9.3px;
+  font-size: 1rem;
+  border: solid 2px grey;
+}
+#club-vision,#club-description{
+  width: 99.4%;
+  resize: none;
+  padding: 10px;
+  outline: none;
+  border: solid 2px grey;
+}
+.area-div{
+  width: 100%;
+}
+#club-vision{
+  min-height: 100px;
+}
+#club-description{
+  min-height: 200px;
+}
+input:focus,#club-vision:focus,#club-description:focus,select:focus{
+  border: solid 2px var(--yellow-color);
+}
+.create-club-btn{
+  width: 100%;
+  text-align: center;
+}
+.create-club-btn button{
+  padding: 7px 50px;
+  color: var(--ligh-color);
+  background-color: var(--red-color);
+  border: solid 1px transparent;
+  transition: .3s ease;
+  margin-top: 20px;
+}
+.create-club-btn button:hover{
+  background-color: transparent;
+  color: var(--red-color);
+  border: solid 1px var(--red-color);
+}
+.confirm-message{
+  background-color: var(--dark-color);
+  color: var(--ligh-color);
+  position: fixed;
+  top: -100%;
+  left: 50%;
+  transform: translate(-50%);
+  padding: 20px;
+  width: 40vw;
+  z-index: 999;
+  transition: .3s ease-in;
+}
+.confirm-message .yes-no-buttons{
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+.yes-no-buttons .yes-btn, .no-btn{
+  padding: 5px 25px;
+  transition: .3s ease;
+}
+.yes-btn{
+  background-color: var(--red-color);
+  color: var(--ligh-color);
+  border: solid 1px transparent;
+}
+.yes-btn:hover{
+  background-color: transparent;
+  color: var(--red-color);
+  border: solid 1px var(--red-color);
+}
+.no-btn{
+  background-color: transparent;
+  color: var(--red-color);
+  border: solid 1px var(--red-color);
+}
+.blur{
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.594);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 998;
+  display: none;
+}
+.error-border{
+ border: solid 2px red !important; 
+}
+.phone-error1, .phone-error2,.description-error,.vision-error,.email-error{
+  color: red;
+  font-weight: bold;
+  display: none;
+}
+/* End create new club style */
+
 @media screen and (max-width: 1387px){
   .club-container .first-container{
       width: 59%;
@@ -237,6 +441,16 @@ body{
   .bigger-profile img{
       width: 55vw;
   }
+  input,select{
+    width: 32vw;
+  }
+.form-container{
+    padding: 20px 30px;
+  }
+.profile-input{
+    width: 150px;
+    height: 150px;
+  }
 }
   @media screen and (max-width: 480px){
   .club-bio-container{
@@ -253,5 +467,21 @@ body{
   }
   .bigger-profile img{
       width: 75vw;
+  }
+  input,select{
+    width: 100%;
+  }
+#club-vision,#club-description{
+    width: 100%;
+  }
+.profile-input{
+    left: 50%;
+    transform: translateX(-50%);
+  }
+.form-container{
+    padding: 20px 10px;
+  }
+.custom-background-upload , .custom-profile-upload{
+    font-size: 1.6rem;
   }
 }

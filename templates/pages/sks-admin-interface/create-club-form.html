@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block content%}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500&display=swap" rel="stylesheet">
+    <title>ClubConnect | Create a New Club</title>
+</head>
+<body>
+    <div onclick="hideConfirmMessage()" class="blur" id="create-club-blur"></div>
+    <div class="confirm-message" id="club-confirm-message">
+        <h3>Confirm</h3>
+        <p>Are you sure you want to create a new club?</p>
+        <div class="yes-no-buttons">
+            <button onclick="hideConfirmMessage()" class="no-btn" type="button">No</button>
+            <button class="yes-btn" type="button">Yes</button>
+        </div>
+    </div>
+    <div class="form-container">
+        <div class="create-club-form">
+            <div class="image-upload-container">
+                <div onclick="backgroundUpload.click()" class="image-preview" id="background-preview"></div>
+                <label for="background-upload" class="custom-background-upload">
+                    <i class="fas fa-cloud-upload-alt"></i> Choose A File
+                </label>
+                <input id="background-upload" type="file" />
+                <div class="profile-input">
+                    <div onclick="profileUpload.click()" class="image-preview" id="profile-preview"></div>
+                    <label for="profile-upload" class="custom-profile-upload">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </label>
+                    <input id="profile-upload" type="file" />
+                </div>
+            </div>
+
+        <div class="club-infos">
+            <input class="input-field" id="club-name" type="text" placeholder="Club Name">
+            <input class="input-field" id="headline" type="text" placeholder="Headline">
+            <input class="input-field" id="club-location" type="text" placeholder="Location">
+            <input class="input-field" id="club-manager" type="text" placeholder="Club Manager">
+            <input class="input-field" id="club-vice-manager" type="text" placeholder="Club Vice Manager">
+            <div class="input-div">
+            <input class="input-field" id="phone1" type="tel" placeholder="Phone Number 1">
+            <strong class="phone-error1">Invalid Number</strong>
+            </div>
+            <div class="input-div">
+            <input class="input-field" id="phone2" type="tel" placeholder="Phone Number 2">
+            <strong class="phone-error2">Invalid Number</strong>
+            </div>
+            <div class="input-div">
+            <input class="input-field" id="club-email" type="email" placeholder="Email Adress">
+            <strong class="email-error">Invalid Email</strong>
+        </div>
+            <select name="categories" id="s-categories">
+                <option value="sport">Sport</option>
+                <option value="gaming">Gaming</option>
+                <option value="technology">Technology</option>
+                <option value="society">Society</option>
+                <option value="programming">Programming</option>
+                <option value="art">Art</option>
+            </select>
+            <div class="area-div">
+            <textarea class="input-field" name="club vison" id="club-vision" placeholder="Club Vision"></textarea>
+            <strong class="vision-error">The club vision should be between 200-3000 letter</strong>
+            </div>
+            <div class="area-div">
+            <textarea class="input-field" name="club description" id="club-description" placeholder="Club Description"></textarea>
+            <strong class="description-error">The club description should be between 300-4000 letter</strong>
+            </div>
+            <div class="create-club-btn"><button onclick="checkAndConfirm()" type="button">Create New Club</button></div>
+        </div>
+    </div>
+    
+    </div>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <script src="{% static 'js/navbar.js' %}"></script>
+    <script src="{% static 'js/admin.js' %}"></script>
+</body>
+</html>
+{% endblock content %}

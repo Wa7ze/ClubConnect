@@ -14,5 +14,6 @@ urlpatterns = [
     path('clubs', views.clubs, name = 'clubs'),
     path('my-list', views.myList, name = 'myList'),
     path('club Profile', views.clubProfile, name = 'clubProfile'),
+    path('create a new club', views.createNewClub, name = 'createNewClub'),
    
 ]

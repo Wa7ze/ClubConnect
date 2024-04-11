@@ -51,8 +51,8 @@ function checkFormValidation(){
 
     //phone number input
     let phoneError = document.querySelector('.phone-error');
-    let numberReg = /^\+\d{2}\d{10}$/;
-    if(!phoneNum.value.match(numberReg)){
+    let numberReg = /^\+\d{2}(\s?\d){10}$/;
+    if(!phoneNum.value.match(numberReg) && phoneNum.value.trim() !== ''){
         phoneError.style.display = 'block'
     }
     else{
@@ -66,7 +66,7 @@ function checkFormValidation(){
     if(descInputValue.length >= 300 && descInputValue.length <= 4000){
         descriptionError.style.display = 'none';
     }
-    else{
+    else if(descInputValue !== ''){
         descriptionError.style.display = 'block';
     }
 }

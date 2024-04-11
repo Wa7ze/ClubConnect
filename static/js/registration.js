@@ -26,7 +26,7 @@ function checkSignupValid(){
     let blankEmail = document.getElementById('blank-email');
     let blankPassword = document.getElementById('blank-password');
     //Confirm Password
-    if(signupPasswordInput.value !== confirmPasswordInput.value){
+    if(signupPasswordInput.value !== confirmPasswordInput.value && confirmPasswordInput.value.trim() !== ''){
         invalidConfirmPassword.style.display = 'block';
     }
     else{
@@ -38,7 +38,7 @@ function checkSignupValid(){
         blankPassword.style.display = 'block';
         invalidPassword.style.display = 'none';
     }
-    else if(signupPasswordInput.value.length < 8 || signupPasswordInput.value.length > 20){
+    else if(signupPasswordInput.value.length < 8 || signupPasswordInput.value.length > 20 && signupPasswordInput.value.trim() !== ''){
         invalidPassword.style.display = 'block';
         blankPassword.style.display = 'none';
     }
@@ -54,7 +54,7 @@ function checkSignupValid(){
         blankEmail.style.display = 'block';
         invalidemail.style.display = 'none';
     }
-    else if(!signupEmailInput.value.match(emailReg)){
+    else if(!signupEmailInput.value.match(emailReg) && signupEmailInput.value.trim() !== ''){
         invalidemail.style.display = 'block';
         blankEmail.style.display = 'none';
     }
@@ -68,7 +68,7 @@ function checkSignupValid(){
         blankName.style.display = 'block';
         invalidName.style.display = 'none';
     }
-    else if(nameInput.value.length < 8 || nameInput.value.length > 20){
+    else if(nameInput.value.length < 8 || nameInput.value.length > 20 && nameInput.value.trim() !== ''){
         invalidName.style.display = 'block';
         blankName.style.display = 'none';
     }

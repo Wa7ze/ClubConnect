@@ -27,6 +27,9 @@ def adminBoard(request):
 def clubProfile(request):
     return render(request, 'pages/sks-admin-interface/club-profile.html')
 
+def createNewClub(request):
+    return render(request, 'pages/sks-admin-interface/create-club-form.html')
+
 # manager Interface:
 
 def eventActivityForm(request):
