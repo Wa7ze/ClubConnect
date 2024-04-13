@@ -166,6 +166,7 @@ footer{
     background-color: var(--dark-color);
     padding: 15px;
     color: var(--yellow-color);
+    z-index: 999;
   }
   .footer-uskudar span{
     position: relative;

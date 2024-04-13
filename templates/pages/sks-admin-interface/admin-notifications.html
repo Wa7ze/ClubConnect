@@ -1,0 +1,439 @@
+{% extends 'base.html' %}
+{% block content%}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        :root {
+            --ligh-color: white;
+            --dark-color: rgb(26, 24, 24);
+            --grey-color: rgb(215, 214, 214);
+            --red-color: #ea3636;
+            --yellow-color: rgb(249, 221, 95);
+            --section-color: #eff7fa;
+            --blue-color: rgb(101, 108, 239);
+          }
+        .notif-header{
+            background-image: url('https://www.bionikkimya.com/wp-content/uploads/2021/08/Istanbul-Paslanmaz-Kaynak-Kimyasallari.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 40vh;
+            position: relative;
+            top: 0;
+            left: 0;
+        }
+        .notif-header h1{
+            color: var(--ligh-color);
+            z-index: 2;
+            letter-spacing: 2px;
+            font-size: 2.2rem;
+        }
+        .notif-header .filter-bg{
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.68);
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1;
+        }
+        .all-features-container{
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .notif-container{
+          display: flex;
+          gap: 20px;
+          flex-wrap: wrap;
+        }
+        .posts-notif-container,.activities-notif-container,.edits-notif-container{
+          border: solid 1px rgba(128, 128, 128, 0.384);
+          width: 31.2vw;
+          height: 500px;
+          padding: 10px 0;
+        }
+        .scroll-container{
+            overflow-y: auto;
+            scrollbar-width: none;
+            height: 92%;
+        }
+        
+        .posts-notif-container h4,.activities-notif-container h4,.edits-notif-container h4{
+            padding-left: 10px;
+            margin-bottom: 20px;
+        }
+        .activity-request, .post-request, .edit-request{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: solid 1px rgba(128, 128, 128, 0.429);
+            padding: 10px;
+        }
+        .activity-request:last-child, .post-request:last-child, .edit-request:last-child{
+            border-bottom: none;
+        }
+        .activity-request:hover, .post-request:hover, .edit-request:hover{
+            background-color: rgba(128, 128, 128, 0.119);
+
+        }
+        .decision-buttons{
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            width: 55%;
+            justify-content: flex-end;
+        }
+        .decision-buttons button{
+            border: none;
+            padding: 4px 14px;
+        }
+        .accept-btn{
+            background-color: rgb(41, 123, 41);
+            color: var(--ligh-color);
+        }
+        .reject-btn{
+            background-color: var(--red-color);
+            color: var(--ligh-color);
+        }
+        .activity-request img, .post-request img, .edit-request img{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: solid 1px rgba(128, 128, 128, 0.639);
+        }
+        .req-text{
+            font-size: .8rem;
+        }
+        .req-text .view-interface-btn{
+            color: blue;
+            cursor: pointer;
+        }
+        
+        .event-interface-container{
+            background-color: rgba(0, 0, 0, 0.495);
+            backdrop-filter: blur(12px);
+            padding: 60px;
+            min-height: 121vh;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 55px;
+            left: 0;
+            z-index: 998;
+            width: 100%;
+            display: none;
+            
+        }
+        .event-interface-container h4{
+            margin-bottom: 30px;
+            color: var(--ligh-color);
+        }
+        .event-interface-container .fa-x{
+            color: var(--ligh-color);
+            position: absolute;
+            right: 40px;
+            top: 35px;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        .event-interface-container .activity-interface{
+            width: 80%;
+            display: flex;
+            gap: 50px;
+            border: solid 1px var(--dark-color);
+            padding: 20px;
+            background-color: var(--ligh-color);
+        }
+        .activity-interface .image-wrapper{
+            position: relative;
+            top: 0;
+            left: 0;
+        }
+        .image-wrapper img{
+            width: 30vw;
+            min-height: 100vh;
+        }
+
+        @media screen and (max-width: 1387px){
+            .event-interface-container{
+                padding: 60px 20px;
+            }
+            .event-interface-container .activity-interface{
+                width: 90%;
+            }
+        }
+        @media screen and (max-width: 1249px){
+            .notif-container{
+                gap: 20px;
+                justify-content: space-between;
+            }
+            .posts-notif-container,.activities-notif-container,.edits-notif-container{
+                width: 46vw;
+            }
+            .event-interface-container{
+                min-height: 200vh;
+                top: 43px;
+            }
+            .event-interface-container .activity-interface{
+                width: 95%;
+            }
+            .event-interface-container .fa-x{
+                top: 40px;
+                right: 15px;
+            }
+            .image-wrapper img{
+                width: 40vw;
+            }
+        }
+        @media screen and (max-width: 893px){
+            .notif-container{
+                gap: 20px;
+                justify-content: flex-start;
+                align-items: center;
+                flex-direction: column;
+            }
+            .event-interface-container{
+                min-height: 272vh;
+                top: 43px;
+            }
+            .posts-notif-container,.activities-notif-container,.edits-notif-container{
+                width: 80vw;
+            }
+            .event-interface-container .activity-interface{
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+            }
+            .image-wrapper{
+                text-align: center;
+            }
+            .image-wrapper img{
+                width: 90%;
+                min-height: 70vh;
+            }
+        }
+        @media screen and (max-width: 480px){
+            .posts-notif-container,.activities-notif-container,.edits-notif-container{
+                width: 99vw;
+            }
+
+            .all-features-container{
+                padding: 20px 0;
+            }
+            .activity-request, .post-request, .edit-request{
+                flex-wrap: wrap;
+            }
+            .decision-buttons{
+                justify-content: flex-start;
+            }
+            .event-interface-container{
+                padding: 60px 20px;
+            }
+            
+            .event-interface-container .activity-interface{
+                padding: 5px;
+                width: 100%;
+            }
+            
+            .image-wrapper img{
+                width: 100%;
+                min-height: 50vh;
+            }
+        }
+    </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500&display=swap" rel="stylesheet">
+    <title>ClubConnect | Notifications | SKS Admin</title>
+</head>
+<body>
+    <div class="notif-header">
+        <div class="filter-bg"></div>
+        <h1>Notifications</h1>
+    </div>
+    <div class="all-features-container">
+    <div class="notif-container">
+        <div class="activities-notif-container">
+            <h4>Event Activity Requests</h4>
+            <div class="scroll-container">
+            <div class="activity-request" data-date="Sat, Apr 24" data-time = '8:00 pm' data-category="Sport"
+             data-phone = "+90 (534)442 1873" data-location="Block D, D-109" data-manager="Nouhad El Hallab"
+             data-title = "Let's Hike Together" data-image = "{% static 'images/hiking-event.jpg' %}"
+             data-description = "Embark on an unforgettable hiking journey to conquer the summit of Büyük Camlica Hill.
+             Experience breathtaking views, diverse wildlife, and camaraderie. Join us for adventure!
+              Explore the winding trails that lead you through lush greenery, with each step bringing you closer to the awe-inspiring peak.
+               As you ascend, be captivated by the symphony of nature, from the melodious songs of birds to the gentle rustle of leaves in the breeze.
+                Along the way, forge bonds with fellow adventurers, sharing in the exhilaration of the climb and the triumph of reaching the summit.
+                 At the pinnacle, stand in awe as panoramic vistas stretch out before you, a tapestry of mountains, forests, and cityscapes that leave you breathless.
+                  This journey is not just about conquering a hill; it's about immersing yourself in the beauty of the natural world and the thrill of exploration.
+                   So lace up your boots, pack your essentials, and join us as we embark on this epic adventure together!">
+
+                <img src="{% static 'images/hiking-club.jpg' %}" alt="club logo">
+                <div class="req-text"><strong class="club-name">Hike Harmony</strong> sent an activity event request <span class="view-interface-btn">view</span></div>
+                <div class="decision-buttons">
+                    <button class="accept-btn" type="button">Accept</button>
+                    <button class="reject-btn" type="button">Reject</button>
+                </div>
+            </div>
+
+            <div class="activity-request" data-date="Thu, May 09" data-time = '2:00 pm' data-category="gaming"
+             data-phone = "+90 (537)482 1275" data-location="Block A, Nermin Tarhan" data-manager="Mohammad Aburahma"
+             data-title = "Virtual Realms: Gaming in the VR Universe" data-image = "{% static 'images/gaming-vr-upcoming-event.png' %}"
+             data-description = "Step into 'Virtual Realms: Gaming in the VR Universe' for an unparalleled gaming adventure!
+             Immerse yourself in cutting-edge VR technology, thrilling demos, and competitive tournaments.
+              Whether you're a seasoned VR enthusiast or new to the experience, there's something for everyone.
+               Join us and explore the limitless possibilities of the VR universe!">
+
+                <img src="{% static 'images/gaming-club.jpg' %}" alt="club logo">
+                <div class="req-text"><strong class="club-name">Pixel Pioneers</strong> sent an activity event request <span class="view-interface-btn">view</span></div>
+                <div class="decision-buttons">
+                    <button class="accept-btn" type="button">Accept</button>
+                    <button class="reject-btn" type="button">Reject</button>
+                </div>
+            </div>
+            <div class="activity-request">
+                <img src="{% static 'images/tech-titans-club.jpg' %}" alt="club logo">
+                <div class="req-text"><strong class="club-name">Tech Titans</strong> sent an activity event request <span class="view-interface-btn">view</span></div>
+                <div class="decision-buttons">
+                    <button class="accept-btn" type="button">Accept</button>
+                    <button class="reject-btn" type="button">Reject</button>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="posts-notif-container">
+            <h4>Event Post Requests</h4>
+            <div class="scroll-container">
+                <div class="post-request">
+                <img src="{% static 'images/hiking-club.jpg' %}" alt="club logo">
+                <div class="req-text"><strong class="club-name">Hike Harmony</strong> sent a post event request <span class="view-interface-btn">view</span></div>
+                <div class="decision-buttons">
+                    <button class="accept-btn" type="button">Accept</button>
+                    <button class="reject-btn" type="button">Reject</button>
+                </div>
+            </div>
+            <div class="post-request">
+                <img src="{% static 'images/hiking-club.jpg' %}" alt="club logo">
+                <div class="req-text"><strong class="club-name">Hike Harmony</strong> sent a post event request <span class="view-interface-btn">view</span></div>
+                <div class="decision-buttons">
+                    <button class="accept-btn" type="button">Accept</button>
+                    <button class="reject-btn" type="button">Reject</button>
+                </div>
+            </div>
+            <div class="post-request">
+                <img src="{% static 'images/hiking-club.jpg' %}" alt="club logo">
+                <div class="req-text"><strong class="club-name">Hike Harmony</strong> sent a post event request <span class="view-interface-btn">view</span></div>
+                <div class="decision-buttons">
+                    <button class="accept-btn" type="button">Accept</button>
+                    <button class="reject-btn" type="button">Reject</button>
+                </div>
+            </div>
+            </div>  
+        </div>
+        <div class="edits-notif-container">
+            <h4>Edit Event Requests</h4>
+            <div class="scroll-container">
+                <div class="edit-request">
+                <img src="{% static 'images/hiking-club.jpg' %}" alt="club logo">
+                <div class="req-text"><strong class="club-name">Hike Harmony</strong> sent an edit event request <span class="view-interface-btn">view</span></div>
+                <div class="decision-buttons">
+                    <button class="accept-btn" type="button">Accept</button>
+                    <button class="reject-btn" type="button">Reject</button>
+                </div>
+            </div>
+            <div class="edit-request">
+                <img src="{% static 'images/hiking-club.jpg' %}" alt="club logo">
+                <div class="req-text"><strong class="club-name">Hike Harmony</strong> sent an edit event request <span class="view-interface-btn">view</span></div>
+                <div class="decision-buttons">
+                    <button class="accept-btn" type="button">Accept</button>
+                    <button class="reject-btn" type="button">Reject</button>
+                </div>
+            </div>
+            <div class="edit-request">
+                <img src="{% static 'images/hiking-club.jpg' %}" alt="club logo">
+                <div class="req-text"><strong class="club-name">Hike Harmony</strong> sent an edit event request <span class="view-interface-btn">view</span></div>
+                <div class="decision-buttons">
+                    <button class="accept-btn" type="button">Accept</button>
+                    <button class="reject-btn" type="button">Reject</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="event-interface-container">
+        <!-- HERE THE ACTIVITY INTERFACE WILL BE DISPLAYED FROM JS  -->
+    </div>
+</div>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <script src="{% static 'js/navbar.js' %}"></script>
+    <script src="{% static 'js/admin.js' %}"></script>
+    <script>
+
+      let activityRequest = document.querySelectorAll('.activity-request');
+      let activityInterface = document.querySelector('.event-interface-container');
+      function showRequestContent(){
+        for(let i = 0; i < activityRequest.length; i++){
+          let activityViewBtn = activityRequest[i].querySelector('.view-interface-btn');
+          let activityClubName = activityRequest[i].querySelector('.club-name');
+
+          activityViewBtn.addEventListener('click', ()=>{
+            activityInterface.style.display = 'flex';
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            let activityPreview =
+            `
+            <i onclick="closeEventInterface()" class="fa-solid fa-x"></i>
+            <div class="activity-interface">
+                <div class="image-wrapper">
+                        <img class="activity-image" src="${activityRequest[i].dataset.image}" class="card-img-top event-img" alt="let's Hike Event">
+                    </div>
+                    <div class="activity-infos">
+                    <div class="activity-title-desc">
+                    <h3 class="activity-title">${activityRequest[i].dataset.title}</h3>
+                    <p class="activity-desc">${activityRequest[i].dataset.description}</p>
+                   </div>
+                   <div class="activity-subheaders">
+                    <p><i class="fa-regular fa-calendar"></i> Date: ${activityRequest[i].dataset.date}</p>
+                    <p><i class="fa-regular fa-clock"></i> Time: ${activityRequest[i].dataset.time}</p>
+                    <p><i class="fa-solid fa-location-dot"></i> Location: ${activityRequest[i].dataset.location}</p>
+                    <p><i class="fa-solid fa-list"></i> Category: ${activityRequest[i].dataset.category}</p>
+                    <p><i class="fa-regular fa-user"></i> Manager: ${activityRequest[i].dataset.manager}</p>
+                    <p><i class="fa-solid fa-cube"></i> Club Name: ${activityClubName.textContent}</p>
+                    <p><i class="fa-solid fa-phone"></i> Phone Number: ${activityRequest[i].dataset.phone}</p>
+                    
+                   </div>
+                    </div>
+        </div>
+            
+            `;
+            activityInterface.innerHTML = activityPreview;
+          });
+      }
+      }
+      showRequestContent();
+
+      function closeEventInterface(){
+        activityInterface.style.display = 'none';
+      }
+
+    </script>
+</body>
+</html>
+{% endblock content %}

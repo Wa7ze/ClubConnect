@@ -79,12 +79,13 @@ form .input-wrapper{
     display: flex;
     flex-direction: column;
 }
+
 form .input-wrapper input{
     padding: 7px;
     width: 28vw;
     outline: none;
     border-radius: 0;
-    border: solid 1px grey;
+    border: solid 2px grey;
 }
 form .input-wrapper input:focus{
     border: solid 2px var(--yellow-color);
@@ -110,10 +111,10 @@ form .input-wrapper select{
     font-size: 2.4rem;
 }
 
-#file-upload {
+.event-file-upload-input{
     display: none;
 }
-#file-list{
+.event-file-list{
     width: 50vw;
     margin-top: 5px;
     align-self: center;
@@ -123,7 +124,7 @@ form .input-wrapper select{
    margin-top: 5px;
    color: red;
    font-weight: bold;
-   font-size: 1.2rem;
+   font-size: .9rem;
    display: none;
 }
 .phone-error,.description-error{
@@ -158,6 +159,60 @@ form .input-wrapper select{
     background-color: transparent;
     border: solid 1px var(--red-color);
 }
+.blur{
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.594);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 998;
+    display: none;
+  }
+  .confirm-message{
+    background-color: var(--dark-color);
+    color: var(--ligh-color);
+    position: fixed;
+    top: -100%;
+    left: 50%;
+    transform: translate(-50%);
+    padding: 20px;
+    width: 40vw;
+    z-index: 999;
+    transition: .4s ease;
+  }
+  .confirm-message .yes-no-buttons{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+  .yes-no-buttons .yes-btn, .no-btn{
+    padding: 5px 25px;
+    transition: .3s ease;
+  }
+  .yes-btn{
+    background-color: var(--red-color);
+    color: var(--ligh-color);
+    border: solid 1px transparent;
+  }
+  .yes-btn:hover{
+    background-color: transparent;
+    color: var(--red-color);
+    border: solid 1px var(--red-color);
+  }
+  .no-btn{
+    background-color: transparent;
+    color: var(--red-color);
+    border: solid 1px var(--red-color);
+  }
+  .error-border{
+    border: solid 2px red !important; 
+   }
+   .email-error{
+    color: red;
+    font-weight: bold;
+    display: none;
+  }
 
 @media screen and (max-width: 750px){
     form .input-wrapper input{

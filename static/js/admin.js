@@ -1,7 +1,6 @@
 let searchEvent = document.getElementById('search-for-event');
 let eventCards = document.querySelectorAll('.event-card');
 let NoResultsMatches = document.querySelector('.no-clubs-events-matches');
-let biggerImage = document.querySelector('.bigger-profile');
 const backgroundUpload = document.getElementById('background-upload');
 const profileUpload = document.getElementById('profile-upload');
 const backgroundPreview = document.getElementById('background-preview');
@@ -10,8 +9,8 @@ let backgroundContainer = document.querySelector('.image-upload-container');
 let profileContainer = document.querySelector('.profile-input');
 let phoneNum1 = document.getElementById('phone1');
 let phoneNum2 = document.getElementById('phone2');
-let clubDescriptionInput = document.getElementById('club-description');
-let clubVisionInput = document.getElementById('club-vision');
+let clubDescriptionInput = document.getElementById('club-description-input');
+let clubVisionInput = document.getElementById('club-vision-input');
 let clubConfirmMessage = document.getElementById('club-confirm-message');
 let clubCreateBlur = document.getElementById('create-club-blur');
 let clubEmail = document.getElementById('club-email');
@@ -41,14 +40,6 @@ function checkEventsFound(){
      
   }
 }
-
-function openImage(){
-  biggerImage.style.display = 'flex';
-}
-function closeImage(){
-  biggerImage.style.display = 'none';
-}
-
 
 function displayImagePreview(input, preview) {
   const file = input.files[0];

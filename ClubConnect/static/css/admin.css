@@ -314,7 +314,7 @@ select{
   font-size: 1rem;
   border: solid 2px grey;
 }
-#club-vision,#club-description{
+#club-vision-input,#club-description-input{
   width: 99.4%;
   resize: none;
   padding: 10px;
@@ -324,13 +324,13 @@ select{
 .area-div{
   width: 100%;
 }
-#club-vision{
+#club-vision-input{
   min-height: 100px;
 }
-#club-description{
+#club-description-input{
   min-height: 200px;
 }
-input:focus,#club-vision:focus,#club-description:focus,select:focus{
+input:focus,#club-vision-input:focus,#club-description-input:focus,select:focus{
   border: solid 2px var(--yellow-color);
 }
 .create-club-btn{

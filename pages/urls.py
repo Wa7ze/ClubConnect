@@ -15,5 +15,6 @@ urlpatterns = [
     path('my-list', views.myList, name = 'myList'),
     path('club Profile', views.clubProfile, name = 'clubProfile'),
     path('create a new club', views.createNewClub, name = 'createNewClub'),
+    path('admin-notifications', views.adminNotifications, name = 'adminNotifications'),
    
 ]

@@ -268,3 +268,13 @@ if(document.body.id === 'events'){
         
 /*End Events Page JS*/
 
+/*Start Club Profile Page JS*/ 
+let biggerImage = document.querySelector('.bigger-profile');
+function openImage(){
+    biggerImage.style.display = 'flex';
+  }
+  function closeImage(){
+    biggerImage.style.display = 'none';
+  }
+/*End Club Profile Page JS*/ 
+

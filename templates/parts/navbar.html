@@ -36,12 +36,18 @@
         <div class="reg-buttons flex-column align-items-center gap-4 gap-lg-2 flex-lg-row">
             <a href="{% url 'createNewClub' %}"><button type="button" class="logout-btn btn">Create New Club</button></a>
             
-            <a href="#">
+            <a href="{% url 'adminNotifications' %}" id="admin-notifications">
               <div class="notifications-container me-2">
               <i class="fa-solid fa-bell"></i>
               <div class="notif-div"></div>
               </div>
           </a>
+          <a href="#" id="manager-notifications">
+            <div class="notifications-container me-2">
+            <i class="fa-solid fa-bell"></i>
+            <div class="notif-div"></div>
+            </div>
+        </a>
           <div class="profile-container d-lg-flex align-items-lg-center gap-1">
           <div class="profile-letter">N</div>
           <i class="fa-solid fa-caret-down"></i>

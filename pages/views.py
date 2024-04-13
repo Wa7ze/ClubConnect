@@ -17,18 +17,32 @@ def studentLogin(request):
 def studentSignup(request):
     return render(request, 'pages/registration-form/student-signup.html')
 
+# All Users Interface:
+def homePage(request):
+    return render(request, 'pages/all-users-interface/homepage.html')
 
+def events(request):
+    return render(request, 'pages/all-users-interface/events.html')
+
+def clubs(request):
+    return render(request, 'pages/all-users-interface/clubs.html')
+
+def myList(request):
+    return render(request, 'pages/all-users-interface/my-list.html')
+
+def clubProfile(request):
+    return render(request, 'pages/all-users-interface/club-profile.html')
 
 # admin Interface:
 
 def adminBoard(request):
     return render(request, 'pages/sks-admin-interface/admin-board.html')
 
-def clubProfile(request):
-    return render(request, 'pages/sks-admin-interface/club-profile.html')
-
 def createNewClub(request):
     return render(request, 'pages/sks-admin-interface/create-club-form.html')
+
+def adminNotifications(request):
+    return render(request, 'pages/sks-admin-interface/admin-notifications.html')
 
 # manager Interface:
 
@@ -38,19 +52,6 @@ def eventActivityForm(request):
 def eventPostForm(request):
     return render(request, 'pages/club-manager-interface/event-post.html')
 
-#student-interface
-
-def homePage(request):
-    return render(request, 'pages/student-interface/homepage.html')
-
-def events(request):
-    return render(request, 'pages/student-interface/events.html')
-
-def clubs(request):
-    return render(request, 'pages/student-interface/clubs.html')
-
-def myList(request):
-    return render(request, 'pages/student-interface/my-list.html')
 
 
 
