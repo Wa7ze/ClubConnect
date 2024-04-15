@@ -107,6 +107,6 @@ showConfirmMessage();
 }
 
 function hideConfirmMessage(){
-eventConfirmMessage.style.top = '-100px';
+eventConfirmMessage.style.top = '-100%';
 eventCreateBlur.style.display = 'none';
 }

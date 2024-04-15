@@ -405,6 +405,214 @@ input:focus,#club-vision-input:focus,#club-description-input:focus,select:focus{
   display: none;
 }
 /* End create new club style */
+/*Start Admin Notification Style*/
+.notif-header{
+  background-image: url('https://www.bionikkimya.com/wp-content/uploads/2021/08/Istanbul-Paslanmaz-Kaynak-Kimyasallari.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40vh;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.notif-header h1{
+  color: var(--ligh-color);
+  z-index: 2;
+  letter-spacing: 2px;
+  font-size: 2.2rem;
+}
+.notif-header .filter-bg{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.68);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+.all-features-container{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.notif-container{
+display: flex;
+gap: 20px;
+flex-wrap: wrap;
+}
+.posts-notif-container,.activities-notif-container,.edits-notif-container{
+border: solid 1px rgba(128, 128, 128, 0.384);
+width: 31.2vw;
+height: 500px;
+padding: 10px 0;
+}
+.scroll-container{
+  overflow-y: auto;
+  scrollbar-width: none;
+  height: 92%;
+}
+
+.posts-notif-container h4,.activities-notif-container h4,.edits-notif-container h4{
+  padding-left: 10px;
+  margin-bottom: 20px;
+}
+.activity-request, .post-request, .edit-request{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: solid 1px rgba(128, 128, 128, 0.429);
+  padding: 10px;
+}
+.activity-request:last-child, .post-request:last-child, .edit-request:last-child{
+  border-bottom: none;
+}
+.activity-request:hover, .post-request:hover, .edit-request:hover{
+  background-color: rgba(128, 128, 128, 0.119);
+
+}
+.decision-buttons{
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  width: 55%;
+  justify-content: flex-end;
+}
+.decision-buttons button{
+  border: none;
+  padding: 4px 14px;
+}
+.accept-btn{
+  background-color: rgb(41, 123, 41);
+  color: var(--ligh-color);
+}
+.reject-btn{
+  background-color: var(--red-color);
+  color: var(--ligh-color);
+}
+.activity-request img, .post-request img, .edit-request img{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: solid 1px rgba(128, 128, 128, 0.639);
+}
+.req-text{
+  font-size: .8rem;
+}
+.req-text .view-interface-btn{
+  color: blue;
+  cursor: pointer;
+}
+
+.event-interface-container{
+  background-color: rgba(0, 0, 0, 0.495);
+  backdrop-filter: blur(12px);
+  padding: 50px 60px;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 20px;
+  left: 0;
+  z-index: 998;
+  width: 100%;
+  display: none;
+  
+}
+.event-interface-container h4{
+  margin-bottom: 30px;
+  color: var(--ligh-color);
+}
+.event-interface-container .fa-x{
+  color: var(--ligh-color);
+  position: absolute;
+  right: 40px;
+  top: 45px;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+.event-interface-container .interface-box{
+  width: 80%;
+  display: flex;
+  gap: 50px;
+  border: solid 1px var(--dark-color);
+  padding: 20px;
+  background-color: var(--ligh-color);
+  overflow: auto;
+  scrollbar-width: none;
+  height: 88vh;
+}
+.event-interface-container .post-interface{
+  flex-direction: column !important;
+}
+.image-wrapper{
+  text-align: center;
+}
+.activity-interface .image-wrapper img{
+  width: 30vw;
+  height: 100%;
+}
+.post-interface .image-wrapper{
+  width: 100%;
+}
+.post-interface .image-wrapper img{
+  width: 100% !important;
+  height: 500px !important;
+}
+.old-edited-intefaces-container{
+  display: flex;
+  gap: 40px;
+  overflow: auto;
+  scrollbar-width: none;
+  padding: 20px 10px;
+  height: 90vh;
+}
+.old-edited-intefaces-container .edited-old-box{
+  background-color: var(--ligh-color);
+  min-height: 194vh;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 10px 20px;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.box-filter{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+}
+.old-box-filter{
+  background-color: rgba(255, 0, 0, 0.13) !important;
+}
+.edited-box-filter{
+  background-color: rgba(5, 255, 5, 0.114) !important;
+}
+.post-edited-old-box{
+  min-height: 100% !important;
+}
+
+.edited-old-box .image-wrapper img{
+  width: 30vw;
+}
+.post-edited-old-box .image-wrapper img{
+  width: 40vw !important;
+}
+.activity-infos p, .post-infos p{
+  font-size: 1rem;
+}
+.activity-subheaders{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+/*End Admin Notification Style*/
 
 @media screen and (max-width: 1387px){
   .club-container .first-container{
@@ -415,6 +623,34 @@ input:focus,#club-vision-input:focus,#club-description-input:focus,select:focus{
   }
   .bigger-profile img{
       width: 38vw;
+  }
+  .event-interface-container{
+    padding: 60px 20px;
+}
+.event-interface-container .interface-box{
+    width: 90%;
+}
+}
+@media screen and (max-width: 1249px){
+  .notif-container{
+      gap: 20px;
+      justify-content: space-between;
+  }
+  .posts-notif-container,.activities-notif-container,.edits-notif-container{
+      width: 46vw;
+  }
+  .event-interface-container .interface-box{
+      width: 95%;
+  }
+  .event-interface-container .fa-x{
+      top: 40px;
+      right: 15px;
+  }
+  .activity-interface .image-wrapper img{
+      width: 40vw;
+  }
+  .post-interface .image-wrapper img{
+      width: 100% !important;
   }
 }
 @media screen and (max-width: 893px){
@@ -451,7 +687,53 @@ input:focus,#club-vision-input:focus,#club-description-input:focus,select:focus{
     width: 150px;
     height: 150px;
   }
+  .notif-container{
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+  }
+  .posts-notif-container,.activities-notif-container,.edits-notif-container{
+      width: 80vw;
+  }
+  .event-interface-container .interface-box{
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+  }
+  .image-wrapper{
+      text-align: center;
+  }
+  .activity-interface .image-wrapper img{
+      width: 90%;
+      min-height: 70vh;
+  }
+  .post-interface .image-wrapper img{
+      height: 300px !important;
+  }
+  .old-edited-intefaces-container{
+      flex-direction: column;
+  }
+  .post-edited-old-box{
+      min-height: 110vh !important;
+  }
+  .edited-old-box .image-wrapper img{
+      width: 45vw;
+  }
+  .post-edited-old-box .image-wrapper img{
+      width: 80vw !important;
+  }
+  .activity-infos p, .post-infos p{
+      font-size: .8rem;
+  }
+  .old-edited-intefaces-container .edited-old-box{
+      min-height: 140vh;
+  }
+  .event-interface-container .fa-x{
+      right: 7px;
+  }
 }
+
   @media screen and (max-width: 480px){
   .club-bio-container{
       flex-direction: column;
@@ -483,5 +765,52 @@ input:focus,#club-vision-input:focus,#club-description-input:focus,select:focus{
   }
 .custom-background-upload , .custom-profile-upload{
     font-size: 1.6rem;
+  }
+  .posts-notif-container,.activities-notif-container,.edits-notif-container{
+    width: 99vw;
+  }
+
+  .all-features-container{
+      padding: 20px 0;
+  }
+  .activity-request, .post-request, .edit-request{
+      flex-wrap: wrap;
+  }
+  .decision-buttons{
+      justify-content: flex-start;
+  }
+  .event-interface-container{
+      padding: 60px 5px;
+  }
+
+  .event-interface-container .activity-interface{
+      padding: 5px;
+      width: 100%;
+  }
+
+  .activity-interface .image-wrapper img{
+      width: 100%;
+      min-height: 50vh;
+  }
+  .event-interface-container .interface-box{
+      padding: 10px 3px;
+  }
+  .edited-old-box .image-wrapper img{
+      width: 65vw;
+  }
+  .post-edited-old-box .image-wrapper img{
+      width: 100% !important;
+  }
+  .activity-infos p, .post-infos p{
+      font-size: .6rem;
+  }
+  .old-edited-intefaces-container .edited-old-box{
+      min-height: 144vh;
+  }
+  .post-edited-old-box{
+      min-height: 80vh !important;
+  }
+  .event-interface-container .fa-x{
+      top: 30px;
   }
 }
