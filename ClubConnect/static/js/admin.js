@@ -14,6 +14,7 @@ let clubVisionInput = document.getElementById('club-vision-input');
 let clubConfirmMessage = document.getElementById('club-confirm-message');
 let clubCreateBlur = document.getElementById('create-club-blur');
 let clubEmail = document.getElementById('club-email');
+let createClubForm = document.querySelector('.create-club-form');
 let eventsFound;
 
 function searchForEvent(){

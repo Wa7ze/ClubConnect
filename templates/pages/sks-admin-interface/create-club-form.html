@@ -23,11 +23,12 @@
         <p>Are you sure you want to create a new club?</p>
         <div class="yes-no-buttons">
             <button onclick="hideConfirmMessage()" class="no-btn" type="button">No</button>
-            <button class="yes-btn" type="button">Yes</button>
+            <button onclick="createClubForm.submit()" class="yes-btn" type="submit">Yes</button>
         </div>
     </div>
     <div class="form-container">
-        <div class="create-club-form">
+        <form class="create-club-form" action="" method="POST">
+            {% csrf_token%}
             <div class="image-upload-container">
                 <div onclick="backgroundUpload.click()" class="image-preview" id="background-preview"></div>
                 <label for="background-upload" class="custom-background-upload">
@@ -87,6 +88,7 @@
     <script src="{% static 'js/all.min.js' %}"></script>
     <script src="{% static 'js/navbar.js' %}"></script>
     <script src="{% static 'js/admin.js' %}"></script>
+    
 </body>
 </html>
 {% endblock content %}
