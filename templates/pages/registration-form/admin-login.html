@@ -24,7 +24,8 @@
 <div class="centered-div">
       <div class="login-signup-form">
         <img src="https://foto.haberler.com/haber/2022/08/09/uskudar-universitesi-burs-imkanlari-15156736_6917_amp.jpg">
-        <div class="form">
+        <form action="" method="POST">
+            {% csrf_token %}
             <h1>Log In</h1>
             <div class="input-fields">
                 <div class="one-input-wrapper">
@@ -46,7 +47,7 @@
                 <span><i class="fa-solid fa-triangle-exclamation"></i></span>
                 <strong>There was a problem logging in. Check your email and password or create an account.</strong>
             </div>
-        </div>
+        </form>
      </div>
 </div>
 <footer>

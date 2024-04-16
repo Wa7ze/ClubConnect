@@ -23,7 +23,8 @@
       </nav>
 <div class="centered-div">
     <div class="login-signup-form">
-        <div class="form">
+        <form action="" method="POST">
+            {% csrf_token %}
             <h1>Sign Up</h1>
             <div class="input-fields signup-input-fields">
                 <div class="one-input-wrapper">
@@ -63,7 +64,7 @@
         </div>
         <p>Already have an account? <a href="{% url 'studentLogin' %}">Log In</a></p>
         <a href="{% url 'homePage' %}"></a><button onclick="checkSignupValid()" class="reg-btn">Sign Up</button>
-        </div>
+    </form>
         <img src="https://foto.haberler.com/haber/2022/08/09/uskudar-universitesi-taban-puanlari-2022-15156540_4460_amp.jpg">
      </div>
 </div>

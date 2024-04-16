@@ -213,6 +213,70 @@ form .input-wrapper select{
     font-weight: bold;
     display: none;
   }
+  /*Start Manager notifications Style*/
+  .notif-header{
+    background-image: url('https://www.bionikkimya.com/wp-content/uploads/2021/08/Istanbul-Paslanmaz-Kaynak-Kimyasallari.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 40vh;
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+  .notif-header h1{
+    color: var(--ligh-color);
+    z-index: 2;
+    letter-spacing: 2px;
+    font-size: 2.2rem;
+  }
+  .notif-header .filter-bg{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.68);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+  }
+  .manager-notif-container{
+    min-height: 45vh;
+    padding: 20px;
+  }
+  .notification{
+    padding: 32px 15px 15px 15px;
+    margin-bottom: 20px;
+    height: 90px;
+    font-size: 1rem;
+  }
+  .notification svg{
+    margin-right: 5px;
+  }
+  .notification-accepted{
+    background-color: rgba(4, 250, 4, 0.199);
+  }
+  .notification-rejected{
+    background-color: rgba(255, 0, 0, 0.274);
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+  .notification-rejected button{
+    color: blue;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+  }
+  .purpose-of-rejection{
+    margin-top: 40px;
+  }
+  .show-purpose{
+    min-height: 25vh !important;
+    overflow-y: auto !important;
+  }
+  /*End Manager notifications Style*/
 
 @media screen and (max-width: 750px){
     form .input-wrapper input{
@@ -253,4 +317,7 @@ form .input-wrapper select{
     .image-wrapper h1{
         font-size: 1.4rem;
     }
+    .notification{
+        font-size: .8rem;
+      }
 }

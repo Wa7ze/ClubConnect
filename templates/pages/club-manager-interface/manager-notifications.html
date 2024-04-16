@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content%}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/manager.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500&display=swap" rel="stylesheet">
+    <title>ClubConnect | Notifications | Club Manager</title>
+</head>
+<body id="manager-notifications">
+    <div class="notif-header">
+        <div class="filter-bg"></div>
+        <h1>Notifications</h1>
+    </div>
+    <div class="manager-notif-container">
+       <div class="notification notification-accepted">
+        <i class="fa-solid fa-check"></i>
+        Your Event Activity Request Is Accepted By The SKS Admin
+       </div>
+       <div class="notification notification-rejected">
+        <i class="fa-solid fa-xmark"></i>
+        Your Event Activity Request Is Rejected By The SKS Admin
+        <button class="why-rejected">See Why</button>
+        <p class ="purpose-of-rejection">
+            The decision to reject an event hinges on several critical factors. Primarily, it must align with organizational values and goals.
+             If the event contradicts these principles or poses a threat to safety, it warrants rejection. Additionally, if the content lacks
+              relevance or fails to offer meaningful benefits to attendees, rejection becomes necessary to uphold standards of quality and purpose.chjbfdjhbshjvjhbcjhebcjheb ejhbcehjbcejhbchjebc dfhjbcjhbchjsbchjdsbc scdhjbcsdhjbcjhsbcjhdsbchjsbdchjsbdchjbdshcjbsdhjcb csjhbcsjhbchjfsbchjsbcjhsbchjsbcjhsbcjhsbc csjhbcsjhbcjhsdbcjhsbchjdsbcjhdsbcjhsdbcjhs cshjbcjhsfbcjhsfbcjhsbcjhbshjcbshjcb sdjhcbshjbcshjbcsjhbchsjbcjhsbchjsb csjhbchjsbchjsbcjhsbcjhsdbcjhdsbc cdhjsbcsjbcjsbcjsbhjcbsdbc cdsjhbcdsjhbchsjbcjhsbchjsbcjhsdb dchjsdbcjhbdschjdbscjhbshjcbshbc csjhdbcsjhdbchjsbchjsbcjhsbcjhbds cjhdsbchjsbcjnckjfsnjfnjvbdf vfdjhbvjhdfbvhjdfbvhdbhvbdfjhvbdv djhfbvfjhdbvhjdbvjhdbvhjdbhvdbv dfjhvbdfjhvbdjhbvjhdbvhjdbvhjdbvjhdbvhjdbvhjdbhvjbdhvbdfhjv fdjhvbdfjhbjhdfbjhfdbjhbfhjvbfdhj vfdjhbvhjfdbvjd vhfdjbvhfdjbvd vjhfdbvhjdfbvjhdv fdvbfdjhbvjhdbvd vjhdbvhjdbvjhfdbv dfjhvbdjhbvdjhbv vdjhbvhjdbvhjfdbv fdjhvbdjhvbdjhfbv vjhdbvjhdfbvhjdfbvhjdbfvhjfdbvhjbdhjvbdh vdjhbvhdjbvhjdbvjhdbvhjdbvhjbdhvbdfhvbdhjb
+            </p>
+       </div>
+       <div class="notification notification-accepted">
+        <i class="fa-solid fa-check"></i>
+        Your Event Activity Request Is Accepted By The SKS Admin
+       </div>
+       <div class="notification notification-rejected">
+        <i class="fa-solid fa-xmark"></i>
+        Your Event Activity Request Is Rejected By The SKS Admin
+        <button class="why-rejected">See Why</button>
+        <p class ="purpose-of-rejection">
+            The Location You chose isn't available on Monday 24 Apr
+            </p>
+       </div>
+       
+    </div>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <script src="{% static 'js/navbar.js' %}"></script>
+    <script src="{% static 'js/manager.js' %}"></script>
+    
+</body>
+</html>
+{% endblock content %}

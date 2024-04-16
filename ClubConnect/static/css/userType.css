@@ -66,14 +66,14 @@ body{
 .login-signup-form img{
     width: 40vw;
 }
-.login-signup-form .form{
+.login-signup-form form{
     padding: 30px;
     position: relative;
     top: 0;
     left: 0;
     height: 100%;
 }
-.login-signup-form .form h1{
+.login-signup-form form h1{
     font-size: 40px;
     color: var(--yellow-color);
 }

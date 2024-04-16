@@ -52,6 +52,9 @@ def eventActivityForm(request):
 def eventPostForm(request):
     return render(request, 'pages/club-manager-interface/event-post.html')
 
+def managerNotifications(request):
+    return render(request, 'pages/club-manager-interface/manager-notifications.html')
+
 
 
 

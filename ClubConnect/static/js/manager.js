@@ -110,3 +110,16 @@ function hideConfirmMessage(){
 eventConfirmMessage.style.top = '-100%';
 eventCreateBlur.style.display = 'none';
 }
+
+/*Start Manager Notifications JS*/
+let rejectNotif = document.querySelectorAll('.notification-rejected');
+        function showWhyRejected(){
+           for(let i=0; i<rejectNotif.length; i++){
+            let seeWhyBtn = rejectNotif[i].querySelector('.why-rejected');
+            seeWhyBtn.addEventListener('click', ()=>{
+                rejectNotif[i].classList.toggle('show-purpose');
+            });
+           }
+        }
+        showWhyRejected();
+/*End Manager Notifications JS*/
