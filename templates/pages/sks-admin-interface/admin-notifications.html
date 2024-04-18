@@ -16,6 +16,17 @@
     <title>ClubConnect | Notifications | SKS Admin</title>
 </head>
 <body id="admin-notifications">
+    <div class="blur" id="admin-notification-blur"></div>
+
+    <form method="post" action="" class="admin-rejection-purpose">
+        {% csrf_token %}
+        <h3 class="mt-3">Please Enter Your Rejection Purpose</h3>
+        <i onclick="hideRejectionPurpose()" class="fa-solid fa-xmark rejection-cancel"></i>
+        <textarea  name="rejection_purpose" id="rej-perp" placeholder="enter your rejection purpose"></textarea>
+        <br>
+        <button class="submit-rej-btn" type="submit">Submit</button>
+    </form>
+
     <div class="notif-header">
         <div class="filter-bg"></div>
         <h1>Notifications</h1>
@@ -42,7 +53,7 @@
                 <div class="req-text"><strong class="club-name">Hike Harmony</strong> sent an event activity request <span class="view-interface-btn">view</span></div>
                 <div class="decision-buttons">
                     <button class="accept-btn" type="button">Accept</button>
-                    <button class="reject-btn" type="button">Reject</button>
+                    <button onclick="showRejectionPurpose()" class="reject-btn" type="button">Reject</button>
                 </div>
             </div>
 
@@ -174,12 +185,7 @@
     <div class="event-interface-container" id="edited-event-interface-container">
         <!-- HERE THE Old and Edited Event INTERFACE WILL BE DISPLAYED FROM JS  -->
     </div>
-
-    <div class="admin-rejection-purpose">
-        <h3>Please Enter Your Rejection Purpose</h3>
-        <input type="text" name="rejection purpose" id="rej-perp" placeholder="enter your rejection perpose">
-        <button type="button">Submit</button>
-    </div>
+    
 </div>
 
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>

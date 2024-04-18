@@ -364,6 +364,21 @@ function closeEventInterface(interface){
 }
 
 
+let rejectionContainer = document.querySelector('.admin-rejection-purpose');
+let rejectionBlur = document.getElementById('admin-notification-blur');
+function showRejectionPurpose(){
+  document.body.style.overflow = 'hidden';
+  rejectionContainer.style.display = 'block';
+  rejectionBlur.style.display = 'block';
+}
+
+function hideRejectionPurpose(){
+    document.body.style.overflow = 'auto';
+    rejectionContainer.style.display = 'none';
+    rejectionBlur.style.display = 'none';
+}
+
+
 
 
 

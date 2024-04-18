@@ -270,6 +270,7 @@ if(document.body.id === 'events'){
 
 /*Start Club Profile Page JS*/ 
 let biggerImage = document.querySelector('.bigger-profile');
+let searchEvent = document.getElementById('search-for-event');
 function openImage(){
     biggerImage.style.display = 'flex';
   }

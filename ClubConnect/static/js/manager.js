@@ -3,7 +3,9 @@ let eventCategory = document.querySelector('.event-category-input');
 let fileUpload = document.querySelector('.event-file-upload-input');
 let phoneNum = document.querySelector('.event-phone-input');
 let eventDescription = document.querySelector('.event-description-input');
-let eventEmail = document.querySelector('.acitvity-email-input');
+let eventEmail = document.querySelector('.activity-email-input');
+let eventPostForm = document.getElementById('event-post-form');
+let eventActivityForm = document.getElementById('event-activity-form');
 
 function displayFiles(input) {
     let fileList = document.querySelector('.event-file-list');
@@ -44,7 +46,8 @@ for(let i = 0; i < targetedInput.length; i++){
 }
 
 //image input
-let imageError = document.querySelector('.image-error');
+if(document.body.id === "create-activity-event"){
+  let imageError = document.querySelector('.image-error');
 if(fileUpload.value.trim() === ''){
   imageError.style.display = 'block';
   hasErrors = true;
@@ -52,17 +55,6 @@ if(fileUpload.value.trim() === ''){
 }
 else{
   imageError.style.display = 'none';
-}
-
-//Description Input
-let descriptionError = document.querySelector('.description-error');
-descInputValue = eventDescription.value.trim();
-if(descInputValue.length >= 300 && descInputValue.length <= 4000){
-  descriptionError.style.display = 'none';
-}
-else if(descInputValue !== ''){
-  descriptionError.style.display = 'block';
-  hasErrors = true;
 }
 
 //phone number input
@@ -75,17 +67,32 @@ if(!phoneNum.value.match(numberReg) && phoneNum.value.trim() !== ''){
 else{
     phoneError.style.display = 'none';
 }
- //Email input
-  let emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  let emailError = document.querySelector('.email-error');
 
-  if(!eventEmail.value.match(emailReg) && eventEmail.value.trim() !== ''){
-      emailError.style.display = 'block';
-      hasErrors = true;
-  }
+//Email input
+let emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+let emailError = document.querySelector('.email-error');
+
+if(!eventEmail.value.match(emailReg) && eventEmail.value.trim() !== ''){
+    emailError.style.display = 'block';
+    hasErrors = true;
+}
 else{
-      emailError.style.display = 'none';
-  }
+    emailError.style.display = 'none';
+}
+
+}
+
+
+//Description Input
+let descriptionError = document.querySelector('.description-error');
+descInputValue = eventDescription.value.trim();
+if(descInputValue.length >= 300 && descInputValue.length <= 4000){
+  descriptionError.style.display = 'none';
+}
+else if(descInputValue !== ''){
+  descriptionError.style.display = 'block';
+  hasErrors = true;
+}
 
 return hasErrors
 }

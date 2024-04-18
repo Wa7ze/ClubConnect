@@ -34,32 +34,32 @@
                 <label for="background-upload" class="custom-background-upload">
                     <i class="fas fa-cloud-upload-alt"></i> Choose A File
                 </label>
-                <input id="background-upload" type="file" />
+                <input id="background-upload" type="file" required/>
                 <div class="profile-input">
                     <div onclick="profileUpload.click()" class="image-preview" id="profile-preview"></div>
                     <label for="profile-upload" class="custom-profile-upload">
                         <i class="fas fa-cloud-upload-alt"></i>
                     </label>
-                    <input id="profile-upload" type="file" />
+                    <input id="profile-upload" type="file" required/>
                 </div>
             </div>
 
         <div class="club-infos">
-            <input class="input-field" id="club-name" type="text" placeholder="Club Name">
-            <input class="input-field" id="headline" type="text" placeholder="Headline">
-            <input class="input-field" id="club-location" type="text" placeholder="Location">
-            <input class="input-field" id="club-manager" type="text" placeholder="Club Manager">
-            <input class="input-field" id="club-vice-manager" type="text" placeholder="Club Vice Manager">
+            <input class="input-field" id="club-name" type="text" placeholder="Club Name" required>
+            <input class="input-field" id="headline" type="text" placeholder="Headline" required>
+            <input class="input-field" id="club-location" type="text" placeholder="Location" required>
+            <input class="input-field" id="club-manager" type="text" placeholder="Club Manager" required>
+            <input class="input-field" id="club-vice-manager" type="text" placeholder="Club Vice Manager" required>
             <div class="input-div">
-            <input class="input-field" id="phone1" type="tel" placeholder="Phone Number 1">
+            <input class="input-field" id="phone1" type="tel" placeholder="Phone Number 1" required>
             <strong class="phone-error1">Invalid Number</strong>
             </div>
             <div class="input-div">
-            <input class="input-field" id="phone2" type="tel" placeholder="Phone Number 2">
+            <input class="input-field" id="phone2" type="tel" placeholder="Phone Number 2" required>
             <strong class="phone-error2">Invalid Number</strong>
             </div>
             <div class="input-div">
-            <input class="input-field" id="club-email" type="email" placeholder="Email Adress">
+            <input class="input-field" id="club-email" type="email" placeholder="Email Adress" required>
             <strong class="email-error">Invalid Email</strong>
         </div>
             <select name="categories" id="s-categories">
@@ -71,11 +71,11 @@
                 <option value="art">Art</option>
             </select>
             <div class="area-div">
-            <textarea class="input-field" name="club vison" id="club-vision-input" placeholder="Club Vision"></textarea>
+            <textarea class="input-field" name="club vison" id="club-vision-input" placeholder="Club Vision" required></textarea>
             <strong class="vision-error">The club vision should be between 200-3000 letter</strong>
             </div>
             <div class="area-div">
-            <textarea class="input-field" name="club description" id="club-description-input" placeholder="Club Description"></textarea>
+            <textarea class="input-field" name="club description" id="club-description-input" placeholder="Club Description" required></textarea>
             <strong class="description-error">The club description should be between 300-4000 letter</strong>
             </div>
             <div class="create-club-btn"><button onclick="checkAndConfirm()" type="button">Create New Club</button></div>
@@ -88,7 +88,6 @@
     <script src="{% static 'js/all.min.js' %}"></script>
     <script src="{% static 'js/navbar.js' %}"></script>
     <script src="{% static 'js/admin.js' %}"></script>
-    
 </body>
 </html>
 {% endblock content %}

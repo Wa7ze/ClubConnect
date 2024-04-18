@@ -20,46 +20,51 @@
                 <a href= "{% url 'usertype' %}"><i class="fa-solid fa-link"></i> ClubConnect</a>
             </div>
         </div>
-      </nav>
-<div class="centered-div">
-      <div class="login-signup-form">
-        <img src="https://foto.haberler.com/haber/2022/08/09/uskudar-universitesi-burs-imkanlari-15156736_6917_amp.jpg">
-        <form action="" method="POST">
-            {% csrf_token %}
-            <h1>Log In</h1>
-            <div class="input-fields">
-                <div class="one-input-wrapper">
-                    <input id="student-login-email" class="email login-email" type="email" placeholder="Email Adress">
-                    <div class="form-icons">
-                    <i onclick="loginEmailInput.focus()" class="fa-regular fa-envelope"></i>
-                </div>
-                </div>
-                <div class="one-input-wrapper">
-                    <input id="student-login-password" class="password login-password hidden-password" type="password" placeholder="Password">
-                    <div class="form-icons">
-                    <i onclick="passwordVisible(loginPasswordInput)" class="fa-regular fa-eye"></i>
-                    <i onclick="loginPasswordInput.focus()" class="fa-solid fa-lock"></i>
-                </div>
-                </div>
-        </div>
-        <p>Don't have an account? <a href="{% url 'studentSignup' %}">Sign Up</a></p>
-        <a href="{% url 'homePage' %}"><button class="reg-btn">Log In</button></a>
+    </nav>
+    <div class="centered-div">
+        <div class="login-signup-form">
+            <img src="https://foto.haberler.com/haber/2022/08/09/uskudar-universitesi-burs-imkanlari-15156736_6917_amp.jpg">
+            <div class="form">
+                
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <h1>Log In</h1>
+                    <div class="input-fields">
+                        <div class="one-input-wrapper">
+                            <input id="student-login-email" name= "email" class="email login-email" type="email" placeholder="Email Adress" required>
+                            <div class="form-icons">
+                                <i onclick="loginEmailInput.focus()" class="fa-regular fa-envelope"></i>
+                            </div>
+                        </div>
+                        <div class="one-input-wrapper">
+                            <input id="student-login-password" name="password" class="password login-password hidden-password" type="password" placeholder="Password" required>
+                            <div class="form-icons">
+                                <i onclick="passwordVisible(loginPasswordInput)" class="fa-regular fa-eye"></i>
+                                <i onclick="loginPasswordInput.focus()" class="fa-solid fa-lock"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Don't have an account? <a href="{% url 'studentSignup' %}">Sign Up</a></p>
+                    <button type="submit" class="reg-btn">Log In</button>
 
-            <div class="invalid-message mt-4">
-                <span><i class="fa-solid fa-triangle-exclamation"></i></span>
-                <strong>There was a problem logging in. Check your email and password or create an account.</strong>
+                    <div>
+                        {% for message in messages %}
+                        <strong class="strong-message">{{message}}</strong>
+                        {% endfor %}
+                    </div>
+
+                </form>
             </div>
-        </form>
-     </div>
-</div>
-<footer>
-    <div class="footer-uskudar">
-        <h6>@ <span>USKUDAR UNIVERSITESI - 2011</span></h6>
+        </div>
     </div>
-  </footer>
-<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'js/all.min.js' %}"></script>
-<script src="{% static 'js/navbar.js' %}"></script>
-<script src="{% static 'js/registration.js' %}"></script>
+    <footer>
+        <div class="footer-uskudar">
+            <h6>@ <span>USKUDAR UNIVERSITESI - 2011</span></h6>
+        </div>
+    </footer>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <script src="{% static 'js/navbar.js' %}"></script>
+    <script src="{% static 'js/registration.js' %}"></script>
 </body>
 </html>

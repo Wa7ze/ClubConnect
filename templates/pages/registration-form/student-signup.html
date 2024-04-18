@@ -20,61 +20,65 @@
                 <a href= "{% url 'usertype' %}"><i class="fa-solid fa-link"></i> ClubConnect</a>
             </div>
         </div>
-      </nav>
-<div class="centered-div">
-    <div class="login-signup-form">
-        <form action="" method="POST">
-            {% csrf_token %}
-            <h1>Sign Up</h1>
-            <div class="input-fields signup-input-fields">
-                <div class="one-input-wrapper">
-                    <input id="name" class="name" type="text" placeholder="Name">
-                    <div class="form-icons">
-                    <i onclick="nameInput.focus()" class="fa-regular fa-user"></i>
+    </nav>
+
+    <div class="centered-div">
+        <div class="login-signup-form">
+            <div class="form">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <h1>Sign Up</h1>
+                    <div class="input-fields signup-input-fields">
+                        <div class="one-input-wrapper">
+                            <input id="name" class="name" name="username" type="text" placeholder="Name" required>
+                            <div class="form-icons">
+                                <i onclick="nameInput.focus()" class="fa-regular fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="one-input-wrapper">
+                            <input id="student-signup-email" name="email" class="signup-email" type="email" placeholder="Email Address" required>
+                            <div class="form-icons">
+                                <i onclick="signupEmailInput.focus()" class="fa-regular fa-envelope"></i>
+                            </div>
+                        </div>
+                        <div class="one-input-wrapper">
+                            <input id="student-signup-password"  name="password" class="signup-password hidden-password" type="password" placeholder="Password" required>
+                            <div class="form-icons">
+                                <i onclick="passwordVisible(signupPasswordInput)" class="fa-regular fa-eye"></i>
+                                <i onclick="signupPasswordInput.focus()" class="fa-solid fa-lock"></i>
+                            </div>
+                        </div>
+                        <div class="one-input-wrapper">
+                            <input id="confirm-password" name="password2" class="password hidden-password" type="password" placeholder="Confirm Password" required>
+                            <div class="form-icons">
+                                <i onclick="passwordVisible(confirmPasswordInput)" class="fa-regular fa-eye"></i>
+                                <i onclick="confirmPasswordInput.focus()" class="fa-solid fa-lock"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Already have an account? <a href="{% url 'studentLogin' %}">Log In</a></p>
+                    <button onclick="checkSignupValid()" class="reg-btn">Sign Up</button>
+                    
+                <div>
+                    {% for message in messages %}
+                    <strong class="strong-message">{{message}}</strong>
+                    {% endfor %}
                 </div>
-                </div>
-                <strong class="strong-message" id="invalid-name">Name should be 8-20 characters</strong>
-                <strong class="strong-message" id="blank-name">Cannot Leave the field blank</strong>
-                <div class="one-input-wrapper">
-                    <input id="student-signup-email" class="signup-email" type="email" placeholder="Email Adress">
-                    <div class="form-icons">
-                    <i onclick="signupEmailInput.focus()" class="fa-regular fa-envelope"></i>
-                </div>
-                </div>
-                <strong class="strong-message" id="invalid-email">Email should be in form ' example.email@st.uskudar.edu.tr '</strong>
-                <strong class="strong-message" id="blank-email">Cannot Leave the field blank</strong>
-                <div class="one-input-wrapper">
-                    <input id="student-signup-password" class="signup-password hidden-password" type="password" placeholder="Password">
-                    <div class="form-icons">
-                    <i onclick="passwordVisible(signupPasswordInput)" class="fa-regular fa-eye"></i>
-                    <i onclick="signupPasswordInput.focus()" class="fa-solid fa-lock"></i>
-                </div>
-                </div>
-                <strong class="strong-message" id="invalid-password">Password should be 8-20 characters</strong>
-                <strong class="strong-message" id="blank-password">Cannot Leave the field blank</strong>
-                <div class="one-input-wrapper">
-                    <input id="confirm-password" class="password hidden-password" type="password" placeholder="Confirm Password">
-                    <div class="form-icons">
-                    <i onclick="passwordVisible(confirmPasswordInput)" class="fa-regular fa-eye"></i>
-                    <i onclick="confirmPasswordInput.focus()" class="fa-solid fa-lock"></i>
-                </div>
-                </div>
-                <strong class="strong-message" id="invalid-confirm-password">Passwords doesn't match</strong>
-                <strong class="strong-message" id="blank-confirm-password">Cannot Leave the field blank</strong>
+                
+                </form>
+                
+            </div>
+            <img src="https://foto.haberler.com/haber/2022/08/09/uskudar-universitesi-taban-puanlari-2022-15156540_4460_amp.jpg">
         </div>
-        <p>Already have an account? <a href="{% url 'studentLogin' %}">Log In</a></p>
-        <a href="{% url 'homePage' %}"></a><button onclick="checkSignupValid()" class="reg-btn">Sign Up</button>
-    </form>
-        <img src="https://foto.haberler.com/haber/2022/08/09/uskudar-universitesi-taban-puanlari-2022-15156540_4460_amp.jpg">
-     </div>
-</div>
-<footer>
-    <div class="footer-uskudar">
-        <h6>@ <span>USKUDAR UNIVERSITESI - 2011</span></h6>
     </div>
-  </footer>
-<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'js/all.min.js' %}"></script>
-<script src="{% static 'js/navbar.js' %}"></script>
-<script src="{% static 'js/registration.js' %}"></script>
+    <footer>
+        <div class="footer-uskudar">
+            <h6>@ <span>USKUDAR UNIVERSITESI - 2011</span></h6>
+        </div>
+    </footer>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <script src="{% static 'js/navbar.js' %}"></script>
+    <script src="{% static 'js/registration.js' %}"></script>
 </body>
+</html>
