@@ -277,5 +277,57 @@ function openImage(){
   function closeImage(){
     biggerImage.style.display = 'none';
   }
+  function searchForEvent(){
+    eventsFound = false;
+     for(let i = 0; i < eventCards.length; i++){
+    let eventTitle = eventCards[i].querySelector('.card-title');
+    if(eventTitle.textContent.toLowerCase().includes(searchEvent.value.toLowerCase())){
+       eventCards[i].classList.remove('hidden-card');
+       eventsFound = true;
+    }
+    else{
+       eventCards[i].classList.add('hidden-card');
+    }
+  }
+  checkEventsFound();
+  }
+  
+  
+  function checkEventsFound(){
+    if (!eventsFound) {
+        NoResultsMatches.classList.remove('hidden-div');
+    } else {
+        NoResultsMatches.classList.add('hidden-div');
+       
+    }
+  }
+
+  const eventPostsSlider = document.querySelector('.event-posts-slider');
+  const profilePostCards = document.querySelectorAll('.profile-post-card');
+  let currentIndex = 0;
+  
+  function moveNext() {
+      const cardWidth = profilePostCards[0].offsetWidth;
+      const cardsInView = Math.floor(eventPostsSlider.offsetWidth / cardWidth);
+      const moveDistance = currentIndex < profilePostCards.length - cardsInView ? -(currentIndex + 1) * cardWidth : 0;
+  
+      profilePostCards.forEach(card => {
+          card.style.transform = `translateX(${moveDistance}px)`;
+      });
+  
+      currentIndex = currentIndex < profilePostCards.length - cardsInView ? currentIndex + 1 : 0;
+  }
+  
+  function movePrevious() {
+      const cardWidth = profilePostCards[0].offsetWidth;
+      const cardsInView = Math.floor(eventPostsSlider.offsetWidth / cardWidth);
+      const moveDistance = currentIndex > 0 ? -(currentIndex - 1) * cardWidth : -(profilePostCards.length - cardsInView) * cardWidth;
+  
+      profilePostCards.forEach(card => {
+          card.style.transform = `translateX(${moveDistance}px)`;
+      });
+  
+      currentIndex = currentIndex > 0 ? currentIndex - 1 : profilePostCards.length - cardsInView;
+  }
 /*End Club Profile Page JS*/ 
 

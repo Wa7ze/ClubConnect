@@ -84,7 +84,7 @@
     </div>
     <div class="club-events">
       <div class="search-event-input">
-        <div class="club-events-title">Club's Events</div>
+        <div class="club-events-title">Club's Event Activities</div>
         <div class="search-container">
         <input onkeyup="searchForEvent()" type="text" id="search-for-event" placeholder="Search for events...">
         <div onclick="searchEvent.focus()" class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
@@ -164,8 +164,39 @@
         </div>
       </div>
     </div>
-    
-    
+
+
+    <div class="club-events">
+        <div class="search-event-input">
+          <div class="club-events-title">Club's Event Posts</div>
+      </div>
+
+      <div class="event-posts-container">
+       <i onclick="movePrevious()" class="fa-solid fa-less-than"></i>
+       <div class="event-posts-slider">
+        <div class="profile-post-card">
+        <img src="https://www.colorado.edu/program/data-science/sites/default/files/styles/large/public/slider/img_0146_0.jpg?itok=IVE2eqdQ">
+        <h3 class="event-post-title">From our Hiking Event</h3>
+        <p class="event-post-description">Memories made on the trail! 🌲🥾 Check out this snapshot of our students embracing nature's beauty during our recent hike.
+            Adventure awaits! 📸✨ #Hiking #NatureLovers</p>
+       </div>
+       <div class="profile-post-card">
+        <img src="#">
+        <h3 class="event-post-title">From our </h3>
+        <p class="event-post-description">Memories made on the trail! 🌲🥾 Check out this snapshot of our students embracing nature's beauty during our recent hike.
+            Adventure awaits! 📸✨ #Hiking #NatureLovers</p>
+       </div>
+       <div class="profile-post-card">
+        <img src="https://www.colorado.edu/program/data-science/sites/default/files/styles/large/public/slider/img_0146_0.jpg?itok=IVE2eqdQ">
+        <h3 class="event-post-title">Hiking  cfcd Event</h3>
+        <p class="event-post-description">Memories made on the trail! 🌲🥾 Check out this snapshot of our students embracing nature's beauty during our recent hike.
+            Adventure awaits! 📸✨ #Hiking #NatureLovers</p>
+       </div>
+       </div>
+       
+       <i onclick="moveNext()" class="fa-solid fa-greater-than"></i>
+      </div>
+      </div>
 
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/all.min.js' %}"></script>

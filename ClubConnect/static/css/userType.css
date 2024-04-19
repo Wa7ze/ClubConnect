@@ -159,10 +159,16 @@ body{
     .login-signup-form input{
         width: 30vw;
     }
+    .user-container{
+        width: 70%;
+    }
   }
   @media screen and (max-width: 764px){
     .login-signup-form img{
         width: 50vw;
+    }
+    .user-container{
+        width: 85%;
     }
   }
   @media screen and (max-width: 554px){
@@ -172,7 +178,9 @@ body{
     .login-signup-form input{
         width: 55vw;
     }
-   
+    .user-container{
+        width: 92%;
+    }
   }
 /*End Registration*/
 

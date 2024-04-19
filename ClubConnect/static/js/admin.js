@@ -17,30 +17,6 @@ let clubEmail = document.getElementById('club-email');
 let createClubForm = document.querySelector('.create-club-form');
 let eventsFound;
 
-function searchForEvent(){
-  eventsFound = false;
-   for(let i = 0; i < eventCards.length; i++){
-  let eventTitle = eventCards[i].querySelector('.card-title');
-  if(eventTitle.textContent.toLowerCase().includes(searchEvent.value.toLowerCase())){
-     eventCards[i].classList.remove('hidden-card');
-     eventsFound = true;
-  }
-  else{
-     eventCards[i].classList.add('hidden-card');
-  }
-}
-checkEventsFound();
-}
-
-
-function checkEventsFound(){
-  if (!eventsFound) {
-      NoResultsMatches.classList.remove('hidden-div');
-  } else {
-      NoResultsMatches.classList.add('hidden-div');
-     
-  }
-}
 
 function displayImagePreview(input, preview) {
   const file = input.files[0];

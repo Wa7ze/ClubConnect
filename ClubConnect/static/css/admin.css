@@ -661,7 +661,53 @@ padding: 10px 0;
   cursor: pointer;
 }
 /*End Admin Notification Style*/
-
+/*Start Event Posts In club Profile*/
+.event-posts-container{
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  top: 0;
+  left: 0;
+  min-height: 90vh;
+  margin-bottom: 30px;
+}
+.event-posts-slider{
+  width: 700px;
+  min-height: 20vw;
+  display: flex;
+  overflow: hidden;
+  border: solid 1px var(--dark-color);
+}
+.profile-post-card{
+  padding: 20px;
+  transition: .6s ease;
+}
+.profile-post-card img{
+  width: 660px;
+  height: 400px;
+}
+.profile-post-card .event-post-title{
+  margin-top: 12px;
+}
+.event-posts-container svg{
+  font-size: 3rem;
+  position: absolute;
+  color: var(--dark-color);
+  cursor: pointer;
+  z-index: 900;
+}
+.event-posts-container .fa-less-than{
+  left: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.event-posts-container .fa-greater-than{
+  right: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+/*End Event Posts In club Profile*/
 @media screen and (max-width: 1387px){
   .club-container .first-container{
       width: 59%;
@@ -782,7 +828,46 @@ padding: 10px 0;
   }
   .admin-rejection-purpose{
     width: 90vw;
+  }
+
+  .event-posts-container svg{
+    font-size: 2rem;
+  }
+  .event-posts-container .fa-less-than{
+    left: 20px;
+  }
+  .event-posts-container .fa-greater-than{
+    right: 20px;
+  }
+  .event-posts-slider{
+    width: 550px;
+  }
+  .profile-post-card img{
+    width: 510px;
+    height: 250px;
+  }
+
 }
+
+@media screen and (max-width: 646px){
+  .event-posts-container{
+      padding: 0;
+      font-size: 0.8rem;
+  }
+  .event-posts-slider{
+      width: 100%;
+  }
+  .profile-post-card img{
+      width: 98.4vw;
+      height: 300px;
+  }
+  .profile-post-card{
+      padding: 5px;
+  }
+  .profile-post-card{
+      width: 100vw;
+  }
+  
 }
 
   @media screen and (max-width: 480px){
