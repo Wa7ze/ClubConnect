@@ -68,7 +68,7 @@
           </div>
             <div class="card p-0 col-md-4 col-lg-3 event-card card-to-filter text-center" data-category = "sport">
                         <div class="image-wrapper">
-                            <a href="#">
+                            <a href="{% url 'eventPage'%}">
                         <img src="{% static 'images/hiking-event.jpg' %}" class="card-img-top event-img" alt="let's Hike Event">
                         <div class="event-date date-to-style" data-date = "2024-04-27">
                         <span><span class="event-day">27 </span><span class="event-month">Apr</span></span>
@@ -83,7 +83,7 @@
                         <p class="card-text text-black-50">Embark on an unforgettable hiking journey to conquer the summit of Büyük Camlica Hill.
                              Experience breathtaking views, diverse wildlife, and camaraderie. Join us for adventure!</p>
                         <div class="info-list">
-                            <a href="#"><button type="button" class="main-btn more-info-btn">More Info</button></a>
+                            <a href="{% url 'eventPage'%}"><button type="button" class="main-btn more-info-btn">More Info</button></a>
                             <span class="add-to-list-btn add-to-list-plus"></span>
                         </div>
                 </div>

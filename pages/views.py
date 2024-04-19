@@ -102,6 +102,9 @@ def myList(request):
 def clubProfile(request):
     return render(request, 'pages/all-users-interface/club-profile.html')
 
+def eventPage(request):
+    return render(request, 'pages/all-users-interface/event-page.html')
+
 # admin Interface:
 
 def adminBoard(request):

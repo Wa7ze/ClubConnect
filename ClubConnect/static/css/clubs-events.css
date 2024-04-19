@@ -393,6 +393,95 @@ a{
   }
  /*End My List Style*/
 
+ /*Start Event Page Style*/
+ .event-timer{
+    background-image: url('https://studyinturkey.com/wp-content/uploads/2021/06/uskurdar-universitesi-6.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 40vh;
+    gap: 7px;
+    color: var(--yellow-color);
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.event-timer .filter-bg{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.82);
+    z-index: 900;
+}
+.timer-div{
+    text-align: center;
+    z-index: 901;
+}
+
+.timer-div p{
+    font-size: 3rem;
+}
+.timer-points{
+    font-size: 2.6rem;
+    margin-bottom: 35px;
+    z-index: 901;
+}
+.timer-div span{
+    font-size: .8rem;
+}
+.event-activity-details-container{
+    display: flex;
+    padding: 50px;
+    gap: 60px;
+}
+.event-activity-details-container img{
+    width: 50vw;
+    height: 100vh;
+}
+.event-activity-details{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.event-activity-details p{
+    margin-right: 20px;
+    font-weight: bold;
+}
+.more-event-activities{
+    background-color: var(--dark-color);
+    padding: 20px;
+}
+.more-event-activities h3{
+    color: var(--ligh-color);
+    font-weight: 300;
+}
+@media screen and (max-width: 1168px){
+    .event-activity-details-container{
+        flex-direction: column;
+        align-items: center;
+    }
+}
+@media screen and (max-width: 780px){
+    .event-activity-details-container img{
+        width: 90vw;
+        height: 100%;
+    }
+    .timer-div p{
+        font-size: 2.3rem;
+    }
+    .timer-points{
+        font-size: 2rem;
+        margin-bottom: 35px;
+        z-index: 901;
+    }
+}
+ /*End Event Page Style*/
+
 @media screen and (min-width: 1316px){
     .cards-section{
         max-width: 1296px;
@@ -470,6 +559,7 @@ a{
         background-color: green;
       }
 }
+
 @media screen and (min-width: 996px) and (max-width: 1315px){
     .cards-section{
         max-width: 960px;

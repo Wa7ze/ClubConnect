@@ -18,5 +18,6 @@ urlpatterns = [
     path('create a new club', views.createNewClub, name = 'createNewClub'),
     path('admin-notifications', views.adminNotifications, name = 'adminNotifications'),
     path('manager-notifications', views.managerNotifications, name = 'managerNotifications'),
+    path('event-page', views.eventPage, name = 'eventPage'),
    
 ]

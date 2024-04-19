@@ -329,5 +329,40 @@ function openImage(){
   
       currentIndex = currentIndex > 0 ? currentIndex - 1 : profilePostCards.length - cardsInView;
   }
-/*End Club Profile Page JS*/ 
+/*End Club Profile Page JS*/
+
+/*Start Event Page JS*/
+if(document.body.id === "event-page"){
+    let eventTimer = document.querySelector('.event-timer');
+        let countDownDate = new Date(`${eventTimer.dataset.date} ${eventTimer.dataset.time}`).getTime();
+        let x = setInterval(function(){
+            let now = new Date().getTime();
+            let distance = countDownDate - now;
+        
+            let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            days = days < 10 ? "0" + days : days;
+            hours = hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("minutes").innerHTML = minutes;
+            document.getElementById("seconds").innerHTML = seconds;
+        
+            if(distance < 0){
+                clearInterval(x);
+                document.getElementById("days").innerHTML = '00';
+                document.getElementById("hours").innerHTML = '00';
+                document.getElementById("minutes").innerHTML = '00';
+                document.getElementById("seconds").innerHTML = '00';
+            }
+            
+        },1000);
+}
+/*End Event Page JS*/
 
