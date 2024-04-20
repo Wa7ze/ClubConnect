@@ -1,8 +1,8 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User, auth
-from django.http import HttpResponse
 from django.contrib import messages
 from .models import clubProfile
+from django.contrib.auth.decorators import login_required
 
 
 # registration:
@@ -84,7 +84,10 @@ def studentLogin(request):
         return render(request, 'pages/registration-form/student-login.html')
     
 
-# @login_required(login_url = 'usertype')
+@login_required(login_url='usertype')     
+def studentLogout(request):
+    auth.logout(request)
+    return redirect('usertype')
 
 # All Users Interface:
 def homePage(request):
