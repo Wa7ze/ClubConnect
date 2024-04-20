@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import clubProfile
+from .models import createclub,Post,EventActivity
 
 # Register your models here.
-admin.site.register(clubProfile)
+admin.site.register(createclub)
+admin.site.register(Post)
+admin.site.register(EventActivity)
