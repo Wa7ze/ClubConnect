@@ -45,24 +45,24 @@
             </div>
 
         <div class="club-infos">
-            <input class="input-field" id="club-name" type="text" placeholder="Club Name" required>
-            <input class="input-field" id="headline" type="text" placeholder="Headline" required>
-            <input class="input-field" id="club-location" type="text" placeholder="Location" required>
-            <input class="input-field" id="club-manager" type="text" placeholder="Club Manager" required>
-            <input class="input-field" id="club-vice-manager" type="text" placeholder="Club Vice Manager" required>
+            <input class="input-field" id="club-name" name="clubname" type="text" placeholder="Club Name" required>
+            <input class="input-field" id="headline" name="headline" type="text" placeholder="Headline" required>
+            <input class="input-field" id="club-location" name="location" type="text" placeholder="Location" required>
+            <input class="input-field" id="club-manager" name="clubmanager" type="text" placeholder="Club Manager" required>
+            <input class="input-field" id="club-vice-manager" name="clubvicemanager" type="text" placeholder="Club Vice Manager" required>
             <div class="input-div">
-            <input class="input-field" id="phone1" type="tel" placeholder="Phone Number 1" required>
+            <input class="input-field" id="phone1" name="phonenumber1" type="tel" placeholder="Phone Number 1" required>
             <strong class="phone-error1">Invalid Number</strong>
             </div>
             <div class="input-div">
-            <input class="input-field" id="phone2" type="tel" placeholder="Phone Number 2" required>
+            <input class="input-field" id="phone2" name="phonenumber2" type="tel" placeholder="Phone Number 2" required>
             <strong class="phone-error2">Invalid Number</strong>
             </div>
             <div class="input-div">
-            <input class="input-field" id="club-email" type="email" placeholder="Email Adress" required>
+            <input class="input-field" id="club-email" name="email" type="email" placeholder="Email Adress" required>
             <strong class="email-error">Invalid Email</strong>
         </div>
-            <select name="categories" id="s-categories">
+            <select name="category" id="s-categories">
                 <option value="sport">Sport</option>
                 <option value="gaming">Gaming</option>
                 <option value="technology">Technology</option>
@@ -71,11 +71,11 @@
                 <option value="art">Art</option>
             </select>
             <div class="area-div">
-            <textarea class="input-field" name="club vison" id="club-vision-input" placeholder="Club Vision" required></textarea>
+            <textarea class="input-field" name="clubvision" id="club-vision-input" placeholder="Club Vision" required></textarea>
             <strong class="vision-error">The club vision should be between 200-3000 letter</strong>
             </div>
             <div class="area-div">
-            <textarea class="input-field" name="club description" id="club-description-input" placeholder="Club Description" required></textarea>
+            <textarea class="input-field" name="clubdescription" id="club-description-input" placeholder="Club Description" required></textarea>
             <strong class="description-error">The club description should be between 300-4000 letter</strong>
             </div>
             <div class="create-club-btn"><button onclick="checkAndConfirm()" type="button">Create New Club</button></div>
