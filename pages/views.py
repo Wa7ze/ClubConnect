@@ -2,7 +2,10 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.models import User, auth
 from django.http import HttpResponse
 from django.contrib import messages
-from .models import clubProfile
+from .models import createclub,Post,EventActivity
+from django.contrib.auth.decorators import login_required
+from pages.authentication_backends import EmailAuthBackend
+
 
 
 # registration:
@@ -83,10 +86,13 @@ def studentLogin(request):
     else:
         return render(request, 'pages/registration-form/student-login.html')
     
-
 # @login_required(login_url = 'usertype')
+def studentLogout(request):
+    auth.logout(request)
+    return redirect('usertype')
 
 # All Users Interface:
+#@login_required(login_url='usertype') 
 def homePage(request):
     return render(request, 'pages/all-users-interface/homepage.html')
 
@@ -110,51 +116,75 @@ def eventPage(request):
 def adminBoard(request):
     return render(request, 'pages/sks-admin-interface/admin-board.html')
 
+def get_or_create_user_by_username(username):
+    # Attempt to get the user by username
+    user, created = User.objects.get_or_create(username=username)
+    # If the user is newly created, you might want to set some default values
+    if created:
+        # Set default values or perform any additional actions if needed
+        pass
+    return user 
+
 def createNewClub(request):
         if request.method == 'POST':
                 # Assuming you have a form that submits club data
                 # Extract club data from the form
-                clubname = request.POST.get('clubname')
-                headline = request.POST.get('headline')
-                location = request.POST.get('location')
+                clubname = request.POST['clubname']
+                headline = request.POST['headline']
+                location = request.POST['location']
                 clubmanager = request.POST.get('clubmanager')
-                clubvicemanager = request.POST.get('clubvicemanager')
-                phonenumber1 = request.POST.get('phonenumber1')
-                phonenumber2 = request.POST.get('phonenumber2')
-                email = request.POST.get('email')
-                category = request.POST.get('category')
-                clubvision = request.POST.get('clubvision')
-                clubdescription = request.POST.get('clubdescription')
+                clubvicemanager = request.POST['clubvicemanager']
+                phonenumber1 = request.POST['phonenumber1']
+                phonenumber2 = request.POST['phonenumber2']
+                email = request.POST['email']
+                category = request.POST['category']
+                clubvision = request.POST['clubvision']
+                clubdescription = request.POST['clubdescription']
+                profileimg = request.FILES.get('profile')
+                profileimg2 = request.FILES.get('background')
 
-                # Validate form data
+               # try:
+              #      manager = User.objects.get(username=clubmanager)
+              #  except User.DoesNotExist:
+                        # Handle the case where the user does not exist
+                        # You might want to redirect the user to an error page or display a message
+               #     return HttpResponse("Error: The specified club manager does not exist.")
+
+                manager = get_or_create_user_by_username(clubmanager)
+                vice_manager = get_or_create_user_by_username(clubvicemanager)
+
+                        # Validate form data
                 if not clubname or not headline or not clubmanager or not email:
                     messages.error(request, 'Please fill in all required fields.')
                     return redirect('createNewClub')
-
+                
+                
                 # Create club profile
-                new_profile = clubProfile.objects.create(
+                new_club = createclub.objects.create(
                     clubname=clubname,
                     headline=headline,
                     location=location,
-                    clubmanager=clubmanager,
-                    clubvicemanager=clubvicemanager,
+                    clubmanager=manager,
+                    clubvicemanager= clubvicemanager,
                     phonenumber1=phonenumber1,
                     phonenumber2=phonenumber2,
                     email=email,
                     category=category,
                     clubvision=clubvision,
-                    clubdescription=clubdescription
+                    clubdescription=clubdescription,
+                    profileimg=profileimg,
+                    profileimg2=profileimg2
                 )
-
+                new_club.user = request.user
                 # Save the profile
-                new_profile.save()
-
+                new_club.save()
+                
                 # Optionally, you might want to associate the profile with the current user
-                # new_profile.user = request.user
+                # new_club.user = request.user
                 # new_profile.save()
 
                 # Redirect to a success page or homepage
-                return redirect('homepage')
+                return redirect('createNewClub')
         else:
                 return render(request, 'pages/sks-admin-interface/create-club-form.html')
             
@@ -164,11 +194,75 @@ def adminNotifications(request):
 
 # manager Interface:
 
-def eventActivityForm(request):
+def eventActivityForm(request): 
+    if request.method == 'POST':
+        # Retrieve form data
+        clubmanager = request.POST['clubmanager']
+        clubvicemanager = request.POST['clubvicemanager']
+        clubname = request.POST['clubname']
+        email = request.POST['email']
+        eventtitle = request.POST['eventtitle']
+        categories = request.POST['categories']
+        event_image = request.FILES.get('event_image')
+        date = request.POST['date']
+        time = request.POST['time']
+        location = request.POST['location']
+        phonenumber = request.POST['phonenumber']
+        description = request.POST['description']
+
+        # Create EventActivity object
+        event_activity = EventActivity(
+            clubmanager=clubmanager,
+            clubvicemanager=clubvicemanager,
+            clubname=clubname,
+            email=email,
+            eventtitle=eventtitle,
+            categories=categories,
+            event_image=event_image,
+            date=date,
+            time=time,
+            location=location,
+            phonenumber=phonenumber,
+            description=description
+        )
+
+        # Save the object to the database
+        event_activity.save()
+
+        # Redirect to a success page or homepage
+        return redirect('eventActivityForm')
+
     return render(request, 'pages/club-manager-interface/event-activity.html')
 
 def eventPostForm(request):
-    return render(request, 'pages/club-manager-interface/event-post.html')
+     if request.method == 'POST':   
+            clubname = request.POST['clubname']
+            clubmanager = request.POST['clubmanager']
+            clubvicemanager = request.POST['clubvicemanager']
+            phonenumber1 = request.POST['phonenumber1']
+            postdescription = request.POST['postdescription']
+            eventtitle = request.POST['eventtitle']
+            image = request.FILES.get('image_upload')
+           
+            if not clubname or not clubmanager or not eventtitle:
+                # Handle invalid form data
+             messages.error(request, 'Please fill in all required fields.')
+             return redirect('eventPostForm')
+        
+            new_post = Post.objects.create(
+            clubname=clubname,
+            image=image,
+            clubmanager=clubmanager,
+            clubvicemanager=clubvicemanager,
+            phonenumber1=phonenumber1,
+            postdescription=postdescription,
+            eventtitle=eventtitle
+             )
+            new_post.save()
+            return redirect('eventPostForm')
+     else:
+            return render(request, 'pages/club-manager-interface/event-post.html')
+
 
 def managerNotifications(request):
     return render(request, 'pages/club-manager-interface/manager-notifications.html')
