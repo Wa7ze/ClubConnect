@@ -177,7 +177,7 @@ function showRequestContent(request,interfaceContainer){
       <i onclick="closeEventInterface(activityInterface)" class="fa-solid fa-x"></i>
       <div class="activity-interface interface-box">
           <div class="image-wrapper">
-                  <img class="activity-image" src="${request[i].dataset.image}" class="card-img-top event-img" alt="let's Hike Event">
+                  <img class="activity-image" src="${request[i].dataset.image}" class="card-img-top event-img">
               </div>
               <div class="activity-infos">
               <div class="activity-title-desc">
@@ -205,7 +205,7 @@ function showRequestContent(request,interfaceContainer){
 <div class="post-interface interface-box">
   ${request[i].dataset.image !== "" ? 
       `<div class="image-wrapper">
-          <img class="post-image" src="${request[i].dataset.image}" class="card-img-top event-img" alt="let's Hike Event">
+          <img class="post-image" src="${request[i].dataset.image}" class="card-img-top event-img">
       </div>` 
       : ""}
   <div class="post-infos">
@@ -227,7 +227,7 @@ let editActivityPreview =
       <div class="edited-old-box">
           <div class="box-filter old-box-filter"></div>
           <div class="image-wrapper">
-                  <img class="activity-image" src="${request[i].dataset.oldimage}" class="card-img-top event-img" alt="let's Hike Event">
+                  <img class="activity-image" src="${request[i].dataset.oldimage}" class="card-img-top event-img">
               </div>
               <div class="activity-infos">
               <div class="activity-title-desc">
@@ -251,7 +251,7 @@ let editActivityPreview =
   <div class="edited-old-box">
       <div class="box-filter edited-box-filter"></div>
       <div class="image-wrapper">
-              <img class="activity-image" src="${request[i].dataset.editedimage}" class="card-img-top event-img" alt="let's Hike Event">
+              <img class="activity-image" src="${request[i].dataset.editedimage}" class="card-img-top event-img">
           </div>
           <div class="activity-infos">
           <div class="activity-title-desc">
@@ -281,7 +281,7 @@ let editPostPreview = `
       <div class="box-filter old-box-filter"></div>
           ${request[i].dataset.oldimage !== "" ? 
               `<div class="image-wrapper">
-                  <img class="post-image" src="${request[i].dataset.oldimage}" class="card-img-top event-img" alt="let's Hike Event">
+                  <img class="post-image" src="${request[i].dataset.oldimage}" class="card-img-top event-img">
               </div>` 
               : ""}
           <div class="post-infos">
@@ -299,7 +299,7 @@ let editPostPreview = `
       <div class="box-filter edited-box-filter"></div>
           ${request[i].dataset.editedimage !== "" ? 
               `<div class="image-wrapper">
-                  <img class="post-image" src="${request[i].dataset.editedimage}" class="card-img-top event-img" alt="let's Hike Event">
+                  <img class="post-image" src="${request[i].dataset.editedimage}" class="card-img-top event-img">
               </div>` 
               : ""}
           <div class="post-infos">

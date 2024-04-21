@@ -189,10 +189,19 @@ def createNewClub(request):
                 return redirect('createNewClub')
         else:
                 return render(request, 'pages/sks-admin-interface/create-club-form.html')
-            
+
+
+posts = Post.objects.all().order_by('-pk')
+
+activities = EventActivity.objects.all().order_by('-pk')
+
+context = {
+        'posts': posts,
+        'activities': activities,
+    }          
 
 def adminNotifications(request):
-    return render(request, 'pages/sks-admin-interface/admin-notifications.html')
+    return render(request, 'pages/sks-admin-interface/admin-notifications.html',context)
 
 # manager Interface:
 
@@ -205,12 +214,13 @@ def eventActivityForm(request):
         email = request.POST['email']
         eventtitle = request.POST['eventtitle']
         categories = request.POST['categories']
-        event_image = request.FILES.get('event_image')
         date = request.POST['date']
         time = request.POST['time']
         location = request.POST['location']
         phonenumber = request.POST['phonenumber']
         description = request.POST['description']
+        if len(request.FILES) != 0:
+          event_image = request.FILES['event_image']
 
         # Create EventActivity object
         event_activity = EventActivity(
@@ -239,24 +249,13 @@ def eventActivityForm(request):
 def eventPostForm(request):
      if request.method == 'POST':   
             clubname = request.POST['clubname']
-            clubmanager = request.POST['clubmanager']
-            clubvicemanager = request.POST['clubvicemanager']
-            phonenumber1 = request.POST['phonenumber1']
             postdescription = request.POST['postdescription']
             eventtitle = request.POST['eventtitle']
-            image = request.FILES.get('image_upload')
-           
-            if not clubname or not clubmanager or not eventtitle:
-                # Handle invalid form data
-             messages.error(request, 'Please fill in all required fields.')
-             return redirect('eventPostForm')
+            image = request.FILES['post_image']
         
             new_post = Post.objects.create(
             clubname=clubname,
             image=image,
-            clubmanager=clubmanager,
-            clubvicemanager=clubvicemanager,
-            phonenumber1=phonenumber1,
             postdescription=postdescription,
             eventtitle=eventtitle
              )

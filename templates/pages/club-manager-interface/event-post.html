@@ -37,40 +37,26 @@
       <div class="form-header">
         <h3>Submit Your Event Post Form</h3>
       </div>
-      <form action="" method="post" id="event-post-form">
+      <form action="" method="post" id="event-post-form" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="input-container justify-content-lg-between gap-lg-0 gap-4">
-            <div class="input-wrapper">
-              <label for="p-cm-name">Club Manager Name:</label>
-          <input class="input-field" type="text" name="clubmanager" id="p-cm-name" placeholder="e.g Nouhad El Hallab">
-          </div>
-          <div class="input-wrapper">
-              <label for="p-cvm-name">Club Vice Manager Name:</label>
-          <input class="input-field" type="text" name="clubvicemanager" id="p-cvm-name" placeholder="e.g Mohammad Aburahma">
-          </div>  
           <div class="input-wrapper">
                 <label for="p-c-name">Club Name:</label>
             <input class="input-field" type="text" name="clubname" id="p-c-name" placeholder="e.g Paddle Pros" required>
             </div>
+
+            <div class="input-wrapper ms-lg-5">
+              <label for="p-e-title">Event Title:</label>
+          <input class="input-field event-title-input" type="text" name="eventtitle" id="p-e-title" placeholder="Event Title" required>
+          </div>
         </div>
         
-        <div class="input-container gap-lg-5 gap-4">
-              <div class="input-wrapper me-lg-1">
-                <label for="p-p-number">Phone Number:</label>
-            <input class="input-field event-phone-input" type="text" name="phonenumber1" id="p-p-number" placeholder="e.g +90 (512) 345 678 9">
-            <strong class="phone-error">Invalid Number</strong>
-            </div>
-            <div class="input-wrapper ms-lg-5">
-                <label for="p-e-title">Event Title:</label>
-            <input class="input-field event-title-input" type="text" name="eventtitle" id="p-e-title" placeholder="Event Title" required>
-            </div>
-        </div>
         <h6>Event Post Image:</h6>
         <div class="image-upload-container">
             <label for="p-file-upload" class="custom-file-upload">
             <i class="fas fa-cloud-upload-alt"></i> Choose File
         </label>
-        <input id="p-file-upload" type="file" onchange="displayFiles(this)" multiple />
+        <input id="p-file-upload" name="post_image" type="file" onchange="displayFiles(this)" multiple />
         </div>
         <div class="event-file-list" id="p-file-list"></div>
 

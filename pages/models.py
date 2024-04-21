@@ -27,10 +27,7 @@ class createclub(models.Model):
 
 class Post(models.Model):
     id=models.UUIDField(primary_key=True,default=uuid.uuid4)
-    clubmanager= models.CharField(max_length=100)
-    clubvicemanager =models.CharField(max_length=100)
     clubname=models.CharField(max_length=100)
-    phonenumber1 =models.IntegerField()
     eventtitle=models.CharField(max_length=100)
     image=models.ImageField(upload_to='post_images')
     postdescription=models.TextField()

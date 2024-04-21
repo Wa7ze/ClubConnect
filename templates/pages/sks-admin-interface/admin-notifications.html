@@ -31,75 +31,44 @@
         <div class="filter-bg"></div>
         <h1>Notifications</h1>
     </div>
+
     <div class="all-features-container">
     <div class="notif-container">
         <div class="activities-notif-container">
             <h4>Event Activity Requests</h4>
             <div class="scroll-container">
-            <div class="activity-request" data-date="Sat, Apr 24" data-time = '8:00 pm' data-category="Sport"
-             data-phone = "+90 (534)442 1873" data-location="Block D, D-109" data-manager="Nouhad El Hallab"
-             data-vicemanager = 'Haneen'
-             data-title = "Let's Hike Together" data-image = "{% static 'images/hiking-event.jpg' %}"
-             data-description = "Embark on an unforgettable hiking journey to conquer the summit of Büyük Camlica Hill.
-             Experience breathtaking views, diverse wildlife, and camaraderie. Join us for adventure!
-              Explore the winding trails that lead you through lush greenery, with each step bringing you closer to the awe-inspiring peak.
-               As you ascend, be captivated by the symphony of nature, from the melodious songs of birds to the gentle rustle of leaves in the breeze.
-                Along the way, forge bonds with fellow adventurers, sharing in the exhilaration of the climb and the triumph of reaching the summit.
-                 At the pinnacle, stand in awe as panoramic vistas stretch out before you, a tapestry of mountains, forests, and cityscapes that leave you breathless.
-                  This journey is not just about conquering a hill; it's about immersing yourself in the beauty of the natural world and the thrill of exploration.
-                   So lace up your boots, pack your essentials, and join us as we embark on this epic adventure together!">
+            {% for act in activities %}
+            <div class="activity-request" data-date="{{act.date}}" data-time = "{{act.time}}" data-category="{{act.categories}}"
+             data-phone = "{{act.phonenumber}}" data-location="{{act.location}}" data-manager="{{act.clubmanager}}"
+             data-vicemanager = "{{act.clubvicemanager}}"
+             data-title = "{{act.eventtitle}}" data-image = "{{act.event_image.url}}"
+             data-description = "{{act.description}}">
 
                 <img src="{% static 'images/hiking-club.jpg' %}" alt="club logo">
-                <div class="req-text"><strong class="club-name">Hike Harmony</strong> sent an event activity request <span class="view-interface-btn">view</span></div>
+                <div class="req-text"><strong class="club-name">{{act.clubname}}</strong> sent an event activity request <span class="view-interface-btn">view</span></div>
                 <div class="decision-buttons">
                     <button class="accept-btn" type="button">Accept</button>
                     <button onclick="showRejectionPurpose()" class="reject-btn" type="button">Reject</button>
                 </div>
             </div>
-
-            <div class="activity-request" data-date="Thu, May 09" data-time = '2:00 pm' data-category="gaming"
-             data-phone = "+90 (537)482 1275" data-location="Block A, Nermin Tarhan" data-manager="Mohammad Aburahma"
-             data-vicemanager = 'Mazen'
-             data-title = "Virtual Realms: Gaming in the VR Universe" data-image = "{% static 'images/gaming-vr-upcoming-event.png' %}"
-             data-description = "Step into 'Virtual Realms: Gaming in the VR Universe' for an unparalleled gaming adventure!
-             Immerse yourself in cutting-edge VR technology, thrilling demos, and competitive tournaments.
-              Whether you're a seasoned VR enthusiast or new to the experience, there's something for everyone.
-               Join us and explore the limitless possibilities of the VR universe!">
-
-                <img src="{% static 'images/gaming-club.jpg' %}" alt="club logo">
-                <div class="req-text"><strong class="club-name">Pixel Pioneers</strong> sent an event activity request <span class="view-interface-btn">view</span></div>
-                <div class="decision-buttons">
-                    <button class="accept-btn" type="button">Accept</button>
-                    <button class="reject-btn" type="button">Reject</button>
-                </div>
-            </div>
+            {% endfor %}
         </div>
         </div>
         <div class="posts-notif-container">
             <h4>Event Post Requests</h4>
             <div class="scroll-container">
-                <div class="post-request" data-title = "From our Hiking Event"
-                 data-image = "https://www.colorado.edu/program/data-science/sites/default/files/styles/large/public/slider/img_0146_0.jpg?itok=IVE2eqdQ"
-                data-description = "Memories made on the trail! 🌲🥾 Check out this snapshot of our students embracing nature's beauty during our recent hike.
-                 Adventure awaits! 📸✨ #Hiking #NatureLovers">
+                {% for post in posts %}
+                <div class="post-request" data-title = "{{post.eventtitle}}"
+                 data-image = "{{post.image.url}}"
+                data-description = "{{post.postdescription}}">
                 <img src="{% static 'images/hiking-club.jpg' %}" alt="club logo">
-                <div class="req-text"><strong class="club-name">Hike Harmony</strong> sent an event post request <span class="view-interface-btn">view</span></div>
+                <div class="req-text"><strong class="club-name">{{post.clubname}}</strong> sent an event post request <span class="view-interface-btn">view</span></div>
                 <div class="decision-buttons">
                     <button class="accept-btn" type="button">Accept</button>
                     <button class="reject-btn" type="button">Reject</button>
                 </div>
             </div>
-            <div class="post-request" data-title = "Join Us as Vice Manager of Pixel Pioneers!"
-            data-image = ""
-           data-description = " We need a passionate gaming enthusiast to join our team as Vice Manager of the Gaming Club! Take part in organizing events
-            and building a thriving gaming community on campus. Ready to level up? Apply now!">
-                <img src="{% static 'images/gaming-club.jpg' %}" alt="club logo">
-                <div class="req-text"><strong class="club-name">Pixel Pioneers</strong> sent an event post request <span class="view-interface-btn">view</span></div>
-                <div class="decision-buttons">
-                    <button class="accept-btn" type="button">Accept</button>
-                    <button class="reject-btn" type="button">Reject</button>
-                </div>
-            </div>
+            {% endfor %}
             </div>  
         </div>
         <div class="edits-notif-container">
