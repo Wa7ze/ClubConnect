@@ -189,18 +189,17 @@ def createNewClub(request):
                 return redirect('createNewClub')
         else:
                 return render(request, 'pages/sks-admin-interface/create-club-form.html')
-
-
-posts = Post.objects.all().order_by('-pk')
-
-activities = EventActivity.objects.all().order_by('-pk')
-
-context = {
-        'posts': posts,
-        'activities': activities,
-    }          
+        
 
 def adminNotifications(request):
+    posts = Post.objects.all().order_by('-pk')
+
+    activities = EventActivity.objects.all().order_by('-pk')
+
+    context = {
+        'posts': posts,
+        'activities': activities,
+    }  
     return render(request, 'pages/sks-admin-interface/admin-notifications.html',context)
 
 # manager Interface:
