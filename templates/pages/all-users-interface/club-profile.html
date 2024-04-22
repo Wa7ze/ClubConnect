@@ -3,6 +3,37 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+    <style>
+        .edit-clubProfile-form{
+          background-color: red;
+          width: 70vw;
+          height: 600px;
+          position: absolute;
+          top: 85%;
+          left: 50%;
+          transform: translate(-50%,-85%);
+          z-index: 999;
+          overflow: auto;
+        }
+        .blur{
+            display: block !important;
+            z-index: 998 !important;
+        }
+        .edit-club-infos{
+            background-color: blue;
+            justify-content: center !important;
+        }
+        @media screen and (max-width: 893px){
+            .edit-clubProfile-form{
+                width: 80vw;
+            }
+            @media screen and (max-width: 646px){
+                .edit-clubProfile-form{
+                    width: 90vw;
+                }
+            }
+        }
+    </style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,6 +48,63 @@
     <title>ClubConnect | Paddle Pros Club</title>
 </head>
 <body>
+    <div class="blur"></div>
+    <div class="edit-clubProfile-form">
+        <form class="create-club-form" action="" method="POST">
+            {% csrf_token%}
+            <div class="image-upload-container">
+                <div onclick="backgroundUpload.click()" class="image-preview bg-preview" id="edit-background-preview"></div>
+                <label for="edit-background-upload" class="custom-background-upload">
+                    <i class="fas fa-cloud-upload-alt"></i> Choose A File
+                </label>
+                <input class="background-upload" id="edit-background-upload" type="file" name="edit_bg_club" required/>
+                <div class="profile-input">
+                    <div onclick="profileUpload.click()" class="image-preview profile-preview" id="edit-profile-preview"></div>
+                    <label for="edit-profile-upload" class="custom-profile-upload">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </label>
+                    <input class="profile-upload" id="edit-profile-upload" type="file" name="edit_profile_club" required/>
+                </div>
+            </div>
+
+        <div class="club-infos edit-club-infos">
+            <input class="input-field club-name" id="edit-club-name" name="edit_clubname" type="text" placeholder="Club Name" required>
+            <input class="input-field headline" id="edit-headline" name="edit_headline" type="text" placeholder="Headline" required>
+            <input class="input-field club-location" id="edit-club-location" name="edit_location" type="text" placeholder="Location" required>
+            <input class="input-field club-manager" id="edit-club-manager" name="edit_clubmanager" type="text" placeholder="Club Manager" required>
+            <input class="input-field club-vice-manager" id="edit-club-vice-manager" name="edit_clubvicemanager" type="text" placeholder="Club Vice Manager" required>
+            <div class="input-div">
+            <input class="input-field phone1" id="edit-phone1" name="edit_phonenumber1" type="tel" placeholder="Phone Number 1" required>
+            <strong class="phone-error1">Invalid Number</strong>
+            </div>
+            <div class="input-div">
+            <input class="input-field phone2" id="edit-phone2" name="edit_phonenumber2" type="tel" placeholder="Phone Number 2" required>
+            <strong class="phone-error2">Invalid Number</strong>
+            </div>
+            <div class="input-div">
+            <input class="input-field edit_club-email" id="edit_club-email" name="edit_email" type="email" placeholder="Email Adress" required>
+            <strong class="email-error">Invalid Email</strong>
+        </div>
+            <select name="edit_category" id="edit-s-categories">
+                <option value="sport">Sport</option>
+                <option value="gaming">Gaming</option>
+                <option value="technology">Technology</option>
+                <option value="society">Society</option>
+                <option value="programming">Programming</option>
+                <option value="art">Art</option>
+            </select>
+            <div class="area-div">
+            <textarea class="input-field club-vision" name="edit_clubvision" id="edit-club-vision-input" placeholder="Club Vision" required></textarea>
+            <strong class="vision-error">The club vision should be between 200-3000 letter</strong>
+            </div>
+            <div class="area-div">
+            <textarea class="input-field club-description" name="edit_clubdescription" id="edit-club-description-input" placeholder="Club Description" required></textarea>
+            <strong class="description-error">The club description should be between 300-4000 letter</strong>
+            </div>
+            <div class="create-club-btn"><button onclick="checkAndConfirm()" type="button">Edit Club</button></div>
+        </div>
+    </form>
+    </div>
     <div class="bigger-profile">
         <img src="{% static 'images/ping-pong-club.jpg' %}" alt="club profile picture">
         <i onclick="closeImage()" class="fa-solid fa-x"></i>
@@ -202,6 +290,7 @@
     <script src="{% static 'js/all.min.js' %}"></script>
     <script src="{% static 'js/navbar.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/admin.js' %}"></script>
 
 </body>
 </html>

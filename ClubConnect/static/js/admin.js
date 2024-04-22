@@ -1,19 +1,18 @@
-let searchEvent = document.getElementById('search-for-event');
 let eventCards = document.querySelectorAll('.event-card');
 let NoResultsMatches = document.querySelector('.no-clubs-events-matches');
-const backgroundUpload = document.getElementById('background-upload');
-const profileUpload = document.getElementById('profile-upload');
-const backgroundPreview = document.getElementById('background-preview');
-const profilePreview = document.getElementById('profile-preview');
+const backgroundUpload = document.querySelector('.background-upload');
+const profileUpload = document.querySelector('.profile-upload');
+const backgroundPreview = document.querySelector('.bg-preview');
+const profilePreview = document.getElementById('.profile-preview');
 let backgroundContainer = document.querySelector('.image-upload-container');
 let profileContainer = document.querySelector('.profile-input');
-let phoneNum1 = document.getElementById('phone1');
-let phoneNum2 = document.getElementById('phone2');
-let clubDescriptionInput = document.getElementById('club-description-input');
-let clubVisionInput = document.getElementById('club-vision-input');
-let clubConfirmMessage = document.getElementById('club-confirm-message');
-let clubCreateBlur = document.getElementById('create-club-blur');
-let clubEmail = document.getElementById('club-email');
+let phoneNum1 = document.querySelector('.phone1');
+let phoneNum2 = document.querySelector('.phone2');
+let clubDescriptionInput = document.querySelector('.club-description-input');
+let clubVisionInput = document.querySelector('.club-vision-input');
+let clubConfirmMessage = document.querySelector('.club-confirm-message');
+let clubCreateBlur = document.querySelector('.create-club-blur');
+let clubEmail = document.querySelector('.club-email');
 let createClubForm = document.querySelector('.create-club-form');
 let eventsFound;
 
@@ -353,8 +352,3 @@ function hideRejectionPurpose(){
     rejectionContainer.style.display = 'none';
     rejectionBlur.style.display = 'none';
 }
-
-
-
-
-
