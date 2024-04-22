@@ -1,19 +1,18 @@
-let searchEvent = document.getElementById('search-for-event');
 let eventCards = document.querySelectorAll('.event-card');
 let NoResultsMatches = document.querySelector('.no-clubs-events-matches');
-const backgroundUpload = document.getElementById('background-upload');
-const profileUpload = document.getElementById('profile-upload');
-const backgroundPreview = document.getElementById('background-preview');
-const profilePreview = document.getElementById('profile-preview');
+const backgroundUpload = document.querySelector('.background-upload');
+const profileUpload = document.querySelector('.profile-upload');
+const backgroundPreview = document.querySelector('.bg-preview');
+const profilePreview = document.getElementById('.profile-preview');
 let backgroundContainer = document.querySelector('.image-upload-container');
 let profileContainer = document.querySelector('.profile-input');
-let phoneNum1 = document.getElementById('phone1');
-let phoneNum2 = document.getElementById('phone2');
-let clubDescriptionInput = document.getElementById('club-description-input');
-let clubVisionInput = document.getElementById('club-vision-input');
-let clubConfirmMessage = document.getElementById('club-confirm-message');
-let clubCreateBlur = document.getElementById('create-club-blur');
-let clubEmail = document.getElementById('club-email');
+let phoneNum1 = document.querySelector('.phone1');
+let phoneNum2 = document.querySelector('.phone2');
+let clubDescriptionInput = document.querySelector('.club-description-input');
+let clubVisionInput = document.querySelector('.club-vision-input');
+let clubConfirmMessage = document.querySelector('.club-confirm-message');
+let clubCreateBlur = document.querySelector('.create-club-blur');
+let clubEmail = document.querySelector('.club-email');
 let createClubForm = document.querySelector('.create-club-form');
 let eventsFound;
 
@@ -177,7 +176,7 @@ function showRequestContent(request,interfaceContainer){
       <i onclick="closeEventInterface(activityInterface)" class="fa-solid fa-x"></i>
       <div class="activity-interface interface-box">
           <div class="image-wrapper">
-                  <img class="activity-image" src="${request[i].dataset.image}" class="card-img-top event-img" alt="let's Hike Event">
+                  <img class="activity-image" src="${request[i].dataset.image}" class="card-img-top event-img">
               </div>
               <div class="activity-infos">
               <div class="activity-title-desc">
@@ -205,7 +204,7 @@ function showRequestContent(request,interfaceContainer){
 <div class="post-interface interface-box">
   ${request[i].dataset.image !== "" ? 
       `<div class="image-wrapper">
-          <img class="post-image" src="${request[i].dataset.image}" class="card-img-top event-img" alt="let's Hike Event">
+          <img class="post-image" src="${request[i].dataset.image}" class="card-img-top event-img">
       </div>` 
       : ""}
   <div class="post-infos">
@@ -227,7 +226,7 @@ let editActivityPreview =
       <div class="edited-old-box">
           <div class="box-filter old-box-filter"></div>
           <div class="image-wrapper">
-                  <img class="activity-image" src="${request[i].dataset.oldimage}" class="card-img-top event-img" alt="let's Hike Event">
+                  <img class="activity-image" src="${request[i].dataset.oldimage}" class="card-img-top event-img">
               </div>
               <div class="activity-infos">
               <div class="activity-title-desc">
@@ -251,7 +250,7 @@ let editActivityPreview =
   <div class="edited-old-box">
       <div class="box-filter edited-box-filter"></div>
       <div class="image-wrapper">
-              <img class="activity-image" src="${request[i].dataset.editedimage}" class="card-img-top event-img" alt="let's Hike Event">
+              <img class="activity-image" src="${request[i].dataset.editedimage}" class="card-img-top event-img">
           </div>
           <div class="activity-infos">
           <div class="activity-title-desc">
@@ -281,7 +280,7 @@ let editPostPreview = `
       <div class="box-filter old-box-filter"></div>
           ${request[i].dataset.oldimage !== "" ? 
               `<div class="image-wrapper">
-                  <img class="post-image" src="${request[i].dataset.oldimage}" class="card-img-top event-img" alt="let's Hike Event">
+                  <img class="post-image" src="${request[i].dataset.oldimage}" class="card-img-top event-img">
               </div>` 
               : ""}
           <div class="post-infos">
@@ -299,7 +298,7 @@ let editPostPreview = `
       <div class="box-filter edited-box-filter"></div>
           ${request[i].dataset.editedimage !== "" ? 
               `<div class="image-wrapper">
-                  <img class="post-image" src="${request[i].dataset.editedimage}" class="card-img-top event-img" alt="let's Hike Event">
+                  <img class="post-image" src="${request[i].dataset.editedimage}" class="card-img-top event-img">
               </div>` 
               : ""}
           <div class="post-infos">
@@ -353,8 +352,3 @@ function hideRejectionPurpose(){
     rejectionContainer.style.display = 'none';
     rejectionBlur.style.display = 'none';
 }
-
-
-
-
-
