@@ -1,20 +1,17 @@
-let eventCards = document.querySelectorAll('.event-card');
-let NoResultsMatches = document.querySelector('.no-clubs-events-matches');
 const backgroundUpload = document.querySelector('.background-upload');
 const profileUpload = document.querySelector('.profile-upload');
 const backgroundPreview = document.querySelector('.bg-preview');
-const profilePreview = document.getElementById('.profile-preview');
+const profilePreview = document.querySelector('.profile-preview');
 let backgroundContainer = document.querySelector('.image-upload-container');
 let profileContainer = document.querySelector('.profile-input');
 let phoneNum1 = document.querySelector('.phone1');
 let phoneNum2 = document.querySelector('.phone2');
 let clubDescriptionInput = document.querySelector('.club-description-input');
 let clubVisionInput = document.querySelector('.club-vision-input');
-let clubConfirmMessage = document.querySelector('.club-confirm-message');
-let clubCreateBlur = document.querySelector('.create-club-blur');
+let clubConfirmMessage = document.querySelector('.confirm-message');
+let clubBlur = document.querySelector('.blur');
 let clubEmail = document.querySelector('.club-email');
 let createClubForm = document.querySelector('.create-club-form');
-let eventsFound;
 
 
 function displayImagePreview(input, preview) {
@@ -32,7 +29,7 @@ function displayImagePreview(input, preview) {
       reader.readAsDataURL(file);
   }
 }
-if(document.body.id === 'create new club'){
+if(document.body.id === 'create new club' || document.body.id === 'club-profile'){
 backgroundUpload.addEventListener('change', function() {
   displayImagePreview(this, backgroundPreview);
 });
@@ -135,7 +132,7 @@ function checkInputs(){
 
 function showConfirmMessage(){
   clubConfirmMessage.style.top = '70px';
-  clubCreateBlur.style.display = 'block';
+  clubBlur.style.display = 'block';
 }
 
 function checkAndConfirm() {
@@ -149,7 +146,7 @@ function checkAndConfirm() {
 
 function hideConfirmMessage(){
   clubConfirmMessage.style.top = '-100%';
-  clubCreateBlur.style.display = 'none';
+  clubBlur.style.display = 'none';
 }
 
 let activityRequest = document.querySelectorAll('.activity-request');

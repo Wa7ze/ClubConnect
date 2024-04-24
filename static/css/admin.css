@@ -263,7 +263,7 @@ body{
   display: none;
 }
 
-.background-preview{
+.bg-preview{
   width: 100%;
   height: 100%;
   border: 2px solid #ccc;
@@ -389,7 +389,7 @@ input:focus,#club-vision-input:focus,#edit-club-vision-input:focus,#club-descrip
 .blur{
   width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.594);
+  background-color: rgba(0, 0, 0, 0.769);
   position: fixed;
   top: 0;
   left: 0;

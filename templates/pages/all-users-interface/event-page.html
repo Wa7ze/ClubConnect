@@ -3,6 +3,44 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+    <style>
+        :root {
+            --ligh-color: white;
+            --dark-color: rgb(26, 24, 24);
+            --grey-color: rgb(215, 214, 214);
+            --red-color: #ea3636;
+            --yellow-color: rgb(249, 221, 95);
+            --section-color: #eff7fa;
+            --blue-color: rgb(101, 108, 239);
+          }
+        .edit-event-btn{
+            background-color: rgb(57, 57, 159);
+            color: var(--ligh-color);
+            padding: 5px 50px;
+            margin-top: 20px;
+            margin-right: 10px;
+            border: solid 1px transparent;
+            transition: .3s ease;
+        }
+        .delete-event-btn{
+            background-color: rgb(171, 15, 15);
+            color: var(--ligh-color);
+            padding: 5px 40px;
+            margin-top: 20px;
+            border: solid 1px transparent;
+            transition: .3s ease;
+        }
+          .edit-event-btn:hover{
+            border: solid 1px rgb(57, 57, 159);
+            background-color: transparent;
+            color: rgb(57, 57, 159);
+          }
+          .delete-event-btn:hover{
+            border: solid 1px rgb(171, 15, 15);
+            background-color: transparent;
+            color: rgb(171, 15, 15);
+          }
+    </style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -70,6 +108,9 @@
                 <p><i class="fa-solid fa-cube"></i> Club Name: Hike Harmony</p>
                 <p><i class="fa-solid fa-phone"></i> Phone Number: +90 531 123 1234</p>
             </div>
+
+            <button type="button" class="edit-event-btn">Edit</button>
+            <button type="button" class="delete-event-btn">Delete</button>
         </div>
     </div>
     <div class="more-event-activities">

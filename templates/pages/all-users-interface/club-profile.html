@@ -4,8 +4,18 @@
 <!DOCTYPE html>
 <html lang="en">
     <style>
+        :root {
+            --ligh-color: white;
+            --dark-color: rgb(26, 24, 24);
+            --grey-color: rgb(215, 214, 214);
+            --red-color: #ea3636;
+            --yellow-color: rgb(249, 221, 95);
+            --section-color: #eff7fa;
+            --blue-color: rgb(101, 108, 239);
+          }
+        
         .edit-clubProfile-form{
-          background-color: red;
+          background-color: var(--ligh-color);
           width: 70vw;
           height: 600px;
           position: absolute;
@@ -14,15 +24,25 @@
           transform: translate(-50%,-85%);
           z-index: 999;
           overflow: auto;
+          display: none;
         }
-        .blur{
-            display: block !important;
-            z-index: 998 !important;
-        }
+        
         .edit-club-infos{
-            background-color: blue;
             justify-content: center !important;
         }
+        #x-mark{
+            position: absolute;
+            right: 8px;
+            top: 10px;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 999;
+            color: var(--dark-color);
+        }
+        #edit-club-blur{
+            z-index: 998 !important;
+        }
+    
         @media screen and (max-width: 893px){
             .edit-clubProfile-form{
                 width: 80vw;
@@ -47,9 +67,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500&display=swap" rel="stylesheet">
     <title>ClubConnect | Paddle Pros Club</title>
 </head>
-<body>
-    <div class="blur"></div>
+<body id="club-profile">
+    <div onclick="hideConfirmMessage()" class="blur" id="edit-club-blur"></div>
     <div class="edit-clubProfile-form">
+        <i onclick="hideEditClubForm()" class="fa-solid fa-xmark" id="x-mark"></i>
+        <div class="confirm-message" id="club-confirm-message">
+            <h3>Confirm</h3>
+            <p>Are you sure you want to create a new club?</p>
+            <div class="yes-no-buttons">
+                <button onclick="hideConfirmMessage()" class="no-btn" type="button">No</button>
+                <button onclick="createClubForm.submit()" class="yes-btn" type="submit">Yes</button>
+            </div>
+        </div>
         <form class="create-club-form" action="" method="POST">
             {% csrf_token%}
             <div class="image-upload-container">
@@ -82,7 +111,7 @@
             <strong class="phone-error2">Invalid Number</strong>
             </div>
             <div class="input-div">
-            <input class="input-field edit_club-email" id="edit_club-email" name="edit_email" type="email" placeholder="Email Adress" required>
+            <input class="input-field club-email" id="edit_club-email" name="edit_email" type="email" placeholder="Email Adress" required>
             <strong class="email-error">Invalid Email</strong>
         </div>
             <select name="edit_category" id="edit-s-categories">
@@ -93,18 +122,22 @@
                 <option value="programming">Programming</option>
                 <option value="art">Art</option>
             </select>
+            <input type="text" class="club-achievment" name="edit_clubAchievment1" id= "edit_clubAchievment1" placeholder="Club's Achievment">
+            <input type="text" class="club-achievment" name="edit_clubAchievment2" id= "edit_clubAchievment2" placeholder="Club's Achievment">
+            <input type="text" class="club-achievment" name="edit_clubAchievment3" id= "edit_clubAchievment3" placeholder="Club's Achievment">
             <div class="area-div">
-            <textarea class="input-field club-vision" name="edit_clubvision" id="edit-club-vision-input" placeholder="Club Vision" required></textarea>
+            <textarea class="input-field club-vision-input" name="edit_clubvision" id="edit-club-vision-input" placeholder="Club Vision" required></textarea>
             <strong class="vision-error">The club vision should be between 200-3000 letter</strong>
             </div>
             <div class="area-div">
-            <textarea class="input-field club-description" name="edit_clubdescription" id="edit-club-description-input" placeholder="Club Description" required></textarea>
+            <textarea class="input-field club-description-input" name="edit_clubdescription" id="edit-club-description-input" placeholder="Club Description" required></textarea>
             <strong class="description-error">The club description should be between 300-4000 letter</strong>
             </div>
             <div class="create-club-btn"><button onclick="checkAndConfirm()" type="button">Edit Club</button></div>
         </div>
     </form>
     </div>
+
     <div class="bigger-profile">
         <img src="{% static 'images/ping-pong-club.jpg' %}" alt="club profile picture">
         <i onclick="closeImage()" class="fa-solid fa-x"></i>
@@ -163,7 +196,7 @@
                 
             </div>
             <div class="edit-delete">
-                <button type="button" class="edit-btn" id="edit-button">Edit Club</button>
+                <button onclick="showEditClubForm()" type="button" class="edit-btn" id="edit-button">Edit Club</button>
                 <button type="button" class="delete-btn" id="delete-button">Delete Club</button>
             </div>
            </div>
@@ -289,8 +322,22 @@
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/all.min.js' %}"></script>
     <script src="{% static 'js/navbar.js' %}"></script>
-    <script src="{% static 'js/script.js' %}"></script>
     <script src="{% static 'js/admin.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script>
+        let editClub = document.querySelector('.edit-clubProfile-form');
+        let closeEditBtn = document.getElementById('x-mark');
+        let editClubBlur = document.getElementById('edit-club-blur');
+
+      function showEditClubForm(){
+          editClub.style.display = "block";
+          editClubBlur.style.display = "block";
+      }
+      function hideEditClubForm(){
+        editClub.style.display = "none";
+        editClubBlur.style.display = "none";
+    }
+    </script>
 
 </body>
 </html>

@@ -1,3 +1,4 @@
+
 let clubsContainer = document.querySelector('.clubs-container');
 let searchByName = document.getElementById('search-by-name');
 let FilterList = document.querySelector('.filter-list');
