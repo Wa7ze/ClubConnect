@@ -17,12 +17,12 @@
         .edit-clubProfile-form{
           background-color: var(--ligh-color);
           width: 70vw;
-          height: 600px;
-          position: absolute;
+          height: 550px;
+          position: fixed;
           top: 85%;
           left: 50%;
           transform: translate(-50%,-85%);
-          z-index: 999;
+          z-index: 900;
           overflow: auto;
           display: none;
         }
@@ -39,8 +39,18 @@
             z-index: 999;
             color: var(--dark-color);
         }
-        #edit-club-blur{
-            z-index: 998 !important;
+        .blur2{
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.769);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 500;
+            display: none;
+        }
+        #edit-confirm-blur{
+            z-index: 950 !important;
         }
     
         @media screen and (max-width: 893px){
@@ -68,74 +78,18 @@
     <title>ClubConnect | Paddle Pros Club</title>
 </head>
 <body id="club-profile">
-    <div onclick="hideConfirmMessage()" class="blur" id="edit-club-blur"></div>
+    <div onclick="hideConfirmMessage()" class="blur" id="edit-confirm-blur"></div>
+    <div onclick="hideEditClubForm()" class="blur2" id="edit-club-blur"></div>
+    <div class="confirm-message" id="club-confirm-message">
+        <h3>Confirm</h3>
+        <p>Are you sure you want to create a new club?</p>
+        <div class="yes-no-buttons">
+            <button onclick="hideConfirmMessage()" class="no-btn" type="button">No</button>
+            <button onclick="editClubForm.submit()" class="yes-btn" type="submit">Yes</button>
+        </div>
+    </div>
     <div class="edit-clubProfile-form">
-        <i onclick="hideEditClubForm()" class="fa-solid fa-xmark" id="x-mark"></i>
-        <div class="confirm-message" id="club-confirm-message">
-            <h3>Confirm</h3>
-            <p>Are you sure you want to create a new club?</p>
-            <div class="yes-no-buttons">
-                <button onclick="hideConfirmMessage()" class="no-btn" type="button">No</button>
-                <button onclick="createClubForm.submit()" class="yes-btn" type="submit">Yes</button>
-            </div>
-        </div>
-        <form class="create-club-form" action="" method="POST">
-            {% csrf_token%}
-            <div class="image-upload-container">
-                <div onclick="backgroundUpload.click()" class="image-preview bg-preview" id="edit-background-preview"></div>
-                <label for="edit-background-upload" class="custom-background-upload">
-                    <i class="fas fa-cloud-upload-alt"></i> Choose A File
-                </label>
-                <input class="background-upload" id="edit-background-upload" type="file" name="edit_bg_club" required/>
-                <div class="profile-input">
-                    <div onclick="profileUpload.click()" class="image-preview profile-preview" id="edit-profile-preview"></div>
-                    <label for="edit-profile-upload" class="custom-profile-upload">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                    </label>
-                    <input class="profile-upload" id="edit-profile-upload" type="file" name="edit_profile_club" required/>
-                </div>
-            </div>
-
-        <div class="club-infos edit-club-infos">
-            <input class="input-field club-name" id="edit-club-name" name="edit_clubname" type="text" placeholder="Club Name" required>
-            <input class="input-field headline" id="edit-headline" name="edit_headline" type="text" placeholder="Headline" required>
-            <input class="input-field club-location" id="edit-club-location" name="edit_location" type="text" placeholder="Location" required>
-            <input class="input-field club-manager" id="edit-club-manager" name="edit_clubmanager" type="text" placeholder="Club Manager" required>
-            <input class="input-field club-vice-manager" id="edit-club-vice-manager" name="edit_clubvicemanager" type="text" placeholder="Club Vice Manager" required>
-            <div class="input-div">
-            <input class="input-field phone1" id="edit-phone1" name="edit_phonenumber1" type="tel" placeholder="Phone Number 1" required>
-            <strong class="phone-error1">Invalid Number</strong>
-            </div>
-            <div class="input-div">
-            <input class="input-field phone2" id="edit-phone2" name="edit_phonenumber2" type="tel" placeholder="Phone Number 2" required>
-            <strong class="phone-error2">Invalid Number</strong>
-            </div>
-            <div class="input-div">
-            <input class="input-field club-email" id="edit_club-email" name="edit_email" type="email" placeholder="Email Adress" required>
-            <strong class="email-error">Invalid Email</strong>
-        </div>
-            <select name="edit_category" id="edit-s-categories">
-                <option value="sport">Sport</option>
-                <option value="gaming">Gaming</option>
-                <option value="technology">Technology</option>
-                <option value="society">Society</option>
-                <option value="programming">Programming</option>
-                <option value="art">Art</option>
-            </select>
-            <input type="text" class="club-achievment" name="edit_clubAchievment1" id= "edit_clubAchievment1" placeholder="Club's Achievment">
-            <input type="text" class="club-achievment" name="edit_clubAchievment2" id= "edit_clubAchievment2" placeholder="Club's Achievment">
-            <input type="text" class="club-achievment" name="edit_clubAchievment3" id= "edit_clubAchievment3" placeholder="Club's Achievment">
-            <div class="area-div">
-            <textarea class="input-field club-vision-input" name="edit_clubvision" id="edit-club-vision-input" placeholder="Club Vision" required></textarea>
-            <strong class="vision-error">The club vision should be between 200-3000 letter</strong>
-            </div>
-            <div class="area-div">
-            <textarea class="input-field club-description-input" name="edit_clubdescription" id="edit-club-description-input" placeholder="Club Description" required></textarea>
-            <strong class="description-error">The club description should be between 300-4000 letter</strong>
-            </div>
-            <div class="create-club-btn"><button onclick="checkAndConfirm()" type="button">Edit Club</button></div>
-        </div>
-    </form>
+        
     </div>
 
     <div class="bigger-profile">
@@ -145,21 +99,21 @@
     <div class="club-container">
         <div class="first-container">
             <div class="club-bg-image">
-          <img onclick="openImage()" src="{% static 'images/ping-pong-club.jpg' %}" alt="club profile picture" id="profile-picture">
+          <img onclick="openImage()" src="{% static 'images/ping-pong-club.jpg' %}" alt="club profile picture">
         </div>
         <div class="club-bio-container">
             <div class="club-summary">
-                <h3 class="club-name">Paddle Pros <span>Verified <i class="fa-solid fa-check"></i></span></h3>
-            <p class="club-sub">Paddle Club | Paddle, Adventure, Unity</p>
-            <p class="club-location">Istanbul,Turkey</p>
+                <h3 class="club-name"><span id="club-name-data">Paddle Pros</span> <span class="verified">Verified <i class="fa-solid fa-check"></i></span></h3>
+            <p class="club-sub" id="headline-data">Paddle Club | Paddle, Adventure, Unity</p>
+            <p class="club-location" id="location-data">Istanbul,Turkey</p>
             </div>
             <div class="uni-icon"><img src="https://uskudar.edu.tr/template/app/dist/img/logo/yazisiz-logo.png" alt="uskudar university icon">Uskudar University</div>
         </div>
         <div class="vision-description">
             <h4>Club Vision</h4>
-            <p id="club-vision">the club's Vision goes here, you can write anything you want</p>
+            <p id="club-vision-data">the club's Vision goes here, you can write anything you want</p>
             <h4>Club Description</h4>
-            <p id="club-desc">
+            <p id="club-description-data">
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                   when an unknown printer took a galley of type and scrambled it to make a type specimen book.
@@ -168,26 +122,27 @@
                      Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
                       software like Aldus PageMaker including versions of Lorem Ipsum.
             </p>
-            <div class="club-category" >Club Category: <span data-category="sport">Sport</span></div>
+            <div class="club-category" >Club Category: <span id="club-category-data" data-category="sport">Sport</span></div>
         </div>
         </div>
         <div class="second-container">
            <div class="club-achievments">
             <h4>Club's Achievments <i class="fa-solid fa-medal"></i></h4>
             <ul>
-                <li>club's achievments goes here</li>
-                <li>club's achievments goes here</li>
-                <li>club's achievments goes here</li>
-                <li>club's achievments goes here</li>
+                <li id="club-achievment1-data">club's achievments 1</li>
+                <li id="club-achievment2-data">club's achievments 2</li>
+                <li id="club-achievment3-data">club's achievments 3</li>
+                <li id="club-achievment4-data">club's achievments 4</li>
+                <li id="club-achievment5-data">club's achievments 5</li>
             </ul>
             </div>
             <div class="club-management">
-                <p><i class="fa-solid fa-user"></i> <span>Club Manager: </span>Nouhad El Hallab</p>
-                <p><i class="fa-solid fa-user"></i> <span>Club Vice Manager: </span>Mohammad Aburahma</p>
-                <p><i class="fa-solid fa-user-group"></i> <span>Number Of Members: </span>75</p>
-                <p><i class="fa-solid fa-phone"></i> <span>Phone Number 1: </span>+90 (531) 234 56 78</p>
-                <p><i class="fa-solid fa-phone"></i> <span>Phone Number 2: </span>+90 (531) 234 56 78</p>
-                <p><i class="fa-solid fa-envelope"></i> <span>Email: </span>paddleuskudar@gmail.com</p>
+                <p><i class="fa-solid fa-user"></i> <strong>Club Manager: </strong><span id="club-manager-data">Nouhad El Hallab</span></p>
+                <p><i class="fa-solid fa-user"></i> <strong>Club Vice Manager: </strong><span id="vice-manager-data">Mohammad Aburahma</span></p>
+                <p><i class="fa-solid fa-user-group"></i> <strong>Number Of Members: </strong><span id="num-of-members-data">75</span></p>
+                <p><i class="fa-solid fa-phone"></i> <strong>Phone Number 1: </strong><span id="phone1-data">+90 (531) 234 56 78</span></p>
+                <p><i class="fa-solid fa-phone"></i> <strong>Phone Number 2: </strong><span id="phone2-data">+90 (531) 234 56 78</span></p>
+                <p><i class="fa-solid fa-envelope"></i> <strong>Email: </strong><span id="club-email-data">paddleuskudar@gmail.com</span></p>
                 <div class="social-media">
                     <a href="#"><i class="fa-brands fa-instagram"></i></a>
                     <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
@@ -322,22 +277,116 @@
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/all.min.js' %}"></script>
     <script src="{% static 'js/navbar.js' %}"></script>
-    <script src="{% static 'js/admin.js' %}"></script>
-    <script src="{% static 'js/script.js' %}"></script>
     <script>
         let editClub = document.querySelector('.edit-clubProfile-form');
         let closeEditBtn = document.getElementById('x-mark');
         let editClubBlur = document.getElementById('edit-club-blur');
+        let clubNameData = document.getElementById('club-name-data');
+        let headLineData = document.getElementById('headline-data');
+        let locationData = document.getElementById('location-data');
+        let clubManageData = document.getElementById('club-manager-data');
+        let viceManagerData = document.getElementById('vice-manager-data');
+        let phone1Data = document.getElementById('phone1-data');
+        let phone2Data = document.getElementById('phone2-data');
+        let clubEmailData = document.getElementById('club-email-data');
+        let clubCategoryData = document.getElementById('club-category-data');
+        let numOfMembersData = document.getElementById('num-of-members-data');
+        let clubAchievment1Data = document.getElementById('club-achievment1-data');
+        let clubAchievment2Data = document.getElementById('club-achievment2-data');
+        let clubAchievment3Data = document.getElementById('club-achievment3-data');
+        let clubAchievment4Data = document.getElementById('club-achievment4-data');
+        let clubAchievment5Data = document.getElementById('club-achievment5-data');
+        let clubVisionData = document.getElementById('club-vision-data');
+        let clubDescriptionData = document.getElementById('club-description-data');
+
+        function showEditClubFormData(){
+            let editClubFormInterface = 
+        `
+        <i onclick="hideEditClubForm()" class="fa-solid fa-xmark" id="x-mark"></i>
+        <form class="edit-club-form" action="" method="POST">
+            {% csrf_token%}
+            <div class="image-upload-container">
+                <div onclick="backgroundUpload.click()" class="image-preview bg-preview" id="edit-background-preview"></div>
+                <label for="edit-background-upload" class="custom-background-upload">
+                    <i class="fas fa-cloud-upload-alt"></i> Choose A File
+                </label>
+                <input class="background-upload" id="edit-background-upload" type="file" name="edit_bg_club" required/>
+                <div class="profile-input">
+                    <div onclick="profileUpload.click()" class="image-preview profile-preview" id="edit-profile-preview"></div>
+                    <label for="edit-profile-upload" class="custom-profile-upload">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </label>
+                    <input class="profile-upload" id="edit-profile-upload" type="file" name="edit_profile_club" required/>
+                </div>
+            </div>
+
+        <div class="club-infos edit-club-infos">
+            <input class="input-field club-name" id="edit-club-name" name="edit_clubname" type="text" placeholder="Club Name" value="${clubNameData.textContent}" required>
+            <input class="input-field headline" id="edit-headline" name="edit_headline" type="text" placeholder="Headline" value="${headLineData.textContent}" required>
+            <input class="input-field club-location" id="edit-club-location" name="edit_location" type="text" placeholder="Location" value="${locationData.textContent}" required>
+            <input class="input-field club-manager" id="edit-club-manager" name="edit_clubmanager" type="text" placeholder="Club Manager" value="${clubManageData.textContent}" required>
+            <input class="input-field club-vice-manager" id="edit-club-vice-manager" name="edit_clubvicemanager" type="text" placeholder="Club Vice Manager" value="${viceManagerData.textContent}" required>
+            <div class="input-div">
+            <input class="input-field phone1" id="edit-phone1" name="edit_phonenumber1" type="tel" placeholder="Phone Number 1" value="${phone1Data.textContent}" required>
+            <strong class="phone-error1">Invalid Number</strong>
+            </div>
+            <div class="input-div">
+            <input class="input-field phone2" id="edit-phone2" name="edit_phonenumber2" type="tel" placeholder="Phone Number 2" value="${phone2Data.textContent}" required>
+            <strong class="phone-error2">Invalid Number</strong>
+            </div>
+            <div class="input-div">
+            <input class="input-field club-email" id="edit_club-email" name="edit_email" type="email" placeholder="Email Adress" value="${clubEmailData.textContent}" required>
+            <strong class="email-error">Invalid Email</strong>
+        </div>
+            <select name="edit_category" id="edit-s-categories">
+                <option value="${clubCategoryData.textContent}">${clubCategoryData.textContent}</option>
+                <option value="sport">Sport</option>
+                <option value="gaming">Gaming</option>
+                <option value="technology">Technology</option>
+                <option value="society">Society</option>
+                <option value="programming">Programming</option>
+                <option value="art">Art</option>
+            </select>
+            <input class="input-field" type="number" name="numOfMembers" placeholder="Number of Members" value="${parseInt(numOfMembersData.textContent)}" required>
+            <input type="text" class="club-achievment" name="edit_clubAchievment1" id= "edit_clubAchievment1" placeholder="Club's Achievment" value="${clubAchievment1Data.textContent}">
+            <input type="text" class="club-achievment" name="edit_clubAchievment2" id= "edit_clubAchievment2" placeholder="Club's Achievment" value="${clubAchievment2Data.textContent}">
+            <input type="text" class="club-achievment" name="edit_clubAchievment3" id= "edit_clubAchievment3" placeholder="Club's Achievment" value="${clubAchievment3Data.textContent}">
+            <input type="text" class="club-achievment" name="edit_clubAchievment4" id= "edit_clubAchievment3" placeholder="Club's Achievment" value="${clubAchievment4Data.textContent}">
+            <input type="text" class="club-achievment" name="edit_clubAchievment5" id= "edit_clubAchievment3" placeholder="Club's Achievment" value="${clubAchievment5Data.textContent}">
+            <div class="area-div">
+            <textarea class="input-field club-vision-input" name="edit_clubvision" id="edit-club-vision-input" placeholder="Club Vision" required>${clubVisionData.textContent}</textarea>
+            <strong class="vision-error">The club vision should be between 200-3000 letter</strong>
+            </div>
+            <div class="area-div">
+            <textarea class="input-field club-description-input" name="edit_clubdescription" id="edit-club-description-input" placeholder="Club Description" required>${clubDescriptionData.textContent}</textarea>
+            <strong class="description-error">The club description should be between 300-4000 letter</strong>
+            </div>
+            <div class="create-club-btn"><button onclick="checkAndConfirm()" type="button">Edit Club</button></div>
+        </div>
+    </form>
+        `;
+        editClub.innerHTML =  editClubFormInterface;
+        }
+        showEditClubFormData();
 
       function showEditClubForm(){
           editClub.style.display = "block";
           editClubBlur.style.display = "block";
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+         
       }
       function hideEditClubForm(){
         editClub.style.display = "none";
         editClubBlur.style.display = "none";
+   
     }
     </script>
+    <script src="{% static 'js/admin.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    
 
 </body>
 </html>

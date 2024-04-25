@@ -7,7 +7,7 @@
     --section-color: #eff7fa;
     --blue-color: rgb(101, 108, 239);
   }
-
+  
 body{
     font-family: "Roboto", sans-serif;
 }
@@ -77,7 +77,7 @@ body{
   padding: 0 45px;
   margin-top: 70px;
 }
-.club-bio-container .club-name span{
+.club-bio-container .club-name .verified{
   background-color: var(--dark-color);
   border-radius: 15px;
   color: var(--yellow-color);
@@ -176,7 +176,7 @@ body{
   color:rgb(118, 117, 117);
   font-size: .9rem;
 }
-.club-management p span{
+.club-management p strong{
   font-weight: bold;
   color: var(--dark-color);
   font-size: .9rem;
