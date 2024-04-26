@@ -51,11 +51,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500&display=swap" rel="stylesheet">
-    <title>ClubConnect | Let's Hike Together Event</title>
+    <title>ClubConnect | {{ event_activity.eventtitle}}</title>
 </head>
 <body id="event-page">
 
-    <div class="event-timer" data-date="Apr 27, 2024" data-time="20:00:00">
+    <div class="event-timer" data-date="{{ event_activity.date }}" data-time="{{ event_activity.time }}">
         <div class="filter-bg"></div>
         <div class="timer-div">
         <p id="days">00</p>
@@ -86,27 +86,19 @@
     </div>
 
     <div class="event-activity-details-container">
-        <img src="{% static 'images/hiking-event.jpg' %}" alt="let's Hike Event">
-        <div class="event-activity-infos">
-            <h3 class="event-activity-title">Let's Hike Together</h3>
-            <p class="event-activity-description">Embark on an unforgettable hiking journey to conquer the summit of Büyük Camlica Hill.
-                Experience breathtaking views, diverse wildlife, and camaraderie. Join us for adventure!
-                 Explore the winding trails that lead you through lush greenery, with each step bringing you closer to the awe-inspiring peak.
-                  As you ascend, be captivated by the symphony of nature, from the melodious songs of birds to the gentle rustle of leaves in the breeze.
-                   Along the way, forge bonds with fellow adventurers, sharing in the exhilaration of the climb and the triumph of reaching the summit.
-                    At the pinnacle, stand in awe as panoramic vistas stretch out before you, a tapestry of mountains, forests, and cityscapes that leave you breathless.
-                     This journey is not just about conquering a hill; it's about immersing yourself in the beauty of the natural world and the thrill of exploration.
-                      So lace up your boots, pack your essentials, and join us as we embark on this epic adventure together!
-            </p>
+        <img src="{{ event_activity.event_image.url }}" alt="{{ event_activity.eventtitle }}">
+        <div class="event-activity-infos">  
+            <h3 class="event-activity-title"> {{ event_activity.eventtitle }}</h3>
+            <p class="event-activity-description"> {{ event_activity.description }}</p>
             <div class="event-activity-details">
-                <p><i class="fa-regular fa-calendar"></i> Date: Sat, Apr 27</p>
-                <p><i class="fa-regular fa-clock"></i> Time: 8:00pm</p>
-                <p><i class="fa-solid fa-location-dot"></i> Location: Block A, Nermin Tarhan</p>
-                <p><i class="fa-solid fa-list"></i> Category: Sport</p>
-                <p><i class="fa-regular fa-user"></i> Manager: Nouhad Elhallab</p>
-                <p><i class="fa-regular fa-user"></i> Vice Manager: Mohammad Aburahma</p>
-                <p><i class="fa-solid fa-cube"></i> Club Name: Hike Harmony</p>
-                <p><i class="fa-solid fa-phone"></i> Phone Number: +90 531 123 1234</p>
+                <p><i class="fa-regular fa-calendar"></i> Date: {{ event_activity.date }}</p>
+                <p><i class="fa-regular fa-clock"></i> Time: {{ event_activity.time|time:"h:i A" }}</p>
+                <p><i class="fa-solid fa-location-dot"></i> Location: {{ event_activity.location }}</p>
+                <p><i class="fa-solid fa-list"></i> Category: {{ event_activity.categories }}</p>
+                <p><i class="fa-regular fa-user"></i> Manager: {{ event_activity.clubmanager }}</p>
+                <p><i class="fa-regular fa-user"></i> Vice Manager: {{ event_activity.clubvicemanager }}</p>
+                <p><i class="fa-solid fa-cube"></i> Club Name: {{ event_activity.clubname }}</p>
+                <p><i class="fa-solid fa-phone"></i> Phone Number: {{ event_activity.phonenumber }}</p>
             </div>
 
             <button type="button" class="edit-event-btn">Edit</button>
@@ -122,71 +114,28 @@
           <div class="no-clubs-events-matches hidden-div">
               <h3 class="text-black-50 fs-5">No Events Found</h3>
           </div>
-            <div class="card p-0 col-md-4 col-lg-3 event-card card-to-filter text-center" data-category = "sport">
-                        <div class="image-wrapper">
-                            <a href="#">
-                        <img src="{% static 'images/hiking-event.jpg' %}" class="card-img-top event-img" alt="let's Hike Event">
-                        <div class="event-date date-to-style" data-date = "2024-04-27">
-                        <span><span class="event-day">27 </span><span class="event-month">Apr</span></span>
-                        <hr>
-                        <span class="event-time">8:00 pm</span>
-                    </div>
-                    </a>
-                    </div>
-                    
-                    <div class="card-body">
-                        <h5 class="card-title mt-5">Let's Hike Together</h5>
-                        <p class="card-text text-black-50">Embark on an unforgettable hiking journey to conquer the summit of Büyük Camlica Hill.
-                             Experience breathtaking views, diverse wildlife, and camaraderie. Join us for adventure!</p>
-                        <div class="info-list">
-                            <a href="#"><button type="button" class="main-btn more-info-btn">More Info</button></a>
-            
-                        </div>
-                </div>
-            </div>
-            <div class="card p-0 col-md-4 col-lg-3 event-card card-to-filter text-center" data-category = "sport">
-                <div class="image-wrapper">
-                    <a href="#">
-                <img src="{% static 'images/run-for-fun-event.jpg' %}" class="card-img-top event-img" alt="Running event">
-                <div class="event-date date-to-style" data-date = "2024-06-20">
-                <span><span class="event-day">20 </span><span class="event-month">Jun</span></span>
-                <hr>
-                <span class="event-time">3:30 pm</span>
-            </div>
-            </a>
-            </div>
-            
-            <div class="card-body">
-                <h5 class="card-title mt-5">Run For Fun</h5>
-                <p class="card-text text-black-50">Gear up for an exhilarating urban adventure at the "Urban Rush: Istanbul City Marathon.
-                    " Join thousands of runners as we race through iconic landmarks and vibrant neighborhoods of Istanbul.</p>
-                <div class="info-list">
-                    <a href="#"><button type="button" class="main-btn more-info-btn">More Info</button></a>
-    
-                </div>
-        </div>
-    </div>
-        <div class="card p-0 col-md-4 col-lg-3 event-card card-to-filter text-center" data-category = "sport">
-            <div class="image-wrapper">
-                <a href="#">
-            <img src="{% static 'images/volley-ball-event.jpg' %}" class="card-img-top event-img" alt="volleyBall match Event">
-            <div class="event-date date-to-style" data-date = "2024-04-30">
-            <span><span class="event-day">30 </span><span class="event-month">Apr</span></span>
-            <hr>
-            <span class="event-time">7:00 pm</span>
-        </div>
-        </a>
-        </div>
-        
-        <div class="card-body">
-            <h5 class="card-title mt-5">VolleyBall Match</h5>
-            <p class="card-text text-black-50">Dive into the excitement of beach volleyball at the "Bosphorus Beach Volleyball Bash"!
-                 Join us for an action-packed match on the sandy shores of Istanbul's iconic Bosphorus coastline.</p>
-            <div class="info-list">
-                <a href="#"><button type="button" class="main-btn more-info-btn">More Info</button></a>
-
-            </div>
-    </div>
+          {% for EventActivity in activity reversed %}
+          <div class="card p-0 col-md-4 col-lg-3 event-card card-to-filter text-center" data-category = "{{ EventActivity.categories }}">
+                      <div class="image-wrapper">
+                          <a href="{% url 'eventPage' pk=EventActivity.id %}">
+                      <img src="{{ EventActivity.event_image.url }}" class="card-img-top event-img" alt="{{ EventActivity.eventtitle }}">
+                      <div class="event-date date-to-style" data-date = "{{ EventActivity.date }}">
+                      <span><span class="event-day">{{ EventActivity.date.day }}</span><span class="event-month">{{ EventActivity.date|date:"M" }}</span></span>
+                      <hr>
+                      <span class="event-time">{{ EventActivity.time|time:"h:i A" }}</span>
+                  </div>
+                  </a>
+                  </div>
+                  
+                  <div class="card-body">
+                      <h5 class="card-title mt-5">{{EventActivity.eventtitle}}</h5>
+                      <p class="card-text text-black-50">{{EventActivity.description|truncatewords:20}}</p>
+                      <div class="info-list">
+                          <a href="{% url 'eventPage' pk=EventActivity.id %}"><button type="button" class="main-btn more-info-btn">More Info</button></a>
+                      </div>
+              </div>
+          </div>
+        {% endfor %} 
     </div>
         </div>
       </div>

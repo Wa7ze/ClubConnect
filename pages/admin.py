@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import createclub,Post,EventActivity
+from .models import createclub,Post,EventActivity,Profile
 
 # Register your models here.
 class ActivityAdmin(admin.ModelAdmin):
@@ -15,5 +15,6 @@ class PostAdmin(admin.ModelAdmin):
 admin.site.register(createclub)
 admin.site.register(Post,PostAdmin)
 admin.site.register(EventActivity,ActivityAdmin)
+admin.site.register(Profile)
 admin.site.site_header = 'ClubConnect'
 admin.site.site_title = 'ClubConnect'

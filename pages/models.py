@@ -1,11 +1,19 @@
+from django.conf import settings
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 from django.contrib.auth.backends import ModelBackend
 import uuid
 from datetime import datetime
 
-User = get_user_model()
+#User = get_user_model()
 # Create your models here.
+class Profile(models.Model):
+    username=models.OneToOneField(User,null=True,on_delete=models.CASCADE)
+    email = models.EmailField()
+    
+    def _str_(self):
+        return str(self.User)
 
 class createclub(models.Model):
     profileimg = models.ImageField(upload_to='profile_images', default='blank-profile-picture.png')  
@@ -21,25 +29,27 @@ class createclub(models.Model):
     category = models.CharField(max_length=100, choices=[('sport', 'Sport'), ('gaming', 'Gaming'), ('technology', 'Technology'), ('society', 'Society'), ('programming', 'Programming'), ('art', 'Art')])
     clubvision = models.TextField()
     clubdescription = models.TextField()
-
+    
     def _str_(self):
-        return self.clubname.username
+        return self.clubname
 
 class Post(models.Model):
     id=models.UUIDField(primary_key=True,default=uuid.uuid4)
-    clubname=models.CharField(max_length=100)
+    clubname=models.ForeignKey(createclub, on_delete=models.CASCADE, related_name='posts')
+    clubmanager = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts_managed', default=None)
     eventtitle=models.CharField(max_length=100)
     image=models.ImageField(upload_to='post_images')
     postdescription=models.TextField()
     created_at=models.DateTimeField(default=datetime.now)
-    
+    approved=models.BooleanField('Approved',default=False)
     def __str__(self):
         return self.eventtitle
     
 class EventActivity(models.Model):
-    clubmanager= models.CharField(max_length=100)
+    id=models.UUIDField(primary_key=True,default=uuid.uuid4)
+    clubmanager = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='activites_managed', default=None)
     clubvicemanager = models.CharField(max_length=100)
-    clubname = models.CharField(max_length=100)
+    clubname = models.ForeignKey(createclub, on_delete=models.CASCADE, related_name='activities')
     email = models.EmailField()
     eventtitle = models.CharField(max_length=100)
     categories = models.CharField(max_length=100)
@@ -49,6 +59,7 @@ class EventActivity(models.Model):
     location = models.CharField(max_length=100)
     phonenumber = models.CharField(max_length=100)
     description = models.TextField()
+    approved=models.BooleanField('Approved',default=False)
 
     def __str__(self):
         return self.eventtitle  # Return a meaningful representation of the event title

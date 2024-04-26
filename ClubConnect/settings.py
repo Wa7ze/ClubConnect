@@ -26,6 +26,9 @@ SECRET_KEY = 'django-insecure-9)m_8_4%4t+g55$^v_rx@g7d#io%3z)v(0s*19^8u20a*r&=fg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Add the SESSION_COOKIE_SECURE setting here
+SESSION_COOKIE_SECURE = False
+
 ALLOWED_HOSTS = []
 
 
@@ -135,4 +138,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT= os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
+LOGIN_URL = 'usertype'  # Replace 'usertype' with the actual URL name of your login page
 
