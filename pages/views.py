@@ -160,15 +160,17 @@ def clubs(request):
 def myList(request):
     return render(request, 'pages/all-users-interface/my-list.html')
 
-def clubProfile(request):
-    activity= EventActivity.objects.all()
-    post=Post.objects.all()
-    return render(request, 'pages/all-users-interface/club-profile.html', {'activity': activity , 'post':post})
+def clubProfile(request,pk):
+    club = get_object_or_404(createclub, pk = pk)
+    activity= EventActivity.objects.filter(clubname=club)
+    post=Post.objects.filter(clubname=club)
+
+    return render(request, 'pages/all-users-interface/club-profile.html', {'activity': activity , 'post':post , 'club':club})
 
 
 def eventPage(request,pk):
     activity= EventActivity.objects.all()
-    event_activity=  get_object_or_404(EventActivity, pk=pk)
+    event_activity= get_object_or_404(EventActivity, pk=pk)
     return render(request, 'pages/all-users-interface/event-page.html',{'event_activity': event_activity, 'activity': activity})
 
 # admin Interface:

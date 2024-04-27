@@ -65,7 +65,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500&display=swap" rel="stylesheet">
-    <title>ClubConnect | Paddle Pros Club</title>
+    <title>ClubConnect | {{club.clubname}}</title>
 </head>
 <body id="club-profile">
     <div onclick="hideConfirmMessage()" class="blur" id="edit-club-blur"></div>
@@ -139,36 +139,30 @@
     </div>
 
     <div class="bigger-profile">
-        <img src="{% static 'images/ping-pong-club.jpg' %}" alt="club profile picture">
+        <img src="{{ club.profileimg.url }}" alt="club profile picture">
         <i onclick="closeImage()" class="fa-solid fa-x"></i>
     </div>
     <div class="club-container">
         <div class="first-container">
             <div class="club-bg-image">
-          <img onclick="openImage()" src="{% static 'images/ping-pong-club.jpg' %}" alt="club profile picture" id="profile-picture">
+          <img onclick="openImage()" src="{{ club.profileimg.url }}" alt="club profile picture" id="profile-picture">
         </div>
         <div class="club-bio-container">
             <div class="club-summary">
-                <h3 class="club-name">Paddle Pros <span>Verified <i class="fa-solid fa-check"></i></span></h3>
-            <p class="club-sub">Paddle Club | Paddle, Adventure, Unity</p>
-            <p class="club-location">Istanbul,Turkey</p>
+                <h3 class="club-name"> {{club.clubname}} <span>Verified <i class="fa-solid fa-check"></i></span></h3>
+            <p class="club-sub">{{club.headline}}</p>
+            <p class="club-location">{{club.location}}</p>
             </div>
             <div class="uni-icon"><img src="https://uskudar.edu.tr/template/app/dist/img/logo/yazisiz-logo.png" alt="uskudar university icon">Uskudar University</div>
         </div>
         <div class="vision-description">
             <h4>Club Vision</h4>
-            <p id="club-vision">the club's Vision goes here, you can write anything you want</p>
+            <p id="club-vision">{{club.clubvision}}</p>
             <h4>Club Description</h4>
             <p id="club-desc">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                  when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                   It has survived not only five centuries, but also the leap into electronic typesetting,
-                    remaining essentially unchanged. It was popularised in the 1960s with the release of
-                     Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
-                      software like Aldus PageMaker including versions of Lorem Ipsum.
+                {{club.clubdescription}}
             </p>
-            <div class="club-category" >Club Category: <span data-category="sport">Sport</span></div>
+            <div class="club-category" >Club Category: <span data-category="sport">{{club.category}}</span></div>
         </div>
         </div>
         <div class="second-container">
@@ -182,12 +176,12 @@
             </ul>
             </div>
             <div class="club-management">
-                <p><i class="fa-solid fa-user"></i> <span>Club Manager: </span>Nouhad El Hallab</p>
-                <p><i class="fa-solid fa-user"></i> <span>Club Vice Manager: </span>Mohammad Aburahma</p>
+                <p><i class="fa-solid fa-user"></i> <span>Club Manager: </span>{{club.clubmanager}}</p>
+                <p><i class="fa-solid fa-user"></i> <span>Club Vice Manager: </span>{{club.clubvicemanager}}</p>
                 <p><i class="fa-solid fa-user-group"></i> <span>Number Of Members: </span>75</p>
-                <p><i class="fa-solid fa-phone"></i> <span>Phone Number 1: </span>+90 (531) 234 56 78</p>
-                <p><i class="fa-solid fa-phone"></i> <span>Phone Number 2: </span>+90 (531) 234 56 78</p>
-                <p><i class="fa-solid fa-envelope"></i> <span>Email: </span>paddleuskudar@gmail.com</p>
+                <p><i class="fa-solid fa-phone"></i> <span>Phone Number 1: </span>{{club.phonenumber1}}</p>
+                <p><i class="fa-solid fa-phone"></i> <span>Phone Number 2: </span>{{club.phonenumber2}}</p>
+                <p><i class="fa-solid fa-envelope"></i> <span>Email: </span>{{club.email}}</p>
                 <div class="social-media">
                     <a href="#"><i class="fa-brands fa-instagram"></i></a>
                     <a href="#"><i class="fa-brands fa-x-twitter"></i></a>

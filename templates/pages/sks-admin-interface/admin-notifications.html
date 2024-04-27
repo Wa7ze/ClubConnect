@@ -47,7 +47,12 @@
                 <img src="{% static 'images/hiking-club.jpg' %}" alt="club logo">
                 <div class="req-text"><strong class="club-name">{{act.clubname}}</strong> sent an event activity request <span class="view-interface-btn">view</span></div>
                 <div class="decision-buttons">
-                    <button class="accept-btn" type="button">Accept</button>
+                    
+                    <input class="accept-btn" type="checkbox" checked="
+                    checked" value={{act.id}}
+                    named="boxes">
+
+                    <button class="accept-btn" onclick=""  type="button">Accept</button>
                     <button onclick="showRejectionPurpose()" class="reject-btn" type="button">Reject</button>
                 </div>
             </div>

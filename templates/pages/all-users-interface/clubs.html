@@ -57,18 +57,18 @@
     <div class="no-clubs-events-matches hidden-div">
         <h3 class="text-black-50 fs-5">No Clubs Found</h3>
     </div>
-    
-        <div class="card col-md-4 col-lg-3 club-card card-to-filter text-center pt-2" data-category = "sport">
-                <div class="image-wrapper">
-                    <img src="{% static 'images/ping-pong-club.jpg' %}" class="card-img-top rounded-pill" alt="Paddle Pros club">
-                </div>
-                <div class="card-body">
-                <h5 class="card-title">Paddle Pros</h5>
-                <p class="card-text text-black-50">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="{% url 'clubProfile' %}" class="btn clubs-btn">Explore Club</a>
+    {% for club in clubs %}
+    <div class="card col-md-4 col-lg-3 club-card card-to-filter text-center pt-2" data-category="{{ club.category }}">
+        <div class="image-wrapper">
+            <img src="{{ club.profileimg.url }}" class="card-img-top rounded-pill" alt="{{ club.clubname }}">
         </div>
-      </div>
-        
+        <div class="card-body">
+            <h5 class="card-title">{{ club.clubname }}</h5>
+            <p class="card-text text-black-50">{{ club.headline }}</p>
+            <a href="{% url 'clubProfile' pk=club.id %}" class="btn clubs-btn">Explore Club</a>
+        </div>
+    </div>
+    {% endfor %}
     </div>
       
   </div>

@@ -48,12 +48,14 @@
                 </a></li>
             </ul>
        {% endif %}
+       {% if request.user.is_superuser %}
        <div class="reg-buttons flex-column align-items-center gap-4 gap-lg-2 flex-lg-row">
         <a href="{% url 'managerNotifications' %}" id="manager-notifications">
           <div class="notifications-container me-2">
           <i class="fa-solid fa-bell"></i>
           <div class="notif-div"></div>
       </div>
+      {% endif %}
       </a>
         <div class="profile-container d-lg-flex align-items-lg-center gap-1">
         <div class="profile-letter">N</div>

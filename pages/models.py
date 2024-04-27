@@ -16,6 +16,8 @@ class Profile(models.Model):
         return str(self.User)
 
 class createclub(models.Model):
+    
+    id=models.UUIDField(primary_key=True,default=uuid.uuid4)
     profileimg = models.ImageField(upload_to='profile_images', default='blank-profile-picture.png')  
     profileimg2 = models.ImageField(upload_to='profile_images2', default='blank-profile-picture.png')
     clubname =models.CharField(max_length=100)
