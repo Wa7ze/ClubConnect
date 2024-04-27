@@ -6,7 +6,8 @@ from django.contrib.auth.backends import ModelBackend
 import uuid
 from datetime import datetime
 
-#User = get_user_model()
+User = get_user_model()
+
 # Create your models here.
 class Profile(models.Model):
     username=models.OneToOneField(User,null=True,on_delete=models.CASCADE)
@@ -16,7 +17,7 @@ class Profile(models.Model):
         return str(self.User)
 
 class createclub(models.Model):
-    
+
     id=models.UUIDField(primary_key=True,default=uuid.uuid4)
     profileimg = models.ImageField(upload_to='profile_images', default='blank-profile-picture.png')  
     profileimg2 = models.ImageField(upload_to='profile_images2', default='blank-profile-picture.png')
@@ -32,7 +33,7 @@ class createclub(models.Model):
     clubvision = models.TextField()
     clubdescription = models.TextField()
     
-    def _str_(self):
+    def __str__(self):
         return self.clubname
 
 class Post(models.Model):
@@ -64,4 +65,4 @@ class EventActivity(models.Model):
     approved=models.BooleanField('Approved',default=False)
 
     def __str__(self):
-        return self.eventtitle  # Return a meaningful representation of the event title
+        return self.eventtitle  

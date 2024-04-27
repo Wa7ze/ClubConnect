@@ -48,6 +48,7 @@ def managerLogin(request):
             # Check if the authenticated user is a superuser
             if  user.groups.filter(name='manager').exists():
                 # If the user is a superuser, redirect to homePage
+                login(request, user)
                 return redirect('homePage')
             else:
                 # If the user is not a superuser, show error message and redirect to managerLogin
@@ -144,7 +145,7 @@ def LogoutUser(request):
 def homePage(request):
     return render(request, 'pages/all-users-interface/homepage.html')
 
-
+@login_required(login_url='usertype')
 def events(request):
     activity= EventActivity.objects.all()
     return render(request, 'pages/all-users-interface/events.html', {'activity': activity})
@@ -205,8 +206,14 @@ def createNewClub(request):
                 category = request.POST['category']
                 clubvision = request.POST['clubvision']
                 clubdescription = request.POST['clubdescription']
-                profileimg = request.FILES.get('profile')
-                profileimg2 = request.FILES.get('background')
+                profileimg = None
+                profileimg2 = None
+
+                if 'profile_club' in request.FILES:  # Check if profile image file is uploaded
+                    profileimg = request.FILES['profile_club']
+                if 'background_club' in request.FILES:  # Check if background image file is uploaded
+                    profileimg2 = request.FILES['background_club']
+
 
                # try:
               #      manager = User.objects.get(username=clubmanager)
