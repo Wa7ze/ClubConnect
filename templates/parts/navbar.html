@@ -36,6 +36,7 @@
             </div>
 
 
+
        {% if request.user.is_authenticated and request.user.is_staff %}
             <ul class="reg-buttons flex-column align-items-center gap-4 gap-lg-2 flex-lg-row">
                 <li><a href="{% url 'createNewClub' %}"><button type="button" class="logout-btn btn">Create New Club</button></a></li>

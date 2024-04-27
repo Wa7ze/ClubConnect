@@ -152,7 +152,8 @@ def events(request):
 
 
 def clubs(request):
-    return render(request, 'pages/all-users-interface/clubs.html')
+    clubs = createclub.objects.all()
+    return render(request, 'pages/all-users-interface/clubs.html',{'clubs': clubs})
 
 
 
@@ -160,7 +161,9 @@ def myList(request):
     return render(request, 'pages/all-users-interface/my-list.html')
 
 def clubProfile(request):
-    return render(request, 'pages/all-users-interface/club-profile.html')
+    activity= EventActivity.objects.all()
+    post=Post.objects.all()
+    return render(request, 'pages/all-users-interface/club-profile.html', {'activity': activity , 'post':post})
 
 
 def eventPage(request,pk):
@@ -263,7 +266,7 @@ def adminNotifications(request):
 
 # manager Interface:
 
-@allowed_users(allowed_roles=['manager'])
+#@allowed_users(allowed_roles=['manager'])
 def eventActivityForm(request): 
     if request.method == 'POST':
         # Retrieve form data
@@ -309,7 +312,7 @@ def eventActivityForm(request):
 
     return render(request, 'pages/club-manager-interface/event-activity.html')
 
-@allowed_users(allowed_roles=['manager'])
+#@allowed_users(allowed_roles=['manager'])
 def eventPostForm(request):
      if request.method == 'POST':   
             clubname = request.POST.get('clubname')
@@ -333,6 +336,6 @@ def eventPostForm(request):
             return render(request, 'pages/club-manager-interface/event-post.html')
 
  
-@allowed_users(allowed_roles=['manager'])
+#@allowed_users(allowed_roles=['manager'])
 def managerNotifications(request):
     return render(request, 'pages/club-manager-interface/manager-notifications.html')

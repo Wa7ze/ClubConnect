@@ -115,6 +115,7 @@
               <h3 class="text-black-50 fs-5">No Events Found</h3>
           </div>
           {% for EventActivity in activity reversed %}
+          {% if EventActivity.approved %}
           <div class="card p-0 col-md-4 col-lg-3 event-card card-to-filter text-center" data-category = "{{ EventActivity.categories }}">
                       <div class="image-wrapper">
                           <a href="{% url 'eventPage' pk=EventActivity.id %}">
@@ -135,6 +136,7 @@
                       </div>
               </div>
           </div>
+          {% endif %} 
         {% endfor %} 
     </div>
         </div>
