@@ -3,50 +3,13 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <style>
-        :root {
-            --ligh-color: white;
-            --dark-color: rgb(26, 24, 24);
-            --grey-color: rgb(215, 214, 214);
-            --red-color: #ea3636;
-            --yellow-color: rgb(249, 221, 95);
-            --section-color: #eff7fa;
-            --blue-color: rgb(101, 108, 239);
-          }
-        .edit-event-btn{
-            background-color: rgb(57, 57, 159);
-            color: var(--ligh-color);
-            padding: 5px 50px;
-            margin-top: 20px;
-            margin-right: 10px;
-            border: solid 1px transparent;
-            transition: .3s ease;
-        }
-        .delete-event-btn{
-            background-color: rgb(171, 15, 15);
-            color: var(--ligh-color);
-            padding: 5px 40px;
-            margin-top: 20px;
-            border: solid 1px transparent;
-            transition: .3s ease;
-        }
-          .edit-event-btn:hover{
-            border: solid 1px rgb(57, 57, 159);
-            background-color: transparent;
-            color: rgb(57, 57, 159);
-          }
-          .delete-event-btn:hover{
-            border: solid 1px rgb(171, 15, 15);
-            background-color: transparent;
-            color: rgb(171, 15, 15);
-          }
-    </style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
     <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/clubs-events.css' %}">
+    <link rel="stylesheet" href="{% static 'css/manager.css' %}">
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -54,8 +17,17 @@
     <title>ClubConnect | Let's Hike Together Event</title>
 </head>
 <body id="event-page">
+    <div onclick="hideConfirmMessage()" class="blur" id="create-activity-blur"></div>
+    <div class="confirm-message" id="activity-confirm-message">
+        <h3>Confirm</h3>
+        <p>Are you sure you want to create a new club?</p>
+        <div class="yes-no-buttons">
+            <button onclick="hideConfirmMessage()" class="no-btn" type="button">No</button>
+            <button onclick="editEventActivityForm.submit()" class="yes-btn" type="button">Yes</button>
+        </div>
+    </div>
 
-    <div class="event-timer" data-date="Apr 27, 2024" data-time="20:00:00">
+    <div class="event-timer" data-date="30-04-2024" data-time="22:00:00">
         <div class="filter-bg"></div>
         <div class="timer-div">
         <p id="days">00</p>
@@ -85,11 +57,15 @@
         
     </div>
 
+    <div class="edit-activity-container">
+         <!-- The edit activity Form goes here -->
+    </div>
+    
     <div class="event-activity-details-container">
         <img src="{% static 'images/hiking-event.jpg' %}" alt="let's Hike Event">
         <div class="event-activity-infos">
-            <h3 class="event-activity-title">Let's Hike Together</h3>
-            <p class="event-activity-description">Embark on an unforgettable hiking journey to conquer the summit of Büyük Camlica Hill.
+            <h3 class="event-activity-title" id="activity-title-data">Let's Hike Together</h3>
+            <p class="event-activity-description" id="activity-desc-data">Embark on an unforgettable hiking journey to conquer the summit of Büyük Camlica Hill.
                 Experience breathtaking views, diverse wildlife, and camaraderie. Join us for adventure!
                  Explore the winding trails that lead you through lush greenery, with each step bringing you closer to the awe-inspiring peak.
                   As you ascend, be captivated by the symphony of nature, from the melodious songs of birds to the gentle rustle of leaves in the breeze.
@@ -99,17 +75,18 @@
                       So lace up your boots, pack your essentials, and join us as we embark on this epic adventure together!
             </p>
             <div class="event-activity-details">
-                <p><i class="fa-regular fa-calendar"></i> Date: Sat, Apr 27</p>
-                <p><i class="fa-regular fa-clock"></i> Time: 8:00pm</p>
-                <p><i class="fa-solid fa-location-dot"></i> Location: Block A, Nermin Tarhan</p>
-                <p><i class="fa-solid fa-list"></i> Category: Sport</p>
-                <p><i class="fa-regular fa-user"></i> Manager: Nouhad Elhallab</p>
-                <p><i class="fa-regular fa-user"></i> Vice Manager: Mohammad Aburahma</p>
-                <p><i class="fa-solid fa-cube"></i> Club Name: Hike Harmony</p>
-                <p><i class="fa-solid fa-phone"></i> Phone Number: +90 531 123 1234</p>
+                <p><i class="fa-regular fa-calendar"></i> Date: <span id="activity-date-data">Sat, Apr 27</span></p>
+                <p><i class="fa-regular fa-clock"></i> Time: <span id="activity-time-data">8:00pm</span></p>
+                <p><i class="fa-solid fa-location-dot"></i> Location: <span id="activity-location-data">Block A, Nermin Tarhan</span></p>
+                <p><i class="fa-solid fa-list"></i> Category: <span id="activity-category-data">Sport</span></p>
+                <p><i class="fa-regular fa-user"></i> Manager: <span id="activity-manager-data">Nouhad Elhallab</span> </p>
+                <p><i class="fa-regular fa-user"></i> Vice Manager: <span id="activity-vice-data">Mohammad Aburahma</span> </p>
+                <p><i class="fa-solid fa-cube"></i> Club Name: <span id="activity-clubname-data">Hike Harmony</span> </p>
+                <p><i class="fa-regular fa-envelope"></i> Email: <span id="activity-email-data">email@gmail.com</span> </p>
+                <p><i class="fa-solid fa-phone"></i> Phone Number: <span id="activity-phone-data">+90 531 123 1234</span> </p>
             </div>
 
-            <button type="button" class="edit-event-btn">Edit</button>
+            <button onclick="showEditActivityForm()" type="button" class="edit-event-btn">Edit</button>
             <button type="button" class="delete-event-btn">Delete</button>
         </div>
     </div>
@@ -195,6 +172,8 @@
     <script src="{% static 'js/all.min.js' %}"></script>
     <script src="{% static 'js/navbar.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/manager.js' %}"></script>
+    
 </body>
 </html>
 {% endblock content %}

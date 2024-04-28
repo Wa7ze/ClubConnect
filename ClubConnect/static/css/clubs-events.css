@@ -420,7 +420,7 @@ a{
 }
 .timer-div{
     text-align: center;
-    z-index: 901;
+    z-index: 201;
 }
 
 .timer-div p{
@@ -429,7 +429,7 @@ a{
 .timer-points{
     font-size: 2.6rem;
     margin-bottom: 35px;
-    z-index: 901;
+    z-index: 201;
 }
 .timer-div span{
     font-size: .8rem;
@@ -460,6 +460,74 @@ a{
     color: var(--ligh-color);
     font-weight: 300;
 }
+.edit-event-btn{
+    background-color: rgb(57, 57, 159);
+    color: var(--ligh-color);
+    padding: 5px 50px;
+    margin-top: 20px;
+    margin-right: 10px;
+    border: solid 1px transparent;
+    transition: .3s ease;
+}
+.delete-event-btn{
+    background-color: rgb(171, 15, 15);
+    color: var(--ligh-color);
+    padding: 5px 40px;
+    margin-top: 20px;
+    border: solid 1px transparent;
+    transition: .3s ease;
+}
+  .edit-event-btn:hover{
+    border: solid 1px rgb(57, 57, 159);
+    background-color: transparent;
+    color: rgb(57, 57, 159);
+  }
+  .delete-event-btn:hover{
+    border: solid 1px rgb(171, 15, 15);
+    background-color: transparent;
+    color: rgb(171, 15, 15);
+  }
+  .edit-activity-container{
+    background-color: rgba(0, 0, 0, 0.747);
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    z-index: 205;
+    min-height: 100vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: none;
+  }
+  .event-timer .filter-bg{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.82);
+    z-index: 200 !important;
+}
+  .edit-activity-form{
+    position: relative;
+    top: 0;
+    left: 0;
+    background-color: var(--ligh-color);
+    width: 60%;
+    height: 550px;
+    overflow: auto;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .edit-activity-form #edit-activity-x-mark{
+    position: absolute;
+    top: 3px;
+    right: 10px;
+    font-size: 30px;
+    cursor: pointer;
+  }
 @media screen and (max-width: 1168px){
     .event-activity-details-container{
         flex-direction: column;
@@ -480,6 +548,13 @@ a{
         z-index: 901;
     }
 }
+
+@media screen and (max-width: 536px){
+    .edit-activity-form{
+        width: 99%;
+    }
+  }
+  
  /*End Event Page Style*/
 
 @media screen and (min-width: 1316px){
