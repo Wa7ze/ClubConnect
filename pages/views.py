@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.models import User, auth, Group
 from django.contrib.auth import logout,login,authenticate
 from django.contrib import messages
-from .models import createclub,Post,EventActivity
+from .models import createclub,Post,EventActivity,Rejections
 from django.contrib.auth.decorators import login_required
 from pages.authentication_backends import EmailAuthBackend
 from .decorators import unauthenticated_user ,allowed_users
@@ -143,7 +143,9 @@ def LogoutUser(request):
 #@login_required(login_url='usertype') 
 #@admin_only
 def homePage(request):
-    return render(request, 'pages/all-users-interface/homepage.html')
+    home = createclub.objects.all()
+    event = EventActivity.objects.all()
+    return render(request, 'pages/all-users-interface/homepage.html',{'home':home ,'event':event})
 
 @login_required(login_url='usertype')
 def events(request):
@@ -294,6 +296,22 @@ def adminNotifications(request):
         messages.success(request,("Event Activity Requests has been updated"))
         return redirect('clubs')
       
+    if request.method == 'POST':
+        reason = request.POST.get('reason')  # Get the rejection reason from the form
+        selected_activities = request.POST.getlist('boxes')  # Get the IDs of selected activities
+        for activity_id in selected_activities:
+            try:
+                activity = EventActivity.objects.get(id=activity_id)
+                rejection = Rejections(reason=reason)
+                rejection.save()  # Save the rejection reason
+                # Optionally, you can link the rejection reason to the activity
+                # activity.rejection = rejection
+                # activity.save()
+            except EventActivity.DoesNotExist:
+                # Handle the case if the activity does not exist
+                pass
+            return redirect('adminNotifications')
+        
     context = {
         'posts': posts,
         'activities': activities,
@@ -375,4 +393,12 @@ def eventPostForm(request):
  
 #@allowed_users(allowed_roles=['manager'])
 def managerNotifications(request):
-    return render(request, 'pages/club-manager-interface/manager-notifications.html')
+    posts = Post.objects.all().order_by('-pk')
+
+    activities = EventActivity.objects.all().order_by('-pk')
+
+    context = {
+        'posts': posts,
+        'activities': activities,
+    }  
+    return render(request, 'pages/club-manager-interface/manager-notifications.html',context)

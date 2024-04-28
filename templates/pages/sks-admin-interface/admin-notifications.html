@@ -58,8 +58,16 @@
                     name="boxes">
                     {% endif %}
 
-                    <button class="accept-btn" onclick=""  type="button">Accept</button>
-                    <button onclick="showRejectionPurpose()" class="reject-btn" type="button">Reject</button>
+                    
+                        
+                        <div class="form-group">
+                            <label for="reason">Rejection Reason:</label>
+                            <input type="text" class="form-control" name="reason" id="reason" placeholder="Enter rejection reason">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                   
+                    
+
                 </div>
             </div>
             {% endfor %}

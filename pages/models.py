@@ -9,12 +9,6 @@ from datetime import datetime
 User = get_user_model()
 
 # Create your models here.
-class Profile(models.Model):
-    username=models.OneToOneField(User,null=True,on_delete=models.CASCADE)
-    email = models.EmailField()
-    
-    def _str_(self):
-        return str(self.User)
 
 class createclub(models.Model):
 
@@ -35,6 +29,13 @@ class createclub(models.Model):
     
     def __str__(self):
         return self.clubname
+
+class Rejections(models.Model):
+    id=models.UUIDField(primary_key=True,default=uuid.uuid4)
+    reason=models.TextField()    
+    def __str__(self):
+        return str(self.reason)
+
 
 class Post(models.Model):
     id=models.UUIDField(primary_key=True,default=uuid.uuid4)
@@ -65,4 +66,5 @@ class EventActivity(models.Model):
     approved=models.BooleanField('Approved',default=False)
 
     def __str__(self):
-        return self.eventtitle  
+        return self.eventtitle
+      

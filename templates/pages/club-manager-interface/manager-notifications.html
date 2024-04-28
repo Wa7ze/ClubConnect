@@ -21,10 +21,22 @@
         <h1>Notifications</h1>
     </div>
     <div class="manager-notif-container">
+        {% for act in activities %}
+        {% if act.approved %}
        <div class="notification notification-accepted">
         <i class="fa-solid fa-check"></i>
-        Your Event Activity Request Is Accepted By The SKS Admin
+        Your Event Activity ( {{act.eventtitle}} ) Request Is Accepted By The SKS Admin
        </div>
+       {% endif %}   
+       {% endfor %}
+       {% for post in posts %}
+       {% if post.approved %}
+      <div class="notification notification-accepted">
+       <i class="fa-solid fa-check"></i>
+       Your Event Post ( {{post.eventtitle}} ) Request Is Accepted By The SKS Admin
+      </div>
+      {% endif %}   
+      {% endfor %}
        <div class="notification notification-rejected">
         <i class="fa-solid fa-xmark"></i>
         Your Event Activity Request Is Rejected By The SKS Admin
@@ -34,10 +46,6 @@
              If the event contradicts these principles or poses a threat to safety, it warrants rejection. Additionally, if the content lacks
               relevance or fails to offer meaningful benefits to attendees, rejection becomes necessary to uphold standards of quality and purpose.chjbfdjhbshjvjhbcjhebcjheb ejhbcehjbcejhbchjebc dfhjbcjhbchjsbchjdsbc scdhjbcsdhjbcjhsbcjhdsbchjsbdchjsbdchjbdshcjbsdhjcb csjhbcsjhbchjfsbchjsbcjhsbchjsbcjhsbcjhsbc csjhbcsjhbcjhsdbcjhsbchjdsbcjhdsbcjhsdbcjhs cshjbcjhsfbcjhsfbcjhsbcjhbshjcbshjcb sdjhcbshjbcshjbcsjhbchsjbcjhsbchjsb csjhbchjsbchjsbcjhsbcjhsdbcjhdsbc cdhjsbcsjbcjsbcjsbhjcbsdbc cdsjhbcdsjhbchsjbcjhsbchjsbcjhsdb dchjsdbcjhbdschjdbscjhbshjcbshbc csjhdbcsjhdbchjsbchjsbcjhsbcjhbds cjhdsbchjsbcjnckjfsnjfnjvbdf vfdjhbvjhdfbvhjdfbvhdbhvbdfjhvbdv djhfbvfjhdbvhjdbvjhdbvhjdbhvdbv dfjhvbdfjhvbdjhbvjhdbvhjdbvhjdbvjhdbvhjdbvhjdbhvjbdhvbdfhjv fdjhvbdfjhbjhdfbjhfdbjhbfhjvbfdhj vfdjhbvhjfdbvjd vhfdjbvhfdjbvd vjhfdbvhjdfbvjhdv fdvbfdjhbvjhdbvd vjhdbvhjdbvjhfdbv dfjhvbdjhbvdjhbv vdjhbvhjdbvhjfdbv fdjhvbdjhvbdjhfbv vjhdbvjhdfbvhjdfbvhjdbfvhjfdbvhjbdhjvbdh vdjhbvhdjbvhjdbvjhdbvhjdbvhjbdhvbdfhvbdhjb
             </p>
-       </div>
-       <div class="notification notification-accepted">
-        <i class="fa-solid fa-check"></i>
-        Your Event Activity Request Is Accepted By The SKS Admin
        </div>
        <div class="notification notification-rejected">
         <i class="fa-solid fa-xmark"></i>
