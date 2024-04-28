@@ -1,63 +1,71 @@
 <nav class="navbar navbar-expand-lg sticky-top">
-    <div class="container-fluid">
-        <div class="logo">
-            <a href= "{% url 'homePage' %}"><i class="fa-solid fa-link"></i> ClubConnect</a>
-        </div>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main" aria-controls="main" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse text-center" id="main">
-        <ul class="navbar-nav ms-auto mb-2  mb-lg-0">
-          <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
-            <a id="dashboard" class="nav-link to-activate" aria-current="page" href="{% url 'admin:index' %}">Dashboard</a>
-          </li>
-          <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
-            <a id="home" class="nav-link to-activate" aria-current="page" href="{% url 'homePage' %}">Home</a>
-          </li>
-          <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
-            <a id="events" class="nav-link to-activate" href="{% url 'events' %}">Events</a>
-          </li>
-          <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
-            <a id="clubs" class="nav-link to-activate" href="{% url 'clubs' %}">Clubs</a>
-          </li>
-          <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
-            <a id="my-list" class="nav-link to-activate" href="{% url 'myList' %}">My List</a>
-          </li>
-          <div class="dropdown">
+  <div class="container-fluid">
+      <div class="logo">
+          <a href= "{% url 'homePage' %}"><i class="fa-solid fa-link"></i> ClubConnect</a>
+      </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main" aria-controls="main" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse text-center" id="main">
+      <ul class="navbar-nav ms-auto mb-2  mb-lg-0">
+        {% if request.user.is_authenticated and request.user.is_staff %}
+        <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
+          <a id="dashboard" class="nav-link to-activate" aria-current="page" href="{% url 'admin:index' %}">Dashboard</a>
+        </li>
+        {% endif %}
+        <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
+          <a id="home" class="nav-link to-activate" aria-current="page" href="{% url 'homePage' %}">Home</a>
+        </li>
+        <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
+          <a id="events" class="nav-link to-activate" href="{% url 'events' %}">Events</a>
+        </li>
+        <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
+          <a id="clubs" class="nav-link to-activate" href="{% url 'clubs' %}">Clubs</a>
+        </li>
+        <li class="nav-item ps-lg-1 pe-lg-1 ps-2 pe-2">
+          <a id="my-list" class="nav-link to-activate" href="{% url 'myList' %}">My List</a>
+        </li>
+            <div class="dropdown">
                 <li class="nav-link create-button dropdown-toggle to-activate" type="button" id="create" data-bs-toggle="dropdown" aria-expanded="false">
-                  Create
+                    Create
                 </li>
                 <ul class="dropdown-menu activity-post-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><a class="dropdown-item" href="{% url 'eventActivityForm' %}">Event Activity</a></li>
-                  <li><a class="dropdown-item" href="{% url 'eventPostForm' %}">Event Post</a></li>
+                    <li><a class="dropdown-item" href="{% url 'eventActivityForm' %}">Event Activity</a></li>
+                    <li><a class="dropdown-item" href="{% url 'eventPostForm' %}">Event Post</a></li>
                 </ul>
-              </div>
-        </ul>
-        <div class="reg-buttons flex-column align-items-center gap-4 gap-lg-2 flex-lg-row">
-            <a href="{% url 'createNewClub' %}"><button type="button" class="logout-btn btn">Create New Club</button></a>
-            
-            <a href="{% url 'adminNotifications' %}" id="admin-notifications">
-              <div class="notifications-container me-2">
-              <i class="fa-solid fa-bell"></i>
-              <div class="notif-div"></div>
-              </div>
-          </a>
-          <a href="{% url 'managerNotifications' %}" id="manager-notifications">
-            <div class="notifications-container me-2">
-            <i class="fa-solid fa-bell"></i>
-            <div class="notif-div"></div>
             </div>
-        </a>
-          <div class="profile-container d-lg-flex align-items-lg-center gap-1">
-          <div class="profile-letter">N</div>
-          <i class="fa-solid fa-caret-down"></i>
-          </div>
-         <ul class="logout-menu hidden-logout">
-          <li><a href="{% url 'usertype' %}">Logout</a></li>
-         </ul>
-        </div>
-        </div>
-        
+
+
+
+       {% if request.user.is_authenticated and request.user.is_staff %}
+            <ul class="reg-buttons flex-column align-items-center gap-4 gap-lg-2 flex-lg-row">
+                <li><a href="{% url 'createNewClub' %}"><button type="button" class="logout-btn btn">Create New Club</button></a></li>
+                <li><a href="{% url 'adminNotifications' %}" id="admin-notifications">
+                    <div class="notifications-container me-2">
+                        <i class="fa-solid fa-bell"></i>
+                        <div class="notif-div"></div>
+                    </div>
+                </a></li>
+            </ul>
+       {% endif %}
+       
+       <div class="reg-buttons flex-column align-items-center gap-4 gap-lg-2 flex-lg-row">
+        <a href="{% url 'managerNotifications' %}" id="manager-notifications">
+          <div class="notifications-container me-2">
+          <i class="fa-solid fa-bell"></i>
+          <div class="notif-div"></div>
       </div>
- 
-  </nav>
+
+      </a>
+        <div class="profile-container d-lg-flex align-items-lg-center gap-1">
+        <div class="profile-letter">N</div>
+        <i class="fa-solid fa-caret-down"></i>
+        </div>
+       <ul class="logout-menu hidden-logout">
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+       </ul>
+      </div>
+      </div>
+      
+    </div>
+</nav>

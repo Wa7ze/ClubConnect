@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500&display=swap" rel="stylesheet">
-    <title>ClubConnect | Paddle Pros Club</title>
+    <title>ClubConnect | {{club.clubname}}</title>
 </head>
 <body id="club-profile">
     <div onclick="hideConfirmMessage()" class="blur" id="edit-confirm-blur"></div>
@@ -33,36 +33,33 @@
     </div>
 
     <div class="bigger-profile">
-        <img src="{% static 'images/ping-pong-club.jpg' %}" alt="club profile picture">
+        <img src="{{ club.profileimg.url }}" alt="club profile picture">
         <i onclick="closeImage()" class="fa-solid fa-x"></i>
     </div>
     <div class="club-container">
         <div class="first-container">
             <div class="club-bg-image">
-          <img onclick="openImage()" src="{% static 'images/ping-pong-club.jpg' %}" alt="club profile picture">
+
+          <img onclick="openImage()" src="{{ club.profileimg.url }}" alt="club profile picture">
         </div>
         <div class="club-bio-container">
             <div class="club-summary">
-                <h3 class="club-name"><span id="club-name-data">Paddle Pros</span> <span class="verified">Verified <i class="fa-solid fa-check"></i></span></h3>
-            <p class="club-sub" id="headline-data">Paddle Club | Paddle, Adventure, Unity</p>
-            <p class="club-location" id="location-data">Istanbul,Turkey</p>
+                <h3 class="club-name"><span id="club-name-data">{{club.clubname}}</span> <span class="verified">Verified <i class="fa-solid fa-check"></i></span></h3>
+            <p class="club-sub" id="headline-data">{{club.headline}}</p>
+            <p class="club-location" id="location-data">{{club.location}}</p>
+
             </div>
             <div class="uni-icon"><img src="https://uskudar.edu.tr/template/app/dist/img/logo/yazisiz-logo.png" alt="uskudar university icon">Uskudar University</div>
         </div>
         <div class="vision-description">
             <h4>Club Vision</h4>
-            <p id="club-vision-data">the club's Vision goes here, you can write anything you want</p>
+            <p id="club-vision-data">{{club.clubvision}}</p>
             <h4>Club Description</h4>
             <p id="club-description-data">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                  when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                   It has survived not only five centuries, but also the leap into electronic typesetting,
-                    remaining essentially unchanged. It was popularised in the 1960s with the release of
-                     Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
-                      software like Aldus PageMaker including versions of Lorem Ipsum.
+                {{club.clubdescription}}
             </p>
-            <div class="club-category" >Club Category: <span id="club-category-data" data-category="sport">Sport</span></div>
+            <div class="club-category" >Club Category: <span id="club-category-data" data-category="{{club.category}}">{{club.category}}</span></div>
+
         </div>
         </div>
         <div class="second-container">
@@ -77,12 +74,14 @@
             </ul>
             </div>
             <div class="club-management">
-                <p><i class="fa-solid fa-user"></i> <strong>Club Manager: </strong><span id="club-manager-data">Nouhad El Hallab</span></p>
-                <p><i class="fa-solid fa-user"></i> <strong>Club Vice Manager: </strong><span id="vice-manager-data">Mohammad Aburahma</span></p>
+
+                <p><i class="fa-solid fa-user"></i> <strong>Club Manager: </strong><span id="club-manager-data">{{club.clubmanager}}</span></p>
+                <p><i class="fa-solid fa-user"></i> <strong>Club Vice Manager: </strong><span id="vice-manager-data">{{club.clubvicemanager}}</span></p>
                 <p><i class="fa-solid fa-user-group"></i> <strong>Number Of Members: </strong><span id="num-of-members-data">75</span></p>
-                <p><i class="fa-solid fa-phone"></i> <strong>Phone Number 1: </strong><span id="phone1-data">+90 (531) 234 56 78</span></p>
-                <p><i class="fa-solid fa-phone"></i> <strong>Phone Number 2: </strong><span id="phone2-data">+90 (531) 234 56 78</span></p>
-                <p><i class="fa-solid fa-envelope"></i> <strong>Email: </strong><span id="club-email-data">paddleuskudar@gmail.com</span></p>
+                <p><i class="fa-solid fa-phone"></i> <strong>Phone Number 1: </strong><span id="phone1-data">{{club.phonenumber1}}</span></p>
+                <p><i class="fa-solid fa-phone"></i> <strong>Phone Number 2: </strong><span id="phone2-data">{{club.phonenumber2}}</span></p>
+                <p><i class="fa-solid fa-envelope"></i> <strong>Email: </strong><span id="club-email-data">{{club.email}}</span></p>
+
                 <div class="social-media">
                     <a href="#"><i class="fa-brands fa-instagram"></i></a>
                     <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
@@ -111,71 +110,31 @@
           <div class="no-clubs-events-matches hidden-div">
               <h3 class="text-black-50 fs-5">No Events Found</h3>
           </div>
-            <div class="card p-0 col-md-4 col-lg-3 event-card card-to-filter text-center" data-category = "sport">
-                        <div class="image-wrapper">
-                            <a href="#">
-                        <img src="{% static 'images/hiking-event.jpg' %}" class="card-img-top event-img" alt="let's Hike Event">
-                        <div class="event-date date-to-style" data-date = "2024-04-27">
-                        <span><span class="event-day">27 </span><span class="event-month">Apr</span></span>
-                        <hr>
-                        <span class="event-time">8:00 pm</span>
-                    </div>
-                    </a>
-                    </div>
-                    
-                    <div class="card-body">
-                        <h5 class="card-title mt-5">Let's Hike Together</h5>
-                        <p class="card-text text-black-50">Embark on an unforgettable hiking journey to conquer the summit of Büyük Camlica Hill.
-                             Experience breathtaking views, diverse wildlife, and camaraderie. Join us for adventure!</p>
-                        <div class="info-list">
-                            <a href="#"><button type="button" class="main-btn more-info-btn">More Info</button></a>
-            
-                        </div>
-                </div>
-            </div>
-            <div class="card p-0 col-md-4 col-lg-3 event-card card-to-filter text-center" data-category = "sport">
-                <div class="image-wrapper">
-                    <a href="#">
-                <img src="{% static 'images/run-for-fun-event.jpg' %}" class="card-img-top event-img" alt="Running event">
-                <div class="event-date date-to-style" data-date = "2024-06-20">
-                <span><span class="event-day">20 </span><span class="event-month">Jun</span></span>
-                <hr>
-                <span class="event-time">3:30 pm</span>
-            </div>
-            </a>
-            </div>
-            
-            <div class="card-body">
-                <h5 class="card-title mt-5">Run For Fun</h5>
-                <p class="card-text text-black-50">Gear up for an exhilarating urban adventure at the "Urban Rush: Istanbul City Marathon.
-                    " Join thousands of runners as we race through iconic landmarks and vibrant neighborhoods of Istanbul.</p>
-                <div class="info-list">
-                    <a href="#"><button type="button" class="main-btn more-info-btn">More Info</button></a>
-    
-                </div>
-        </div>
-    </div>
-        <div class="card p-0 col-md-4 col-lg-3 event-card card-to-filter text-center" data-category = "sport">
-            <div class="image-wrapper">
-                <a href="#">
-            <img src="{% static 'images/volley-ball-event.jpg' %}" class="card-img-top event-img" alt="volleyBall match Event">
-            <div class="event-date date-to-style" data-date = "2024-04-30">
-            <span><span class="event-day">30 </span><span class="event-month">Apr</span></span>
-            <hr>
-            <span class="event-time">7:00 pm</span>
-        </div>
-        </a>
-        </div>
-        
-        <div class="card-body">
-            <h5 class="card-title mt-5">VolleyBall Match</h5>
-            <p class="card-text text-black-50">Dive into the excitement of beach volleyball at the "Bosphorus Beach Volleyball Bash"!
-                 Join us for an action-packed match on the sandy shores of Istanbul's iconic Bosphorus coastline.</p>
-            <div class="info-list">
-                <a href="#"><button type="button" class="main-btn more-info-btn">More Info</button></a>
 
-            </div>
-    </div>
+          {% for EventActivity in activity reversed %}
+          {% if EventActivity.approved %}
+          <div class="card p-0 col-md-4 col-lg-3 event-card card-to-filter text-center" data-category = "{{ EventActivity.categories }}">
+                      <div class="image-wrapper">
+                          <a href="{% url 'eventPage' pk=EventActivity.id %}">
+                      <img src="{{ EventActivity.event_image.url }}" class="card-img-top event-img" alt="{{ EventActivity.eventtitle }}">
+                      <div class="event-date date-to-style" data-date = "{{ EventActivity.date }}">
+                      <span><span class="event-day">{{ EventActivity.date.day }}</span><span class="event-month">{{ EventActivity.date|date:"M" }}</span></span>
+                      <hr>
+                      <span class="event-time">{{ EventActivity.time|time:"h:i A" }}</span>
+                  </div>
+                  </a>
+                  </div>
+                  
+                  <div class="card-body">
+                      <h5 class="card-title mt-5">{{EventActivity.eventtitle}}</h5>
+                      <p class="card-text text-black-50">{{EventActivity.description|truncatewords:20}}</p>
+                      <div class="info-list">
+                          <a href="{% url 'eventPage' pk=EventActivity.id %}"><button type="button" class="main-btn more-info-btn">More Info</button></a>
+                      </div>
+              </div>
+          </div>
+          {% endif %} 
+        {% endfor %}
     </div>
         </div>
       </div>
@@ -189,24 +148,15 @@
       <div class="event-posts-container">
        <i onclick="movePrevious()" class="fa-solid fa-less-than"></i>
        <div class="event-posts-slider">
+        {% for post in post %}
+        {% if post.approved %}
         <div class="profile-post-card">
-        <img src="https://www.colorado.edu/program/data-science/sites/default/files/styles/large/public/slider/img_0146_0.jpg?itok=IVE2eqdQ">
-        <h3 class="event-post-title">From our Hiking Event</h3>
-        <p class="event-post-description">Memories made on the trail! 🌲🥾 Check out this snapshot of our students embracing nature's beauty during our recent hike.
-            Adventure awaits! 📸✨ #Hiking #NatureLovers</p>
+        <img src="{{ post.image.url }}">
+        <h3 class="event-post-title">{{ post.eventtitle }}</h3>
+        <p class="event-post-description">{{ post.postdescription }}</p>
        </div>
-       <div class="profile-post-card">
-        <img src="#">
-        <h3 class="event-post-title">From our </h3>
-        <p class="event-post-description">Memories made on the trail! 🌲🥾 Check out this snapshot of our students embracing nature's beauty during our recent hike.
-            Adventure awaits! 📸✨ #Hiking #NatureLovers</p>
-       </div>
-       <div class="profile-post-card">
-        <img src="https://www.colorado.edu/program/data-science/sites/default/files/styles/large/public/slider/img_0146_0.jpg?itok=IVE2eqdQ">
-        <h3 class="event-post-title">Hiking  cfcd Event</h3>
-        <p class="event-post-description">Memories made on the trail! 🌲🥾 Check out this snapshot of our students embracing nature's beauty during our recent hike.
-            Adventure awaits! 📸✨ #Hiking #NatureLovers</p>
-       </div>
+        {% endif %} 
+       {% endfor %}
        </div>
        
        <i onclick="moveNext()" class="fa-solid fa-greater-than"></i>
