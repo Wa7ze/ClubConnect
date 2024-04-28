@@ -46,7 +46,7 @@ for(let i = 0; i < targetedInput.length; i++){
 }
 
 //image input
-if(document.body.id === "create-activity-event"){
+if(document.body.id === "create-activity-event" || document.body.id === "event-page"){
   let imageError = document.querySelector('.image-error');
 if(fileUpload.value.trim() === ''){
   imageError.style.display = 'block';
