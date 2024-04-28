@@ -267,6 +267,33 @@ def adminNotifications(request):
 
     activities = EventActivity.objects.all().order_by('-pk')
 
+    if request.method == 'POST':
+      if 'update_activities' in request.POST:
+        id_list=request.POST.getlist('boxes')
+        
+        activities.update(approved=False)
+
+        for activity_id in id_list:
+                activity = get_object_or_404(EventActivity, id=activity_id)
+                activity.approved = True
+                activity.save()   
+        messages.success(request,("Event Activity Requests has been updated"))
+        return redirect('events')
+
+
+    if request.method == 'POST':
+      if 'update_posts' in request.POST:
+        id_list=request.POST.getlist('boxes')
+        
+        posts.update(approved=False)
+
+        for post_id in id_list:
+                posts = get_object_or_404(Post, id=post_id)
+                posts.approved = True
+                posts.save()     
+        messages.success(request,("Event Activity Requests has been updated"))
+        return redirect('clubs')
+      
     context = {
         'posts': posts,
         'activities': activities,
@@ -332,6 +359,7 @@ def eventPostForm(request):
 
             manager = get_or_create_user_by_username(clubmanager)
             club_instance, created = createclub.objects.get_or_create(clubname=clubname)
+            
             new_post = Post.objects.create(
             clubname=club_instance,
             clubmanager=manager,
