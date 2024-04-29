@@ -13,13 +13,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500&display=swap" rel="stylesheet">
-    <title>ClubConnect | Create An Event Activity</title>
+    <title>ClubConnect | Create An Event Post</title>
 </head>
 <body id="create-post-event">
     <div onclick="hideConfirmMessage()" class="blur" id="create-activity-blur"></div>
     <div class="confirm-message" id="activity-confirm-message">
         <h3>Confirm</h3>
-        <p>Are you sure you want to create a new club?</p>
+        <p>Are you sure you want to create an event post?</p>
         <div class="yes-no-buttons">
             <button onclick="hideConfirmMessage()" class="no-btn" type="button">No</button>
             <button onclick="eventPostForm.submit()" class="yes-btn" type="submit">Yes</button>
@@ -44,7 +44,10 @@
                 <label for="p-c-name">Club Name:</label>
             <input class="input-field" type="text" name="clubname" id="p-c-name" placeholder="e.g Paddle Pros" required>
             </div>
-
+            <div class="input-wrapper">
+              <label for="a-cm-name">Club Manager Name:</label>
+          <input class="input-field" type="text" name="clubmanager" id="a-cm-name" placeholder="e.g Nouhad El Hallab" required>
+          </div>
             <div class="input-wrapper ms-lg-5">
               <label for="p-e-title">Event Title:</label>
           <input class="input-field event-title-input" type="text" name="eventtitle" id="p-e-title" placeholder="Event Title" required>
