@@ -226,10 +226,11 @@ body{
 }
 .event-posts-slider{
   width: 700px;
-  min-height: 20vw;
+  height: 600px;
   display: flex;
   overflow: hidden;
   border: solid 1px var(--dark-color);
+  cursor: pointer;
 }
 .profile-post-card{
   padding: 20px;
@@ -247,7 +248,7 @@ body{
   position: absolute;
   color: var(--dark-color);
   cursor: pointer;
-  z-index: 900;
+  z-index: 699;
 }
 .event-posts-container .fa-less-than{
   left: 50px;
@@ -274,6 +275,7 @@ body{
 
 .edit-club-infos{
     justify-content: center !important;
+    margin-top: 60px !important;
 }
 #x-mark{
     position: absolute;
@@ -296,6 +298,44 @@ body{
 }
 #edit-confirm-blur{
     z-index: 950 !important;
+}
+.bigger-post-container{
+  background-color: white;
+  width: 100%;
+  height: 630px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+.bigger-post-container svg{
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
+.bigger-post{
+    width: 60vw;
+    height: 600px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    border: solid 2px black;
+}
+.bigger-post img{
+    width: 30vw;
+}
+.bigger-post h3{
+    font-size: 1.2rem;
+}
+.bigger-post p{
+    font-size: 1rem;
 }
 
 /* End Club Profile style */
@@ -906,10 +946,8 @@ padding: 10px 0;
       height: 300px;
   }
   .profile-post-card{
-      padding: 5px;
-  }
-  .profile-post-card{
       width: 100vw;
+      padding: 5px;
   }
   .edit-clubProfile-form{
     width: 90vw;

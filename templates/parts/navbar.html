@@ -38,15 +38,15 @@
 
 
        {% if request.user.is_authenticated and request.user.is_staff %}
-            <ul class="reg-buttons flex-column align-items-center gap-4 gap-lg-2 flex-lg-row">
-                <li><a href="{% url 'createNewClub' %}"><button type="button" class="logout-btn btn">Create New Club</button></a></li>
-                <li><a href="{% url 'adminNotifications' %}" id="admin-notifications">
+            <div class="reg-buttons flex-column align-items-center gap-4 gap-lg-2 flex-lg-row">
+                <a href="{% url 'createNewClub' %}"><button type="button" class="logout-btn btn">Create New Club</button></a>
+                <a href="{% url 'adminNotifications' %}" id="admin-notifications">
                     <div class="notifications-container me-2">
                         <i class="fa-solid fa-bell"></i>
                         <div class="notif-div"></div>
                     </div>
-                </a></li>
-            </ul>
+                </a>
+            </div>
        {% endif %}
        
        <div class="reg-buttons flex-column align-items-center gap-4 gap-lg-2 flex-lg-row">

@@ -55,12 +55,13 @@
 
 <div class="upcoming-events-section">
     <h1 class="section-title">Upcoming Event</h1>
+    {% for event in event %}
     <div class="event-post event-card" data-category="design">
-        {% for event in event %}
+        
         <div class="event-details">
             <h1 class="card-title">{{event.eventtitle}}</h1>
             <p class="event-paragraph text-black-50 card-text">
-                {{event.description}}
+                {{event.description | truncatewords:90}}
             </p>
             <div class="info-list">
                 <a href="{% url 'eventPage' pk=event.id %}">
@@ -85,8 +86,9 @@
         <div class="event-image">
             <img class="event-img" src="{{event.event_image.url}}">
         </div>
-        {% endfor %}
+        
     </div>
+    {% endfor %}
     <div class="Explore-Events-container d-flex justify-content-center mt-5 mb-5 pt-3 pb-3">
         <a href="{% url 'events' %}">
             <button type="button" class="explore-events-btn">Explore Events</button>

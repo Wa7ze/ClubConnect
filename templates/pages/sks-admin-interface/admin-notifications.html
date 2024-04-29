@@ -196,7 +196,208 @@
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/all.min.js' %}"></script>
     <script src="{% static 'js/navbar.js' %}"></script>
-    <script src="{% static 'js/admin.js' %}"></script>
+    <script>
+let activityRequest = document.querySelectorAll('.activity-request');
+let activityInterface = document.getElementById('activity-interface-container');
+let postRequest = document.querySelectorAll('.post-request');
+let editRequest = document.querySelectorAll('.edit-request');
+let postInterface = document.getElementById('post-interface-container');
+let editedEventInterface = document.getElementById('edited-event-interface-container');
+
+function showRequestContent(request,interfaceContainer){
+  for(let i = 0; i < request.length; i++){
+    let eventViewBtn = request[i].querySelector('.view-interface-btn');
+    let clubName = request[i].querySelector('.club-name');
+
+    eventViewBtn.addEventListener('click', ()=>{
+      interfaceContainer.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+      });
+      let activityPreview =
+      `
+      <i onclick="closeEventInterface(activityInterface)" class="fa-solid fa-x"></i>
+      <div class="activity-interface interface-box">
+          <div class="image-wrapper">
+                  <img class="activity-image" src="${request[i].dataset.image}" class="card-img-top event-img">
+              </div>
+              <div class="activity-infos">
+              <div class="activity-title-desc">
+              <h3 class="activity-title">${request[i].dataset.title}</h3>
+              <p class="activity-desc">${request[i].dataset.description}</p>
+             </div>
+             <div class="activity-subheaders">
+              <p><i class="fa-regular fa-calendar"></i> Date: ${request[i].dataset.date}</p>
+              <p><i class="fa-regular fa-clock"></i> Time: ${request[i].dataset.time}</p>
+              <p><i class="fa-solid fa-location-dot"></i> Location: ${request[i].dataset.location}</p>
+              <p><i class="fa-solid fa-list"></i> Category: ${request[i].dataset.category}</p>
+              <p><i class="fa-regular fa-user"></i> Manager: ${request[i].dataset.manager}</p>
+              <p><i class="fa-regular fa-user"></i> Vice Manager: ${request[i].dataset.vicemanager}</p>
+              <p><i class="fa-solid fa-cube"></i> Club Name: ${clubName.textContent}</p>
+              <p><i class="fa-solid fa-phone"></i> Phone Number: ${request[i].dataset.phone}</p>
+              
+             </div>
+              </div>
+  </div>
+      
+      `;
+
+      let postPreview = `
+<i onclick="closeEventInterface(postInterface)" class="fa-solid fa-x"></i>
+<div class="post-interface interface-box">
+  ${request[i].dataset.image !== "" ? 
+      `<div class="image-wrapper">
+          <img class="post-image" src="${request[i].dataset.image}" class="card-img-top event-img">
+      </div>` 
+      : ""}
+  <div class="post-infos">
+      <div class="post-title-desc">
+          <h3 class="post-title">${request[i].dataset.title}</h3>
+          <p class="post-desc">${request[i].dataset.description}</p>
+      </div>
+      <div class="post-subheaders">
+          <p><i class="fa-solid fa-cube"></i> Club Name: ${clubName.textContent}</p>
+      </div>
+  </div>
+</div>`;
+
+let editActivityPreview =
+      `
+      <i onclick="closeEventInterface(editedEventInterface)" class="fa-solid fa-x"></i>
+      
+      <div class= "old-edited-intefaces-container">
+      <div class="edited-old-box">
+          <div class="box-filter old-box-filter"></div>
+          <div class="image-wrapper">
+                  <img class="activity-image" src="${request[i].dataset.oldimage}" class="card-img-top event-img">
+              </div>
+              <div class="activity-infos">
+              <div class="activity-title-desc">
+              <h3 class="activity-title">${request[i].dataset.oldtitle}</h3>
+              <p class="activity-desc">${request[i].dataset.olddescription}</p>
+             </div>
+             <div class="activity-subheaders">
+              <p><i class="fa-regular fa-calendar"></i> Date: ${request[i].dataset.olddate}</p>
+              <p><i class="fa-regular fa-clock"></i> Time: ${request[i].dataset.oldtime}</p>
+              <p><i class="fa-solid fa-location-dot"></i> Location: ${request[i].dataset.oldlocation}</p>
+              <p><i class="fa-solid fa-list"></i> Category: ${request[i].dataset.oldcategory}</p>
+              <p><i class="fa-regular fa-user"></i> Manager: ${request[i].dataset.oldmanager}</p>
+              <p><i class="fa-regular fa-user"></i> Vice Manager: ${request[i].dataset.oldvicemanager}</p>
+              <p><i class="fa-solid fa-cube"></i> Club Name: ${clubName.textContent}</p>
+              <p><i class="fa-solid fa-phone"></i> Phone Number: ${request[i].dataset.oldphone}</p>
+              
+             </div>
+              </div>
+  </div>
+
+  <div class="edited-old-box">
+      <div class="box-filter edited-box-filter"></div>
+      <div class="image-wrapper">
+              <img class="activity-image" src="${request[i].dataset.editedimage}" class="card-img-top event-img">
+          </div>
+          <div class="activity-infos">
+          <div class="activity-title-desc">
+          <h3 class="activity-title">${request[i].dataset.editedtitle}</h3>
+          <p class="activity-desc">${request[i].dataset.editeddescription}</p>
+         </div>
+         <div class="activity-subheaders">
+          <p><i class="fa-regular fa-calendar"></i> Date: ${request[i].dataset.editeddate}</p>
+          <p><i class="fa-regular fa-clock"></i> Time: ${request[i].dataset.editedtime}</p>
+          <p><i class="fa-solid fa-location-dot"></i> Location: ${request[i].dataset.editedlocation}</p>
+          <p><i class="fa-solid fa-list"></i> Category: ${request[i].dataset.editedcategory}</p>
+          <p><i class="fa-regular fa-user"></i> Manager: ${request[i].dataset.editedmanager}</p>
+          <p><i class="fa-regular fa-user"></i> Vice Manager: ${request[i].dataset.editedvicemanager}</p>
+          <p><i class="fa-solid fa-cube"></i> Club Name: ${clubName.textContent}</p>
+          <p><i class="fa-solid fa-phone"></i> Phone Number: ${request[i].dataset.editedphone}</p>
+          
+         </div>
+          </div>
+</div>
+</div>
+      
+  `;
+let editPostPreview = `
+      <i onclick="closeEventInterface(editedEventInterface)" class="fa-solid fa-x"></i>
+      <div class= "old-edited-intefaces-container">
+      <div class="edited-old-box post-edited-old-box">
+      <div class="box-filter old-box-filter"></div>
+          ${request[i].dataset.oldimage !== "" ? 
+              `<div class="image-wrapper">
+                  <img class="post-image" src="${request[i].dataset.oldimage}" class="card-img-top event-img">
+              </div>` 
+              : ""}
+          <div class="post-infos">
+              <div class="post-title-desc">
+                  <h3 class="post-title">${request[i].dataset.oldtitle}</h3>
+                  <p class="post-desc">${request[i].dataset.olddescription}</p>
+              </div>
+              <div class="post-subheaders">
+                  <p><i class="fa-solid fa-cube"></i> Club Name: ${clubName.textContent}</p>
+              </div>
+          </div>
+      </div>
+      
+      <div class="edited-old-box post-edited-old-box">
+      <div class="box-filter edited-box-filter"></div>
+          ${request[i].dataset.editedimage !== "" ? 
+              `<div class="image-wrapper">
+                  <img class="post-image" src="${request[i].dataset.editedimage}" class="card-img-top event-img">
+              </div>` 
+              : ""}
+          <div class="post-infos">
+              <div class="post-title-desc">
+                  <h3 class="post-title">${request[i].dataset.editedtitle}</h3>
+                  <p class="post-desc">${request[i].dataset.editeddescription}</p>
+              </div>
+              <div class="post-subheaders">
+                  <p><i class="fa-solid fa-cube"></i> Club Name: ${clubName.textContent}</p>
+              </div>
+          </div>
+      </div>
+  </div>`;
+
+      if(interfaceContainer.id === 'activity-interface-container'){
+          interfaceContainer.innerHTML = activityPreview;
+      }
+      else if(interfaceContainer.id === 'post-interface-container'){
+          interfaceContainer.innerHTML = postPreview;
+      }
+      else if(interfaceContainer.id === 'edited-event-interface-container' && request[i].dataset.type === 'activity'){
+          interfaceContainer.innerHTML = editActivityPreview;
+      }
+      else if(interfaceContainer.id === 'edited-event-interface-container' && request[i].dataset.type === 'post'){
+          interfaceContainer.innerHTML = editPostPreview;
+      }
+      
+    });
+}
+}
+showRequestContent(activityRequest,activityInterface);
+showRequestContent(postRequest,postInterface);
+showRequestContent(editRequest,editedEventInterface);
+
+function closeEventInterface(interface){
+  interface.style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+
+let rejectionContainer = document.querySelector('.admin-rejection-purpose');
+let rejectionBlur = document.getElementById('admin-notification-blur');
+function showRejectionPurpose(){
+  document.body.style.overflow = 'hidden';
+  rejectionContainer.style.display = 'block';
+  rejectionBlur.style.display = 'block';
+}
+
+function hideRejectionPurpose(){
+    document.body.style.overflow = 'auto';
+    rejectionContainer.style.display = 'none';
+    rejectionBlur.style.display = 'none';
+}
+    </script>
     
 </body>
 </html>

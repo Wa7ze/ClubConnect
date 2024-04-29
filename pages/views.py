@@ -178,7 +178,7 @@ def eventPage(request,pk):
 
 # admin Interface:
 @login_required(login_url='usertype') 
-@allowed_users(allowed_roles=['admin'])
+# @allowed_users(allowed_roles=['admin'])
 def adminBoard(request):
     return render(request, 'pages/sks-admin-interface/admin-board.html')
 
@@ -192,7 +192,7 @@ def get_or_create_user_by_username(username):
     return user 
 
 @login_required(login_url='usertype')   
-@allowed_users(allowed_roles=['admin'])  
+# @allowed_users(allowed_roles=['admin'])  
 def createNewClub(request):
         if request.method == 'POST':
                 # Assuming you have a form that submits club data
@@ -263,7 +263,7 @@ def createNewClub(request):
                 return render(request, 'pages/sks-admin-interface/create-club-form.html')
         
 @login_required(login_url='usertype')            
-@allowed_users(allowed_roles=['admin'])
+# @allowed_users(allowed_roles=['admin'])
 def adminNotifications(request):
     posts = Post.objects.all().order_by('-pk')
 

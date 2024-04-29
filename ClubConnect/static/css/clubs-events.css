@@ -439,10 +439,15 @@ a{
     padding: 50px;
     gap: 60px;
 }
+.event-activity-infos{
+    height: 695px;
+    overflow-y: scroll;
+}
 .event-activity-details-container img{
     width: 50vw;
     height: 100vh;
 }
+
 .event-activity-details{
     display: flex;
     flex-wrap: wrap;
