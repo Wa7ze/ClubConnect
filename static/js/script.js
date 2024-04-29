@@ -355,37 +355,38 @@ if(document.body.id === "event-page"){
         behavior: "smooth"
         })
         document.body.style.overflow = "hidden";
-    
+    }
+    function showEditActivityData(){
         let editActivityForm = 
         `
         <i onclick="hideEditActivityForm()" class="fa-solid fa-xmark" id="edit-activity-x-mark"></i>
         <div class="input-container justify-content-center gap-2">
             <div class="input-wrapper">
-                <label for="a-cm-name">Club Manager Name:</label>
+                <label for="e-a-cm-name">Club Manager Name:</label>
             <input class="input-field" type="text" name="edit_clubmanager" id="e-a-cm-name" placeholder="e.g Nouhad El Hallab" value="${activityManagerData.textContent}" required>
             </div>
             <div class="input-wrapper">
-                <label for="a-cvm-name">Club Vice Manager Name:</label>
+                <label for="e-a-cvm-name">Club Vice Manager Name:</label>
             <input class="input-field" type="text" name="edit_clubvicemanager" id="e-a-cvm-name" placeholder="e.g Mohammad Aburahma" value="${activityViceData.textContent}" required>
             </div>
             <div class="input-wrapper">
-                <label for="a-c-name">Club Name:</label>
+                <label for="e-a-c-name">Club Name:</label>
             <input class="input-field" type="text" name="edit_clubname" id="e-a-c-name" placeholder="e.g Paddle Pros" value="${activityClubNameData.textContent}" required>
             </div>
         </div>
     
         <div class="input-container justify-content-center gap-2">
             <div class="input-wrapper">
-                <label for="a-e-email">Email:</label>
+                <label for="e-a-e-email">Email:</label>
             <input class="input-field activity-email-input" type="email" name="edit_email" id="e-a-e-email" placeholder="Email"value="${activityEmailData.textContent}" required>
             <strong class="email-error">Invalid Email</strong>
             </div>
             <div class="input-wrapper">
-                <label for="a-e-title">Event Title:</label>
+                <label for="e-a-e-title">Event Title:</label>
             <input class="input-field event-title-input" type="text" name="edit_eventtitle" id="e-a-e-title" placeholder="Event Title" value="${activityTitleData.textContent}" required>
             </div>
             <div class="input-wrapper set-top">
-                <label for="a-s-categories">Select a category:</label>
+                <label for="e-a-s-categories">Select a category:</label>
             <select class="event-category-input" name="edit_categories" id="e-a-s-categories">
                 <option value="${activityCategoryData.textContent}">${activityCategoryData.textContent}</option>
                 <option value="sport">Sport</option>
@@ -409,7 +410,7 @@ if(document.body.id === "event-page"){
     
         <div class="input-container justify-content-center gap-2 mt-5">
             <div class="input-wrapper">
-                <label for="a-e-date">Event Date:</label>
+                <label for="e-a-e-date">Event Date:</label>
             <input class="input-field" type="date" name="edit_date" id="e-a-e-date" required>
             </div>
             <div class="input-wrapper">
@@ -437,56 +438,49 @@ if(document.body.id === "event-page"){
         `;
         editActivityPlace.innerHTML = editActivityForm;
     }
-    
+    showEditActivityData();
     function hideEditActivityForm(){
         editActivityContainer.style.display = "none";
         document.body.style.overflow = "auto";
         }
     
-    let eventTimer = document.querySelector('.event-timer');
-    let eventDateStr = eventTimer.dataset.date.match(/\w+ \d+, \d+/)[0];
-    let eventDate = new Date(eventDateStr);
-    let eventData = [
-        eventDate.getFullYear(),
-        ('0' + (eventDate.getMonth() + 1)).slice(-2),
-        ('0' + eventDate.getDate()).slice(-2)
-    ];
-    let eventTime = [
-        ('0' + eventDate.getHours()).slice(-2),
-        ('0' + eventDate.getMinutes()).slice(-2),
-        ('0' + eventDate.getSeconds()).slice(-2)
-    ];
-    let countDownDate = new Date(
-        parseInt(eventData[0]),
-        parseInt(eventData[1]) - 1,
-        parseInt(eventData[2]),
-        parseInt(eventTime[0]),
-        parseInt(eventTime[1]),
-        parseInt(eventTime[2])
-    ).getTime();
-    let x = setInterval(function() {
-        let now = new Date().getTime();
-        let distance = countDownDate - now;
-        let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        days = days < 10 ? "0" + days : days;
-        hours = hours < 10 ? "0" + hours : hours;
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-        document.getElementById("days").innerHTML = days;
-        document.getElementById("hours").innerHTML = hours;
-        document.getElementById("minutes").innerHTML = minutes;
-        document.getElementById("seconds").innerHTML = seconds;
-        if (distance < 0) {
-        clearInterval(x);
-        document.getElementById("days").innerHTML = '00';
-        document.getElementById("hours").innerHTML = '00';
-        document.getElementById("minutes").innerHTML = '00';
-        document.getElementById("seconds").innerHTML = '00';
-        }
-    }, 1000);
+        let eventTimer = document.querySelector('.event-timer');
+        let eventDateStr = eventTimer.dataset.date.match(/\w+ \d+, \d+/)[0];
+        let eventTimeStr = eventTimer.dataset.time;
+        
+        let eventTimeComponents = eventTimeStr.split(' ');
+        let eventHour = parseInt(eventTimeComponents[0]);
+        let eventMinutes = eventTimeComponents[1] === 'a.m.' ? eventHour : eventHour + 12;
+        
+        let eventDateTimeStr = `${eventDateStr} ${eventMinutes}:00:00`;
+        
+        let eventDate = new Date(eventDateTimeStr);
+        let countDownDate = eventDate.getTime();
+        
+        let x = setInterval(function() {
+            let now = new Date().getTime();
+            let distance = countDownDate - now;
+            let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            days = days < 10 ? "0" + days : days;
+            hours = hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("minutes").innerHTML = minutes;
+            document.getElementById("seconds").innerHTML = seconds;
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("days").innerHTML = '00';
+                document.getElementById("hours").innerHTML = '00';
+                document.getElementById("minutes").innerHTML = '00';
+                document.getElementById("seconds").innerHTML = '00';
+            }
+        }, 1000);
+        
     
     }
 /*End Event Page JS*/

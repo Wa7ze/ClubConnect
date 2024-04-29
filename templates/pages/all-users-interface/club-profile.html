@@ -3,7 +3,18 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
+<style>
+    .first-container .club-bg-image{
+        background-image: url("{{ club.bgimg.url }}") !important;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-height: 35vh;
+        position: relative;
+        top: 0;
+        left: 0;
+      }
+</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +33,7 @@
     <div onclick="hideEditClubForm()" class="blur2" id="edit-club-blur"></div>
     <div class="confirm-message" id="club-confirm-message">
         <h3>Confirm</h3>
-        <p>Are you sure you want to create a new club?</p>
+        <p>Are you sure you want to edit your club profile?</p>
         <div class="yes-no-buttons">
             <button onclick="hideConfirmMessage()" class="no-btn" type="button">No</button>
             <button onclick="editClubForm.submit()" class="yes-btn" type="submit">Yes</button>

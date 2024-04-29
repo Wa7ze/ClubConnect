@@ -14,7 +14,7 @@ class createclub(models.Model):
 
     id=models.UUIDField(primary_key=True,default=uuid.uuid4)
     profileimg = models.ImageField(upload_to='profile_images', default='blank-profile-picture.png')  
-    profileimg2 = models.ImageField(upload_to='profile_images2', default='blank-profile-picture.png')
+    bgimg = models.ImageField(upload_to='bg_image', default='blank-profile-picture.png')
     clubname =models.CharField(max_length=100)
     headline = models.CharField(max_length=300)
     location = models.CharField(max_length=100)

@@ -209,12 +209,12 @@ def createNewClub(request):
                 clubvision = request.POST['clubvision']
                 clubdescription = request.POST['clubdescription']
                 profileimg = None
-                profileimg2 = None
+                bgimg = None
 
                 if 'profile_club' in request.FILES:  # Check if profile image file is uploaded
                     profileimg = request.FILES['profile_club']
                 if 'background_club' in request.FILES:  # Check if background image file is uploaded
-                    profileimg2 = request.FILES['background_club']
+                   bgimg = request.FILES['background_club']
 
 
                # try:
@@ -247,7 +247,7 @@ def createNewClub(request):
                     clubvision=clubvision,
                     clubdescription=clubdescription,
                     profileimg=profileimg,
-                    profileimg2=profileimg2
+                    bgimg=bgimg
                 )
                 new_club.user = request.user
                 # Save the profile
