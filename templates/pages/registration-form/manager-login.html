@@ -29,13 +29,13 @@
             <h1>Log In</h1>
             <div class="input-fields">
                 <div class="one-input-wrapper">
-                    <input id="manager-login-email" class="login-email" type="email" placeholder="Email Adress">
+                    <input id="manager-login-email" name="email" class="login-email" type="email" placeholder="Email Adress">
                     <div class="form-icons">
                     <i onclick="loginEmailInput.focus()" class="fa-regular fa-envelope"></i>
                 </div>
                 </div>
                 <div class="one-input-wrapper">
-                    <input id="manager-login-password" class="login-password hidden-password" type="password" placeholder="Password">
+                    <input id="manager-login-password" name="password" class="login-password hidden-password" type="password" placeholder="Password">
                     <div class="form-icons">
                     <i onclick="passwordVisible(loginPasswordInput)" class="fa-regular fa-eye"></i>
                     <i onclick="loginPasswordInput.focus()" class="fa-solid fa-lock"></i>
@@ -44,10 +44,11 @@
         </div>
         <a href="{% url 'homePage' %}"><button class="reg-btn">Log In</button></a>
         
-            <div class="invalid-message mt-4">
-                <span><i class="fa-solid fa-triangle-exclamation"></i></span>
-                <strong>There was a problem logging in. Check your email and password or create an account.</strong>
-            </div>
+        <div>
+            {% for message in messages %}
+            <strong class="strong-message">{{message}}</strong>
+            {% endfor %}
+        </div>
         </form>
      </div>
 </div>

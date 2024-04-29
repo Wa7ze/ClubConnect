@@ -1,7 +1,3 @@
-const backgroundUpload = document.querySelector('.background-upload');
-const profileUpload = document.querySelector('.profile-upload');
-const backgroundPreview = document.querySelector('.bg-preview');
-const profilePreview = document.querySelector('.profile-preview');
 let backgroundContainer = document.querySelector('.image-upload-container');
 let profileContainer = document.querySelector('.profile-input');
 let phoneNum1 = document.querySelector('.phone1');
@@ -14,9 +10,8 @@ let clubEmail = document.querySelector('.club-email');
 let createClubForm = document.querySelector('.create-club-form');
 let editClubForm = document.querySelector('.edit-club-form');
 
-
+if(document.body.id="club-profile"){
 let editClub = document.querySelector('.edit-clubProfile-form');
-let closeEditBtn = document.getElementById('x-mark');
 let editClubBlur = document.getElementById('edit-club-blur');
 let clubNameData = document.getElementById('club-name-data');
 let headLineData = document.getElementById('headline-data');
@@ -35,13 +30,31 @@ let clubAchievment4Data = document.getElementById('club-achievment4-data');
 let clubAchievment5Data = document.getElementById('club-achievment5-data');
 let clubVisionData = document.getElementById('club-vision-data');
 let clubDescriptionData = document.getElementById('club-description-data');
+let editClubPlace = document.querySelector('.edit-club-form-place');
+let clubActivitiesContainer = document.querySelector('.events-cards-container');
+let noClubsFoundMessage = document.querySelector('.no-clubs-events-matches');
 
-        function showEditClubFormData(){
+    function isContainerEmpty(container, excludeElement) {
+        for (let i = 0; i < container.childNodes.length; i++) {
+            const childNode = container.childNodes[i];
+            if (childNode.nodeType === Node.ELEMENT_NODE) {
+                if (childNode !== excludeElement) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    if (isContainerEmpty(clubActivitiesContainer, noClubsFoundMessage)) {
+        noClubsFoundMessage.classList.remove('hidden-div');
+    } else {
+        noClubsFoundMessage.classList.add('hidden-div');
+
+    }
+     function showEditClubFormData(){
             let editClubFormInterface = 
         `
-        <i onclick="hideEditClubForm()" class="fa-solid fa-xmark" id="x-mark"></i>
-        <form class="edit-club-form" action="" method="POST">
-            {% csrf_token%}
             <div class="image-upload-container">
                 <div onclick="backgroundUpload.click()" class="image-preview bg-preview" id="edit-background-preview"></div>
                 <label for="edit-background-upload" class="custom-background-upload">
@@ -102,7 +115,7 @@ let clubDescriptionData = document.getElementById('club-description-data');
         </div>
     </form>
         `;
-        editClub.innerHTML =  editClubFormInterface;
+        editClubPlace.innerHTML =  editClubFormInterface;
         }
         showEditClubFormData();
 
@@ -121,6 +134,40 @@ let clubDescriptionData = document.getElementById('club-description-data');
    
     }
 
+    let postCard = document.querySelectorAll('.profile-post-card');
+    let biggerPostContainer = document.querySelector('.bigger-post-container');
+    function showBiggerPost(){
+        for(let i = 0; i < postCard.length; i++){
+          let postImage = postCard[i].querySelector(".profile-post-card img");
+          let postTitle = postCard[i].querySelector(".event-post-title");
+          let postDesc = postCard[i].querySelector(".event-post-description");
+          postCard[i].addEventListener('click',()=>{
+            let biggerPost = 
+            `
+            <i onclick="hideBiggerPost()" class="fa-solid fa-xmark"></i>
+    <div class="bigger-post">
+            <img src="${postImage.src}">
+            <h3>${postTitle.textContent}</h3>
+            <p>${postDesc.textContent}</p>
+    </div>
+            `;
+            biggerPostContainer.innerHTML = biggerPost;
+            biggerPostContainer.style.display = "flex";
+        
+        });
+    }
+    }
+    showBiggerPost();
+
+    function hideBiggerPost(){
+        biggerPostContainer.style.display = "none";
+    }
+}
+       
+const backgroundUpload = document.querySelector('.background-upload');
+const profileUpload = document.querySelector('.profile-upload');
+const backgroundPreview = document.querySelector('.bg-preview');
+const profilePreview = document.querySelector('.profile-preview');
 function displayImagePreview(input, preview) {
   const file = input.files[0];
   if (file) {
@@ -136,6 +183,7 @@ function displayImagePreview(input, preview) {
       reader.readAsDataURL(file);
   }
 }
+
 if(document.body.id === 'create new club' || document.body.id === 'club-profile'){
 backgroundUpload.addEventListener('change', function() {
   displayImagePreview(this, backgroundPreview);

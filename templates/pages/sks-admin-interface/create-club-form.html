@@ -27,20 +27,20 @@
         </div>
     </div>
     <div class="form-container">
-        <form class="create-club-form" action="" method="POST">
+        <form class="create-club-form" action="" method="POST" enctype="multipart/form-data">
             {% csrf_token%}
             <div class="image-upload-container">
                 <div onclick="backgroundUpload.click()" class="image-preview bg-preview" id="background-preview"></div>
                 <label for="background-upload" class="custom-background-upload">
                     <i class="fas fa-cloud-upload-alt"></i> Choose A File
                 </label>
-                <input class="background-upload" id="background-upload" type="file" required/>
+                <input class="background-upload" name="background_club" id="background-upload" type="file" required/>
                 <div class="profile-input">
                     <div onclick="profileUpload.click()" class="image-preview profile-preview" id="profile-preview"></div>
                     <label for="profile-upload" class="custom-profile-upload">
                         <i class="fas fa-cloud-upload-alt"></i>
                     </label>
-                    <input class="profile-upload" id="profile-upload" type="file" required/>
+                    <input class="profile-upload" name="profile_club" id="profile-upload" type="file" required/>
                 </div>
             </div>
 
@@ -94,6 +94,7 @@
     <script src="{% static 'js/all.min.js' %}"></script>
     <script src="{% static 'js/navbar.js' %}"></script>
     <script src="{% static 'js/admin.js' %}"></script>
+    
 </body>
 </html>
 {% endblock content %}

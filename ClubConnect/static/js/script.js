@@ -335,149 +335,153 @@ function openImage(){
 
 /*Start Event Page JS*/
 if(document.body.id === "event-page"){
+
+    let editActivityContainer = document.querySelector('.edit-activity-container');
+    let editActivityPlace = document.querySelector('.edit-activity-form-place');
+    let activityTitleData = document.getElementById('activity-title-data');
+    let activityDescData = document.getElementById('activity-desc-data');
+    let activityLocationData = document.getElementById('activity-location-data');
+    let activityCategoryData = document.getElementById('activity-category-data');
+    let activityManagerData = document.getElementById('activity-manager-data');
+    let activityEmailData = document.getElementById('activity-email-data');
+    let activityViceData = document.getElementById('activity-vice-data');
+    let activityClubNameData = document.getElementById('activity-clubname-data');
+    let activityPhoneData = document.getElementById('activity-phone-data');
     
-let editActivityContainer = document.querySelector('.edit-activity-container');
-let activityTitleData = document.getElementById('activity-title-data');
-let activityDescData = document.getElementById('activity-desc-data');
-let activityLocationData = document.getElementById('activity-location-data');
-let activityCategoryData = document.getElementById('activity-category-data');
-let activityManagerData = document.getElementById('activity-manager-data');
-let activityEmailData = document.getElementById('activity-email-data');
-let activityViceData = document.getElementById('activity-vice-data');
-let activityClubNameData = document.getElementById('activity-clubname-data');
-let activityPhoneData = document.getElementById('activity-phone-data');
-
-function showEditActivityForm(){
-    editActivityContainer.style.display = "flex";
-    scrollTo({
-    top: 0,
-    behavior: "smooth"
-    })
-    document.body.style.overflow = "hidden";
-
-    let editActivityForm = 
-    `
-    <form class="edit-activity-form" action="" method="post" id="edit-event-activity-form" enctype="multipart/form-data">
-    {% csrf_token %}
-    <i onclick="hideEditActivityForm()" class="fa-solid fa-xmark" id="edit-activity-x-mark"></i>
-    <div class="input-container justify-content-center gap-2">
-        <div class="input-wrapper">
-            <label for="a-cm-name">Club Manager Name:</label>
-        <input class="input-field" type="text" name="edit_clubmanager" id="e-a-cm-name" placeholder="e.g Nouhad El Hallab" value="${activityManagerData.textContent}" required>
-        </div>
-        <div class="input-wrapper">
-            <label for="a-cvm-name">Club Vice Manager Name:</label>
-        <input class="input-field" type="text" name="edit_clubvicemanager" id="e-a-cvm-name" placeholder="e.g Mohammad Aburahma" value="${activityViceData.textContent}" required>
-        </div>
-        <div class="input-wrapper">
-            <label for="a-c-name">Club Name:</label>
-        <input class="input-field" type="text" name="edit_clubname" id="e-a-c-name" placeholder="e.g Paddle Pros" value="${activityClubNameData.textContent}" required>
-        </div>
-    </div>
-
-    <div class="input-container justify-content-center gap-2">
-        <div class="input-wrapper">
-            <label for="a-e-email">Email:</label>
-        <input class="input-field activity-email-input" type="email" name="edit_email" id="e-a-e-email" placeholder="Email"value="${activityEmailData.textContent}" required>
-        <strong class="email-error">Invalid Email</strong>
-        </div>
-        <div class="input-wrapper">
-            <label for="a-e-title">Event Title:</label>
-        <input class="input-field event-title-input" type="text" name="edit_eventtitle" id="e-a-e-title" placeholder="Event Title" value="${activityTitleData.textContent}" required>
-        </div>
-        <div class="input-wrapper set-top">
-            <label for="a-s-categories">Select a category:</label>
-        <select class="event-category-input" name="edit_categories" id="e-a-s-categories">
-            <option value="${activityCategoryData.textContent}">${activityCategoryData.textContent}</option>
-            <option value="sport">Sport</option>
-            <option value="gaming">Gaming</option>
-            <option value="technology">Technology</option>
-            <option value="society">Society</option>
-            <option value="programming">Programming</option>
-            <option value="art">Art</option>
-        </select>
-        </div>
-    </div>
-    <h6>Event Activity Image:</h6>
-    <div class="image-upload-container">
-        <label for="e-a-file-upload" class="custom-file-upload">
-        <i class="fas fa-cloud-upload-alt"></i> Choose File
-    </label>
-    <input class="event-file-upload-input" id="e-a-file-upload" name="edit_event_image" type="file" onchange="displayFiles(this)" required multiple />
-    </div>
-    <div class="event-file-list" id="e-a-file-list"></div>
-    <strong class="image-error">You should set an image for your event</strong>
-
-    <div class="input-container justify-content-center gap-2 mt-5">
-        <div class="input-wrapper">
-            <label for="a-e-date">Event Date:</label>
-        <input class="input-field" type="date" name="edit_date" id="e-a-e-date" required>
-        </div>
-        <div class="input-wrapper">
-            <label for="a-e-time">Event Time:</label>
-        <input class="input-field" type="time" name="edit_time" id="e-a-e-time" required>
-        </div>
-        <div class="input-wrapper">
-            <label for="a-e-location">Location:</label>
-        <input class="input-field" type="text" name="edit_location" id="e-a-e-location" placeholder="e.g Uskudar Univer..." value="${activityLocationData.textContent}" required>
-        </div>
-        <div class="input-wrapper mt-lg-4">
-            <label for="a-p-number">Phone Number:</label>
-        <input class="input-field event-phone-input" type="text" name="edit_phonenumber" id="e-a-p-number" placeholder="e.g +90 (512) 345 678 9" value="${activityPhoneData.textContent}" required>
-        <strong class="phone-error">Invalid Number</strong>
-        </div>
-    </div>
-    <h6>Event Description:</h6>
-    <div class="description-container">
-        <textarea class="input-field event-description-input" name="edit_description" id="e-a-e-description" placeholder="e.g The goal of this event..." required>${activityDescData.textContent}</textarea>
-        <strong class="description-error">The Description should be between 300-4000 letter</strong>
-    </div>
-    <button onclick="checkEventFormAndConfirm()" type="button" class="send-request-btn align-self-center">Submit Request</button>
-    </form>
-
-    `;
-    editActivityContainer.innerHTML = editActivityForm;
-}
-
-function hideEditActivityForm(){
-    editActivityContainer.style.display = "none";
-    document.body.style.overflow = "auto";
+    function showEditActivityForm(){
+        editActivityContainer.style.display = "flex";
+        scrollTo({
+        top: 0,
+        behavior: "smooth"
+        })
+        document.body.style.overflow = "hidden";
     }
-
-let eventTimer = document.querySelector('.event-timer');
-let eventData = eventTimer.dataset.date.split('-');
-let eventTime = eventTimer.dataset.time.split(':');
-let countDownDate = new Date(
-parseInt(eventData[2]),
-parseInt(eventData[1]) - 1,
-parseInt(eventData[0]),
-parseInt(eventTime[0]),
-parseInt(eventTime[1]),
-parseInt(eventTime[2])
-).getTime();
-let x = setInterval(function(){
-let now = new Date().getTime();
-let distance = countDownDate - now;
-let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-days = days < 10 ? "0" + days : days;
-hours = hours < 10 ? "0" + hours : hours;
-minutes = minutes < 10 ? "0" + minutes : minutes;
-seconds = seconds < 10 ? "0" + seconds : seconds;
-document.getElementById("days").innerHTML = days;
-document.getElementById("hours").innerHTML = hours;
-document.getElementById("minutes").innerHTML = minutes;
-document.getElementById("seconds").innerHTML = seconds;
-if(distance < 0){
-    clearInterval(x);
-    document.getElementById("days").innerHTML = '00';
-    document.getElementById("hours").innerHTML = '00';
-    document.getElementById("minutes").innerHTML = '00';
-    document.getElementById("seconds").innerHTML = '00';
-}
-}, 1000);
-}
+    function showEditActivityData(){
+        let editActivityForm = 
+        `
+        <i onclick="hideEditActivityForm()" class="fa-solid fa-xmark" id="edit-activity-x-mark"></i>
+        <div class="input-container justify-content-center gap-2">
+            <div class="input-wrapper">
+                <label for="e-a-cm-name">Club Manager Name:</label>
+            <input class="input-field" type="text" name="edit_clubmanager" id="e-a-cm-name" placeholder="e.g Nouhad El Hallab" value="${activityManagerData.textContent}" required>
+            </div>
+            <div class="input-wrapper">
+                <label for="e-a-cvm-name">Club Vice Manager Name:</label>
+            <input class="input-field" type="text" name="edit_clubvicemanager" id="e-a-cvm-name" placeholder="e.g Mohammad Aburahma" value="${activityViceData.textContent}" required>
+            </div>
+            <div class="input-wrapper">
+                <label for="e-a-c-name">Club Name:</label>
+            <input class="input-field" type="text" name="edit_clubname" id="e-a-c-name" placeholder="e.g Paddle Pros" value="${activityClubNameData.textContent}" required>
+            </div>
+        </div>
+    
+        <div class="input-container justify-content-center gap-2">
+            <div class="input-wrapper">
+                <label for="e-a-e-email">Email:</label>
+            <input class="input-field activity-email-input" type="email" name="edit_email" id="e-a-e-email" placeholder="Email"value="${activityEmailData.textContent}" required>
+            <strong class="email-error">Invalid Email</strong>
+            </div>
+            <div class="input-wrapper">
+                <label for="e-a-e-title">Event Title:</label>
+            <input class="input-field event-title-input" type="text" name="edit_eventtitle" id="e-a-e-title" placeholder="Event Title" value="${activityTitleData.textContent}" required>
+            </div>
+            <div class="input-wrapper set-top">
+                <label for="e-a-s-categories">Select a category:</label>
+            <select class="event-category-input" name="edit_categories" id="e-a-s-categories">
+                <option value="${activityCategoryData.textContent}">${activityCategoryData.textContent}</option>
+                <option value="sport">Sport</option>
+                <option value="gaming">Gaming</option>
+                <option value="technology">Technology</option>
+                <option value="society">Society</option>
+                <option value="programming">Programming</option>
+                <option value="art">Art</option>
+            </select>
+            </div>
+        </div>
+        <h6>Event Activity Image:</h6>
+        <div class="image-upload-container">
+            <label for="e-a-file-upload" class="custom-file-upload">
+            <i class="fas fa-cloud-upload-alt"></i> Choose File
+        </label>
+        <input class="event-file-upload-input" id="e-a-file-upload" name="edit_event_image" type="file" onchange="displayFiles(this)" required multiple />
+        </div>
+        <div class="event-file-list" id="e-a-file-list"></div>
+        <strong class="image-error">You should set an image for your event</strong>
+    
+        <div class="input-container justify-content-center gap-2 mt-5">
+            <div class="input-wrapper">
+                <label for="e-a-e-date">Event Date:</label>
+            <input class="input-field" type="date" name="edit_date" id="e-a-e-date" required>
+            </div>
+            <div class="input-wrapper">
+                <label for="a-e-time">Event Time:</label>
+            <input class="input-field" type="time" name="edit_time" id="e-a-e-time" required>
+            </div>
+            <div class="input-wrapper">
+                <label for="a-e-location">Location:</label>
+            <input class="input-field" type="text" name="edit_location" id="e-a-e-location" placeholder="e.g Uskudar Univer..." value="${activityLocationData.textContent}" required>
+            </div>
+            <div class="input-wrapper mt-lg-4">
+                <label for="a-p-number">Phone Number:</label>
+            <input class="input-field event-phone-input" type="text" name="edit_phonenumber" id="e-a-p-number" placeholder="e.g +90 (512) 345 678 9" value="${activityPhoneData.textContent}" required>
+            <strong class="phone-error">Invalid Number</strong>
+            </div>
+        </div>
+        <h6>Event Description:</h6>
+        <div class="description-container">
+            <textarea class="input-field event-description-input" name="edit_description" id="e-a-e-description" placeholder="e.g The goal of this event..." required>${activityDescData.textContent}</textarea>
+            <strong class="description-error">The Description should be between 300-4000 letter</strong>
+        </div>
+        <button onclick="checkEventFormAndConfirm()" type="button" class="send-request-btn align-self-center">Submit Request</button>
+        </form>
+    
+        `;
+        editActivityPlace.innerHTML = editActivityForm;
+    }
+    showEditActivityData();
+    function hideEditActivityForm(){
+        editActivityContainer.style.display = "none";
+        document.body.style.overflow = "auto";
+        }
+    
+        let eventTimer = document.querySelector('.event-timer');
+        let eventDateStr = eventTimer.dataset.date.match(/\w+ \d+, \d+/)[0];
+        let eventTimeStr = eventTimer.dataset.time;
+        
+        let eventTimeComponents = eventTimeStr.split(' ');
+        let eventHour = parseInt(eventTimeComponents[0]);
+        let eventMinutes = eventTimeComponents[1] === 'a.m.' ? eventHour : eventHour + 12;
+        
+        let eventDateTimeStr = `${eventDateStr} ${eventMinutes}:00:00`;
+        
+        let eventDate = new Date(eventDateTimeStr);
+        let countDownDate = eventDate.getTime();
+        
+        let x = setInterval(function() {
+            let now = new Date().getTime();
+            let distance = countDownDate - now;
+            let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            days = days < 10 ? "0" + days : days;
+            hours = hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("minutes").innerHTML = minutes;
+            document.getElementById("seconds").innerHTML = seconds;
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("days").innerHTML = '00';
+                document.getElementById("hours").innerHTML = '00';
+                document.getElementById("minutes").innerHTML = '00';
+                document.getElementById("seconds").innerHTML = '00';
+            }
+        }, 1000);
+        
+    
+    }
 /*End Event Page JS*/
 
