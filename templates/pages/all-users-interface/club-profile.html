@@ -4,16 +4,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <style>
-    .first-container .club-bg-image{
-        background-image: url("{{ club.bgimg.url }}") !important;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        min-height: 35vh;
-        position: relative;
-        top: 0;
-        left: 0;
-      }
+ .first-container .club-bg-image{
+  background-image: url("{{ club.bgimg.url }}");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 35vh;
+  position: relative;
+  top: 0;
+  left: 0;
+}
 </style>
 <head>
     <meta charset="UTF-8">
@@ -43,6 +43,7 @@
         <i onclick="hideEditClubForm()" class="fa-solid fa-xmark" id="x-mark"></i>
         <form class="edit-club-form" action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
+
         <div class="edit-club-form-place">
             <!-- edit club profile form in admin.js(line 40) -->
         </div>
@@ -188,6 +189,7 @@
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/all.min.js' %}"></script>
     <script src="{% static 'js/navbar.js' %}"></script>
+    <script src="{% static 'js/clubProfile.js' %}"></script>
     <script src="{% static 'js/admin.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
 

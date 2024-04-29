@@ -52,16 +52,6 @@ body{
   box-shadow: 0 0 8px 0;
   width: 25%;
 }
-.first-container .club-bg-image{
-  background-image: url("https://bfplny.com/wp-content/uploads/2019/06/PingPong_6.4.18-1-6_crop.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 35vh;
-  position: relative;
-  top: 0;
-  left: 0;
-}
 .first-container .club-bg-image img{
   border-radius: 50%;
   width: 200px;
