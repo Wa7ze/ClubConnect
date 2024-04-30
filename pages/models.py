@@ -24,6 +24,12 @@ class createclub(models.Model):
     phonenumber2 = models.CharField(max_length=300)
     email = models.EmailField()
     category = models.CharField(max_length=100, choices=[('sport', 'Sport'), ('gaming', 'Gaming'), ('technology', 'Technology'), ('society', 'Society'), ('programming', 'Programming'), ('art', 'Art')])
+    number_of_members = models.IntegerField(default=0)
+    club_achievement1 = models.CharField(max_length=200, blank=True, null=True)
+    club_achievement2 = models.CharField(max_length=200, blank=True, null=True)
+    club_achievement3 = models.CharField(max_length=200, blank=True, null=True)
+    club_achievement4 = models.CharField(max_length=200, blank=True, null=True)
+    club_achievement5 = models.CharField(max_length=200, blank=True, null=True)
     clubvision = models.TextField()
     clubdescription = models.TextField()
     
@@ -33,6 +39,10 @@ class createclub(models.Model):
 class Rejections(models.Model):
     id=models.UUIDField(primary_key=True,default=uuid.uuid4)
     reason=models.TextField()    
+    event_activity = models.ForeignKey('EventActivity', related_name='rejection_reason', on_delete=models.CASCADE, null=True, blank=True)
+    # ForeignKey relationship with Post
+    post = models.ForeignKey('Post', related_name='rejection_reason', on_delete=models.CASCADE, null=True, blank=True)
+
     def __str__(self):
         return str(self.reason)
 
@@ -46,6 +56,8 @@ class Post(models.Model):
     postdescription=models.TextField()
     created_at=models.DateTimeField(default=datetime.now)
     approved=models.BooleanField('Approved',default=False)
+    rejected=models.BooleanField('Rejected',default=False)
+
     def __str__(self):
         return self.eventtitle
     
@@ -64,6 +76,28 @@ class EventActivity(models.Model):
     phonenumber = models.CharField(max_length=100)
     description = models.TextField()
     approved=models.BooleanField('Approved',default=False)
+    rejected=models.BooleanField('Rejected',default=False)
+
+
+    def __str__(self):
+        return self.eventtitle
+      
+class EditEventActivity(models.Model):
+    id=models.UUIDField(primary_key=True,default=uuid.uuid4)
+    clubmanager = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='activites_managed_edit', default=None)
+    clubvicemanager = models.CharField(max_length=100)
+    clubname = models.ForeignKey(createclub, on_delete=models.CASCADE, related_name='activities_Edit')
+    email = models.EmailField()
+    eventtitle = models.CharField(max_length=100)
+    categories = models.CharField(max_length=100)
+    event_image = models.ImageField(upload_to='event_images')  
+    date = models.DateField()
+    time = models.TimeField()
+    location = models.CharField(max_length=100)
+    phonenumber = models.CharField(max_length=100)
+    description = models.TextField()
+    approved=models.BooleanField('Approved',default=False)
+    rejected=models.BooleanField('Rejected',default=False)
 
     def __str__(self):
         return self.eventtitle

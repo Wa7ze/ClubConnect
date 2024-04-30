@@ -49,6 +49,8 @@
                 <img src="{% static 'images/hiking-club.jpg' %}" alt="club logo">
                 <div class="req-text"><strong class="club-name">{{act.clubname}}</strong> sent an event activity request <span class="view-interface-btn">view</span></div>
                 <div class="decision-buttons">
+
+                    <label for="reason">Approve</label>
                     {% if act.approved %}
                     <input class="accept-btn" type="checkbox" checked="
                     checked" value={{act.id}}
@@ -58,22 +60,32 @@
                     name="boxes">
                     {% endif %}
 
-                    
-                        
-                        <div class="form-group">
-                            <label for="reason">Rejection Reason:</label>
-                            <input type="text" class="form-control" name="reason" id="reason" placeholder="Enter rejection reason">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                   
-                    
+                    <label for="reason">Reject</label>
+                    {% if act.rejected %}
+                    <input class="accept-btn" type="checkbox" checked="
+                    checked" value={{act.id}}
+                    name="boxes2">
+                    {% else %}
+                    <input class="accept-btn" type="checkbox" value={{act.id}}
+                    name="boxes2">
+                    {% endif %}
+
 
                 </div>
+
+                <div class="form-group">
+                    <label for="reason">Rejection Reason:</label>
+                     <input type="text" class="form-control" name="reason" id="reason" placeholder="Enter rejection reason">
+                   </div>
             </div>
             {% endfor %}
         </div>
+        <button class="accept-btn" name="update_activities"  type="submit">Update approval</button>
+        <button class="accept-btn" name="update_reject"  type="submit">Update reject</button>
+        <button type="submit" class="accept-btn">Submit</button>        
+  
       </form>
-      <button class="accept-btn" name="update_activities"  type="submit">Update approval</button>
+
 
         </div>
      <form method="post" action="">
@@ -88,6 +100,8 @@
                 <img src="{% static 'images/hiking-club.jpg' %}" alt="club logo">
                 <div class="req-text"><strong class="club-name">{{post.clubname}}</strong> sent an event post request <span class="view-interface-btn">view</span></div>
                 <div class="decision-buttons">
+
+                    <label for="reason">Approve</label>
                     {% if post.approved %}
                     <input class="accept-btn" type="checkbox" checked="
                     checked" value={{post.id}}
@@ -96,15 +110,31 @@
                     <input class="accept-btn" type="checkbox" value={{post.id}}
                     name="boxes">
                     {% endif %}
-                    <button class="accept-btn" type="button">Accept</button>
-                    <button class="reject-btn" type="button">Reject</button>
+                    
+
+                    <label for="reason">Reject</label>
+                    {% if post.rejected %}
+                    <input class="accept-btn" type="checkbox" checked="
+                    checked" value={{post.id}}
+                    name="boxes2">
+                    {% else %}
+                    <input class="accept-btn" type="checkbox" value={{post.id}}
+                    name="boxes2">
+                    {% endif %}
+
                 </div>
+                <div class="form-group">
+                    <label for="reason">Rejection Reason:</label>
+                     <input type="text" class="form-control" name="reason" id="reason" placeholder="Enter rejection reason">
+                   </div>
             </div>
             {% endfor %}
             
             </div> 
         </form>
         <button class="accept-btn" name="update_posts"  type="submit">Update approval</button>
+        <button class="accept-btn" name="update_reject_post"  type="submit">Update reject</button>
+        <button type="submit" class="accept-btn">Submit</button>       
 
         </div>
         <div class="edits-notif-container">
