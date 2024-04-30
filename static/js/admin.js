@@ -1,7 +1,3 @@
-const backgroundUpload = document.querySelector('.background-upload');
-const profileUpload = document.querySelector('.profile-upload');
-const backgroundPreview = document.querySelector('.bg-preview');
-const profilePreview = document.querySelector('.profile-preview');
 let backgroundContainer = document.querySelector('.image-upload-container');
 let profileContainer = document.querySelector('.profile-input');
 let phoneNum1 = document.querySelector('.phone1');
@@ -13,6 +9,11 @@ let clubBlur = document.querySelector('.blur');
 let clubEmail = document.querySelector('.club-email');
 let createClubForm = document.querySelector('.create-club-form');
 
+       
+const backgroundUpload = document.querySelector('.background-upload');
+const profileUpload = document.querySelector('.profile-upload');
+const backgroundPreview = document.querySelector('.bg-preview');
+const profilePreview = document.querySelector('.profile-preview');
 function displayImagePreview(input, preview) {
   const file = input.files[0];
   if (file) {
