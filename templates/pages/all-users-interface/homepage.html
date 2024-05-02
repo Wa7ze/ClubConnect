@@ -56,12 +56,13 @@
 <div class="upcoming-events-section">
     <h1 class="section-title">Upcoming Event</h1>
     {% for event in event %}
+    {% if event.approved %}
     <div class="event-post event-card" data-category="design">
         
         <div class="event-details">
             <h1 class="card-title">{{event.eventtitle}}</h1>
             <p class="event-paragraph text-black-50 card-text">
-                {{event.description | truncatewords:90}}
+                {{event.description|truncatewords:90}}
             </p>
             <div class="info-list">
                 <a href="{% url 'eventPage' pk=event.id %}">
@@ -88,6 +89,43 @@
         </div>
         
     </div>
+    {% endif %}
+    {% endfor %}
+    {% for event in edit_activity %}
+    {% if event.approved %}
+    <div class="event-post event-card" data-category="design">
+        
+        <div class="event-details">
+            <h1 class="card-title">{{event.eventtitle}}</h1>
+            <p class="event-paragraph text-black-50 card-text">
+                {{event.description|truncatewords:90}}
+            </p>
+            <div class="info-list">
+                <a href="{% url 'eventPage' pk=event.id %}">
+                    <button type="button" class="main-btn more-info-btn">More Info</button>
+                </a>
+            </div>
+            <div class="event-infos">
+                <div class="date-time">
+                    <i class="fa-regular fa-calendar"></i>
+                    <p class="text-black-50 event-date">{{event.date}}, <span class="event-time">{{event.time}}</span></p>
+                </div>
+                <div class="location">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p class="text-black-50">{{event.location}}</p>
+                </div>
+                <div class="contact">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <p class="text-black-50">{{event.phonenumber}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="event-image">
+            <img class="event-img" src="{{event.event_image.url}}">
+        </div>
+        
+    </div>
+    {% endif %}
     {% endfor %}
     <div class="Explore-Events-container d-flex justify-content-center mt-5 mb-5 pt-3 pb-3">
         <a href="{% url 'events' %}">

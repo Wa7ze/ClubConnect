@@ -21,6 +21,7 @@
         <h1>Notifications</h1>
     </div>
     <div class="manager-notif-container">
+
         {% for act in activities %}
             {% if act.approved %}
                 <div class="notification notification-accepted">
@@ -44,6 +45,30 @@
             {% endif %}
         {% endfor %}
     
+        {% for act in editedactivities %}
+            {% if act.approved %}
+                <div class="notification notification-accepted">
+                    <i class="fa-solid fa-check"></i>
+                    Your Event Activity ({{ act.eventtitle }}) Edit Request Is Accepted By The SKS Admin
+                </div>
+            {% endif %}
+            {% if act.rejected %}
+                <div class="notification notification-rejected">
+                    <i class="fa-solid fa-xmark"></i>
+                    Your Event Activity ({{ act.eventtitle }}) Edit Request Is Rejected By The SKS Admin
+                    <button class="why-rejected">See Why</button>
+                    <p class="purpose-of-rejection">
+                        {% for reason in act.rejection_reason.all %}
+                            <!-- Display rejection reason if available -->
+                            Reason: {{ reason.reason }}
+                        {% endfor %}
+
+                    </p>
+                </div>
+            {% endif %}
+        {% endfor %}
+    
+
         {% for post in posts %}
             {% if post.approved %}
                 <div class="notification notification-accepted">
@@ -66,6 +91,14 @@
                 </div>
             {% endif %}
         {% endfor %}
+
+        {% for club in clubs %}
+        <div class="notification notification-accepted">
+            <i class="fa-solid fa-check"></i>
+            Your Club ({{ club.clubname }}) Has been created By The SKS Admin
+        </div>
+
+    {% endfor %}
     </div>
     
 

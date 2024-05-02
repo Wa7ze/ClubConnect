@@ -66,8 +66,8 @@
           <div class="no-clubs-events-matches hidden-div">
               <h3 class="text-black-50 fs-5">No Events Found</h3>
           </div>
-          {% for EventActivity in activity reversed %}
-          {% if EventActivity.approved %}
+{% for EventActivity in activity reversed %}
+    {% if EventActivity.approved %}
             <div class="card p-0 col-md-4 col-lg-3 event-card card-to-filter text-center" data-category = "{{ EventActivity.categories }}">
                         <div class="image-wrapper">
                             <a href="{% url 'eventPage' pk=EventActivity.id %}">
@@ -89,8 +89,34 @@
                         </div>
                 </div>
             </div>
-            {% endif %}  
-          {% endfor %}  
+        {% endif %} 
+        {% endfor %}  
+
+        {% for edit_event in edit_activity reversed %}
+        {% if  edit_event.approved %}
+        <div class="card p-0 col-md-4 col-lg-3 event-card card-to-filter text-center" data-category="{{ edit_event.categories }}">
+                    <div class="image-wrapper">
+                        <a href="{% url 'eventPage' pk=edit_event.id %}">
+                            <img src="{{ edit_event.event_image.url }}" class="card-img-top event-img" alt="{{ edit_event.eventtitle }}">
+                            <div class="event-date date-to-style" data-date="{{ edit_event.date }}">
+                                <span><span class="event-day">{{ edit_event.date.day }}</span><span class="event-month">{{ edit_event.date|date:"M" }}</span></span>
+                                <hr>
+                                <span class="event-time">{{ edit_event.time|time:"h:i A" }}</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title mt-5">{{ edit_event.eventtitle }}</h5>
+                        <p class="card-text text-black-50">{{ edit_event.description|truncatewords:20 }}</p>
+                        <div class="info-list">
+                            <a href="{% url 'eventPage' pk=edit_event.id %}"><button type="button" class="main-btn more-info-btn">More Info</button></a>
+                            <span class="add-to-list-btn add-to-list-plus"></span>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+ 
         </div>
        </div>
     </div>    

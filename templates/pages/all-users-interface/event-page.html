@@ -142,7 +142,7 @@
     </div>
     
     <div class="event-activity-details-container">
-
+        {% if event_activity %}
         <img src="{{ event_activity.event_image.url }}" alt="{{ event_activity.eventtitle }}">
         <div class="event-activity-infos">
             <h3 class="event-activity-title" id="activity-title-data">{{ event_activity.eventtitle }}</h3>
@@ -159,13 +159,44 @@
                 <p><i class="fa-solid fa-cube"></i> Club Name: <span id="activity-clubname-data">{{ event_activity.clubname }}</span> </p>
                 <p><i class="fa-regular fa-envelope"></i> Email: <span id="activity-email-data">{{ event_activity.email }}</span> </p>
                 <p><i class="fa-solid fa-phone"></i> Phone Number: <span id="activity-phone-data">{{ event_activity.phonenumber }}</span> </p>
-
+                 
             </div>
 
             <button onclick="showEditActivityForm()" type="button" class="edit-event-btn">Edit</button>
             <button type="button" class="delete-event-btn">Delete</button>
         </div>
+        {% endif %}
+        {% if edit_event_activity %}
+            {{ edit_event_activity }}
+        {% else %}
+            <p>No edit activity found</p>
+        {% endif %}
+        {% if edit_event_activity %}
+        <img src="{{ edit_event_activity.event_image.url }}" alt="{{ edit_event_activity.eventtitle }}">
+        <div class="event-activity-infos">
+        <h3 class="event-activity-title" id="activity-title-data">{{ edit_event_activity.eventtitle }}</h3>
+        <p class="event-activity-description" id="activity-desc-data">
+            {{ edit_event_activity.description }}
+        </p>
+        <div class="event-activity-details">
+            <p><i class="fa-regular fa-calendar"></i> Date: <span id="activity-date-data">{{ edit_event_activity.date }}</span></p>
+            <p><i class="fa-regular fa-clock"></i> Time: <span id="activity-time-data">{{ edit_event_activity.time|time:"h:i A" }}</span></p>
+            <p><i class="fa-solid fa-location-dot"></i> Location: <span id="activity-location-data">{{ edit_event_activity.location }}</span></p>
+            <p><i class="fa-solid fa-list"></i> Category: <span id="activity-category-data">{{ edit_event_activity.categories }}</span></p>
+            <p><i class="fa-regular fa-user"></i> Manager: <span id="activity-manager-data">{{  edit_event_activity.clubmanager }}</span> </p>
+            <p><i class="fa-regular fa-user"></i> Vice Manager: <span id="activity-vice-data">{{  edit_event_activity.clubvicemanager }}</span> </p>
+            <p><i class="fa-solid fa-cube"></i> Club Name: <span id="activity-clubname-data">{{  edit_event_activity.clubname }}</span> </p>
+            <p><i class="fa-regular fa-envelope"></i> Email: <span id="activity-email-data">{{  edit_event_activity.email }}</span> </p>
+            <p><i class="fa-solid fa-phone"></i> Phone Number: <span id="activity-phone-data">{{  edit_event_activity.phonenumber }}</span> </p>
+
+        </div>
+        <button onclick="showEditActivityForm()" type="button" class="edit-event-btn">Edit</button>
+        <button type="button" class="delete-event-btn">Delete</button>
+        </div>
+     {% endif %}
+    
     </div>
+    
     <div class="more-event-activities">
         <h3>More Event Activities</h3>
     </div>
@@ -199,6 +230,29 @@
           </div>
           {% endif %} 
         {% endfor %} 
+        {% for edit_event in edit_activity reversed %}
+        {% if  edit_event.approved %}
+        <div class="card p-0 col-md-4 col-lg-3 event-card card-to-filter text-center" data-category="{{ edit_event.categories }}">
+                    <div class="image-wrapper">
+                        <a href="{% url 'eventPage' pk=edit_event.id %}">
+                            <img src="{{ edit_event.event_image.url }}" class="card-img-top event-img" alt="{{ edit_event.eventtitle }}">
+                            <div class="event-date date-to-style" data-date="{{ edit_event.date }}">
+                                <span><span class="event-day">{{ edit_event.date.day }}</span><span class="event-month">{{ edit_event.date|date:"M" }}</span></span>
+                                <hr>
+                                <span class="event-time">{{ edit_event.time|time:"h:i A" }}</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title mt-5">{{ edit_event.eventtitle }}</h5>
+                        <p class="card-text text-black-50">{{ edit_event.description|truncatewords:20 }}</p>
+                        <div class="info-list">
+                            <a href="{% url 'eventPage' pk=edit_event.id %}"><button type="button" class="main-btn more-info-btn">More Info</button></a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
     </div>
         </div>
       </div>

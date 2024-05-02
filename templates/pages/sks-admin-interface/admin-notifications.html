@@ -46,7 +46,7 @@
              data-title = "{{act.eventtitle}}" data-image = "{{act.event_image.url}}"
              data-description = "{{act.description}}">
 
-                <img src="{% static 'images/hiking-club.jpg' %}" alt="club logo">
+                <img src="{{act.clubname.profileimg.url}}" alt="club logo">
                 <div class="req-text"><strong class="club-name">{{act.clubname}}</strong> sent an event activity request <span class="view-interface-btn">view</span></div>
                 <div class="decision-buttons">
 
@@ -97,7 +97,7 @@
                 <div class="post-request" data-title = "{{post.eventtitle}}"
                  data-image = "{{post.image.url}}"
                 data-description = "{{post.postdescription}}">
-                <img src="{% static 'images/hiking-club.jpg' %}" alt="club logo">
+                <img src="{{post.clubname.profileimg.url}}" alt="club logo">
                 <div class="req-text"><strong class="club-name">{{post.clubname}}</strong> sent an event post request <span class="view-interface-btn">view</span></div>
                 <div class="decision-buttons">
 
@@ -137,77 +137,64 @@
         <button type="submit" class="accept-btn">Submit</button>       
 
         </div>
-        <div class="edits-notif-container">
-            <h4>Edit Event Requests</h4>
-            <div class="scroll-container">
-                <div class="edit-request" data-type = "activity" data-olddate="Sat, Apr 24" data-oldtime = '8:00 pm' data-oldcategory="Sport"
-                data-oldphone = "+90 (534)442 1873" data-oldlocation="Block D, D-109" data-oldmanager="Nouhad El Hallab"
-                data-oldvicemanager = 'Haneen' data-oldtitle = "Let's Hike Together" data-oldimage = "{% static 'images/hiking-event.jpg' %}"
-                data-olddescription = "Embark on an unforgettable hiking journey to conquer the summit of Büyük Camlica Hill.
-                Experience breathtaking views, diverse wildlife, and camaraderie. Join us for adventure!
-                 Explore the winding trails that lead you through lush greenery, with each step bringing you closer to the awe-inspiring peak.
-                  As you ascend, be captivated by the symphony of nature, from the melodious songs of birds to the gentle rustle of leaves in the breeze.
-                   Along the way, forge bonds with fellow adventurers, sharing in the exhilaration of the climb and the triumph of reaching the summit.
-                    At the pinnacle, stand in awe as panoramic vistas stretch out before you, a tapestry of mountains, forests, and cityscapes that leave you breathless.
-                     This journey is not just about conquering a hill; it's about immersing yourself in the beauty of the natural world and the thrill of exploration.
-                      So lace up your boots, pack your essentials, and join us as we embark on this epic adventure together!"
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="edits-notif-container">
+                <h4>Edit Event Requests</h4>
+                <div class="scroll-container">
+                    {% for event in events %}
+                    {% if event.edit_event %}
+                    <div class="edit-request" data-type = "activity" 
 
-                      data-editeddate="Sat, Apr 24" data-editedtime = '12:00 pm' data-editedcategory="Sport"
-                data-editedphone = "+90 (534)442 1873" data-editedlocation="Block D, D-109" data-editedmanager="Nouhad El Hallab"
-                data-editedvicemanager = 'Haneen' data-editedtitle = "Hiking Event" data-editedimage = "{% static 'images/run-for-fun-event.jpg' %}"
-                data-editeddescription = "Embark on an unforgettable hiking journey to conquer the summit of Büyük Camlica Hill.
-                Experience breathtaking views, diverse wildlife, and camaraderie. Join us for adventure!
-                 Explore the winding trails that lead you through lush greenery, with each step bringing you closer to the awe-inspiring peak.
-                  As you ascend, be captivated by the symphony of nature, from the melodious songs of birds to the gentle rustle of leaves in the breeze.
-                   Along the way, forge bonds with fellow adventurers, sharing in the exhilaration of the climb and the triumph of reaching the summit.
-                    At the pinnacle, stand in awe as panoramic vistas stretch out before you, a tapestry of mountains, forests, and cityscapes that leave you breathless.
-                     This journey is not just about conquering a hill; it's about immersing yourself in the beauty of the natural world and the thrill of exploration.
-                      So lace up your boots, pack your essentials, and join us as we embark on this epic adventure together!">
-                <img src="{% static 'images/hiking-club.jpg' %}" alt="club logo">
-                <div class="req-text"><strong class="club-name">Hike Harmony</strong> sent an edit activity event request <span class="view-interface-btn">view</span></div>
-                <div class="decision-buttons">
-                    <button class="accept-btn" type="button">Accept</button>
-                    <button class="reject-btn" type="button">Reject</button>
+                        data-olddate="{{ event.date }}" data-oldtime = '{{ event.time }}' data-oldcategory="{{ event.categories }}"
+                    data-oldphone = "{{ event.phonenumber }}" data-oldlocation="{{ event.location }}" data-oldmanager="{{ event.clubmanager }}"
+                    data-oldvicemanager = '{{ event.clubvicemanager }}' data-oldtitle = "{{ event.eventtitle }}" data-oldimage = "{{ event.event_image.url }}"
+                    data-olddescription = "{{ event.description }}"
+
+                        data-editeddate="{{ event.edit_event.date }}" data-editedtime = '{{ event.edit_event.time }}' data-editedcategory="{{ event.edit_event.categories }}"
+                    data-editedphone = "{{ event.edit_event.phonenumber }}" data-editedlocation="{{ event.edit_event.location }}" data-editedmanager="{{ event.edit_event.clubmanager }}"
+                    data-editedvicemanager = '{{ event.edit_event.clubvicemanager }}' data-editedtitle = "{{ event.edit_event.eventtitle }}" data-editedimage = "{{ event.edit_event.event_image.url }}"
+                    data-editeddescription = "{{ event.edit_event.description }}">
+                    <img src="{{ event.clubname.profileimg.url }}" alt="club logo">
+                    <div class="req-text"><strong class="club-name">{{ event.clubname }}</strong> sent an edit activity event request <span class="view-interface-btn">view</span></div>
+                    <div class="decision-buttons">
+
+                        <label for="reason">Approve</label>
+                        {% if event.edit_event.approved %}
+                        <input class="accept-btn" type="checkbox" checked="
+                        checked" value={{event.edit_event.id}}
+                        name="boxe">
+                        {% else %}
+                        <input class="accept-btn" type="checkbox" value={{event.edit_event.id}}
+                        name="boxe">
+                        {% endif %}
+
+                        <label for="reason">Reject</label>
+                        {% if event.edit_event.rejected %}
+                        <input class="accept-btn" type="checkbox" checked="
+                        checked" value={{event.edit_event.id}}
+                        name="boxe2">
+                        {% else %}
+                        <input class="accept-btn" type="checkbox" value={{event.edit_event.id}}
+                        name="boxe2">
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reason">Rejection Reason:</label>
+                        <input type="text" class="form-control" name="reason" id="reason" placeholder="Enter rejection reason">
+                    </div>
+
                 </div>
-            </div>
-
-            <div class="edit-request" data-type="post" data-oldtitle = "From our Hiking Event"
-            data-oldimage = "https://www.colorado.edu/program/data-science/sites/default/files/styles/large/public/slider/img_0146_0.jpg?itok=IVE2eqdQ"
-           data-olddescription = "Memories made on the trail! 🌲🥾 Check out this snapshot of our students embracing nature's beauty during our recent hike.
-            Adventure awaits! 📸✨ #Hiking #NatureLovers"
-
-            data-editedtitle = "Hiking Event Was Great!"
-            data-editedimage = "https://www.colorado.edu/program/data-science/sites/default/files/styles/large/public/slider/img_0146_0.jpg?itok=IVE2eqdQ"
-           data-editeddescription = "Memories made on the trail! 🌲🥾 Check out this snapshot of our students embracing nature's beauty during our recent hike.
-            Adventure awaits! 📸✨ #Hiking #NatureLovers">
-                <img src="{% static 'images/hiking-club.jpg' %}" alt="club logo">
-                <div class="req-text"><strong class="club-name">Hike Harmony</strong> sent an edit post event request <span class="view-interface-btn">view</span></div>
-                <div class="decision-buttons">
-                    <button class="accept-btn" type="button">Accept</button>
-                    <button class="reject-btn" type="button">Reject</button>
-                </div>
-            </div>
-
-            <div class="edit-request" data-type="post" data-oldtitle = "Join Us as Vice Manager of Pixel Pioneers!"
-            data-oldimage = ""
-           data-olddescription = "We need a passionate gaming enthusiast to join our team as Vice Manager of the Pixel Pioneers!
-            Take part in organizing events and building a thriving gaming community on campus. Ready to level up? Apply now!"
-
-            data-editedtitle = "Vice Manager Is Needed!"
-            data-editedimage = ""
-           data-editeddescription = "We need a vice manager to join our team in Pixel Pioneers, If you are passionate in gaming
-           world, contact us via whatsapp: +90 534 441 2345">
-                <img src="{% static 'images/gaming-club.jpg' %}" alt="club logo">
-                <div class="req-text"><strong class="club-name">Pixel Pioneers</strong> sent an edit post event request <span class="view-interface-btn">view</span></div>
-                <div class="decision-buttons">
-                    <button class="accept-btn" type="button">Accept</button>
-                    <button class="reject-btn" type="button">Reject</button>
-                </div>
-            </div>
+                {% endif %}
+                {% endfor %}
 
             </div>
+            </form>
+            <button class="accept-btn" name="update_edit"  type="submit">Update approval</button>
+            <button class="accept-btn" name="update_reject_edit"  type="submit">Update reject</button>
+            <button type="submit" class="accept-btn">Submit</button> 
         </div>
-    </div>
     
     <div class="event-interface-container" id="activity-interface-container">
         <!-- HERE THE ACTIVITY INTERFACE WILL BE DISPLAYED FROM JS  -->

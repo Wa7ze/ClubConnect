@@ -156,6 +156,31 @@
           </div>
           {% endif %} 
         {% endfor %}
+
+        {% for EventActivity in edit_activity reversed %}
+          {% if EventActivity.approved %}
+          <div class="card p-0 col-md-4 col-lg-3 event-card card-to-filter text-center" data-category = "{{ EventActivity.categories }}">
+                      <div class="image-wrapper">
+                          <a href="{% url 'eventPage' pk=EventActivity.id %}">
+                      <img src="{{ EventActivity.event_image.url }}" class="card-img-top event-img" alt="{{ EventActivity.eventtitle }}">
+                      <div class="event-date date-to-style" data-date = "{{ EventActivity.date }}">
+                      <span><span class="event-day">{{ EventActivity.date.day }}</span><span class="event-month">{{ EventActivity.date|date:"M" }}</span></span>
+                      <hr>
+                      <span class="event-time">{{ EventActivity.time|time:"h:i A" }}</span>
+                  </div>
+                  </a>
+                  </div>
+                  
+                  <div class="card-body">
+                      <h5 class="card-title mt-5">{{EventActivity.eventtitle}}</h5>
+                      <p class="card-text text-black-50">{{EventActivity.description|truncatewords:25}}</p>
+                      <div class="info-list">
+                          <a href="{% url 'eventPage' pk=EventActivity.id %}"><button type="button" class="main-btn more-info-btn">More Info</button></a>
+                      </div>
+              </div>
+          </div>
+          {% endif %} 
+        {% endfor %}
     </div>
         </div>
       </div>

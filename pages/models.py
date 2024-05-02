@@ -42,6 +42,7 @@ class Rejections(models.Model):
     event_activity = models.ForeignKey('EventActivity', related_name='rejection_reason', on_delete=models.CASCADE, null=True, blank=True)
     # ForeignKey relationship with Post
     post = models.ForeignKey('Post', related_name='rejection_reason', on_delete=models.CASCADE, null=True, blank=True)
+    edit_event = models.ForeignKey('EditEventActivity', related_name='rejection_reason', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return str(self.reason)
@@ -77,6 +78,7 @@ class EventActivity(models.Model):
     description = models.TextField()
     approved=models.BooleanField('Approved',default=False)
     rejected=models.BooleanField('Rejected',default=False)
+    edit_event = models.ForeignKey('EditEventActivity', on_delete=models.SET_NULL, null=True, blank=True, related_name='original_event')
 
 
     def __str__(self):
