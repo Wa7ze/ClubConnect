@@ -153,7 +153,7 @@ def homePage(request):
     edit_activity = EditEventActivity.objects.filter(date__range=[today, one_week_from_today])
     return render(request, 'pages/all-users-interface/homepage.html',{'home':home ,'event':event,'edit_activity':edit_activity})
 
-#@login_required(login_url='usertype')
+@login_required(login_url='usertype')
 def events(request):
     activity= EventActivity.objects.filter(approved=True)
     edit_activity = EditEventActivity.objects.filter(approved=True)
@@ -180,6 +180,15 @@ def clubProfile(request,pk):
     
     return render(request, 'pages/all-users-interface/club-profile.html', {'activity': activity , 'post':post , 'club':club,'edit_activity':edit_activity})
 
+def delete_club(request,pk):
+    club = createclub.objects.get(pk=pk)
+    club.delete()
+    return redirect('clubs')
+
+def delete_event(request,pk):
+    event_activity = EventActivity.objects.get(pk=pk)
+    event_activity.delete()
+    return redirect('events')
 
 def eventPage(request,pk):
     activity= EventActivity.objects.all()
@@ -262,7 +271,7 @@ def eventPage(request,pk):
         # Redirect to a success page or homepage
         return redirect('events')
 
-    return render(request, 'pages/all-users-interface/event-page.html',{'event_activity': event_activity, 'activity': activity,'edit_event_activity ': edit_event_activity,'edit_activity':edit_activity  })
+    return render(request, 'pages/all-users-interface/event-page.html',{'event_activity': event_activity, 'activity': activity,'edit_event_activity': edit_event_activity,'edit_activity':edit_activity  })
 
 # admin Interface:
 @login_required(login_url='usertype') 
@@ -377,26 +386,26 @@ def adminNotifications(request):
             activities.filter(id__in=id_list).update(approved=True)
             return redirect('adminNotifications')
 
-        if activities and'update_reject' in request.POST:
+        elif activities and'update_reject' in request.POST:
             id_list = request.POST.getlist('boxes2')
             activities.update(rejected=False)
             activities.filter(id__in=id_list).update(rejected=True)
             return redirect('adminNotifications')
 
-        if 'update_posts' in request.POST:
+        elif 'update_posts' in request.POST:
             id_list = request.POST.getlist('boxes')
             posts.update(approved=False)
             posts.filter(id__in=id_list).update(approved=True)
             return redirect('adminNotifications')
 
-        if posts and 'update_reject_post' in request.POST:
+        elif posts and 'update_reject_post' in request.POST:
             id_list = request.POST.getlist('boxes2')
             posts.update(rejected=False)
             posts.filter(id__in=id_list).update(rejected=True)
             return redirect('adminNotifications')
 
         
-        if 'update_edit' in request.POST:
+        elif 'update_edit' in request.POST:
             id_list = request.POST.getlist('boxe')          
             for event in events:
                 if event.edit_event and str(event.edit_event.id) in id_list:                    
@@ -405,12 +414,12 @@ def adminNotifications(request):
                     event.approved = False
                     event.save()
                 else:
-                   if event.edit_event:
-                    event.edit_event.approved = False
-                    event.edit_event.save()
+                    if event.edit_event:
+                        event.edit_event.approved = False
+                        event.edit_event.save()
             return redirect('adminNotifications')
 
-        if 'update_reject_edit' in request.POST:
+        elif 'update_reject_edit' in request.POST:
             id_list = request.POST.getlist('boxe2')
             for event in events:
                 if event.edit_event and str(event.edit_event.id) in id_list:                    
@@ -424,33 +433,34 @@ def adminNotifications(request):
                         event.edit_event.save()
             return redirect('adminNotifications')
         
-        reason = request.POST.get('reason')
-        selected_posts = request.POST.getlist('boxes2')
-        for post_id in selected_posts:
-            try:
-                post = Post.objects.get(id=post_id)
-                rejection = Rejections(reason=reason, post=post)
-                rejection.save()
-            except Post.DoesNotExist:
-                pass
+        else:
+            reason = request.POST.get('reason')
+            selected_posts = request.POST.getlist('boxes2')
+            for post_id in selected_posts:
+                try:
+                    post = Post.objects.get(id=post_id)
+                    rejection = Rejections(reason=reason, post=post)
+                    rejection.save()
+                except Post.DoesNotExist:
+                    pass
 
-        selected_activities = request.POST.getlist('boxes2')
-        for activity_id in selected_activities:
-            try:
-                activity = EventActivity.objects.get(id=activity_id)
-                rejection = Rejections(reason=reason, event_activity=activity)
-                rejection.save()
-            except EventActivity.DoesNotExist:
-                pass
+            selected_activities = request.POST.getlist('boxes2')
+            for activity_id in selected_activities:
+                try:
+                    activity = EventActivity.objects.get(id=activity_id)
+                    rejection = Rejections(reason=reason, event_activity=activity)
+                    rejection.save()
+                except EventActivity.DoesNotExist:
+                    pass
 
-        selected_edited_events = request.POST.getlist('boxe2')
-        for edited_event_id in selected_edited_events:
-            try:
-                edited_event = EditEventActivity.objects.get(id=edited_event_id)
-                rejection = Rejections(reason=reason, edit_event=edited_event)
-                rejection.save()
-            except EditEventActivity.DoesNotExist:
-                pass
+            selected_edited_events = request.POST.getlist('boxe2')
+            for edited_event_id in selected_edited_events:
+                try:
+                    edited_event = EditEventActivity.objects.get(id=edited_event_id)
+                    rejection = Rejections(reason=reason, edit_event=edited_event)
+                    rejection.save()
+                except EditEventActivity.DoesNotExist:
+                    pass
 
 
         return redirect('adminNotifications')
@@ -538,9 +548,9 @@ def eventPostForm(request):
  
 #@allowed_users(allowed_roles=['manager'])
 def managerNotifications(request):
-    posts = Post.objects.all().order_by('pk')
-    clubs = createclub.objects.all().order_by('pk')
-    activities = EventActivity.objects.all().order_by('-pk')
+    club = get_object_or_404(createclub, clubmanager=request.user)    
+    activities= EventActivity.objects.filter(clubname=club).order_by('-pk')
+    posts=Post.objects.filter(clubname=club).order_by('-pk')
     editedactivities = EditEventActivity.objects.all().order_by('-pk')
     rejected_activities_with_reason = EventActivity.objects.filter(rejected=True).prefetch_related('rejection_reason')
     edited_rejected_activities_with_reason = EditEventActivity.objects.filter(rejected=True).prefetch_related('rejection_reason')
@@ -548,7 +558,7 @@ def managerNotifications(request):
 
     context = {
         'posts': posts,
-        'clubs': clubs,
+        'club': club,
         'activities': activities,        
         'editedactivities': editedactivities,
         'rejected_activities_with_reason': rejected_activities_with_reason,

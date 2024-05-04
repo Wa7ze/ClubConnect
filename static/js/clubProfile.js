@@ -21,6 +21,10 @@ let editClubPlace = document.querySelector('.edit-club-form-place');
 let clubActivitiesContainer = document.querySelector('.events-cards-container');
 let noClubsFoundMessage = document.querySelector('.no-clubs-events-matches');
 let editClubForm = document.querySelector('.edit-club-form');
+let editPostPlace = document.querySelector('.edit-post-form-place');
+let postTitleData = document.getElementById('post-title-data');
+let postDescData = document.getElementById('post-desc-data');
+
 
     function isContainerEmpty(container, excludeElement) {
         for (let i = 0; i < container.childNodes.length; i++) {
@@ -137,6 +141,10 @@ let editClubForm = document.querySelector('.edit-club-form');
             <img src="${postImage.src}">
             <h3>${postTitle.textContent}</h3>
             <p>${postDesc.textContent}</p>
+            <div class= "post-btns">
+            <button onclick = "showEditPostForm()" class="edit-post-btn" type="button">Edit Post</button>
+            <button class="delete-post-btn" type="button">Delete Post</button>
+            </div>
     </div>
             `;
             biggerPostContainer.innerHTML = biggerPost;
@@ -150,3 +158,50 @@ let editClubForm = document.querySelector('.edit-club-form');
     function hideBiggerPost(){
         biggerPostContainer.style.display = "none";
     }
+
+        let editPostContainer = document.querySelector('.edit-post-form-container');
+
+       function showPostFormData(){
+          let editPostFormInterface = 
+          `
+          <i onclick="hideEditPostForm()" class="fa-solid fa-xmark" id="post-x-mark"></i>
+                  <div class="edit-post-input-wrapper">
+                    <label for="e-p-e-title">Event Post Title:</label>
+                <input class="input-field event-title-input" type="text" name="eventtitle" id="e-p-e-title" placeholder="Event Title" value="${postTitleData.textContent}" required>
+                </div>
+              
+              <h6>Event Post Image:</h6>
+        <div class="image-upload-container">
+            <label for="e-p-file-upload" class="custom-file-upload">
+            <i class="fas fa-cloud-upload-alt"></i> Choose File
+        </label>
+        <input id="e-p-file-upload" name="post_image" type="file" onchange="displayFiles(this)" multiple />
+        </div>
+        <div class="event-file-list" id="e-p-file-list"></div>
+        
+        <h6 class="mt-3">Event Description:</h6>
+        <div class="description-container">
+            <textarea class="input-field event-description-input" name="postdescription" id="e-p-e-description" placeholder="e.g The goal of this event..." required>${postDescData.textContent}</textarea>
+            <strong class="description-error">The Description should be between 300-4000 letter</strong>
+        </div>
+        <button class="submit-edit-post-btn" type="submit" class="send-request-btn">Submit Request</button>
+
+          `; 
+          editPostPlace.innerHTML = editPostFormInterface;
+        }
+        showPostFormData();
+
+        function showEditPostForm(){
+          editPostContainer.style.display = "flex";
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+          document.body.style.overflow = "hidden";
+          
+        }
+        function hideEditPostForm(){
+            editPostContainer.style.display = "none";
+            document.body.style.overflow = "auto";
+
+        }

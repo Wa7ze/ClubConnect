@@ -14,6 +14,7 @@
   top: 0;
   left: 0;
 }
+  
 </style>
 <head>
     <meta charset="UTF-8">
@@ -47,8 +48,19 @@
         {% csrf_token %}
 
         <div class="edit-club-form-place">
-            <!-- edit club profile form in admin.js(line 40) -->
+            <!-- edit club profile form in club profile.js -->
         </div>
+        </form> 
+        
+    </div>
+    <div class="edit-post-form-container">
+        <form class="edit-post-form" action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="edit-post-form-place">
+            <!-- edit event post form in club profile.js -->
+        </div>
+        </form> 
         
     </div>
 
@@ -110,8 +122,14 @@
                 
             </div>
             <div class="edit-delete">
+                {% if request.user.is_authenticated and request.user.is_superuser and not request.user.is_staff %}
                 <button onclick="showEditClubForm()" type="button" class="edit-btn" id="edit-button">Edit Club</button>
-                <button type="button" class="delete-btn" id="delete-button">Delete Club</button>
+                {% endif %}
+
+                {% if request.user.is_authenticated and request.user.is_staff %}
+                <a href="{% url 'delete-club' club.id %}" class="delete-event-btn">Delete Club</a>
+                {% endif %}
+
             </div>
            </div>
         </div>
@@ -198,8 +216,8 @@
         {% if post.approved %}
         <div class="profile-post-card">
         <img src="{{ post.image.url }}">
-        <h3 class="event-post-title">{{ post.eventtitle }}</h3>
-        <p class="event-post-description">{{ post.postdescription}}</p>
+        <h3 class="event-post-title" id="post-title-data">{{ post.eventtitle }}</h3>
+        <p class="event-post-description" id="post-desc-data">{{ post.postdescription}}</p>
        </div>
         {% endif %} 
        {% endfor %}
@@ -220,6 +238,7 @@
     <script src="{% static 'js/clubProfile.js' %}"></script>
     <script src="{% static 'js/admin.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/manager.js' %}"></script>
 
 </body>
 </html>

@@ -161,16 +161,16 @@
                 <p><i class="fa-solid fa-phone"></i> Phone Number: <span id="activity-phone-data">{{ event_activity.phonenumber }}</span> </p>
                  
             </div>
-
+            {% if request.user.is_authenticated and request.user.is_superuser and not request.user.is_staff %}
             <button onclick="showEditActivityForm()" type="button" class="edit-event-btn">Edit</button>
-            <button type="button" class="delete-event-btn">Delete</button>
+            {% endif %}
+
+            {% if request.user.is_authenticated and request.user.is_staff %}
+            <a href="{% url 'delete-event' event_activity.id %}" class="delete-event-btn">Delete</a>
+            {% endif %}
         </div>
         {% endif %}
-        {% if edit_event_activity %}
-            {{ edit_event_activity }}
-        {% else %}
-            <p>No edit activity found</p>
-        {% endif %}
+
         {% if edit_event_activity %}
         <img src="{{ edit_event_activity.event_image.url }}" alt="{{ edit_event_activity.eventtitle }}">
         <div class="event-activity-infos">
@@ -190,8 +190,14 @@
             <p><i class="fa-solid fa-phone"></i> Phone Number: <span id="activity-phone-data">{{  edit_event_activity.phonenumber }}</span> </p>
 
         </div>
+        {% if request.user.is_authenticated and request.user.is_superuser and not request.user.is_staff %}
         <button onclick="showEditActivityForm()" type="button" class="edit-event-btn">Edit</button>
-        <button type="button" class="delete-event-btn">Delete</button>
+        {% endif %}
+
+        {% if request.user.is_authenticated and request.user.is_staff %}
+        <a href="{% url 'delete-event' edit_event_activity.id %}" class="delete-event-btn">Delete</a>
+        {% endif %}
+
         </div>
      {% endif %}
     

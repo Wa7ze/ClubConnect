@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin-notifications', views.adminNotifications, name = 'adminNotifications'),
     path('manager-notifications', views.managerNotifications, name = 'managerNotifications'),
     path('event-page/<uuid:pk>', views.eventPage, name = 'eventPage'),
-   
+    path('delete_event/<uuid:pk>',views.delete_event,name='delete-event'),
+    path('delete_club/<uuid:pk>',views.delete_club,name='delete-club'),
 ]
