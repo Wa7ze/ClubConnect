@@ -644,7 +644,9 @@ padding: 20px;
 display: flex;
 gap: 20px;
 flex-wrap: wrap;
+min-height: 85vh;
 }
+
 .posts-notif-container,.activities-notif-container,.edits-notif-container{
 border: solid 1px rgba(128, 128, 128, 0.384);
 width: 31.2vw;
@@ -661,12 +663,15 @@ height: 92%;
 padding-left: 10px;
 margin-bottom: 20px;
 }
-.activity-request, .post-request, .edit-request{
+.notif-request{
 display: flex;
-align-items: center;
-gap: 10px;
-border-bottom: solid 1px rgba(128, 128, 128, 0.429);
-padding: 10px;
+  flex-direction: column;
+  align-items: flex-start !important;
+  gap: 10px;
+  border-bottom: solid 1px rgba(128, 128, 128, 0.429);
+  padding: 10px;
+  height: 70px;
+  overflow-y: hidden;
 }
 .activity-request:last-child, .post-request:last-child, .edit-request:last-child{
 border-bottom: none;
@@ -860,6 +865,57 @@ position: absolute;
 top: 15px;
 right: 15px;
 cursor: pointer;
+}
+input[type="checkbox"]{
+width: 20px;
+height: 20px;
+margin-top: 5px;
+}
+.req-text-checkboxes{
+display: flex;
+gap: 5px;
+align-items: center;
+width: 100%;
+}
+.check-container{
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+.form-group .form-control{
+width: 29.8vw;
+border-radius: 0;
+}
+.accept-reject-btn{
+padding: 5px 10px;
+margin: 5px;
+color: white;
+border: solid 1px transparent;
+transition: .3s ease;
+}
+.update-approval{
+background-color: rgb(57, 57, 159);
+}
+.update-approval:hover{
+background-color: transparent;
+border: solid 1px rgb(57, 57, 159);
+color: rgb(57, 57, 159);
+}
+.update-reject{
+background-color: rgb(171, 15, 15);
+}
+.update-reject:hover{
+background-color: transparent;
+border: solid 1px rgb(171, 15, 15);
+color: rgb(171, 15, 15);
+}
+.submit-purpose-btn{
+background-color: green;
+}
+.submit-purpose-btn:hover{
+background-color: transparent;
+border: solid 1px green;
+color: green;
 }
 /*End Admin Notification Style*/
 

@@ -90,11 +90,11 @@ let postDescData = document.getElementById('post-desc-data');
                 <option value="art">Art</option>
             </select>
             <input class="input-field" type="number" name="numOfMembers" placeholder="Number of Members" value="${parseInt(numOfMembersData.textContent)}" required>
-            <input type="text" class="club-achievment" name="edit_clubAchievment1" id= "edit_clubAchievment1" placeholder="Club's Achievment" value="${clubAchievment1Data.textContent}">
-            <input type="text" class="club-achievment" name="edit_clubAchievment2" id= "edit_clubAchievment2" placeholder="Club's Achievment" value="${clubAchievment2Data.textContent}">
-            <input type="text" class="club-achievment" name="edit_clubAchievment3" id= "edit_clubAchievment3" placeholder="Club's Achievment" value="${clubAchievment3Data.textContent}">
-            <input type="text" class="club-achievment" name="edit_clubAchievment4" id= "edit_clubAchievment3" placeholder="Club's Achievment" value="${clubAchievment4Data.textContent}">
-            <input type="text" class="club-achievment" name="edit_clubAchievment5" id= "edit_clubAchievment3" placeholder="Club's Achievment" value="${clubAchievment5Data.textContent}">
+            <input type="text" class="club-achievment" name="edit_clubAchievment1" id="edit_clubAchievment1" placeholder="Club's Achievement" value="${clubAchievment1Data ? clubAchievment1Data.textContent : ''}">
+            <input type="text" class="club-achievment" name="edit_clubAchievment2" id="edit_clubAchievment2" placeholder="Club's Achievement" value="${clubAchievment2Data ? clubAchievment2Data.textContent : ''}">
+            <input type="text" class="club-achievment" name="edit_clubAchievment3" id="edit_clubAchievment3" placeholder="Club's Achievement" value="${clubAchievment3Data ? clubAchievment3Data.textContent : ''}">
+            <input type="text" class="club-achievment" name="edit_clubAchievment4" id="edit_clubAchievment4" placeholder="Club's Achievement" value="${clubAchievment4Data ? clubAchievment4Data.textContent : ''}">
+            <input type="text" class="club-achievment" name="edit_clubAchievment5" id="edit_clubAchievment5" placeholder="Club's Achievement" value="${clubAchievment5Data ? clubAchievment5Data.textContent : ''}">
             <div class="area-div">
             <textarea class="input-field club-vision-input" name="edit_clubvision" id="edit-club-vision-input" placeholder="Club Vision" required>${clubVisionData.textContent}</textarea>
             <strong class="vision-error">The club vision should be between 200-3000 letter</strong>

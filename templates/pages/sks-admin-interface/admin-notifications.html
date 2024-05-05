@@ -3,6 +3,81 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    .notif-container{
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        min-height: 85vh;
+        }
+    input[type="checkbox"]{
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+  }
+  .scroll-container{
+    overflow-y: auto;
+    scrollbar-width: none;
+    height: 92%;
+  }
+  .req-text-checkboxes{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    width: 100%;
+  }
+  .check-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .notif-request{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 10px;
+    border-bottom: solid 1px rgba(128, 128, 128, 0.429);
+    padding: 10px;
+    height: 70px;
+    overflow-y: hidden;
+  }
+  .form-group .form-control{
+    width: 29.8vw;
+    border-radius: 0;
+  }
+  .accept-reject-btn{
+    padding: 5px 10px;
+    margin: 5px;
+    color: white;
+    border: solid 1px transparent;
+    transition: .3s ease;
+  }
+  .update-approval{
+    background-color: rgb(57, 57, 159);
+  }
+  .update-approval:hover{
+    background-color: transparent;
+    border: solid 1px rgb(57, 57, 159);
+    color: rgb(57, 57, 159);
+  }
+  .update-reject{
+    background-color: rgb(171, 15, 15);
+  }
+  .update-reject:hover{
+    background-color: transparent;
+    border: solid 1px rgb(171, 15, 15);
+    color: rgb(171, 15, 15);
+  }
+  .submit-purpose-btn{
+    background-color: green;
+  }
+  .submit-purpose-btn:hover{
+    background-color: transparent;
+    border: solid 1px green;
+    color: green;
+  }
+  
+</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,15 +93,6 @@
 <body id="admin-notifications">
     <div class="blur" id="admin-notification-blur"></div>
 
-    <form method="post" action="" class="admin-rejection-purpose">
-        {% csrf_token %}
-        <h3 class="mt-3">Please Enter Your Rejection Purpose</h3>
-        <i onclick="hideRejectionPurpose()" class="fa-solid fa-xmark rejection-cancel"></i>
-        <textarea  name="rejection_purpose" id="rej-perp" placeholder="enter your rejection purpose"></textarea>
-        <br>
-        <button class="submit-rej-btn" type="submit">Submit</button>
-    </form>
-
     <div class="notif-header">
         <div class="filter-bg"></div>
         <h1>Notifications</h1>
@@ -40,38 +106,38 @@
             <h4>Event Activity Requests</h4>
             <div class="scroll-container">
             {% for act in activities %}
-            <div class="activity-request" data-date="{{act.date}}" data-time = "{{act.time}}" data-category="{{act.categories}}"
+            <div class="activity-request notif-request" data-date="{{act.date}}" data-time = "{{act.time}}" data-category="{{act.categories}}"
              data-phone = "{{act.phonenumber}}" data-location="{{act.location}}" data-manager="{{act.clubmanager}}"
              data-vicemanager = "{{act.clubvicemanager}}"
              data-title = "{{act.eventtitle}}" data-image = "{{act.event_image.url}}"
              data-description = "{{act.description}}">
-
+             <div class="req-text-checkboxes">
                 <img src="{{act.clubname.profileimg.url}}" alt="club logo">
                 <div class="req-text"><strong class="club-name">{{act.clubname}}</strong> sent an event activity request <span class="view-interface-btn">view</span></div>
                 <div class="decision-buttons">
 
+                  <div class="check-container">
                     <label for="reason">Approve</label>
                     {% if act.approved %}
-                    <input class="accept-btn" type="checkbox" checked="
-                    checked" value={{act.id}}
+                    <input class="accept-check" type="checkbox" value={{act.id}}
                     name="boxes">
                     {% else %}
-                    <input class="accept-btn" type="checkbox" value={{act.id}}
+                    <input class="accept-check" type="checkbox" value={{act.id}}
                     name="boxes">
                     {% endif %}
-
+                  </div>
+                  <div class="check-container">
                     <label for="reason">Reject</label>
                     {% if act.rejected %}
-                    <input class="accept-btn" type="checkbox" checked="
-                    checked" value={{act.id}}
+                    <input class="reject-check" type="checkbox" value={{act.id}}
                     name="boxes2">
                     {% else %}
-                    <input class="accept-btn" type="checkbox" value={{act.id}}
+                    <input class="reject-check" type="checkbox" value={{act.id}}
                     name="boxes2">
                     {% endif %}
-
-
+                 </div>
                 </div>
+            </div>
 
                 <div class="form-group">
                     <label for="reason">Rejection Reason:</label>
@@ -80,63 +146,65 @@
             </div>
             {% endfor %}
         </div>
-        <button class="accept-btn" name="update_activities"  type="submit">Update approval</button>
-        <button class="accept-btn" name="update_reject"  type="submit">Update reject</button>
-        <button type="submit" class="accept-btn">Submit</button>        
-  
+        <button class="accept-reject-btn update-approval" name="update_activities"  type="submit">Update approval</button>
+        <button class="accept-reject-btn update-reject" name="update_reject"  type="submit">Update reject</button>
+        <button type="submit" class="accept-reject-btn submit-purpose-btn">Submit</button>        
+  </div>
       </form>
 
-
-        </div>
-     <form method="post" action="">
-          {% csrf_token %}
-        <div class="posts-notif-container">
-            <h4>Event Post Requests</h4>
-            <div class="scroll-container">
-                {% for post in posts %}
-                <div class="post-request" data-title = "{{post.eventtitle}}"
-                 data-image = "{{post.image.url}}"
-                data-description = "{{post.postdescription}}">
+    <form method="post" action="">
+        {% csrf_token %}
+    <div class="posts-notif-container">
+        <h4>Event Post Requests</h4>
+        <div class="scroll-container">
+    {% for post in posts %}
+        <div class="post-request notif-request" data-title = "{{post.eventtitle}}"
+                data-image = "{{post.image.url}}"
+            data-description = "{{post.postdescription}}">
+            <div class="req-text-checkboxes">
                 <img src="{{post.clubname.profileimg.url}}" alt="club logo">
                 <div class="req-text"><strong class="club-name">{{post.clubname}}</strong> sent an event post request <span class="view-interface-btn">view</span></div>
                 <div class="decision-buttons">
-
-                    <label for="reason">Approve</label>
-                    {% if post.approved %}
-                    <input class="accept-btn" type="checkbox" checked="
-                    checked" value={{post.id}}
-                    name="boxes">
-                    {% else %}
-                    <input class="accept-btn" type="checkbox" value={{post.id}}
-                    name="boxes">
-                    {% endif %}
-                    
-
-                    <label for="reason">Reject</label>
-                    {% if post.rejected %}
-                    <input class="accept-btn" type="checkbox" checked="
-                    checked" value={{post.id}}
-                    name="boxes2">
-                    {% else %}
-                    <input class="accept-btn" type="checkbox" value={{post.id}}
-                    name="boxes2">
-                    {% endif %}
-
-                </div>
-                <div class="form-group">
-                    <label for="reason">Rejection Reason:</label>
-                     <input type="text" class="form-control" name="reason" id="reason" placeholder="Enter rejection reason">
+                    <div class="check-container">
+                           <label for="reason">Approve</label>
+                           {% if post.approved %}
+                           <input class="accept-check" type="checkbox" value={{post.id}}
+                           name="boxes">
+                           {% else %}
+                           <input class="accept-check" type="checkbox" value={{post.id}}
+                           name="boxes">
+                           {% endif %}
                    </div>
+                       
+                   <div class="check-container">
+                           <label for="reason">Reject</label>
+                           {% if post.rejected %}
+                           <input class="reject-check" type="checkbox" value={{post.id}}
+                           name="boxes2">
+                           {% else %}
+                           <input class="reject-check" type="checkbox" value={{post.id}}
+                           name="boxes2">
+                           {% endif %}
+                   </div>
+                 </div>
+                 
             </div>
-            {% endfor %}
             
-            </div> 
-        </form>
-        <button class="accept-btn" name="update_posts"  type="submit">Update approval</button>
-        <button class="accept-btn" name="update_reject_post"  type="submit">Update reject</button>
-        <button type="submit" class="accept-btn">Submit</button>       
+        
+        <div class="form-group">
+            <label for="reason">Rejection Reason:</label>
+                <input type="text" class="form-control" name="reason" id="reason" placeholder="Enter rejection reason">
+            </div>
+    </div>
+    {% endfor %}
+        
+        </div> 
+        <button class="accept-reject-btn update-approval" name="update_posts"  type="submit">Update approval</button>
+        <button class="accept-reject-btn update-reject" name="update_reject_post"  type="submit">Update reject</button>
+        <button type="submit" class="accept-reject-btn submit-purpose-btn">Submit</button>
+    </div>
+    </form>       
 
-        </div>
         <form method="post" action="">
             {% csrf_token %}
             <div class="edits-notif-container">
@@ -144,58 +212,58 @@
                 <div class="scroll-container">
                     {% for event in events %}
                     {% if event.edit_event %}
-                    <div class="edit-request" data-type = "activity" 
-
-                        data-olddate="{{ event.date }}" data-oldtime = '{{ event.time }}' data-oldcategory="{{ event.categories }}"
+                <div class="edit-request notif-request" data-type = "activity" 
+                    data-olddate="{{ event.date }}" data-oldtime = '{{ event.time }}' data-oldcategory="{{ event.categories }}"
                     data-oldphone = "{{ event.phonenumber }}" data-oldlocation="{{ event.location }}" data-oldmanager="{{ event.clubmanager }}"
                     data-oldvicemanager = '{{ event.clubvicemanager }}' data-oldtitle = "{{ event.eventtitle }}" data-oldimage = "{{ event.event_image.url }}"
                     data-olddescription = "{{ event.description }}"
-
-                        data-editeddate="{{ event.edit_event.date }}" data-editedtime = '{{ event.edit_event.time }}' data-editedcategory="{{ event.edit_event.categories }}"
+                    data-editeddate="{{ event.edit_event.date }}" data-editedtime = '{{ event.edit_event.time }}' data-editedcategory="{{ event.edit_event.categories }}"
                     data-editedphone = "{{ event.edit_event.phonenumber }}" data-editedlocation="{{ event.edit_event.location }}" data-editedmanager="{{ event.edit_event.clubmanager }}"
                     data-editedvicemanager = '{{ event.edit_event.clubvicemanager }}' data-editedtitle = "{{ event.edit_event.eventtitle }}" data-editedimage = "{{ event.edit_event.event_image.url }}"
                     data-editeddescription = "{{ event.edit_event.description }}">
+                    <div class="req-text-checkboxes">
                     <img src="{{ event.clubname.profileimg.url }}" alt="club logo">
                     <div class="req-text"><strong class="club-name">{{ event.clubname }}</strong> sent an edit activity event request <span class="view-interface-btn">view</span></div>
                     <div class="decision-buttons">
-
+                      <div class="check-container">
                         <label for="reason">Approve</label>
                         {% if event.edit_event.approved %}
-                        <input class="accept-btn" type="checkbox" checked="
-                        checked" value={{event.edit_event.id}}
+                        <input class="accept-check" type="checkbox" value={{event.edit_event.id}}
                         name="boxe">
                         {% else %}
-                        <input class="accept-btn" type="checkbox" value={{event.edit_event.id}}
+                        <input class="accept-check" type="checkbox" value={{event.edit_event.id}}
                         name="boxe">
                         {% endif %}
+                      </div>
 
+                      <div class="check-container">
                         <label for="reason">Reject</label>
                         {% if event.edit_event.rejected %}
-                        <input class="accept-btn" type="checkbox" checked="
-                        checked" value={{event.edit_event.id}}
+                        <input class="reject-check" type="checkbox" value={{event.edit_event.id}}
                         name="boxe2">
                         {% else %}
-                        <input class="accept-btn" type="checkbox" value={{event.edit_event.id}}
+                        <input class="reject-check" type="checkbox" value={{event.edit_event.id}}
                         name="boxe2">
                         {% endif %}
+                     </div>
                     </div>
-
+                 </div>
                     <div class="form-group">
                         <label for="reason">Rejection Reason:</label>
                         <input type="text" class="form-control" name="reason" id="reason" placeholder="Enter rejection reason">
                     </div>
-
-                </div>
+            </div>
                 {% endif %}
                 {% endfor %}
 
             </div>
+            <button class="accept-reject-btn update-approval" name="update_edit"  type="submit">Update approval</button>
+            <button class="accept-reject-btn update-reject" name="update_reject_edit"  type="submit">Update reject</button>
+            <button type="submit" class="accept-reject-btn submit-purpose-btn">Submit</button>
+        </div> 
             </form>
-            <button class="accept-btn" name="update_edit"  type="submit">Update approval</button>
-            <button class="accept-btn" name="update_reject_edit"  type="submit">Update reject</button>
-            <button type="submit" class="accept-btn">Submit</button> 
-        </div>
-    
+            
+</div>
     <div class="event-interface-container" id="activity-interface-container">
         <!-- HERE THE ACTIVITY INTERFACE WILL BE DISPLAYED FROM JS  -->
     </div>
@@ -207,7 +275,6 @@
     <div class="event-interface-container" id="edited-event-interface-container">
         <!-- HERE THE Old and Edited Event INTERFACE WILL BE DISPLAYED FROM JS  -->
     </div>
-    
 </div>
 
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
@@ -220,6 +287,34 @@ let postRequest = document.querySelectorAll('.post-request');
 let editRequest = document.querySelectorAll('.edit-request');
 let postInterface = document.getElementById('post-interface-container');
 let editedEventInterface = document.getElementById('edited-event-interface-container');
+let requestContainer = document.querySelectorAll('.notif-request');
+
+if(document.body.id = "admin-notifications"){
+
+function handleRequestContainer(){
+    for(let i = 0; i< requestContainer.length; i++){
+      const approveCheckbox = requestContainer[i].querySelector('.accept-check');
+      const rejectCheckbox = requestContainer[i].querySelector('.reject-check');
+
+      approveCheckbox.addEventListener('change', function() {
+        if (this.checked) {
+            rejectCheckbox.checked = false;
+            requestContainer[i].style.height = "70px";
+        }
+    });
+    
+    rejectCheckbox.addEventListener('change', function() {
+        if (this.checked) {
+            approveCheckbox.checked = false;
+            requestContainer[i].style.height = "170px";
+        }
+        else{
+            requestContainer[i].style.height = "70px";
+        }
+    });
+    }
+}
+handleRequestContainer();
 
 function showRequestContent(request,interfaceContainer){
   for(let i = 0; i < request.length; i++){
@@ -400,19 +495,6 @@ function closeEventInterface(interface){
   document.body.style.overflow = 'auto';
 }
 
-
-let rejectionContainer = document.querySelector('.admin-rejection-purpose');
-let rejectionBlur = document.getElementById('admin-notification-blur');
-function showRejectionPurpose(){
-  document.body.style.overflow = 'hidden';
-  rejectionContainer.style.display = 'block';
-  rejectionBlur.style.display = 'block';
-}
-
-function hideRejectionPurpose(){
-    document.body.style.overflow = 'auto';
-    rejectionContainer.style.display = 'none';
-    rejectionBlur.style.display = 'none';
 }
     </script>
     

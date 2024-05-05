@@ -35,10 +35,9 @@
                     Your Event Activity ({{ act.eventtitle }}) Request Is Rejected By The SKS Admin
                     <button class="why-rejected">See Why</button>
                     <p class="purpose-of-rejection">
-                        {% for reason in act.rejection_reason.all %}
-                            <!-- Display rejection reason if available -->
-                            Reason: {{ reason.reason }}
-                        {% endfor %}
+                        {% if act.rejection_reason.all %}
+                        <p>Rejection Reason: {{ act.rejection_reason.first.reason }}</p>
+                    {% endif %}
 
                     </p>
                 </div>
@@ -58,11 +57,9 @@
                     Your Event Activity ({{ act.eventtitle }}) Edit Request Is Rejected By The SKS Admin
                     <button class="why-rejected">See Why</button>
                     <p class="purpose-of-rejection">
-                        {% for reason in act.rejection_reason.all %}
-                            <!-- Display rejection reason if available -->
-                            Reason: {{ reason.reason }}
-                        {% endfor %}
-
+                        {% if act.rejection_reason.all %}
+                        <p>Rejection Reason: {{ act.rejection_reason.first.reason }}</p>
+                    {% endif %}
                     </p>
                 </div>
             {% endif %}
@@ -83,21 +80,22 @@
                     Your Event Post ({{ post.eventtitle }}) Request Is Rejected By The SKS Admin
                     <button class="why-rejected">See Why</button>
                     <p class="purpose-of-rejection">
-                        {% for reason in post.rejection_reason.all %}
-                            <!-- Display rejection reason if available -->
-                            Reason: {{ reason.reason }}
-                        {% endfor %}
+                        {% if post.rejection_reason.all %}
+                            <p>Rejection Reason: {{ post.rejection_reason.first.reason }}</p>
+                        {% endif %}
                     </p>
                 </div>
             {% endif %}
         {% endfor %}
 
         {% for club in clubs %}
+        
+        {% if request.user.username == club.clubmanager.username %}
         <div class="notification notification-accepted">
             <i class="fa-solid fa-check"></i>
             Your Club ({{ club.clubname }}) Has been created By The SKS Admin
         </div>
-
+        {% endif %}
     {% endfor %}
     </div>
     

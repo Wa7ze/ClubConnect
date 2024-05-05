@@ -8,8 +8,7 @@ let clubConfirmMessage = document.querySelector('.confirm-message');
 let clubBlur = document.querySelector('.blur');
 let clubEmail = document.querySelector('.club-email');
 let createClubForm = document.querySelector('.create-club-form');
-
-       
+    
 const backgroundUpload = document.querySelector('.background-upload');
 const profileUpload = document.querySelector('.profile-upload');
 const backgroundPreview = document.querySelector('.bg-preview');
@@ -156,6 +155,34 @@ let postRequest = document.querySelectorAll('.post-request');
 let editRequest = document.querySelectorAll('.edit-request');
 let postInterface = document.getElementById('post-interface-container');
 let editedEventInterface = document.getElementById('edited-event-interface-container');
+let requestContainer = document.querySelectorAll('.notif-request');
+
+if(document.body.id = "admin-notifications"){
+
+function handleRequestContainer(){
+    for(let i = 0; i< requestContainer.length; i++){
+      const approveCheckbox = requestContainer[i].querySelector('.accept-check');
+      const rejectCheckbox = requestContainer[i].querySelector('.reject-check');
+
+      approveCheckbox.addEventListener('change', function() {
+        if (this.checked) {
+            rejectCheckbox.checked = false;
+            requestContainer[i].style.height = "70px";
+        }
+    });
+    
+    rejectCheckbox.addEventListener('change', function() {
+        if (this.checked) {
+            approveCheckbox.checked = false;
+            requestContainer[i].style.height = "170px";
+        }
+        else{
+            requestContainer[i].style.height = "70px";
+        }
+    });
+    }
+}
+handleRequestContainer();
 
 function showRequestContent(request,interfaceContainer){
   for(let i = 0; i < request.length; i++){
@@ -336,17 +363,4 @@ function closeEventInterface(interface){
   document.body.style.overflow = 'auto';
 }
 
-
-let rejectionContainer = document.querySelector('.admin-rejection-purpose');
-let rejectionBlur = document.getElementById('admin-notification-blur');
-function showRejectionPurpose(){
-  document.body.style.overflow = 'hidden';
-  rejectionContainer.style.display = 'block';
-  rejectionBlur.style.display = 'block';
-}
-
-function hideRejectionPurpose(){
-    document.body.style.overflow = 'auto';
-    rejectionContainer.style.display = 'none';
-    rejectionBlur.style.display = 'none';
 }

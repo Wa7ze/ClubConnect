@@ -1,194 +1,196 @@
 :root {
-    --ligh-color: white;
-    --dark-color: rgb(26, 24, 24);
-    --grey-color: rgb(215, 214, 214);
-    --red-color: #ea3636;
-    --yellow-color: rgb(249, 221, 95);
-    --section-color: #eff7fa;
-    --blue-color: rgb(101, 108, 239);
-  }
+  --ligh-color: white;
+  --dark-color: rgb(26, 24, 24);
+  --grey-color: rgb(215, 214, 214);
+  --red-color: #ea3636;
+  --yellow-color: rgb(249, 221, 95);
+  --section-color: #eff7fa;
+  --blue-color: rgb(101, 108, 239);
+}
 
 body{
-    font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 a{
-    text-decoration: none;
+  text-decoration: none;
 }
 /*Start Navbar*/
 
 .navbar{
-    background-color: var(--dark-color);
+  background-color: var(--dark-color);
 }
 .navbar .logo{
-    padding: 0 30px;
-    font-size: 1.2rem;
+  padding: 0 30px;
+  font-size: 1.2rem;
 }
 .logo a{
-    text-decoration: none;
-    color: var(--yellow-color);
+  text-decoration: none;
+  color: var(--yellow-color);
 }
 .navbar-nav .nav-link{
-    color: var(--ligh-color);
-    
+  color: var(--ligh-color);
+  
 }
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link.active{
-    color: var(--yellow-color);
+  color: var(--yellow-color);
 }
 .navbar .navbar-toggler{
-    border: solid 2px var(--yellow-color);
-    color: var(--yellow-color);
+  border: solid 2px var(--yellow-color);
+  color: var(--yellow-color);
 }
 .navbar .navbar-toggler:focus{
-    box-shadow: none;
+  box-shadow: none;
 }
 
 .reg-buttons{
-    display: flex;
-    border-radius: 0;
-    margin: 0 20px;
-    position: relative;
-    top: 0;
-    left: 0;
+  display: flex;
+  border-radius: 0;
+  margin: 0 20px;
+  position: relative;
+  top: 0;
+  left: 0;
 }
 .main-btn{
-    transition: .3s ease-in-out;
-    padding: 5px 20px;
+  transition: .3s ease-in-out;
+  padding: 5px 20px;
 }
 .create-button{
-    color: var(--ligh-color);
+  color: var(--ligh-color);
 }
 .logout-btn{
-    border: solid 1px transparent;
-    background-color: var(--red-color);
-    color: var(--section-color);
-    transition: .3s ease;
+  border: solid 1px transparent;
+  background-color: var(--red-color);
+  color: var(--section-color);
+  transition: .3s ease;
 }
 
 .activity-post-menu{
-    background-color: var(--dark-color); 
+  background-color: var(--dark-color); 
 }
 .dropdown-item{
-    color: var(--ligh-color);
-    padding: 10px 30px;
-    font-size: .9rem;
+  color: var(--ligh-color);
+  padding: 10px 30px;
+  font-size: .9rem;
 }
 .dropdown-item:hover{
-    background-color: rgba(240, 240, 240, 0.139);
-    color: var(--yellow-color);
+  background-color: rgba(240, 240, 240, 0.139);
+  color: var(--yellow-color);
 }
 
 .btn:focus{
-    box-shadow: none;
+  box-shadow: none;
 }
 .logout-btn:hover{
-   color: var(--red-color);
-   background-color: transparent;
-   border: solid 1px var(--red-color);
+ color: var(--red-color);
+ background-color: transparent;
+ border: solid 1px var(--red-color);
 }
 .create-button:hover{
-    color: var(--yellow-color);
+  color: var(--yellow-color);
 }
 .profile-letter{
-    background-color: var(--yellow-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    font-size: 1.2rem;
-    color: var(--dark-color);
-    cursor: pointer;
+  background-color: var(--yellow-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  color: var(--dark-color);
+  cursor: pointer;
 }
 .profile-name h5{
-    font-size: 1rem;
+  font-size: 1rem;
 }
 .notifications-container{
-    position: relative;
-    top: 0;
-    left: 0;
-    padding: 3px;
-    margin-top: 3px;
-    cursor: pointer;
+  position: relative;
+  top: 0;
+  left: 0;
+  padding: 3px;
+  margin-top: 3px;
+  cursor: pointer;
 }
 .notifications-container svg{
-    font-size: 1.4rem;
-    color: var(--yellow-color);
+  font-size: 1.4rem;
+  color: var(--yellow-color);
 }
 .notifications-container .notif-div{
-    width: 12px;
-    height: 12px;
-    background-color: var(--red-color);
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    right: 0;
+  width: 12px;
+  height: 12px;
+  background-color: var(--red-color);
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 .profile-container{
-    cursor: pointer;
-  }
-  .hidden-logout{
-    display: none;
-  }
+  cursor: pointer;
+}
+.hidden-logout{
+  display: none;
+}
 .fa-caret-down{
-    color: var(--yellow-color);
+  color: var(--yellow-color);
 }
 
-  .logout-menu{
-    background-color: var(--dark-color);
-    position: absolute;
-    right: -25px;
-    bottom: -60px;
-    padding: 7px 0;
-    border-radius: 3px;
-  }
-  .logout-menu li{
-    list-style: none;
-  
-  }
-  .logout-menu li a{
-    text-decoration: none;
-    color: var(--ligh-color);
-    padding: 7px 30px 9.2px 30px;
-    border-radius: 3px;
-  }
-  .logout-menu li a:hover{
-    background-color: rgba(240, 240, 240, 0.139);
-    color: var(--yellow-color);
-  }
+.logout-menu{
+background-color: var(--dark-color);
+position: absolute;
+right: -25px;
+bottom: -80px;
+padding: 7px 0;
+border-radius: 3px;
+}
+.logout-menu li{
+  list-style: none;
+}
+.logout-menu li:last-child{
+  margin-top: 12px !important;
+}
+.logout-menu li a{
+  text-decoration: none;
+  color: var(--ligh-color);
+  padding: 7px 30px 9.2px 30px;
+  border-radius: 3px;
+}
+.logout-menu li a:hover{
+  background-color: rgba(240, 240, 240, 0.139);
+  color: var(--yellow-color);
+}
 
 
 /*End Navbar*/
 
 /*Start Footer*/
 footer{
-    background-color: var(--dark-color);
-    padding: 15px;
-    color: var(--yellow-color);
-  }
-  .footer-uskudar span{
-    position: relative;
-    top: 2px;
-  }
+  background-color: var(--dark-color);
+  padding: 15px;
+  color: var(--yellow-color);
+}
+.footer-uskudar span{
+  position: relative;
+  top: 2px;
+}
 /*End Footer*/
 @media screen and (max-width: 993px){
-    .profile-container{
-      display: none;
-    }
-    .fa-caret-down{
-      display: none;
-    }
-    .logout-menu{
-      position: relative;
-      top: 0;
-      right: 0;
-      background-color: var(--red-color);
-    }
-    .logout-menu li a{
-      color: var(--ligh-color);
-    }
-    .hidden-logout{
-      display: block;
-    }
+  .profile-container{
+    display: none;
   }
+  .fa-caret-down{
+    display: none;
+  }
+  .logout-menu{
+    position: relative;
+    top: 0;
+    right: 0;
+    background-color: var(--red-color);
+  }
+  .logout-menu li a{
+    color: var(--ligh-color);
+  }
+  .hidden-logout{
+    display: block;
+  }
+}

@@ -161,7 +161,7 @@
                 <p><i class="fa-solid fa-phone"></i> Phone Number: <span id="activity-phone-data">{{ event_activity.phonenumber }}</span> </p>
                  
             </div>
-            {% if request.user.is_authenticated and request.user.is_superuser and not request.user.is_staff %}
+            {% if request.user == event_activity.clubname.clubmanager %}
             <button onclick="showEditActivityForm()" type="button" class="edit-event-btn">Edit</button>
             {% endif %}
 
@@ -190,7 +190,7 @@
             <p><i class="fa-solid fa-phone"></i> Phone Number: <span id="activity-phone-data">{{  edit_event_activity.phonenumber }}</span> </p>
 
         </div>
-        {% if request.user.is_authenticated and request.user.is_superuser and not request.user.is_staff %}
+        {% if request.user == edit_event_activity.clubname.clubmanager %}
         <button onclick="showEditActivityForm()" type="button" class="edit-event-btn">Edit</button>
         {% endif %}
 

@@ -1,4 +1,4 @@
-from django.http import Http404
+from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.models import User, auth, Group
 from django.contrib.auth import logout,login,authenticate
@@ -134,7 +134,7 @@ def studentLogin(request):
         return render(request, 'pages/registration-form/student-login.html')
 
 
-
+@login_required(login_url='usertype')   
 def LogoutUser(request):
     if request.user.is_authenticated:
         logout(request)
@@ -144,6 +144,7 @@ def LogoutUser(request):
 #@allowed_users(allowed_roles=['student','admin','manager'])
 #@login_required(login_url='usertype') 
 #@admin_only
+@login_required(login_url='usertype')   
 def homePage(request):
     home = createclub.objects.all()
     today = datetime.now().date()
@@ -161,16 +162,17 @@ def events(request):
     return render(request, 'pages/all-users-interface/events.html', {'activity': activity, 'edit_activity': edit_activity})
 
 
-
+@login_required(login_url='usertype')   
 def clubs(request):
     clubs = createclub.objects.all()
     return render(request, 'pages/all-users-interface/clubs.html',{'clubs': clubs})
 
 
-
+@login_required(login_url='usertype')   
 def myList(request):
     return render(request, 'pages/all-users-interface/my-list.html')
 
+@login_required(login_url='usertype')   
 def clubProfile(request,pk):
     club = get_object_or_404(createclub, pk = pk)
     activity= EventActivity.objects.filter(clubname=club)
@@ -180,16 +182,19 @@ def clubProfile(request,pk):
     
     return render(request, 'pages/all-users-interface/club-profile.html', {'activity': activity , 'post':post , 'club':club,'edit_activity':edit_activity})
 
+@login_required(login_url='usertype')   
 def delete_club(request,pk):
     club = createclub.objects.get(pk=pk)
     club.delete()
     return redirect('clubs')
 
+@login_required(login_url='usertype')   
 def delete_event(request,pk):
     event_activity = EventActivity.objects.get(pk=pk)
     event_activity.delete()
     return redirect('events')
 
+@login_required(login_url='usertype')   
 def eventPage(request,pk):
     activity= EventActivity.objects.all()
     edit_activity = EditEventActivity.objects.all()
@@ -275,7 +280,7 @@ def eventPage(request,pk):
 
 # admin Interface:
 @login_required(login_url='usertype') 
-# @allowed_users(allowed_roles=['admin'])
+@allowed_users(allowed_roles=['admin'])
 def adminBoard(request):
     return render(request, 'pages/sks-admin-interface/admin-board.html')
 
@@ -289,11 +294,9 @@ def get_or_create_user_by_username(username):
     return user 
 
 @login_required(login_url='usertype')   
-# @allowed_users(allowed_roles=['admin'])  
+@allowed_users(allowed_roles=['admin'])  
 def createNewClub(request):
         if request.method == 'POST':
-                # Assuming you have a form that submits club data
-                # Extract club data from the form
                 clubname = request.POST['clubname']
                 headline = request.POST['headline']
                 location = request.POST['location']
@@ -319,14 +322,6 @@ def createNewClub(request):
                     profileimg = request.FILES['profile_club']
                 if 'background_club' in request.FILES:  # Check if background image file is uploaded
                    bgimg = request.FILES['background_club']
-
-
-               # try:
-              #      manager = User.objects.get(username=clubmanager)
-              #  except User.DoesNotExist:
-                        # Handle the case where the user does not exist
-                        # You might want to redirect the user to an error page or display a message
-               #     return HttpResponse("Error: The specified club manager does not exist.")
 
                 manager = get_or_create_user_by_username(clubmanager)
 
@@ -361,18 +356,13 @@ def createNewClub(request):
                 new_club.user = request.user
                 # Save the profile
                 new_club.save()
-                
-                # Optionally, you might want to associate the profile with the current user
-                # new_club.user = request.user
-                # new_profile.save()
 
-                # Redirect to a success page or homepage
                 return redirect('createNewClub')
         else:
                 return render(request, 'pages/sks-admin-interface/create-club-form.html')
         
 @login_required(login_url='usertype')            
-# @allowed_users(allowed_roles=['admin'])
+@allowed_users(allowed_roles=['admin'])
 def adminNotifications(request):
     posts = Post.objects.all().order_by('-pk')
     events = EventActivity.objects.select_related('edit_event').all()
@@ -475,7 +465,8 @@ def adminNotifications(request):
 
 # manager Interface:
 
-#@allowed_users(allowed_roles=['manager'])
+@login_required(login_url='usertype')   
+@allowed_users(allowed_roles=['manager'])
 def eventActivityForm(request): 
     if request.method == 'POST':
         # Retrieve form data
@@ -495,33 +486,37 @@ def eventActivityForm(request):
         if 'event_image' in request.FILES:  # Check if event_image file is uploaded
             event_image = request.FILES['event_image']
         
-        manager = get_or_create_user_by_username(clubmanager)
-        club_instance, created = createclub.objects.get_or_create(clubname=clubname)
-        # Create EventActivity object
-        event_activity = EventActivity(
-            clubmanager=manager,
-            clubvicemanager=clubvicemanager,
-            clubname=club_instance,
-            email=email,
-            eventtitle=eventtitle,
-            categories=categories,
-            event_image=event_image,
-            date=date,
-            time=time,
-            location=location,
-            phonenumber=phonenumber,
-            description=description
-        )
+        manager = request.user
 
-        # Save the object to the database
-        event_activity.save()
+        if manager.username == clubmanager:
+            try:
+                club_instance = createclub.objects.get(clubname=clubname, clubmanager=manager)
+            except createclub.DoesNotExist:
+                return HttpResponseForbidden("The club does not exist or is not associated with the logged-in manager.")
+                
+            event_activity = EventActivity(
+                clubmanager=manager,
+                clubvicemanager=clubvicemanager,
+                clubname=club_instance,
+                email=email,
+                eventtitle=eventtitle,
+                categories=categories,
+                event_image=event_image,
+                date=date,
+                time=time,
+                location=location,
+                phonenumber=phonenumber,
+                description=description
+            )
+            event_activity.save()
+            return redirect('eventActivityForm')
+        else:
+            return HttpResponseForbidden("You are not authorized to perform this action.")
+    else:
+        return render(request, 'pages/club-manager-interface/event-activity.html')
 
-        # Redirect to a success page or homepage
-        return redirect('eventActivityForm')
-
-    return render(request, 'pages/club-manager-interface/event-activity.html')
-
-#@allowed_users(allowed_roles=['manager'])
+@login_required(login_url='usertype')   
+@allowed_users(allowed_roles=['manager'])
 def eventPostForm(request):
      if request.method == 'POST':   
             clubname = request.POST.get('clubname')
@@ -530,23 +525,30 @@ def eventPostForm(request):
             eventtitle = request.POST['eventtitle']
             image = request.FILES['post_image']
 
-            manager = get_or_create_user_by_username(clubmanager)
-            club_instance, created = createclub.objects.get_or_create(clubname=clubname)
-            
-            new_post = Post.objects.create(
-            clubname=club_instance,
-            clubmanager=manager,
-            image=image,
-            postdescription=postdescription,
-            eventtitle=eventtitle
-             )
-            new_post.save()
-            return redirect('eventPostForm')
+            manager = request.user
+
+            if manager.username == clubmanager:
+                try:
+                    club_instance = createclub.objects.get(clubname=clubname, clubmanager=manager)
+                except createclub.DoesNotExist:
+                    return HttpResponseForbidden("The club does not exist or is not associated with the logged-in manager.")
+                
+                new_post = Post.objects.create(
+                clubname=club_instance,
+                clubmanager=manager,
+                image=image,
+                postdescription=postdescription,
+                eventtitle=eventtitle
+                )
+                new_post.save()
+                return redirect('eventPostForm')
+            else:
+                return HttpResponseForbidden("You are not authorized to perform this action.")
      else:
             return render(request, 'pages/club-manager-interface/event-post.html')
 
- 
-#@allowed_users(allowed_roles=['manager'])
+@login_required(login_url='usertype')    
+@allowed_users(allowed_roles=['manager'])
 def managerNotifications(request):
     club = get_object_or_404(createclub, clubmanager=request.user)    
     activities= EventActivity.objects.filter(clubname=club).order_by('-pk')
