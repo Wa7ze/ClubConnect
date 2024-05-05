@@ -534,10 +534,12 @@
                 </div>
                 
             </div>
+            {% if request.user.is_authenticated and request.user.is_staff %}
             <div class="edit-delete">
                 <button onclick="showEditClubForm()" type="button" class="edit-btn" id="edit-button">Edit Club</button>
-                <button type="button" class="delete-btn" id="delete-button">Delete Club</button>
+                <a href="{% url 'delete-club' club.id %}" class="delete-event-btn">Delete Club</a>
             </div>
+            {% endif %}
            </div>
         </div>
         
@@ -628,6 +630,17 @@
        </div>
         {% endif %} 
        {% endfor %}
+
+       {% for post in edit_post %}
+       {% if post.approved %}
+       <div class="profile-post-card">
+       <img src="{{ post.image.url }}">
+       <h3 class="event-post-title" id="post-title-data">{{ post.eventtitle }}</h3>
+       <p class="event-post-description" id="post-desc-data">{{ post.postdescription}}</p>
+      </div>
+       {% endif %} 
+      {% endfor %}
+      
        </div>
        
        <i onclick="moveNext()" class="fa-solid fa-greater-than"></i>
@@ -814,7 +827,15 @@ let postDescData = document.getElementById('post-desc-data');
                     <label for="e-p-e-title">Event Post Title:</label>
                 <input class="input-field event-title-input" type="text" name="eventtitle" id="e-p-e-title" placeholder="Event Title" value="${postTitleData.textContent}" required>
                 </div>
-              
+                <div class="edit-post-input-wrapper">
+                    <label for="p-c-name">Club Name:</label>
+                <input class="input-field" type="text" name="clubname" id="p-c-name" placeholder="Club Name" required>
+                 </div>
+            <div class="edit-post-input-wrapper">
+              <label for="a-cm-name">Club Manager Name:</label>
+            <input class="input-field" type="text" name="clubmanager" id="a-cm-name" placeholder="Club Manager Name" required>
+            </div>
+
               <h6>Event Post Image:</h6>
         <div class="image-upload-container">
             <label for="e-p-file-upload" class="custom-file-upload">

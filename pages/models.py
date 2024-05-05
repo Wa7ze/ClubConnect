@@ -43,6 +43,7 @@ class Rejections(models.Model):
     # ForeignKey relationship with Post
     post = models.ForeignKey('Post', related_name='rejection_reason', on_delete=models.CASCADE, null=True, blank=True)
     edit_event = models.ForeignKey('EditEventActivity', related_name='rejection_reason', on_delete=models.CASCADE, null=True, blank=True)
+    edit_post = models.ForeignKey('EditPost', related_name='rejection_reason', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return str(self.reason)
@@ -58,10 +59,26 @@ class Post(models.Model):
     created_at=models.DateTimeField(default=datetime.now)
     approved=models.BooleanField('Approved',default=False)
     rejected=models.BooleanField('Rejected',default=False)
+    edit_post = models.ForeignKey('EditPost', on_delete=models.SET_NULL, null=True, blank=True, related_name='original_post')
+
 
     def __str__(self):
         return self.eventtitle
-    
+
+class EditPost(models.Model):
+    id=models.UUIDField(primary_key=True,default=uuid.uuid4)
+    clubname=models.ForeignKey(createclub, on_delete=models.CASCADE, related_name='posts_edit')
+    clubmanager = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts_managed_edit', default=None)
+    eventtitle=models.CharField(max_length=100)
+    image=models.ImageField(upload_to='post_images')
+    postdescription=models.TextField()
+    created_at=models.DateTimeField(default=datetime.now)
+    approved=models.BooleanField('Approved',default=False)
+    rejected=models.BooleanField('Rejected',default=False)
+
+    def __str__(self):
+        return self.eventtitle 
+       
 class EventActivity(models.Model):
     id=models.UUIDField(primary_key=True,default=uuid.uuid4)
     clubmanager = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='activites_managed', default=None)

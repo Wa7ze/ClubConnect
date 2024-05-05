@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.models import User, auth, Group
 from django.contrib.auth import logout,login,authenticate
 from django.contrib import messages
-from .models import createclub,Post,EventActivity,Rejections,EditEventActivity
+from .models import createclub,Post,EventActivity,Rejections,EditEventActivity,EditPost
 from django.contrib.auth.decorators import login_required
 from pages.authentication_backends import EmailAuthBackend
 from .decorators import unauthenticated_user ,allowed_users
@@ -177,10 +177,44 @@ def clubProfile(request,pk):
     club = get_object_or_404(createclub, pk = pk)
     activity= EventActivity.objects.filter(clubname=club)
     edit_activity= EditEventActivity.objects.filter(clubname=club)
+    edit_post= EditPost.objects.filter(clubname=club)
     post=Post.objects.filter(clubname=club)
     
-    
-    return render(request, 'pages/all-users-interface/club-profile.html', {'activity': activity , 'post':post , 'club':club,'edit_activity':edit_activity})
+    if request.method == 'POST':   
+            clubname = request.POST.get('clubname')
+            clubmanager = request.POST.get('clubmanager')
+            postdescription = request.POST['postdescription']
+            eventtitle = request.POST['eventtitle']
+            image = request.FILES['post_image']
+
+            manager, created = User.objects.get_or_create(username=clubmanager)
+
+            if not created:
+                # If the user already exists, check if they are the manager of the club
+                if club.clubmanager != manager:
+                    return HttpResponseForbidden("You are not authorized to perform this action.")
+
+            club_instance, created = createclub.objects.get_or_create(
+                clubname=clubname,
+                clubmanager=manager
+            )
+
+            new_post_edit = EditPost.objects.create(
+                clubname=club_instance,
+                clubmanager=manager,
+                image=image,
+                postdescription=postdescription,
+                eventtitle=eventtitle
+                )
+            new_post_edit.save()
+
+            # Update the related Post objects with the new EditPost
+            for p in post:
+                p.edit_post = new_post_edit
+                p.save()
+                return redirect('clubProfile', pk=pk)
+    else:
+         return render(request, 'pages/all-users-interface/club-profile.html', {'activity': activity , 'post':post , 'club':club,'edit_activity':edit_activity, 'edit_post':edit_post})
 
 @login_required(login_url='usertype')   
 def delete_club(request,pk):
@@ -193,6 +227,7 @@ def delete_event(request,pk):
     event_activity = EventActivity.objects.get(pk=pk)
     event_activity.delete()
     return redirect('events')
+
 
 @login_required(login_url='usertype')   
 def eventPage(request,pk):
@@ -366,7 +401,7 @@ def createNewClub(request):
 def adminNotifications(request):
     posts = Post.objects.all().order_by('-pk')
     events = EventActivity.objects.select_related('edit_event').all()
-
+    post = Post.objects.select_related('edit_post').all()
     activities = EventActivity.objects.all().order_by('-pk')
 
     if request.method == 'POST':
@@ -395,33 +430,45 @@ def adminNotifications(request):
             return redirect('adminNotifications')
 
         
-        elif 'update_edit' in request.POST:
-            id_list = request.POST.getlist('boxe')          
-            for event in events:
-                if event.edit_event and str(event.edit_event.id) in id_list:                    
-                    event.edit_event.approved = True
-                    event.edit_event.save()
-                    event.approved = False
-                    event.save()
-                else:
-                    if event.edit_event:
-                        event.edit_event.approved = False
-                        event.edit_event.save()
-            return redirect('adminNotifications')
+        elif 'approve' in request.POST or 'reject' in request.POST:
+            id_list = request.POST.getlist('approve') + request.POST.getlist('reject')
 
-        elif 'update_reject_edit' in request.POST:
-            id_list = request.POST.getlist('boxe2')
+            for pst in post:
+                if pst.edit_post and str(pst.edit_post.id) in id_list:
+                    if 'approve' in request.POST:
+                        pst.edit_post.approved = True
+                        pst.edit_post.save()
+                        pst.approved = False
+                        pst.save()    
+                    elif 'reject' in request.POST:
+                        pst.edit_post.rejected = True
+                        pst.edit_post.save()
+                        pst.rejected = False
+                        pst.save()
+                        reason = request.POST.get('reason')
+                        rejection = Rejections(reason=reason, edit_post=pst.edit_post)
+                        rejection.save()
+                    pst.edit_post.save()
+
             for event in events:
-                if event.edit_event and str(event.edit_event.id) in id_list:                    
-                    event.edit_event.rejected = True
-                    event.edit_event.save()
-                    event.rejected = False
-                    event.save()
-                else:
-                     if event.edit_event:
-                        event.edit_event.rejected = False
+                if event.edit_event and str(event.edit_event.id) in id_list:
+                    if 'approve' in request.POST:
+                        event.edit_event.approved = True
                         event.edit_event.save()
+                        event.approved = False
+                        event.save()
+                    elif 'reject' in request.POST:
+                        event.edit_event.rejected = True
+                        event.edit_event.save()
+                        event.rejected = False
+                        event.save()
+                        reason = request.POST.get('reason')
+                        rejection = Rejections(reason=reason, edit_event=event.edit_event)
+                        rejection.save()
+                    event.edit_event.save()
+
             return redirect('adminNotifications')
+    
         
         else:
             reason = request.POST.get('reason')
@@ -443,20 +490,13 @@ def adminNotifications(request):
                 except EventActivity.DoesNotExist:
                     pass
 
-            selected_edited_events = request.POST.getlist('boxe2')
-            for edited_event_id in selected_edited_events:
-                try:
-                    edited_event = EditEventActivity.objects.get(id=edited_event_id)
-                    rejection = Rejections(reason=reason, edit_event=edited_event)
-                    rejection.save()
-                except EditEventActivity.DoesNotExist:
-                    pass
 
 
         return redirect('adminNotifications')
 
     context = {
-        'posts': posts,
+        'posts': posts,        
+        'post': post,
         'activities': activities,
         'events': events
     }
