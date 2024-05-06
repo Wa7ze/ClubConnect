@@ -1,3 +1,5 @@
+import logging
+from venv import logger
 from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.models import User, auth, Group
@@ -8,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from pages.authentication_backends import EmailAuthBackend
 from .decorators import unauthenticated_user ,allowed_users
 from datetime import datetime, timedelta
+from django.core.exceptions import ObjectDoesNotExist
 
 # registration:
 
@@ -404,46 +407,79 @@ def adminNotifications(request):
     post = Post.objects.select_related('edit_post').all()
     activities = EventActivity.objects.all().order_by('-pk')
 
+    context = {
+        'posts': posts,        
+        'post': post,
+        'activities': activities,
+        'events': events
+    }
+
+    return render(request, 'pages/sks-admin-interface/admin-notifications.html', context)
+
+def approve_or_reject_post(request):
     if request.method == 'POST':
-        if 'update_activities' in request.POST:
-            id_list = request.POST.getlist('boxes')
-            activities.update(approved=False)
-            activities.filter(id__in=id_list).update(approved=True)
-            return redirect('adminNotifications')
+        if 'approve' in request.POST or 'reject' in request.POST:
+            id_list = request.POST.getlist('approve') + request.POST.getlist('reject')
 
-        elif activities and'update_reject' in request.POST:
-            id_list = request.POST.getlist('boxes2')
-            activities.update(rejected=False)
-            activities.filter(id__in=id_list).update(rejected=True)
-            return redirect('adminNotifications')
+            for post_id in id_list:
+                post = get_object_or_404(Post, pk=post_id)
+                if 'approve' in request.POST:
+                    post.approved = True
+                    post.rejected = False
+                elif 'reject' in request.POST:
+                    post.rejected = True
+                    post.approved = False
+                    reason = request.POST.get('reason')
+                    rejection = Rejections(reason=reason, post=post)
+                    rejection.save()
 
-        elif 'update_posts' in request.POST:
-            id_list = request.POST.getlist('boxes')
-            posts.update(approved=False)
-            posts.filter(id__in=id_list).update(approved=True)
-            return redirect('adminNotifications')
+                post.save()
 
-        elif posts and 'update_reject_post' in request.POST:
-            id_list = request.POST.getlist('boxes2')
-            posts.update(rejected=False)
-            posts.filter(id__in=id_list).update(rejected=True)
-            return redirect('adminNotifications')
+    return redirect('adminNotifications')
 
-        
-        elif 'approve' in request.POST or 'reject' in request.POST:
+def approve_or_reject_event(request):
+    if request.method == 'POST':
+        if 'approve' in request.POST or 'reject' in request.POST:
+            id_list = request.POST.getlist('approve') + request.POST.getlist('reject')
+
+            for event_id in id_list:
+                event = get_object_or_404(EventActivity, pk=event_id)
+                if 'approve' in request.POST:
+                    event.approved = True
+                    event.rejected = False
+                elif 'reject' in request.POST:
+                    event.rejected = True
+                    event.approved = False
+                    reason = request.POST.get('reason')
+                    rejection = Rejections(reason=reason, event_activity=event)
+                    rejection.save()
+
+                event.save()
+
+    return redirect('adminNotifications')
+def approve_or_reject_edited_post(request):
+    events = EventActivity.objects.select_related('edit_event').all()
+    post = Post.objects.select_related('edit_post').all()
+
+    if request.method == 'POST':
+        if 'approve' in request.POST or 'reject' in request.POST:
             id_list = request.POST.getlist('approve') + request.POST.getlist('reject')
 
             for pst in post:
                 if pst.edit_post and str(pst.edit_post.id) in id_list:
                     if 'approve' in request.POST:
                         pst.edit_post.approved = True
+                        pst.edit_post.rejected = False
                         pst.edit_post.save()
                         pst.approved = False
+                        pst.rejected= True
                         pst.save()    
                     elif 'reject' in request.POST:
                         pst.edit_post.rejected = True
+                        pst.edit_post.approved = False
                         pst.edit_post.save()
                         pst.rejected = False
+                        pst.approved = True
                         pst.save()
                         reason = request.POST.get('reason')
                         rejection = Rejections(reason=reason, edit_post=pst.edit_post)
@@ -454,54 +490,24 @@ def adminNotifications(request):
                 if event.edit_event and str(event.edit_event.id) in id_list:
                     if 'approve' in request.POST:
                         event.edit_event.approved = True
+                        event.edit_event.rejected = False
                         event.edit_event.save()
                         event.approved = False
+                        event.rejected = True
                         event.save()
                     elif 'reject' in request.POST:
                         event.edit_event.rejected = True
+                        event.edit_event.approved = False
                         event.edit_event.save()
                         event.rejected = False
+                        event.approved = True
                         event.save()
                         reason = request.POST.get('reason')
                         rejection = Rejections(reason=reason, edit_event=event.edit_event)
                         rejection.save()
                     event.edit_event.save()
 
-            return redirect('adminNotifications')
-    
-        
-        else:
-            reason = request.POST.get('reason')
-            selected_posts = request.POST.getlist('boxes2')
-            for post_id in selected_posts:
-                try:
-                    post = Post.objects.get(id=post_id)
-                    rejection = Rejections(reason=reason, post=post)
-                    rejection.save()
-                except Post.DoesNotExist:
-                    pass
-
-            selected_activities = request.POST.getlist('boxes2')
-            for activity_id in selected_activities:
-                try:
-                    activity = EventActivity.objects.get(id=activity_id)
-                    rejection = Rejections(reason=reason, event_activity=activity)
-                    rejection.save()
-                except EventActivity.DoesNotExist:
-                    pass
-
-
-
-        return redirect('adminNotifications')
-
-    context = {
-        'posts': posts,        
-        'post': post,
-        'activities': activities,
-        'events': events
-    }
-
-    return render(request, 'pages/sks-admin-interface/admin-notifications.html', context)
+    return redirect('adminNotifications')
 
 # manager Interface:
 
