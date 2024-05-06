@@ -683,7 +683,6 @@ let editPostPlace = document.querySelector('.edit-post-form-place');
 let postTitleData = document.getElementById('post-title-data');
 let postDescData = document.getElementById('post-desc-data');
 
-
     function isContainerEmpty(container, excludeElement) {
         for (let i = 0; i < container.childNodes.length; i++) {
             const childNode = container.childNodes[i];
@@ -827,13 +826,14 @@ let postDescData = document.getElementById('post-desc-data');
                     <label for="e-p-e-title">Event Post Title:</label>
                 <input class="input-field event-title-input" type="text" name="eventtitle" id="e-p-e-title" placeholder="Event Title" value="${postTitleData.textContent}" required>
                 </div>
+
                 <div class="edit-post-input-wrapper">
                     <label for="p-c-name">Club Name:</label>
-                <input class="input-field" type="text" name="clubname" id="p-c-name" placeholder="Club Name" required>
+                <input class="input-field" type="text" name="clubname" id="p-c-name" placeholder="Club Name" value=${clubNameData.textContent} required readonly>
                  </div>
             <div class="edit-post-input-wrapper">
               <label for="a-cm-name">Club Manager Name:</label>
-            <input class="input-field" type="text" name="clubmanager" id="a-cm-name" placeholder="Club Manager Name" required>
+            <input class="input-field" type="text" name="clubmanager" id="a-cm-name" placeholder="Club Manager Name" value=${clubManageData.textContent} required readonly>
             </div>
 
               <h6>Event Post Image:</h6>

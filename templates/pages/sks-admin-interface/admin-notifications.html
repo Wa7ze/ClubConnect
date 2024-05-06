@@ -4,22 +4,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <style>
-    .notif-container{
-        display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
-        min-height: 85vh;
-        }
+
     input[type="checkbox"]{
     width: 20px;
     height: 20px;
     margin-top: 5px;
   }
-  .scroll-container{
-    overflow-y: auto;
-    scrollbar-width: none;
-    height: 92%;
-  }
+  
   .req-text-checkboxes{
     display: flex;
     gap: 5px;
@@ -41,40 +32,25 @@
     height: 70px;
     overflow-y: hidden;
   }
-  .form-group .form-control{
-    width: 29.8vw;
-    border-radius: 0;
-  }
-  .accept-reject-btn{
-    padding: 5px 10px;
+  
+  .submit-purpose-btn{
+    background-color: green;
+    height: 38px;
+    width: 20%;
     margin: 5px;
+    font-size: .8rem;
     color: white;
     border: solid 1px transparent;
     transition: .3s ease;
-  }
-  .update-approval{
-    background-color: rgb(57, 57, 159);
-  }
-  .update-approval:hover{
-    background-color: transparent;
-    border: solid 1px rgb(57, 57, 159);
-    color: rgb(57, 57, 159);
-  }
-  .update-reject{
-    background-color: rgb(171, 15, 15);
-  }
-  .update-reject:hover{
-    background-color: transparent;
-    border: solid 1px rgb(171, 15, 15);
-    color: rgb(171, 15, 15);
-  }
-  .submit-purpose-btn{
-    background-color: green;
   }
   .submit-purpose-btn:hover{
     background-color: transparent;
     border: solid 1px green;
     color: green;
+  }
+  
+  .rejection-container{
+    width: 100%;
   }
   
 </style>
@@ -141,21 +117,20 @@
                     </div>
                     {% endif %}
 
-                    <div >
-                        <label for="reason">Rejection Reason:</label>
-                        <input type="text" class="form-control" name="reason" id="reason" placeholder="Enter rejection reason">
-                    </div>
-
+                    
 
                 </div>
             </div>
-
+                <div class="rejection-container">
+                    <label for="reason">Rejection Reason:</label>
+                    <input type="text" class="form-control" name="reason" id="reason" placeholder="Enter rejection reason">
+                </div>
 
             </div>
 
             {% endfor %}
         </div> 
-        <input type="submit" class="accept-reject-btn submit-purpose-btn" value="Submit">
+        <input type="submit" class="submit-purpose-btn" value="Submit">
         </div>
       </form>
 
@@ -194,75 +169,72 @@
                             <label for="reject_{{ Post.id }}">Reject</label>
                             <input class="reject-check" type="checkbox"  id="reject_{{ post.id }}" value="{{ post.id }}" name="reject">
                         </div>
-                        {% endif %}
-
-                        <div >
-                            <label for="reason">Rejection Reason:</label>
-                            <input type="text" class="form-control" name="reason" id="reason" placeholder="Enter rejection reason">
-                        </div>
+                        {% endif %} 
                 
                  </div>
-                 
             </div>     
-        
+                <div class="rejection-container">
+                    <label for="reason">Rejection Reason:</label>
+                    <input type="text" class="form-control" name="reason" id="reason" placeholder="Enter rejection reason">
+                </div>
     </div>
     {% endfor %}
         
         </div> 
-        <input type="submit" class="accept-reject-btn submit-purpose-btn" value="Submit">
+        <input type="submit" class=" submit-purpose-btn" value="Submit">
         </div>
     </form>       
 
-        <form method="post" action="{% url 'approve_or_reject_edited_post' %}">
-            {% csrf_token %}
-            <div class="edits-notif-container">
-                <h4>Edit Event Requests</h4>
+    <form method="post" action="{% url 'approve_or_reject_edited_post' %}">
+        {% csrf_token %}
+        <div class="edits-notif-container">
+            <h4>Edit Event Requests</h4>
 
-                <div class="scroll-container">
+            <div class="scroll-container">
 
-                        {% for post in post %}
-                        {% if post.edit_post %}
-                        <div class="edit-request" data-type="post" data-oldtitle = "{{ post.eventtitle }}"
-                            data-oldimage = "{{ post.image.url }}"
-                        data-olddescription = "{{ post.description }}"
+                    {% for post in post %}
+                    {% if post.edit_post %}
+                    <div class="edit-request notif-request" data-type="post" data-oldtitle = "{{ post.eventtitle }}"
+                        data-oldimage = "{{ post.image.url }}"
+                    data-olddescription = "{{ post.description }}"
 
-                        data-editedtitle = "{{ post.edit_post.eventtitle }}"
-                        data-editedimage = "{{ post.edit_post.image.url }}"
-                    data-editeddescription = "{{ post.edit_post.description }}">
-                    <img src="{{ post.clubname.profileimg.url }}" alt="club logo">
-                    <div class="req-text"><strong class="club-name">{{ post.clubname }}</strong> sent an edit post event request <span class="view-interface-btn">view</span></div>
-                    
-                    <div class="decision-buttons">
-                            {% if post.edit_post.approved %}
-                            <div class="check-container">
-                                <label for="approve_{{ post.edit_post.id }}">Approve</label>
-                                <input class="accept-check" type="checkbox" checked id="approve_{{ post.edit_post.id }}" value="{{ post.edit_post.id }}" name="approve">
-                            </div>
-                            {% else %}
-                            <div class="check-container">
-                                <label for="approve_{{ post.edit_post.id }}">Approve</label>
-                                <input class="accept-check" type="checkbox"  id="approve_{{ post.edit_post.id }}" value="{{ post.edit_post.id }}" name="approve">
-                            </div>
-                            {% endif %}
+                    data-editedtitle = "{{ post.edit_post.eventtitle }}"
+                    data-editedimage = "{{ post.edit_post.image.url }}"
+                data-editeddescription = "{{ post.edit_post.description }}">
+                <img src="{{ post.clubname.profileimg.url }}" alt="club logo">
+                <div class="req-text"><strong class="club-name">{{ post.clubname }}</strong> sent an edit post event request <span class="view-interface-btn">view</span></div>
+                
+                <div class="decision-buttons">
+                        {% if post.edit_post.approved %}
+                        <div class="check-container">
+                            <label for="approve_{{ post.edit_post.id }}">Approve</label>
+                            <input class="accept-check" type="checkbox" checked id="approve_{{ post.edit_post.id }}" value="{{ post.edit_post.id }}" name="approve">
+                        </div>
+                        {% else %}
+                        <div class="check-container">
+                            <label for="approve_{{ post.edit_post.id }}">Approve</label>
+                            <input class="accept-check" type="checkbox"  id="approve_{{ post.edit_post.id }}" value="{{ post.edit_post.id }}" name="approve">
+                        </div>
+                        {% endif %}
 
-                            {% if post.edit_post.rejected %}
-                            <div class="check-container">
-                                <label for="reject_{{ post.edit_post.id }}">Reject</label>
-                                <input class="reject-check" type="checkbox" checked id="reject_{{ post.edit_post.id }}" value="{{ post.edit_post.id }}" name="reject">
-                            </div>
-                            {% else %}
-                            <div class="check-container">
-                                <label for="reject_{{ post.edit_post.id }}">Reject</label>
-                                <input class="reject-check" type="checkbox"  id="reject_{{ post.edit_post.id }}" value="{{ post.edit_post.id }}" name="reject">
-                            </div>
-                            {% endif %}
-
-                            <div >
-                                <label for="reason">Rejection Reason:</label>
-                                <input type="text" class="form-control" name="reason" id="reason" placeholder="Enter rejection reason">
-                            </div>
+                        {% if post.edit_post.rejected %}
+                        <div class="check-container">
+                            <label for="reject_{{ post.edit_post.id }}">Reject</label>
+                            <input class="reject-check" type="checkbox" checked id="reject_{{ post.edit_post.id }}" value="{{ post.edit_post.id }}" name="reject">
+                        </div>
+                        {% else %}
+                        <div class="check-container">
+                            <label for="reject_{{ post.edit_post.id }}">Reject</label>
+                            <input class="reject-check" type="checkbox"  id="reject_{{ post.edit_post.id }}" value="{{ post.edit_post.id }}" name="reject">
+                        </div>
+                        {% endif %}
 
 
+
+                    </div>
+                    <div class="rejection-container">
+                        <label for="reason">Rejection Reason:</label>
+                        <input type="text" class="form-control" name="reason" id="reason" placeholder="Enter rejection reason">
                     </div>
             </div>
 
@@ -309,23 +281,22 @@
                                 <input class="reject-check" type="checkbox"  id="reject_{{ event.edit_event.id }}" value="{{ event.edit_event.id }}" name="reject">
                             </div>
                             {% endif %}
-    
-                            <div >
-                                <label for="reason">Rejection Reason:</label>
-                                <input type="text" class="form-control" name="reason" id="reason" placeholder="Enter rejection reason">
-                            </div>
-    
-
                     </div>
 
                  </div>
-
+                 <div >
+                    
+                </div>
+                <div class="rejection-container">
+                    <label for="reason">Rejection Reason:</label>
+                <input type="text" class="form-control" name="reason" id="reason" placeholder="Enter rejection reason">
+                </div>
             </div>
                 {% endif %}
                 {% endfor %}
 
             </div>
-            <input type="submit" class="accept-reject-btn submit-purpose-btn" value="Submit">
+            <input type="submit" class=" submit-purpose-btn" value="Submit">
         </div> 
             </form>
             
