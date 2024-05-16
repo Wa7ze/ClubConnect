@@ -536,7 +536,7 @@
             </div>
             {% if request.user.is_authenticated and request.user.is_staff %}
             <div class="edit-delete">
-                <button onclick="showEditClubForm()" type="button" class="edit-btn" id="edit-button">Edit Club</button>
+              <!-- <button onclick="showEditClubForm()" type="button" class="edit-btn" id="edit-button">Edit Club</button> --> 
                 <a href="{% url 'delete-club' club.id %}" class="delete-event-btn">Delete Club</a>
             </div>
             {% endif %}
@@ -798,9 +798,16 @@ let postDescData = document.getElementById('post-desc-data');
             <img src="${postImage.src}">
             <h3>${postTitle.textContent}</h3>
             <p>${postDesc.textContent}</p>
+
             <div class= "post-btns">
-            <button onclick = "showEditPostForm()" class="edit-post-btn" type="button">Edit Post</button>
+              {% for single_post in post %}
+                {% if request.user == single_post.clubmanager %}
+                  <button onclick="showEditPostForm()" class="edit-post-btn" type="button">Edit Post</button>
+                {% endif %}
+              {% endfor %}
+            {% if request.user.is_authenticated and request.user.is_staff %}
             <button class="delete-post-btn" type="button">Delete Post</button>
+            {% endif %}
             </div>
     </div>
             `;

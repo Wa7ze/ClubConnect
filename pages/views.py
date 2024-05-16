@@ -418,94 +418,97 @@ def adminNotifications(request):
 
 def approve_or_reject_post(request):
     if request.method == 'POST':
-        if 'approve' in request.POST or 'reject' in request.POST:
-            id_list = request.POST.getlist('approve') + request.POST.getlist('reject')
+        for post_id in request.POST.getlist('approve'):
+            post = get_object_or_404(Post, pk=post_id)
+            post.approved = True
+            post.rejected = False
+            post.save()
 
-            for post_id in id_list:
-                post = get_object_or_404(Post, pk=post_id)
-                if 'approve' in request.POST:
-                    post.approved = True
-                    post.rejected = False
-                elif 'reject' in request.POST:
-                    post.rejected = True
-                    post.approved = False
-                    reason = request.POST.get('reason')
-                    rejection = Rejections(reason=reason, post=post)
-                    rejection.save()
+        for post_id in request.POST.getlist('reject'):
+            post = get_object_or_404(Post, pk=post_id)
+            post.rejected = True
+            post.approved = False
 
-                post.save()
+            reason = request.POST.get(f'reason_{post_id}')
+            rejection = Rejections(reason=reason, post=post)
+            rejection.save()
+
+            post.save()
 
     return redirect('adminNotifications')
 
 def approve_or_reject_event(request):
     if request.method == 'POST':
-        if 'approve' in request.POST or 'reject' in request.POST:
-            id_list = request.POST.getlist('approve') + request.POST.getlist('reject')
 
-            for event_id in id_list:
+            for event_id in request.POST.getlist('approve'):
                 event = get_object_or_404(EventActivity, pk=event_id)
-                if 'approve' in request.POST:
-                    event.approved = True
-                    event.rejected = False
-                elif 'reject' in request.POST:
-                    event.rejected = True
-                    event.approved = False
-                    reason = request.POST.get('reason')
-                    rejection = Rejections(reason=reason, event_activity=event)
-                    rejection.save()
+                event.approved = True
+                event.rejected = False
+                event.save()
+
+            for event_id in request.POST.getlist('reject'):
+                event = get_object_or_404(EventActivity, pk=event_id)
+                event.rejected = True
+                event.approved = False
+
+                reason = request.POST.get(f'reason_{event_id}')
+                rejection = Rejections(reason=reason, event_activity=event)
+                rejection.save()
 
                 event.save()
 
     return redirect('adminNotifications')
+
 def approve_or_reject_edited_post(request):
     events = EventActivity.objects.select_related('edit_event').all()
     post = Post.objects.select_related('edit_post').all()
 
     if request.method == 'POST':
-        if 'approve' in request.POST or 'reject' in request.POST:
-            id_list = request.POST.getlist('approve') + request.POST.getlist('reject')
-
             for pst in post:
-                if pst.edit_post and str(pst.edit_post.id) in id_list:
-                    if 'approve' in request.POST:
+                if pst.edit_post and str(pst.edit_post.id) in request.POST.getlist('approve'):
                         pst.edit_post.approved = True
                         pst.edit_post.rejected = False
                         pst.edit_post.save()
                         pst.approved = False
                         pst.rejected= True
                         pst.save()    
-                    elif 'reject' in request.POST:
+            for pst in post:
+                if pst.edit_post and str(pst.edit_post.id) in request.POST.getlist('reject'):
                         pst.edit_post.rejected = True
                         pst.edit_post.approved = False
                         pst.edit_post.save()
                         pst.rejected = False
                         pst.approved = True
                         pst.save()
-                        reason = request.POST.get('reason')
-                        rejection = Rejections(reason=reason, edit_post=pst.edit_post)
-                        rejection.save()
-                    pst.edit_post.save()
+                        reason = request.POST.get(f'reason_{pst.edit_post.id}')
+                        if reason:
+                             rejection = Rejections(reason=reason, edit_post=pst.edit_post)
+                             rejection.save()
+
+            
 
             for event in events:
-                if event.edit_event and str(event.edit_event.id) in id_list:
-                    if 'approve' in request.POST:
+                if event.edit_event and str(event.edit_event.id) in request.POST.getlist('approve'):
                         event.edit_event.approved = True
                         event.edit_event.rejected = False
                         event.edit_event.save()
                         event.approved = False
                         event.rejected = True
                         event.save()
-                    elif 'reject' in request.POST:
+            for event in events:
+                if event.edit_event and str(event.edit_event.id) in request.POST.getlist('reject'):                        
                         event.edit_event.rejected = True
                         event.edit_event.approved = False
                         event.edit_event.save()
                         event.rejected = False
                         event.approved = True
                         event.save()
-                        reason = request.POST.get('reason')
-                        rejection = Rejections(reason=reason, edit_event=event.edit_event)
-                        rejection.save()
-                    event.edit_event.save()
+                        reason = request.POST.get(f'reason_{event.edit_event.id}')
+                        if reason:
+                            rejection = Rejections(reason=reason, edit_event=event.edit_event)
+                            rejection.save()
+               
+            
 
     return redirect('adminNotifications')
 
