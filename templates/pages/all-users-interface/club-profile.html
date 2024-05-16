@@ -638,8 +638,7 @@
        <h3 class="event-post-title" id="post-title-data">{{ post.eventtitle }}</h3>
        <p class="event-post-description" id="post-desc-data">{{ post.postdescription}}</p>
       </div>
-       {% endif %} 
-      {% endfor %}
+
       
        </div>
        
@@ -647,7 +646,8 @@
        <div class="bigger-post-container">
         <!-- Bigger Post Goes Here -->
       </div>
-
+      {% endif %} 
+      {% endfor %}
       </div>
       </div>
       
@@ -800,11 +800,11 @@ let postDescData = document.getElementById('post-desc-data');
             <p>${postDesc.textContent}</p>
 
             <div class= "post-btns">
-              {% for single_post in post %}
-                {% if request.user == single_post.clubmanager %}
+
+              {% if request.user.is_authenticated and request.user.is_superuser %}
                   <button onclick="showEditPostForm()" class="edit-post-btn" type="button">Edit Post</button>
                 {% endif %}
-              {% endfor %}
+
             {% if request.user.is_authenticated and request.user.is_staff %}
             <button class="delete-post-btn" type="button">Delete Post</button>
             {% endif %}
