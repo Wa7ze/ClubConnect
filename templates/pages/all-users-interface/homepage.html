@@ -26,9 +26,8 @@
         <div class="carousel-item active c-item">
             <img src="{% static 'images/image-slider-event-1.png' %}" class="d-block w-100 c-img" alt="...">
             <div class="carousel-caption d-md-block top-0 mt-5">
-                <p class="mt-5 pt-lg-5 pt-3">Embark on Adventure: Join Us for a Hiking Extravaganza!</p>
-                <h1>Let's Hike Together</h1>
-                <button type="button" class="main-btn text-uppercase learn-more-btn mt-4">Learn More</button>
+                <p class="mt-5 pt-lg-5 pt-3">Uskudar Universitesi's club community</p>
+                <h1>Welcome to ClubConnect</h1>
             </div>
         </div>
         <!-- Other carousel items here -->
@@ -57,7 +56,7 @@
     <h1 class="section-title">Upcoming Event</h1>
     {% for event in event %}
     {% if event.approved %}
-    <div class="event-post event-card" data-category="design">
+    <div class="event-post event-card event-to-sort" data-category="design">
         
         <div class="event-details">
             <h1 class="card-title">{{event.eventtitle}}</h1>

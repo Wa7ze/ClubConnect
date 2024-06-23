@@ -77,10 +77,6 @@
         <i class="fa-solid fa-caret-down"></i>
         </div>
        <ul class="logout-menu hidden-logout">
-        {% if request.user.is_authenticated and request.user.is_superuser and not request.user.is_staff %}
-        <li><a href="#">My Club</a></li>
-        {% endif %}
-
         <li><a href="{% url 'logout' %}">Logout</a></li>
        </ul>
       </div>

@@ -16,6 +16,7 @@ let editEventActivityForm = document.getElementById('edit-event-activity-form');
 let clubsFound;
 let eventsFound;
 let dataPro;
+
 if (localStorage.product) {
     dataPro = JSON.parse(localStorage.product);
 }   else {

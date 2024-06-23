@@ -153,8 +153,8 @@ def homePage(request):
     today = datetime.now().date()
     one_week_from_today = today + timedelta(days=7)
 
-    event = EventActivity.objects.filter(date__range=[today, one_week_from_today])
-    edit_activity = EditEventActivity.objects.filter(date__range=[today, one_week_from_today])
+    event = EventActivity.objects.filter(date__range=[today, one_week_from_today]).order_by('date')
+    edit_activity = EditEventActivity.objects.filter(date__range=[today, one_week_from_today]).order_by('date')
     return render(request, 'pages/all-users-interface/homepage.html',{'home':home ,'event':event,'edit_activity':edit_activity})
 
 @login_required(login_url='usertype')

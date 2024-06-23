@@ -801,13 +801,9 @@ let postDescData = document.getElementById('post-desc-data');
 
             <div class= "post-btns">
 
-              {% if request.user.is_authenticated and request.user.is_superuser %}
+              {% if request.user.is_authenticated and request.user.is_superuser and not request.user.is_staff %}
                   <button onclick="showEditPostForm()" class="edit-post-btn" type="button">Edit Post</button>
                 {% endif %}
-
-            {% if request.user.is_authenticated and request.user.is_staff %}
-            <button class="delete-post-btn" type="button">Delete Post</button>
-            {% endif %}
             </div>
     </div>
             `;
