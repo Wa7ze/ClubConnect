@@ -4,7 +4,6 @@ Production settings for ClubConnect project.
 
 from .settings import *
 import os
-import dj_database_url
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -14,18 +13,19 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'your-secret-key-here')
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
+# Force SQLite for now to avoid PostgreSQL dependency issues
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3'))
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
-# Use SQLite if no DATABASE_URL is provided
-if not os.environ.get('DATABASE_URL'):
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+# Uncomment below when you want to use PostgreSQL
+# DATABASES = {
+#     'default': dj_database_url.parse(os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3'))
+# }
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
