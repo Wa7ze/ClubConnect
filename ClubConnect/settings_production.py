@@ -48,6 +48,10 @@ STATICFILES_FINDERS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# Media files configuration for production
+# Note: In production, media files should be served by a CDN or external storage
+# For now, we'll serve them directly (not recommended for high traffic)
+
 # Handle missing Pillow gracefully
 try:
     from PIL import Image
