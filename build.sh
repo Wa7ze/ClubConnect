@@ -20,4 +20,8 @@ python manage.py migrate
 # Collect static files
 python manage.py collectstatic --noinput --clear --verbosity=2
 
+# Ensure media files are accessible
+echo "Checking media files..."
+ls -la static/ | head -10
+
 echo "Build completed successfully!"
