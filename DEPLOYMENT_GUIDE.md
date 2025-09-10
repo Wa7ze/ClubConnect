@@ -1,53 +1,74 @@
 # ClubConnect Deployment Guide
 
-## 🚀 Deploy to Railway (Recommended)
+## 🚀 Deploy to Render (Recommended - FREE)
 
 ### Step 1: Prepare Your Repository
 1. Create a GitHub repository
 2. Push your ClubConnect code to GitHub
 3. Make sure all files are committed
 
-### Step 2: Deploy to Railway
-1. Go to [Railway.app](https://railway.app)
+### Step 2: Deploy to Render
+1. Go to [Render.com](https://render.com)
 2. Sign up with your GitHub account
-3. Click "New Project" → "Deploy from GitHub repo"
-4. Select your ClubConnect repository
-5. Railway will automatically detect it's a Django app
+3. Click "New" → "Web Service"
+4. Connect your GitHub repository
+5. Select your ClubConnect repository
 
-### Step 3: Configure Environment Variables
-In Railway dashboard, add these environment variables:
+### Step 3: Configure Build Settings
+In Render dashboard, set these settings:
+- **Name**: `clubconnect` (or your preferred name)
+- **Environment**: `Python 3`
+- **Build Command**: `pip install -r requirements.txt`
+- **Start Command**: `gunicorn ClubConnect.wsgi:application`
+
+### Step 4: Add Environment Variables
+In Render dashboard, add these environment variables:
 ```
-SECRET_KEY=your-very-secret-key-here
+SECRET_KEY=your-very-secret-key-here-make-it-long-and-random
 DJANGO_SETTINGS_MODULE=ClubConnect.settings_production
 ```
 
-### Step 4: Add Database (Optional)
-1. In Railway dashboard, click "New" → "Database" → "PostgreSQL"
-2. Railway will automatically set the `DATABASE_URL` environment variable
+### Step 5: Add Database
+1. In Render dashboard, click "New" → "PostgreSQL"
+2. Name it `clubconnect-db`
+3. Copy the database URL
+4. Add it as environment variable: `DATABASE_URL=your-postgres-url-here`
 
-### Step 5: Deploy
-1. Railway will automatically deploy your app
-2. Your app will be available at a Railway-provided URL
-3. Run migrations: In Railway dashboard → "Deployments" → "View Logs" → Run: `python manage.py migrate`
+### Step 6: Deploy
+1. Click "Create Web Service"
+2. Render will automatically deploy your app
+3. Your app will be available at `https://your-app-name.onrender.com`
 
-## 🌐 Deploy to Render
+## 🐍 Alternative: Deploy to PythonAnywhere (FREE)
 
-### Step 1: Prepare Repository
-Same as Railway - push to GitHub
+### Step 1: Create Account
+1. Go to [PythonAnywhere.com](https://pythonanywhere.com)
+2. Sign up for a free account
+3. Verify your email
 
-### Step 2: Deploy to Render
-1. Go to [Render.com](https://render.com)
-2. Sign up with GitHub
-3. Click "New" → "Web Service"
-4. Connect your GitHub repository
-5. Configure:
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `gunicorn ClubConnect.wsgi:application`
-   - **Environment**: Python 3
+### Step 2: Upload Your Code
+1. In the Files tab, create a new directory: `clubconnect`
+2. Upload your Django project files
+3. Or use Git: `git clone https://github.com/yourusername/clubconnect.git`
 
-### Step 3: Add Database
-1. In Render dashboard, create a PostgreSQL database
-2. Copy the database URL to environment variables
+### Step 3: Set Up Virtual Environment
+1. Open a Bash console
+2. Create virtual environment: `mkvirtualenv --python=/usr/bin/python3.9 clubconnect`
+3. Install requirements: `pip install -r requirements.txt`
+
+### Step 4: Configure Database
+1. In the Databases tab, create a new MySQL database
+2. Update your settings to use MySQL instead of SQLite
+
+### Step 5: Set Up Web App
+1. Go to Web tab → "Add a new web app"
+2. Choose "Manual configuration" → "Python 3.9"
+3. Configure WSGI file to point to your Django app
+4. Set up static files mapping
+
+### Step 6: Run Migrations
+1. In Bash console: `python manage.py migrate`
+2. Create superuser: `python manage.py createsuperuser`
 
 ## 🔧 Alternative: Netlify + Backend
 
