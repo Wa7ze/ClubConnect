@@ -14,6 +14,6 @@ python test_deployment.py
 python manage.py migrate
 
 # Collect static files
-python manage.py collectstatic --noinput --clear
+python manage.py collectstatic --noinput --clear --verbosity=2
 
 echo "Build completed successfully!"
