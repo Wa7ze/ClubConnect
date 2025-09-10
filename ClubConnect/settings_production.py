@@ -36,6 +36,13 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# Handle missing Pillow gracefully
+try:
+    from PIL import Image
+    PILLOW_AVAILABLE = True
+except ImportError:
+    PILLOW_AVAILABLE = False
+
 # Security settings
 ALLOWED_HOSTS = ['*']  # Configure this properly for your domain
 SECURE_BROWSER_XSS_FILTER = True
