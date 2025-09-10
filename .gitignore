@@ -6,7 +6,6 @@ __pycache__/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-media/
 
 # Environment variables
 .env
@@ -39,3 +38,6 @@ static/
 
 # Deployment
 .railway/
+
+# Note: Media files are now included in the repository for deployment
+# media/
