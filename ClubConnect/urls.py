@@ -8,6 +8,6 @@ urlpatterns = [
     path('', include('pages.urls')),
 ]
 
-# Serve media files in production using WhiteNoise
+# Serve media files in production
 if not settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

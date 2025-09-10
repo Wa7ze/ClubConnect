@@ -22,6 +22,10 @@ python manage.py collectstatic --noinput --clear --verbosity=2
 
 # Ensure media files are accessible
 echo "Checking media files..."
+ls -la media/ | head -10
+
+# Check static files
+echo "Checking static files..."
 ls -la static/ | head -10
 
 echo "Build completed successfully!"
