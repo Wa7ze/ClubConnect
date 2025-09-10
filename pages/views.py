@@ -642,38 +642,3 @@ def test_media_files(request):
             media_info['event_images_count'] = len(os.listdir(event_images))
     
     return JsonResponse(media_info)
-
-# Custom media file serving view for production
-def serve_media(request, path):
-    import os
-    from django.conf import settings
-    from django.http import HttpResponse, Http404
-    from django.views.decorators.cache import never_cache
-    
-    # Security: prevent directory traversal
-    if '..' in path or path.startswith('/'):
-        raise Http404("File not found")
-    
-    # Construct the full file path
-    file_path = os.path.join(settings.MEDIA_ROOT, path)
-    
-    # Check if file exists
-    if not os.path.exists(file_path) or not os.path.isfile(file_path):
-        raise Http404("File not found")
-    
-    # Read and serve the file
-    try:
-        with open(file_path, 'rb') as f:
-            content = f.read()
-        
-        # Determine content type
-        import mimetypes
-        content_type, _ = mimetypes.guess_type(file_path)
-        if content_type is None:
-            content_type = 'application/octet-stream'
-        
-        response = HttpResponse(content, content_type=content_type)
-        response['Content-Length'] = len(content)
-        return response
-    except Exception:
-        raise Http404("File not found")

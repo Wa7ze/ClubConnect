@@ -44,13 +44,13 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
-# Media files - Use different URL but serve from static directory
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static')
-MEDIA_URL = '/media/'
+# Media files - Create a separate media directory in static
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
+MEDIA_URL = '/static/media/'
 
 # Media files configuration for production
-# Note: Media files are in static directory but served via /media/ URLs
-# This maintains compatibility with existing templates
+# Note: Media files are in static/media/ directory and served via /static/media/ URLs
+# This maintains compatibility while using WhiteNoise
 
 # Handle missing Pillow gracefully
 try:
