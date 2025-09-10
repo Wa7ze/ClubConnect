@@ -44,13 +44,13 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
-# Media files - Create a separate media directory in static
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
-MEDIA_URL = '/static/media/'
+# Media files - Keep original URL but serve from static directory
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_URL = '/media/'
 
 # Media files configuration for production
-# Note: Media files are in static/media/ directory and served via /static/media/ URLs
-# This maintains compatibility while using WhiteNoise
+# Note: Media files are in static/ directory but served via /media/ URLs
+# This maintains template compatibility
 
 # Handle missing Pillow gracefully
 try:
@@ -83,8 +83,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 WHITENOISE_USE_FINDERS = True
 WHITENOISE_AUTOREFRESH = True
 
-# Serve media files through WhiteNoise in production
+# Configure WhiteNoise to serve media files
 WHITENOISE_ROOT = os.path.join(BASE_DIR, 'static')
+WHITENOISE_ADD_HEADERS_FUNCTION = 'whitenoise.middleware.add_headers_function'
 
 # Logging configuration
 LOGGING = {
