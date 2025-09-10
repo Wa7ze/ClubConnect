@@ -26,6 +26,14 @@ ls -la media/ | head -10
 
 # Check static files
 echo "Checking static files..."
-ls -la static/ | head -10
+ls -la static_clean/ | head -10
+
+# Test media file serving
+echo "Testing media file access..."
+if [ -f "media/profile_images/IMG-20240425-WA0055.jpg" ]; then
+    echo "Media files are accessible"
+else
+    echo "Media files not found"
+fi
 
 echo "Build completed successfully!"

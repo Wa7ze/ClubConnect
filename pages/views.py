@@ -642,3 +642,25 @@ def test_media_files(request):
             media_info['event_images_count'] = len(os.listdir(event_images))
     
     return JsonResponse(media_info)
+
+# Test view to check if media files are accessible
+def test_media_access(request):
+    import os
+    from django.conf import settings
+    from django.http import JsonResponse
+    
+    # Test if we can access a specific media file
+    test_file = os.path.join(settings.MEDIA_ROOT, 'profile_images', 'IMG-20240425-WA0055.jpg')
+    
+    result = {
+        'media_root': settings.MEDIA_ROOT,
+        'media_url': settings.MEDIA_URL,
+        'test_file_path': test_file,
+        'test_file_exists': os.path.exists(test_file),
+        'media_root_exists': os.path.exists(settings.MEDIA_ROOT),
+    }
+    
+    if os.path.exists(settings.MEDIA_ROOT):
+        result['media_contents'] = os.listdir(settings.MEDIA_ROOT)
+    
+    return JsonResponse(result)
