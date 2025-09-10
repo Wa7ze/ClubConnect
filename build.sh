@@ -10,6 +10,10 @@ pip install -r requirements.txt
 echo "Testing Django setup..."
 python test_deployment.py
 
+# Test media files
+echo "Testing media files..."
+python test_media.py
+
 # Run migrations first
 python manage.py migrate
 

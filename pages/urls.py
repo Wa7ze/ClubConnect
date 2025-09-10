@@ -26,4 +26,5 @@ urlpatterns = [
     path('approve-or-reject-post/', views.approve_or_reject_post, name='approve_or_reject_post'),
     path('approve-or-reject-event/', views.approve_or_reject_event, name='approve_or_reject_event'),
     path('approve-or-reject-edited-post/', views.approve_or_reject_edited_post, name='approve_or_reject_edited_post'),
+    path('test-media', views.test_media_files, name = 'test_media_files'),
 ]

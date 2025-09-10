@@ -617,3 +617,28 @@ def managerNotifications(request):
         'edited_rejected_activities_with_reason': edited_rejected_activities_with_reason,
     }  
     return render(request, 'pages/club-manager-interface/manager-notifications.html',context)
+
+# Test view for media files
+def test_media_files(request):
+    import os
+    from django.conf import settings
+    
+    media_info = {
+        'media_url': settings.MEDIA_URL,
+        'media_root': settings.MEDIA_ROOT,
+        'media_exists': os.path.exists(settings.MEDIA_ROOT),
+    }
+    
+    if os.path.exists(settings.MEDIA_ROOT):
+        profile_images = os.path.join(settings.MEDIA_ROOT, 'profile_images')
+        event_images = os.path.join(settings.MEDIA_ROOT, 'event_images')
+        
+        media_info['profile_images_exists'] = os.path.exists(profile_images)
+        media_info['event_images_exists'] = os.path.exists(event_images)
+        
+        if os.path.exists(profile_images):
+            media_info['profile_images_count'] = len(os.listdir(profile_images))
+        if os.path.exists(event_images):
+            media_info['event_images_count'] = len(os.listdir(event_images))
+    
+    return JsonResponse(media_info)
