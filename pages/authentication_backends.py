@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import BaseBackend
 from django.contrib.auth.base_user import AbstractBaseUser
+from typing import Optional
 
 class EmailAuthBackend(BaseBackend):
     def authenticate(self, request, email=None, password=None):
@@ -12,7 +13,7 @@ class EmailAuthBackend(BaseBackend):
         except user_model.DoesNotExist:
             return None
         
-    def get_user(self, user_id: int) -> AbstractBaseUser | None:
+    def get_user(self, user_id: int) -> Optional[AbstractBaseUser]:
         user_model = get_user_model()
         try:
            user = user_model.objects.get(pk=user_id)
