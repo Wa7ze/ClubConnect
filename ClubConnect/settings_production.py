@@ -34,7 +34,7 @@ STATIC_URL = '/static/'
 
 # Additional static files directories
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static_clean'),
     os.path.join(BASE_DIR, 'ClubConnect', 'static'),
 ]
 
@@ -82,9 +82,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 # WhiteNoise settings
 WHITENOISE_USE_FINDERS = True
 WHITENOISE_AUTOREFRESH = True
-
-# Configure WhiteNoise for static files only
-WHITENOISE_ADD_HEADERS_FUNCTION = 'whitenoise.middleware.add_headers_function'
 
 # Logging configuration
 LOGGING = {

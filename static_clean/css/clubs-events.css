@@ -1,0 +1,827 @@
+:root {
+    --ligh-color: white;
+    --dark-color: rgb(26, 24, 24);
+    --grey-color: rgb(215, 214, 214);
+    --red-color: #ea3636;
+    --yellow-color: rgb(249, 221, 95);
+    --section-color: #eff7fa;
+    --blue-color: rgb(101, 108, 239);
+  }
+
+body{
+    font-family: "Roboto", sans-serif;
+}
+a{
+    text-decoration: none;
+}
+.unable-scroll{
+    overflow: hidden;
+}
+.blur{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    z-index: 9998;
+    background: rgba(0, 0, 10, 0.324);
+    backdrop-filter:blur(2px);
+    display: none;
+}
+.search-filter-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 10px;
+    margin: 30px 0;
+    position: relative;
+    top: 0;
+    z-index: 900;
+    background-color: rgb(51, 46, 46);
+}
+.search-form{
+    display: flex;
+    width: 90%;
+}
+.search-input{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.search-input #search-by-name{
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: solid 3px transparent;
+}
+.search-input #search-by-name:focus{
+    border: solid 3px var(--yellow-color);
+}
+.search-input .search-icon{
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    background-color:var(--dark-color);
+    color: var(--yellow-color);
+    height: 100%;
+    cursor: pointer;
+    border: solid 1px transparent;
+}
+.clubs-btn{
+    border: solid 1px transparent;
+    background-color: var(--red-color);
+    color: var(--section-color);
+}
+.filter-btn{
+    padding: 11px 30px !important;
+}
+.cards-section{
+    padding: 0 20px;
+}
+.clubs-btn:hover{
+    color: var(--red-color);
+    background-color: transparent;
+    border: solid 1px var(--red-color);
+}
+.club-card .image-wrapper{
+    background-color: var(--dark-color);
+    padding: 10px;
+    height: 60%;
+}
+
+.club-card .image-wrapper img{
+    height: 100%;
+}
+ .clubs-cards-container .club-card{
+    width: 18rem;
+    height: 500px;
+}
+.clubs-cards-container{
+    justify-content: center;
+    min-height: 60vh;
+    position: relative;
+    top: 0;
+ }
+ .no-clubs-events-matches{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 995;
+    width: 73%;
+ }
+ .hidden-div,.hidden-card,.hidden-card-category{
+    display: none;
+ }
+ 
+
+ /*Start Filter By Category*/
+.filter-list{
+    background-color: var(--dark-color);
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 100vh;
+    transform: translateX(100%);
+    transition: .6s ease;
+    overflow-y: auto;
+}
+.filter-x{
+    display: block !important;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 100;
+    position: absolute;
+    right: 20px;
+    color: var(--yellow-color);
+
+}
+.filter-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    position: relative;
+    top: 0;
+    left: 0;
+    border-bottom: solid 1px var(--yellow-color);
+}
+.filter-header p{
+    font-size: 28px !important;
+    letter-spacing: 5px;
+    font-weight: bold;
+    margin-top: 10px;
+    color:var(--yellow-color);
+}
+
+.filter-list p{
+    font-size: 18px;
+    font-weight: 300;
+    color:var(--yellow-color);
+}
+
+.filter-list ul{
+    line-height: 35px;
+    overflow-y: scroll;
+    height: 70vh;
+    border-bottom: solid 3px var(--yellow-color);
+    padding-right: 25px;
+}
+.filter-list ul p{
+    padding-top: 5px 20px;
+}
+.filter-list ul li{
+    list-style: none;
+    font-size: 16px;
+    color: var(--ligh-color);
+    font-weight: 300;
+    cursor: pointer;
+    text-transform: capitalize;
+    padding: 10px 5px;
+}
+.filter-list ul li:hover{
+    background-color: rgba(188, 186, 186, 0.084);
+}
+.active-category{
+    background-color: rgba(188, 186, 186, 0.205);
+    color:var(--yellow-color) !important;
+}
+.filter-list-btns{
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+}
+.reset-filter-btn{
+    padding: 10px 110px !important;
+    border: solid 1px transparent;
+    background-color: var(--red-color);
+    color: var(--section-color);
+    transition: .3s ease-in-out;
+}
+.reset-filter-btn:hover{
+    color: var(--red-color);
+    background-color: transparent;
+    border: solid 1px var(--red-color);
+}
+.show-blur{
+    display: block;
+}
+
+ /*End Filter By Category*/
+
+ /*Start Events Style*/
+ .from-date-div{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: var(--yellow-color);
+ }
+ .to-date-div{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    color: var(--yellow-color);
+ }
+ #search-by-date-from,#search-by-date-to{
+    padding: 5px 10px 5px 10px;
+    outline: none;
+ }
+ ::-webkit-calendar-picker-indicator{
+    cursor: pointer;
+    padding: 5px;
+    background-color: var(--yellow-color);
+ }
+
+ .date-search-input{
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+ }
+ .events-cards-container{
+    justify-content: center;
+    min-height: 60vh;
+    position: relative;
+    top: 0;
+ }
+ .event-cards-container .event-card{
+    width: 25rem;
+    height: 600px;
+}
+.event-card .image-wrapper{
+    height: 70%;
+}
+.event-card .image-wrapper img{
+    height: 100%;
+    width: 100%;
+}
+.event-card .image-wrapper{
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.event-card .date-to-style{
+    background-color: rgb(51, 46, 46);
+    color: var(--yellow-color);
+    position: absolute;
+    bottom: -40px;
+    left: 5px;
+    display: flex;
+    flex-direction: column;
+    padding: 5px 10px;
+}
+.date-to-style span{
+    font-size: 15px;
+}
+.info-list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+  }
+  .more-info-btn, .search-date-btn{
+    border: solid 1px transparent;
+    background-color: var(--red-color);
+    color: var(--section-color);
+    margin-top: 2px;
+}
+.more-info-btn:hover, .search-date-btn:hover{
+    color: var(--red-color);
+    background-color: transparent;
+    border: solid 1px var(--red-color);
+ }
+.add-to-list-btn{
+    color: var(--blue-color);
+    margin-top: 7px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .add-to-list-plus::before{
+    content: 'Add To List +';
+  }
+  .remove-from-list-minus::before{
+    content: 'Remove From List -';
+  }
+  
+  
+
+ /*End Events Style*/
+
+ /*Start My List Style*/
+ .header-my-list{
+    text-align: center;
+    padding: 10px;
+    margin-top: 5px;
+    
+    position: relative;
+    top: 0;
+    left: 0;
+ }
+ .table-container{
+    display: flex;
+    justify-content: center;
+    min-height: 82vh;
+    position: relative;
+    top: 0;
+ }
+
+ table{
+    width: 95%;
+    border-spacing: 0;
+    border-bottom: solid 1px var(--dark-color);
+ }
+ table thead tr td{
+    border-bottom: solid 1px var(--dark-color);
+    font-size: .6rem;
+    font-weight: 500;
+    padding: 10px 0;
+    text-align: center;
+ }
+ table thead tr td:first-child{
+    width: 20%;
+    text-align: start !important;
+    padding-left: 0;
+}
+ table tbody tr:not(:last-child){
+    border-bottom: solid 1px var(--grey-color);
+ }
+ table tbody tr td{
+    padding: 15px 0;
+    font-size: .6rem;
+    text-align: center;
+ }
+ table tbody tr td:first-child{
+    text-align: start !important;
+    padding-left: 0;
+}
+ table tbody tr td img{
+    width: 70px;
+    height: 100px;
+}
+.smaller-more-info-btn{
+    padding: 5px 10px !important;
+    font-size: .5rem !important;
+}
+.fa-trash{
+    color: var(--dark-color);
+    cursor: pointer;
+    transition: .3s ease;
+}
+.fa-trash:hover{
+    color: var(--yellow-color);
+}
+.successful-message{
+    background-color: green;
+    color: var(--ligh-color);
+    position: absolute;
+    right: 10px;
+    top: 0;
+    padding: 10px;
+    font-size: .7rem;
+    display: none;
+  }
+ /*End My List Style*/
+
+ /*Start Event Page Style*/
+ .event-timer{
+    background-image: url('https://studyinturkey.com/wp-content/uploads/2021/06/uskurdar-universitesi-6.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 40vh;
+    gap: 7px;
+    color: var(--yellow-color);
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.event-timer .filter-bg{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.82);
+    z-index: 900;
+}
+.timer-div{
+    text-align: center;
+    z-index: 201;
+}
+
+.timer-div p{
+    font-size: 3rem;
+}
+.timer-points{
+    font-size: 2.6rem;
+    margin-bottom: 35px;
+    z-index: 201;
+}
+.timer-div span{
+    font-size: .8rem;
+}
+.event-activity-details-container{
+    display: flex;
+    padding: 50px;
+    gap: 60px;
+}
+.event-activity-infos{
+    height: 695px;
+    overflow-y: scroll;
+}
+.event-activity-details-container img{
+    width: 50vw;
+    height: 100vh;
+}
+
+.event-activity-details{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.event-activity-details p{
+    margin-right: 20px;
+    font-weight: bold;
+}
+.more-event-activities{
+    background-color: var(--dark-color);
+    padding: 20px;
+}
+.more-event-activities h3{
+    color: var(--ligh-color);
+    font-weight: 300;
+}
+.edit-event-btn{
+    background-color: rgb(57, 57, 159);
+    color: var(--ligh-color);
+    padding: 5px 50px;
+    margin-top: 20px;
+    margin-right: 10px;
+    border: solid 1px transparent;
+    transition: .3s ease;
+}
+.delete-event-btn{
+    background-color: rgb(171, 15, 15);
+    color: var(--ligh-color);
+    padding: 5px 40px;
+    margin-top: 20px;
+    border: solid 1px transparent;
+    transition: .3s ease;
+}
+  .edit-event-btn:hover{
+    border: solid 1px rgb(57, 57, 159);
+    background-color: transparent;
+    color: rgb(57, 57, 159);
+  }
+  .delete-event-btn:hover{
+    border: solid 1px rgb(171, 15, 15);
+    background-color: transparent;
+    color: rgb(171, 15, 15);
+  }
+  .edit-activity-container{
+    background-color: rgba(0, 0, 0, 0.747);
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    z-index: 205;
+    min-height: 100vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: none;
+  }
+  .event-timer .filter-bg{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.82);
+    z-index: 200 !important;
+}
+  .edit-activity-form{
+    position: relative;
+    top: 0;
+    left: 0;
+    background-color: var(--ligh-color);
+    width: 60%;
+    height: 550px;
+    overflow: auto;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .edit-activity-form-place{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  .edit-activity-form #edit-activity-x-mark{
+    position: absolute;
+    top: 3px;
+    right: 10px;
+    font-size: 30px;
+    cursor: pointer;
+  }
+@media screen and (max-width: 1168px){
+    .event-activity-details-container{
+        flex-direction: column;
+        align-items: center;
+    }
+}
+@media screen and (max-width: 780px){
+    .event-activity-details-container img{
+        width: 90vw;
+        height: 100%;
+    }
+    .timer-div p{
+        font-size: 2.3rem;
+    }
+    .timer-points{
+        font-size: 2rem;
+        margin-bottom: 35px;
+        z-index: 901;
+    }
+}
+
+@media screen and (max-width: 536px){
+    .edit-activity-form{
+        width: 99%;
+    }
+  }
+  
+ /*End Event Page Style*/
+
+@media screen and (min-width: 1316px){
+    .cards-section{
+        max-width: 1296px;
+        padding: 0;
+    }
+    .clubs-cards-container{
+        justify-content: flex-start;
+        min-height: 68vh;
+        
+     }
+     .events-cards-container{
+        justify-content: flex-start;
+        min-height: 68vh;
+     }
+     .events-cards-container .event-card{
+        width: 25.5rem;
+        transition: .3s ease;
+        height: 900px;
+     }
+     .events-cards-container .event-card:hover{
+        background-color: rgba(209, 206, 206, 0.354);
+     }
+     .filter-list{
+        width: 35%;
+    }
+    .search-filter-section{
+        position: sticky;
+        flex-direction: row;
+        justify-content: space-between;
+        top: 55px;
+    }
+    .search-form{
+        width: 30%;
+    }
+    .date-search-input{
+        flex-direction: row;
+        align-items: flex-start !important;
+     }
+     .to-date-div{
+        gap: 10px;
+     }
+    
+     table{
+        width: 75%;
+        border-spacing: 0;
+        border-bottom: solid 1px var(--dark-color);
+        margin-top: 20px;
+     }
+     .table-container{
+        min-height: 81vh;
+     }
+     table thead tr td{
+        font-size: .9rem;
+     }
+     table thead tr td:first-child{
+        width: 40%;
+        padding-left: 30px;
+    }
+    
+     table tbody tr td{
+        font-size: 1rem;
+     }
+     table tbody tr td:first-child{
+        padding-left: 30px;
+    }
+     table tbody tr td img{
+        width: 220px;
+        height: 290px;
+    }
+    .smaller-more-info-btn{
+        padding: 7px 20px !important;
+        font-size: .8rem !important;
+    }
+    .successful-message{
+        background-color: green;
+      }
+}
+
+@media screen and (min-width: 996px) and (max-width: 1315px){
+    .cards-section{
+        max-width: 960px;
+        padding: 0;
+    }
+    .clubs-cards-container{
+        justify-content: flex-start;
+        min-height: 68vh;
+     }
+     .events-cards-container{
+        justify-content: flex-start;
+        min-height: 68vh;
+     }
+     .events-cards-container .event-card{
+        width: 29.2rem;
+        height: 950px;
+     }
+     .filter-list{
+        width: 40%;
+    }
+    .search-filter-section{
+        position: sticky;
+        flex-direction: row;
+        justify-content: space-between;
+        top: 55px;
+    }
+    .search-form{
+        width: 40%;
+    }
+    .date-search-input{
+        flex-direction: row;
+        align-items: flex-start !important;
+     }
+     .to-date-div{
+        gap: 10px;
+     }
+     .table-container{
+        min-height: 81vh;
+     }
+     table{
+        width: 90%;
+        border-spacing: 0;
+        border-bottom: solid 1px var(--dark-color);
+        margin-top: 20px;
+     }
+     table thead tr td{
+        font-size: .9rem;
+     }
+     table thead tr td:first-child{
+        width: 40%;
+        padding-left: 30px;
+    }
+    
+     table tbody tr td{
+        font-size: 1rem;
+     }
+     table tbody tr td:first-child{
+        padding-left: 30px;
+    }
+     table tbody tr td img{
+        width: 160px;
+        height: 220px;
+    }
+    .smaller-more-info-btn{
+        padding: 7px 20px !important;
+        font-size: .8rem !important;
+    }
+     
+}
+@media screen and (min-width: 768px) and (max-width: 995px){
+    .cards-section{
+        max-width: 625px;
+        padding: 0;
+    }
+    .clubs-cards-container{
+        justify-content: flex-start;
+        min-height: 68vh;
+     }
+     .events-cards-container{
+        min-height: 68vh;
+     }
+     .events-cards-container .event-card{
+        width: 35rem;
+        height: 900px;
+     }
+     .filter-list{
+        width: 50%;
+    }
+    .search-filter-section{
+        flex-direction: row;
+        justify-content: space-between;
+        position: sticky;
+        top: 48px;
+    }
+    .search-form{
+        width: 50%;
+    }
+    .date-search-input{
+        flex-direction: row;
+        align-items: flex-start !important;
+     }
+     .to-date-div{
+        gap: 10px;
+     }
+     .table-container{
+        min-height: 80vh;
+        
+     }
+     table{
+        width: 90%;
+        border-spacing: 0;
+        border-bottom: solid 1px var(--dark-color);
+        margin-top: 20px;
+     }
+     table thead tr td{
+        font-size: .8rem;
+     }
+     table thead tr td:first-child{
+        width: 25%;
+        padding-left: 0;
+    }
+    
+     table tbody tr td{
+        font-size: .9rem;
+     }
+     table tbody tr td:first-child{
+        padding-left: 0;
+    }
+     table tbody tr td img{
+        width: 150px;
+        height: 200px;
+    }
+    .smaller-more-info-btn{
+        padding: 10px 20px !important;
+        font-size: .8rem !important;
+    }
+    
+}
+@media screen and (min-width: 506px) and (max-width: 767px){
+    .filter-list{
+        width: 80%;
+    }
+    .filter-list-btns{
+        gap: 20px;
+    }
+    
+     .events-cards-container .event-card{
+        width: 35rem;
+        height: 900px;
+     }
+     table{
+        width: 95%;
+        border-spacing: 0;
+        border-bottom: solid 1px var(--dark-color);
+     }
+     table thead tr td{
+        font-size: .7rem;
+     }
+     table thead tr td:first-child{
+        width: 20%;
+        padding-left: 0;
+    }
+    
+     table tbody tr td{
+        font-size: .8rem;
+     }
+     table tbody tr td:first-child{
+        padding-left: 0;
+    }
+     table tbody tr td img{
+        width: 80px;
+         height: 120px;
+    }
+    .smaller-more-info-btn{
+        padding: 7px 15px !important;
+        font-size: .5rem !important;
+    }
+    
+   
+}
