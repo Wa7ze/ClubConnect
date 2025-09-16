@@ -822,6 +822,77 @@ a{
         padding: 7px 15px !important;
         font-size: .5rem !important;
     }
-    
-   
+}
+
+/* Additional mobile improvements for clubs and events */
+@media screen and (max-width: 505px){
+    .search-filter-section{
+        padding: 5px;
+        margin: 20px 0;
+    }
+    .search-form{
+        width: 95%;
+    }
+    .filter-list{
+        width: 100%;
+    }
+    .filter-list-btns{
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+    }
+    .reset-filter-btn{
+        padding: 10px 50px !important;
+    }
+    .events-cards-container .event-card{
+        width: 100%;
+        height: auto;
+        margin: 10px 0;
+    }
+    .clubs-cards-container .club-card{
+        width: 100%;
+        height: auto;
+        margin: 10px 0;
+    }
+    .cards-section{
+        padding: 0 10px;
+    }
+    table{
+        width: 100%;
+        font-size: 0.7rem;
+    }
+    table tbody tr td img{
+        width: 60px;
+        height: 90px;
+    }
+    .smaller-more-info-btn{
+        padding: 5px 10px !important;
+        font-size: 0.4rem !important;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .search-input #search-by-name{
+        padding: 8px;
+        font-size: 14px;
+    }
+    .search-input .search-icon{
+        padding: 15px;
+        font-size: 16px;
+    }
+    .filter-header p{
+        font-size: 20px !important;
+        letter-spacing: 2px;
+    }
+    .filter-list p{
+        font-size: 16px;
+    }
+    .filter-list ul li{
+        font-size: 14px;
+        padding: 8px 5px;
+    }
+    .reset-filter-btn{
+        padding: 8px 40px !important;
+        font-size: 0.8rem;
+    }
 }

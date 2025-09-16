@@ -1,21 +1,13 @@
 {% extends 'base.html' %}
-{% block content%}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
-    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/clubs-events.css' %}">
-    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500&display=swap" rel="stylesheet">
-    <title>ClubConnect | Clubs</title>
-</head>
 
+{% block title %}ClubConnect | Clubs{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/clubs-events.css' %}">
+{% endblock %}
+
+{% block content %}
 <body id="clubs">
     <div onclick="hideFilters()" class="blur"></div>
     <div class="filter-list">
@@ -74,10 +66,4 @@
   </div>
 </div>
       
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'js/all.min.js' %}"></script>
-    <script src="{% static 'js/navbar.js' %}"></script>
-    <script src="{% static 'js/script.js' %}"></script>
-</body>
-</html>
 {% endblock content %}
